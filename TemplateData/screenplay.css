@@ -1,0 +1,45 @@
+#TextResultContent, #HtmlResultContent {
+  overflow: scroll;
+  text-align: center;
+}
+
+.screenplay {
+  width: 600px;
+  display: block;
+  font-family: "Courier New";
+}
+
+.paragraph {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  text-align: left;
+}
+
+.SceneHeading {
+  margin-top: 30px;
+}
+
+.Action {
+  margin-top: 20px;
+}
+
+.Character {
+  margin-left: 35%;
+  width: 30%;
+  margin-top: 30px;
+}
+
+.Parenthetical {
+  margin-left: 32%;
+  width: 36%;
+}
+
+.Dialogue {
+  margin-left: 25%;
+  width: 50%;
+}
+
+.Transition {
+  text-align: right;
+}

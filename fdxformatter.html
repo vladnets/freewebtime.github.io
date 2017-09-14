@@ -1,23 +1,93 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Chess Knight 2</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script>
-      $('#control_panel').html('<b>Hello world</b>');
-    </script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>FDX-HTML formatter</title>
+  <!-- <link rel="shortcut icon" href="TemplateData/favicon.ico"> -->
+  <link rel="stylesheet" href="TemplateData/style.css">
+  <link rel="stylesheet" href="TemplateData/general.css">
+  <link rel="stylesheet" href="TemplateData/screenplay.css">
+  <script src="TemplateData/UnityProgress.js"></script>
+  <script src="Build/UnityLoader.js"></script>
+  <script src="TemplateData/fdxFormatter.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  </head>
-  <body>
-    <div id="control_panel">
-      Control Panel
-    </div>
-  </body>
+  <script>
+    $(document).ready(function () {
+      document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+      document.getElementById("defaultOpen").click();
+    });
+
+    function readSingleFile(e) {
+      var file = e.target.files[0];
+      if (!file) {
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        onFileLoad(e);
+      };
+      reader.readAsText(file);
+    }
+
+    function onFileLoad(e) {
+      document.Project = LoadFdx(e);
+
+      $('#TextResultContent').html(document.Project.TextResult);
+      $('#HtmlResultContent').text(document.Project.HtmlResult.get(0).outerHTML);
+      $('#RawInputContent').text(document.Project.RawInput);
+    }
+
+    function openTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <div id="control_panel">
+    <input type="file" id="file-input" />
+  </div>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'TextResult')" id="defaultOpen">Text</button>
+    <button class="tablinks" onclick="openTab(event, 'HtmlResult')">Html</button>
+    <button class="tablinks" onclick="openTab(event, 'RawInput')">Raw Input</button>
+  </div>
+
+  <div id="TextResult" class="tabcontent">
+    <span id="TextResultContent"></span>
+  </div>
+
+  <div id="HtmlResult" class="tabcontent">
+    <pre id="HtmlResultContent"></pre>
+  </div>
+
+  <div id="RawInput" class="tabcontent">
+    <pre id="RawInputContent"></pre>
+  </div>
+
+</body>
+
 </html>
