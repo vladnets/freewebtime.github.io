@@ -2,13 +2,21 @@
 
 <head>
     <script src="js/storyteller.core.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+
+    <script lang="js">
+        $(function () {
+            $("#dialog").dialog();
+        });
     </script>
 
     <script lang="js">
         $(document).ready(function () {
             console.log("ready!");
             storyPlugin.init();
+            storyPlugin.test();
         });
     </script>
 </head>
@@ -21,6 +29,11 @@
     </div>
 
     <div id="footer">
+    </div>
+
+    <div id="dialog" title="Basic dialog">
+        <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and
+            closed with the 'x' icon.</p>
     </div>
 </body>
 

@@ -9,6 +9,10 @@
   "author": "Jack Sydorenko",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.1"
+    "express": "^4.16.1",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

@@ -9,11 +9,6 @@ Draw.loadPlugin(function(ui)
       * The number here is ASCII character code 
     */
 
-	//revision
-    var revision = 0.005;
-    var postfix = 'a';
-	console.log("this is my first plugin. It's version is " + revision + postfix);
-
 	// Adds resources for actions
 	mxResources.parse('myAlert=My alert');
 	mxResources.parse('myTestAction=My test action');
