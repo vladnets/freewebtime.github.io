@@ -1,7 +1,3 @@
-/**
-* A draw.io plugin for inserting a custom text (or ellipse) element,
-* either by keyboard Ctrl+Shift+T (or Ctrl+Shift+Q) or by menu
-*/
 Draw.loadPlugin(function(ui) {
     /* Finding assigned keys:
     
