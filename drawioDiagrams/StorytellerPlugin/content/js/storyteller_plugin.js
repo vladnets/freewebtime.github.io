@@ -18,7 +18,7 @@ Draw.loadPlugin(function(ui)
 		alert("Hi there"); 
 	});
 
-    var revision = 0.001;
+    var revision = 0.002;
     var postfix = 'a';
     console.log("this is my first plugin. It's version is " + revision + postfix);
 
