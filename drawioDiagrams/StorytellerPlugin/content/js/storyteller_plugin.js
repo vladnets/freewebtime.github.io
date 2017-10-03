@@ -13,7 +13,7 @@ Draw.loadPlugin(function(ui)
     */
 
 	//revision
-    var revision = 0.003;
+    var revision = 0.004;
     var postfix = 'a';
 	console.log("this is my first plugin. It's version is " + revision + postfix);
 
