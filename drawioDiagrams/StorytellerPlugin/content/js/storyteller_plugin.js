@@ -61,6 +61,7 @@ Draw.loadPlugin(function(ui)
     ui.menubar.addMenu('Fwt', function(menu, parent) {
         ui.menus.addMenuItem(menu, 'myInsertText');
         ui.menus.addMenuItem(menu, 'myInsertEllipse');
+        ui.menus.addMenuItem(menu, 'myAlert');
     });
 
     // Reorders menubar
