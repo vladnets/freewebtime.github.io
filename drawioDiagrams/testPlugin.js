@@ -28,7 +28,7 @@ Draw.loadPlugin(function(ui) {
           newElement.vertex=!0;
           theGraph.setSelectionCell(theGraph.addCell(newElement))
         }
-    }, null, null, "Ctrl+Shift+Q");
+    }, null, null, "Ctrl+Alt+A");
     
     ui.keyHandler.bindAction(81, !0, "myInsertEllipse", !0);
     
@@ -48,7 +48,7 @@ Draw.loadPlugin(function(ui) {
     ui.keyHandler.bindAction(84, !0, "myInsertText", !0);
     
     // Adds menu
-    ui.menubar.addMenu('My Menu', function(menu, parent) {
+    ui.menubar.addMenu('Fwt', function(menu, parent) {
         ui.menus.addMenuItem(menu, 'myInsertText');
         ui.menus.addMenuItem(menu, 'myInsertEllipse');
     });
