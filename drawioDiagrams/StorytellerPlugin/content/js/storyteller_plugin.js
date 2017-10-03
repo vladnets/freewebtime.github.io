@@ -13,7 +13,7 @@ Draw.loadPlugin(function(ui)
     */
 
 	//revision
-    var revision = 0.004;
+    var revision = 0.005;
     var postfix = 'a';
 	console.log("this is my first plugin. It's version is " + revision + postfix);
 
@@ -79,7 +79,7 @@ Draw.loadPlugin(function(ui)
 	}
 
 	var x = document.createElement('script');
-	x.src = 'https://freewebtime.github.io/drawioDiagrams/StorytellerPlugin/content/js/include.js';
+	x.src = 'https://freewebtime.github.io/drawioDiagrams/StorytellerPlugin/content/js/storyteller.core.js';
 	document.getElementsByTagName("head")[0].appendChild(x);
 	x.onload=callback_function;
 });
