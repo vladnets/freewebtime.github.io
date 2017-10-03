@@ -12,6 +12,10 @@ Draw.loadPlugin(function(ui) {
       * The number here is ASCII character code 
     */
     
+    var revision = 0.001;
+    var postfix = 'a';
+    console.log("this is my first plugin. It's version is " + revision + postfix);
+
     // Adds resources for actions
     mxResources.parse('myInsertText=Insert text element');
     mxResources.parse('myInsertEllipse=Insert ellipse');
