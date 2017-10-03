@@ -75,8 +75,7 @@ Draw.loadPlugin(function(ui)
 	
 	//experimenting
 	function callback_function(){
-		console.log("Script has been loaded...");
-		alertHelloWorld("Message from plugin js")
+		storyPlugin.init();
 	}
 
 	var x = document.createElement('script');
