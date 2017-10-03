@@ -13,14 +13,18 @@ Draw.loadPlugin(function(ui)
     */
 	
 	mxResources.parse('myAlert=My alert');
-	
 	ui.actions.addAction('myAlert', function() {
 		alert("Hi there"); 
 	});
 
-    var revision = 0.002;
+	mxResources.parse('myTestAction=My test action');
+	ui.actions.addAction('myTestAction', function()	{
+		ui.editor.setStatus('Hello, World!');
+	});
+
+    var revision = 0.003;
     var postfix = 'a';
-    console.log("this is my first plugin. It's version is " + revision + postfix);
+	console.log("this is my first plugin. It's version is " + revision + postfix);
 
     // Adds resources for actions
     mxResources.parse('myInsertText=Insert text element');
