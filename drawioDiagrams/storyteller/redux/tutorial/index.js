@@ -27,3 +27,4 @@ store.dispatch({type: "INC", payload: 1});
 store.dispatch({type: "INC", payload: 2});
 store.dispatch({type: "DEC", payload: 3});
 store.dispatch({type: "INC", payload: 1});
+
