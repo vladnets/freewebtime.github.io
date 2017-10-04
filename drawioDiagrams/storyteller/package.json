@@ -20,6 +20,7 @@
     "webpack-dev-server": "^1.16.5"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "google-drive-api-manager": "0.0.8",
     "react": "^0.14.9",
     "react-bootstrap": "^0.31.3",
@@ -28,7 +29,10 @@
     "react-node-graph": "^1.1.1",
     "react-onclickoutside": "^5.11.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.4.1",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "build": "babel src --out-dir lib && webpack --config webpack.prod.config.js",

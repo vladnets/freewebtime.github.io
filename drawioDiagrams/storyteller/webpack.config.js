@@ -22,7 +22,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
-      exclude: /node_modules/,
+      exclude: /(node_modules|bower_components)/,
       include: __dirname
     }]
   }
