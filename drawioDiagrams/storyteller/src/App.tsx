@@ -2,18 +2,26 @@ import { connect } from 'react-redux';
 import * as React  from 'react';
 import './App.css';
 import IAppState from './lib/tutorial/IAppState'
-
-const logo = require('./logo.svg');
+import NavigationBar from './Application/components/NavigationBar';
 
 class App extends React.Component<IAppState> {
+
+  onMenuItemClick(e: any) {
+    console.log(e);
+  }
+
   render() {
 
     const { Project } = this.props;
 
     var header = (
       <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome!</h2>
+        <NavigationBar 
+          headerText="This is header!"
+          headerUrl="#"
+          items={[]}
+          onClick={(e: any) => this.onMenuItemClick(e)}
+        />
       </div>
     )
 

@@ -9,13 +9,19 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.navbar{
+  min-height: 0px;
+}
+
+.nav li a {
+  padding: 5px;
+  margin: 0px;
 }
 
 @keyframes App-logo-spin {
