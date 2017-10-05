@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import ideReducer from './ideReducer';
 
 const rootReducer = combineReducers({
-  ideReducer
+  IdeState: ideReducer
 });
 
 export default rootReducer;

@@ -1,3 +1,4 @@
+import { IIdeState } from '../state/IIdeState';
 import { createAction } from 'redux-actions';
 import { assign } from 'lodash';
 import * as ActionTypes from './actionTypes';
@@ -32,9 +33,7 @@ export const noOperation = createAction<void>(
   }
 )
 
-export const ideInitialize = createAction<void>(
+export const ideInitialize = createAction<IIdeState, IIdeState>(
   ActionTypes.IDE_INITIALIZE,
-  () => { 
-    // none
-  }
+  (ideState: IIdeState) => (ideState)
 );

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import * as React  from 'react';
 import './App.css';
 import  { IAppState } from './lib/ide/state/IAppState';
-import NavigationBar from './Application/components/NavigationBar';
+import { GraphEditorIde } from './lib/ide/components/GraphEditorIde';
 
 class App extends React.Component<IAppState> {
 
@@ -12,40 +12,21 @@ class App extends React.Component<IAppState> {
 
   render() {
 
-    const { Project } = this.props;
+    const { IdeState } = this.props;
 
-    var header = (
-      <div className="App-header">
-        <NavigationBar 
-          headerText="This is header!"
-          headerUrl="#"
-          items={[]}
-          onClick={(e: any) => this.onMenuItemClick(e)}
-        />
-      </div>
-    )
-
-    let bodyContent: any;
-    if (Project) {
-      bodyContent = (
-        <span>
-          <div>Project: {Project.Name}, created {Project.Created}</div>
-        </span>
-      )
-    } else {
-      bodyContent = (
-        <span>
-          <div>No project loaded</div>
-        </span>
-      )
+    if (IdeState){
+      return (
+        <div className="App">
+          <GraphEditorIde Navbar={IdeState.Navbar} Project={IdeState.Project} />
+        </div>
+      );
     }
 
     return (
-        <div className="App">
-          {header}
-          {bodyContent}
-        </div>
-      );
+      <div className="App">
+        Application is loading now...
+      </div>
+    );
   }
 }
 

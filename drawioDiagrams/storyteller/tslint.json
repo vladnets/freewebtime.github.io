@@ -9,10 +9,11 @@
         ],
         "ban": false,
         "class-name": false,
-        "comment-format": [
-            true,
-            "check-space"
-        ],
+        "comment-format": false,
+        // [
+        //     true,
+        //     "check-space"
+        // ],
         "curly": true,
         "eofline": false,
         "forin": true,

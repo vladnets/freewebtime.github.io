@@ -1,8 +1,8 @@
-import { Dispatch } from "react-redux";
-import { IProject } from "./IProject";
+import { Dispatch } from 'react-redux';
+import { IIdeState } from './IIdeState';
 
 export interface IAppState {
   StatusText?: string;
-  Project?: IProject;
+  IdeState?: IIdeState;
   dispatch?: Dispatch<{}>;
 }
