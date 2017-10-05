@@ -96,17 +96,17 @@ export default class NodeGraph extends React.Component {
 		}
 	}
 
-  handleNodeSelect(nid) {
-		if (this.props.onNodeSelect) {
-			this.props.onNodeSelect(nid);
-		}
-  }
+	handleNodeSelect(nid) {
+			if (this.props.onNodeSelect) {
+				this.props.onNodeSelect(nid);
+			}
+	}
 
-  handleNodeDeselect(nid) {
-    if (this.props.onNodeDeselect) {
-      this.props.onNodeDeselect(nid);
-    }
-  }
+	handleNodeDeselect(nid) {
+		if (this.props.onNodeDeselect) {
+		this.props.onNodeDeselect(nid);
+		}
+	}
 
 	computePinIndexfromLabel(pins, pinLabel) {
 		let reval = 0;

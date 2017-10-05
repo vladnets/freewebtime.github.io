@@ -2,22 +2,18 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
   entry: [
-    // 'webpack-dev-server/client?http://0.0.0.0:8080',
-    // 'webpack/hot/only-dev-server',
-    // './example/index.js'
-    './redux/tutorial/index.js'
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    // './example/index.js',
+    // './redux/tutorial/index.js',
+    // './index.js',
+    './src/typescript/index.tsx',
   ],
-  output: {
-    path: __dirname + '/example/',
-    filename: 'all.js',
-    publicPath: '/example'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
+
+  // devtool: 'cheap-module-eval-source-map',
+  devtool: ['cheap-module-eval-source-map', 'inline-source-map'],
+
   module: {
     loaders: [{
       test: /\.js$/,
@@ -25,5 +21,19 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       include: __dirname
     }]
-  }
+  },
+  resolve: {
+    extensions: [ ".tsx", ".ts", ".js" ]
+  },
+
+  output: {
+    path: __dirname + '/example/',
+    filename: 'all.js',
+    publicPath: '/example'
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
 };

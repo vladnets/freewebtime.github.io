@@ -1,4 +1,4 @@
-import * as Metadata from './Metadata';
+import Metadata from './Metadata';
 
 export default {
   Metadata: Metadata
