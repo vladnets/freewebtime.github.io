@@ -1,22 +1,45 @@
-import * as React from 'react';
+import { connect } from 'react-redux';
+import * as React  from 'react';
 import './App.css';
+import IAppState from './lib/tutorial/IAppState'
 
 const logo = require('./logo.svg');
 
-class App extends React.Component {
+class App extends React.Component<IAppState> {
   render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+
+    const { Project } = this.props;
+
+    var header = (
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2>Welcome!</h2>
       </div>
-    );
+    )
+
+    let bodyContent: any;
+    if (Project) {
+      bodyContent = (
+        <span>
+          <div>Project: {Project.Name}, created {Project.Created}</div>
+        </span>
+      )
+    } else {
+      bodyContent = (
+        <span>
+          <div>No project loaded</div>
+        </span>
+      )
+    }
+
+    return (
+        <div className="App">
+          {header}
+          {bodyContent}
+        </div>
+      );
   }
 }
 
-export default App;
+const mapStateToProps = (state: IAppState) => ({...state});
+export default connect(mapStateToProps)(App);

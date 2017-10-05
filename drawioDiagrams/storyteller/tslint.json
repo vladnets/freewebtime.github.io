@@ -8,7 +8,7 @@
             "statements"
         ],
         "ban": false,
-        "class-name": true,
+        "class-name": false,
         "comment-format": [
             true,
             "check-space"
@@ -29,30 +29,31 @@
             "static-before-instance",
             "variables-before-functions"
         ],
-        "no-any": true,
+        "no-any": false,
         "no-arg": true,
         "no-bitwise": true,
-        "no-console": [
-            true,
-            "log",
-            "error",
-            "debug",
-            "info",
-            "time",
-            "timeEnd",
-            "trace"
-        ],
+        // "no-console": [
+        //     false,
+        //     "log",
+        //     "error",
+        //     "debug",
+        //     "info",
+        //     "time",
+        //     "timeEnd",
+        //     "trace"
+        // ],
+        "no-console": false,
         "no-consecutive-blank-lines": true,
         "no-construct": true,
         "no-debugger": true,
         "no-duplicate-variable": true,
         "no-empty": true,
         "no-eval": true,
-        "no-shadowed-variable": true,
+        "no-shadowed-variable": false,
         "no-string-literal": true,
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": false,
-        "no-unused-expression": true,
+        "no-unused-expression": false,
         "no-use-before-declare": true,
         "one-line": [
             true,
@@ -63,7 +64,7 @@
         ],
         "quotemark": [true, "single", "jsx-double"],
         "radix": true,
-        "semicolon": [true, "always"],
+        "semicolon": false, //[true, "always"],
         "switch-default": true,
 
         "trailing-comma": [false],
