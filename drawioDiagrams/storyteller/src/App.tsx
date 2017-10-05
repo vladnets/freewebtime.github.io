@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import * as React  from 'react';
 import './App.css';
-import IAppState from './lib/tutorial/IAppState'
+import  { IAppState } from './lib/ide/state/IAppState';
 import NavigationBar from './Application/components/NavigationBar';
 
 class App extends React.Component<IAppState> {

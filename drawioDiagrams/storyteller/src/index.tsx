@@ -6,14 +6,10 @@ import reduxLogger from 'redux-logger';
 
 import App from './App';
 import './index.css';
-import rootReducer from './lib/tutorial/rootReducer';
-import IAppState from './lib/tutorial/IAppState';
+import rootReducer from './lib/ide/reducers/rootReducer';
+import { IAppState } from './lib/ide/state/IAppState';
 
-import * as Actions from './lib/tutorial/actions';
-
-// import './lib/tutorial/redux.ts';
-
-console.log('hello world!');
+import * as Actions from './lib/ide/actions/actions';
 
 const store: Store<IAppState> = createStore(
   rootReducer, 
@@ -26,6 +22,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('appRoot')
 );
-
+ 
 store.dispatch(Actions.noOperation());
+store.dispatch(Actions.ideInitialize());
 store.dispatch(Actions.projectCreate('new project name'));

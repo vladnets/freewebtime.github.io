@@ -2,15 +2,21 @@ import * as React from 'react';
 import * as Bootstrap from 'react-bootstrap/lib';
 
 export enum NavbarItemTypes {
-  Divider
+  Text,
+  Divider,
+  Dropdown,
+  Link,
+  Button,
 }
 
 export interface NavbarItem {
   type: NavbarItemTypes,
   text: string,
   itemId: string,
-  isEnabled: boolean,
-  onClick: (itemId: string) => {}
+  href?: string,
+  isEnabled?: boolean,
+  children?: NavbarItem[],
+  onClick: (e: NavbarItem) => {}
 }
 
 export interface NavbarData {
@@ -34,48 +40,85 @@ export default class NavigationBar extends React.Component<NavbarData> {
     this.props.onClick(e);
   }
 
+  handleItemClick(item: NavbarItem) {
+    if (!item) {
+      return;
+    }
+
+    if (!item.onClick) {
+      return;
+    }
+
+    item.onClick(item);
+  }
+
+  findMenuItemById(itemId: string, items: NavbarItem[]): NavbarItem | null {
+    let result: NavbarItem | null = null;
+
+    for (var i = 0; i < items.length; i++) {
+      let item = items[i];
+      
+      if (item.itemId === itemId) {
+        result = item;
+      } else if (item.children && item.children.length > 0) {
+        result = this.findMenuItemById(itemId, item.children);
+      }
+      
+      if (result !== null) {
+        return result;
+      }
+    }
+
+    return null;
+  }
+
   render() {
       return (
+
         <Bootstrap.Navbar>
-            <Bootstrap.Button onClick={() => {this.handleClick('hello')}} >Some button text</Bootstrap.Button>
-            <Bootstrap.Nav>
-              <Bootstrap.NavItem eventKey={1} href="#">Link1</Bootstrap.NavItem>
-              <Bootstrap.NavItem eventKey={3}>Yet one item</Bootstrap.NavItem>
-              <Bootstrap.NavDropdown eventKey={2} title="Dropdown" id="basic-nav-dropdown">
-                <Bootstrap.MenuItem eventKey={2.1} onClick={() => this.handleClick('Action 1')}>Action 1</Bootstrap.MenuItem>
-                <Bootstrap.MenuItem eventKey={2.2} onClick={() => this.handleClick('Action 2')}>Action 2</Bootstrap.MenuItem>
-                <Bootstrap.MenuItem eventKey={2.3} onClick={() => this.handleClick('Action 3')}>Action 3</Bootstrap.MenuItem>
-              </Bootstrap.NavDropdown>
-            </Bootstrap.Nav>
+          <Bootstrap.Nav>
+            
+            {this.props.items.map((navbarItem) => {
+              switch (navbarItem.type) {
+                case NavbarItemTypes.Button:
+                  return (
+                    <Bootstrap.Button onClick={() => this.handleItemClick(navbarItem)}>{navbarItem.text}</Bootstrap.Button>
+                  );
+
+                case NavbarItemTypes.Divider:
+                  return (
+                    <Bootstrap.MenuItem divider={true} />
+                  );
+
+                case NavbarItemTypes.Dropdown:
+                  return (
+                    <Bootstrap.Button onClick={() => this.handleItemClick(navbarItem)}>{navbarItem.text}</Bootstrap.Button>
+                  );
+
+                case NavbarItemTypes.Link:
+                  return (
+                    <Bootstrap.NavItem onClick={() => this.handleItemClick(navbarItem)} href={navbarItem.href ? navbarItem.href : '#'}>{navbarItem.text}</Bootstrap.NavItem>
+                  );
+
+                case NavbarItemTypes.Text:
+                  return (
+                    <Bootstrap.NavItem onClick={() => this.handleItemClick(navbarItem)}>{navbarItem.text}</Bootstrap.NavItem>
+                  );
+
+                default:
+                  return ('');
+              }
+              
+            })}
+
+            {/* <Bootstrap.NavDropdown eventKey={2} title="Dropdown" id="basic-nav-dropdown">
+              <Bootstrap.MenuItem eventKey={2.1} onClick={() => this.handleClick('Action 1')}>Action 1</Bootstrap.MenuItem>
+              <Bootstrap.MenuItem eventKey={2.2} onClick={() => this.handleClick('Action 2')}>Action 2</Bootstrap.MenuItem>
+              <Bootstrap.MenuItem eventKey={2.3} onClick={() => this.handleClick('Action 3')}>Action 3</Bootstrap.MenuItem>
+            </Bootstrap.NavDropdown> */}
+          
+          </Bootstrap.Nav>
         </Bootstrap.Navbar>
       ); 
-
-      // return (
-      //   <Bootstrap.Navbar inverse collapseOnSelect>
-      //     <Bootstrap.NavbarHeader>
-      //       <Bootstrap.NavbarBrand>
-      //         <a href={this.props.headerUrl}>{this.props.headerText}</a>
-      //       </Bootstrap.NavbarBrand>
-      //       <Bootstrap.NavbarToggle />
-      //     </Bootstrap.NavbarHeader>
-      //     <Bootstrap.Collapse>
-      //       <Bootstrap.Nav>
-      //         <Bootstrap.NavItem eventKey={1} href="#">Link</Bootstrap.NavItem>
-      //         <Bootstrap.NavItem eventKey={2} href="#">Link</Bootstrap.NavItem>
-      //         <Bootstrap.NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-      //           <Bootstrap.MenuItem eventKey={3.1}>Action</Bootstrap.MenuItem>
-      //           <Bootstrap.MenuItem eventKey={3.2}>Another action</Bootstrap.MenuItem>
-      //           <Bootstrap.MenuItem eventKey={3.3}>Something else here</Bootstrap.MenuItem>
-      //           <Bootstrap.MenuItem divider />
-      //           <Bootstrap.MenuItem eventKey={3.3}>Separated link</Bootstrap.MenuItem>
-      //         </Bootstrap.NavDropdown>
-      //       </Bootstrap.Nav>
-      //       <Bootstrap.Nav pullRight>
-      //         <Bootstrap.NavItem eventKey={1} href="#">Link Right</Bootstrap.NavItem>
-      //         <Bootstrap.NavItem eventKey={2} href="#">Link Right</Bootstrap.NavItem>
-      //       </Bootstrap.Nav>
-      //     </Bootstrap.Collapse>
-      //   </Bootstrap.Navbar>
-      // );      
   }
 }
