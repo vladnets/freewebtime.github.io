@@ -1,23 +1,29 @@
 import { IIdeState } from '../state/IIdeState';
 import * as React from 'react';
 import { NavigationBar } from './NavigationBar';
+import { Renderers } from './Renderers'
 
-export class GraphEditorIde extends React.Component<IIdeState> {
-
-  onMenuItemClick(e: any) {
-    console.log(e);
-  }
+export class GraphEditorIde extends React.Component<{data: IIdeState}> {
 
   render() {
     let bodyContent: any;
-    let ideState = this.props;
-    
-    if (ideState.Project) {
-      bodyContent = (
-        <span>
-          <div>Project: {ideState.Project.Name}, created {ideState.Project.Created}</div>
-        </span>
-      )
+    let data = this.props.data;
+
+    if (data.Project) {
+      let renderMode = data.Project.RenderMode;
+      let renderer = Renderers[renderMode];
+      if (renderer)
+      {
+        bodyContent = renderer(data.Project);
+      }
+      else{
+        bodyContent = (
+          <span>
+            <div>Project: {data.Project.Name}, created {data.Project.Created}</div>
+          </span>
+        )
+      }
+
     } else {
       bodyContent = (
         <span>
@@ -26,9 +32,11 @@ export class GraphEditorIde extends React.Component<IIdeState> {
       )
     }
     
+    console.log(this.props.data.Navbar);
+
     return (
-      <div className="App">
-        <NavigationBar items={ideState.Navbar.items} />
+      <div className="ideRoot">
+        <NavigationBar data={this.props.data.Navbar} />
         {bodyContent}
       </div>
     );  

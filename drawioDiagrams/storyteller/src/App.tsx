@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import * as React  from 'react';
 import './App.css';
-import  { IAppState } from './lib/ide/state/IAppState';
+import { IAppState } from './lib/ide/state/IAppState';
 import { GraphEditorIde } from './lib/ide/components/GraphEditorIde';
 
 class App extends React.Component<IAppState> {
@@ -17,7 +17,7 @@ class App extends React.Component<IAppState> {
     if (IdeState){
       return (
         <div className="App">
-          <GraphEditorIde Navbar={IdeState.Navbar} Project={IdeState.Project} />
+          <GraphEditorIde data={IdeState} />
         </div>
       );
     }

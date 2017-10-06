@@ -4,12 +4,7 @@ import { NavbarItemTypes } from '../state/NavbarItemTypes';
 import { INavbarData } from '../state/INavbarData';
 import { INavbarItem } from '../state/INavbarItem';
 
-export class NavigationBar extends React.Component<INavbarData> {
-  constructor(props: INavbarData) {
-    super(props);
-
-    this.renderNavbarItem = this.renderNavbarItem.bind(this);
-  }
+export class NavigationBar extends React.Component<{data: INavbarData}> {
   
   handleItemClick(item: INavbarItem) {
     if (!item) {
@@ -43,7 +38,9 @@ export class NavigationBar extends React.Component<INavbarData> {
     return null;
   }
 
-  renderNavbarItem(navbarItem: INavbarItem){
+  renderNavbarItem(navbarItem: INavbarItem, root: NavigationBar){
+    console.log('rendering...', navbarItem, root, navbarItem.type);
+    
     switch (navbarItem.type) {
       case NavbarItemTypes.Divider:
         return (
@@ -53,7 +50,7 @@ export class NavigationBar extends React.Component<INavbarData> {
       case NavbarItemTypes.Dropdown:
         let childrenItems: any;
         if (navbarItem.children){
-          childrenItems = navbarItem.children.map(this.renderNavbarItem);
+          childrenItems = navbarItem.children.map((item)=>{root.renderNavbarItem(item, root)});
         }
         return (
             <Bootstrap.NavDropdown key={navbarItem.itemId} id={navbarItem.itemId} title={navbarItem.text}>
@@ -63,13 +60,18 @@ export class NavigationBar extends React.Component<INavbarData> {
 
       case NavbarItemTypes.Link:
         return (
-          <Bootstrap.NavItem key={navbarItem.itemId} onClick={() => this.handleItemClick(navbarItem)} href={navbarItem.href ? navbarItem.href : '#'}>{navbarItem.text}</Bootstrap.NavItem>
+          <Bootstrap.NavItem key={navbarItem.itemId} onClick={() => root.handleItemClick(navbarItem)} href={navbarItem.href ? navbarItem.href : '#'}>{navbarItem.text}</Bootstrap.NavItem>
         );
 
       case NavbarItemTypes.Text:
-        return (
-          <Bootstrap.NavItem key={navbarItem.itemId} onClick={() => this.handleItemClick(navbarItem)}>{navbarItem.text}</Bootstrap.NavItem>
+        console.log('rendering text', navbarItem, root);
+
+        let result = 
+        (
+          <Bootstrap.NavItem key={navbarItem.itemId} onClick={() => root.handleItemClick(navbarItem)}>{navbarItem.text}</Bootstrap.NavItem>
         );
+        
+        return result;
 
       default:
         return null;
@@ -77,12 +79,17 @@ export class NavigationBar extends React.Component<INavbarData> {
   }
 
   render() {
+
     return (
-      <Bootstrap.Navbar>
-      <Bootstrap.Nav>
-        {this.props.items.map(this.renderNavbarItem)}
-      </Bootstrap.Nav>
-    </Bootstrap.Navbar>
+      <div>
+        <Bootstrap.Navbar>
+          <Bootstrap.Nav>
+            {this.props.data.items.map((item)=>{
+              return this.renderNavbarItem(item, this)
+            })}
+          </Bootstrap.Nav>
+        </Bootstrap.Navbar>
+      </div>
     ); 
   }
 }

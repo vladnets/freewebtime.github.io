@@ -1,7 +1,6 @@
-import {IMetadata} from "./IMetadata";
+import { IIdeItem } from './IIdeItem';
 
-export interface IProject {
+export interface IProject extends IIdeItem {
     Name: string,
-    Created: Date,
-    Metadata: IMetadata
+    Created?: Date,
 }
