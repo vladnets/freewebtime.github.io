@@ -1,6 +1,7 @@
-import { IAppState } from '../appState/IAppState';
+import { IAppState } from '../state/IAppState';
 import * as ActionTypes from '../actions/actionTypes';
-import ProjectReducer from './projectReducer';
+// import { NavbarItemTypes } from '../state/NavbarItemTypes';
+import CreateProjectReducer from './createProject';
 
 export default function (state: IAppState, action: { type: string }) {
     switch (action.type) {
@@ -11,7 +12,7 @@ export default function (state: IAppState, action: { type: string }) {
             }
         
         case ActionTypes.PROJECT_CREATE:
-            return ProjectReducer(state, action);
+            return CreateProjectReducer(state, action);
 
         default:
             return {...state}

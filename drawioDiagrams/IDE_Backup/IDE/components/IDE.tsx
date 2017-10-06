@@ -1,9 +1,8 @@
-import { IIdeState } from '../state/IIdeState';
 import * as React from 'react';
 import { NavigationBar } from './NavigationBar';
 import { Renderers } from './Renderers'
 
-export class GraphEditorIde extends React.Component<{data: IIdeState}> {
+export class IDE extends React.Component<{data: IIdeState}> {
 
   render() {
     let bodyContent: any;

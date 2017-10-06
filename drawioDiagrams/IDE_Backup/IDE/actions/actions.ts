@@ -1,7 +1,8 @@
+import { IIDEState } from '../state/IIdeState';
 import { createAction } from 'redux-actions';
 import { assign } from 'lodash';
 import * as ActionTypes from './actionTypes';
-import { IProject } from '../appState/IProject';
+import { IProject } from '../state/IProject';
 
 export const projectCreate = createAction<IProject, string>(
   ActionTypes.PROJECT_CREATE,
@@ -31,3 +32,8 @@ export const noOperation = createAction<void>(
     // none
   }
 )
+
+export const ideInitialize = createAction<IIDEState, IIDEState>(
+  ActionTypes.IDE_INITIALIZE,
+  (ideState: IIDEState) => (ideState)
+);

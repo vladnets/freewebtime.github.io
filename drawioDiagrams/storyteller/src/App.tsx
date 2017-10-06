@@ -1,26 +1,22 @@
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import * as React  from 'react';
 import './App.css';
-import { IAppState } from './lib/ide/state/IAppState';
-import { GraphEditorIde } from './lib/ide/components/GraphEditorIde';
+// import { IAppState } from './lib/ide/state/IAppState';
 
-class App extends React.Component<IAppState> {
-
-  onMenuItemClick(e: any) {
-    console.log(e);
-  }
+export class App<TData> extends React.Component<TData> { 
+//React.Component<{data: any}> {
 
   render() {
 
-    const { IdeState } = this.props;
+    // const { IdeState } = this.props;
 
-    if (IdeState){
-      return (
-        <div className="App">
-          <GraphEditorIde data={IdeState} />
-        </div>
-      );
-    }
+    // if (IdeState){
+    //   return (
+    //     <div className="App">
+    //       <GraphEditorIde data={IdeState} />
+    //     </div>
+    //   );
+    // }
 
     return (
       <div className="App">
@@ -30,5 +26,5 @@ class App extends React.Component<IAppState> {
   }
 }
 
-const mapStateToProps = (state: IAppState) => ({...state});
-export default connect(mapStateToProps)(App);
+// const mapStateToProps = (state: IAppState) => ({...state});
+// export default connect(mapStateToProps)(App);
