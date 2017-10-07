@@ -36,3 +36,10 @@ export const noOperation = (): IAction => {
     type: ActionTypes.NO_OPERATION
   }
 }
+
+export const projectSelectItem = (itemId: string): IAction => {
+  return {
+    type: ActionTypes.PROJECT_SELECT_ITEM,
+    payload: itemId
+  }
+}

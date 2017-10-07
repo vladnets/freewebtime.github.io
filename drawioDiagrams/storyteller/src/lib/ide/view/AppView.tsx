@@ -11,7 +11,7 @@ export class AppView extends View<IApp> {
     if (this.props.data) {
       return (
         <div className={'AppView'}>
-          <View data={this.props.data.Ide} viewData={{...this.props.viewData, id: 'ide', itemType: 'ide'}} />
+          <View data={this.props.data.Ide} viewData={this.props.viewData} />
         </div>
       );
     }

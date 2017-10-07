@@ -1,9 +1,9 @@
 import { IAction } from '../actions/IAction';
+import { Theme } from './Theme';
+
 export interface IViewData {
-  itemType?: string,
   styleName?: string,
-  id?: string,
   displayMode?: string,
-  theme?: any,
+  theme?: Theme,
   callback(action: IAction): void
 }

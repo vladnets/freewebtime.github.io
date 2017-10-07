@@ -3,7 +3,7 @@ import { View } from '../../framework/view/View';
 import * as React from 'react';
 import { IViewData } from '../../framework/view/IViewData';
 import { ProjectView } from './ProjectView';
-import * as Actions from '../actions/actions'
+import * as Actions from '../actions'
 
 export class IdeView extends View<IIde> {
 
@@ -22,7 +22,7 @@ export class IdeView extends View<IIde> {
       if (this.props.data.Project) {
         return (
           <div className={'IdeView'}>
-            <View data={this.props.data.Project} viewData={{...this.props.viewData, itemType: 'project', id: 'project'}} />
+            <View data={this.props.data.Project} viewData={this.props.viewData} />
           </div>
         );
       }
