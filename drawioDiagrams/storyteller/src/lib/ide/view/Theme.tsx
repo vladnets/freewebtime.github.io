@@ -1,3 +1,4 @@
+import { IProjectItem } from '../appData/IProjectItem';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { IdeView } from './IdeView';
@@ -7,6 +8,7 @@ import { AppView } from '../view/AppView';
 import { IViewData } from '../../framework/view/IViewData';
 import { ProjectView } from './ProjectView';
 import { IProject } from '../appData/IProject';
+import { ProjectItemView } from './ProjectItemView';
 
 let styles = {}
 
@@ -32,6 +34,11 @@ styles[('app')][('default')] = (data: IApp, viewData: IViewData) => {
 styles[('project')] = {}
 styles[('project')][('default')] = (data: IProject, viewData: IViewData) => {
   return (<ProjectView data={data} viewData={viewData} key={viewData.id} />);
+}
+
+styles[('textItem')] = {}
+styles[('textItem')][('default')] = (data: IProjectItem, viewData: IViewData) => {
+  return (<ProjectItemView data={data} viewData={viewData} key={viewData.id} />);
 }
 
 export default styles;

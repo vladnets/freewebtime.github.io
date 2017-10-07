@@ -15,7 +15,7 @@ export class ProjectView extends View<IProject> {
           {
             this.props.data.Items.map((item: IProjectItem)=> {
               return (
-                <li key={item.Id}>{item.Name} {item.Value}</li>
+                <View data={item} viewData={{...this.props.viewData, itemType: item.ItemType, id: item.Id}} key={item.Id} />
               );
             })
           }

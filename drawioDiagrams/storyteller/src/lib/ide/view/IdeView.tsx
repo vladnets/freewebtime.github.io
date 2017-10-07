@@ -22,7 +22,7 @@ export class IdeView extends View<IIde> {
       if (this.props.data.Project) {
         return (
           <div className={'IdeView'}>
-            <View data={this.props.data.Project} viewData={{...this.props.viewData, itemType: 'project'}} />
+            <View data={this.props.data.Project} viewData={{...this.props.viewData, itemType: 'project', id: 'project'}} />
           </div>
         );
       }

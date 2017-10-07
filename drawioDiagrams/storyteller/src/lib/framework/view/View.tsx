@@ -29,11 +29,11 @@ export class View<TData> extends React.Component<{data: TData, viewData: IViewDa
 
       const dataTypeTemplate = theme[viewData.itemType || ''];
       if (dataTypeTemplate) {
-        style = (dataTypeTemplate[dataId] || dataTypeTemplate[styleName])
+        style = (dataTypeTemplate[dataId] || dataTypeTemplate[styleName] || dataTypeTemplate[('default')])
       }
 
       if (!style) { 
-          style = (theme[dataId] || theme[styleName]);
+          style = (theme[dataId] || theme[styleName] || dataTypeTemplate[('default')]);
       }
 
       if (!style) {
