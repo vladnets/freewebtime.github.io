@@ -1,7 +1,5 @@
-import { IIde } from './IIde';
 import { IViewData } from '../../framework/view/IViewData';
-import { IItem } from '../../framework/appData/IItem';
+import { IAppItem } from '../../framework/appData/IAppItem';
 
-export interface IApp extends IItem {
-  Ide: IIde;  
+export interface IApp extends IAppItem {
 }

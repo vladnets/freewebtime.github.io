@@ -1,20 +1,27 @@
-import { IItem } from '../appData/IItem';
-import styles from '../../ide/view/Theme';
+import { IAppItem } from '../appData/IAppItem';
 const defaultStyle: string = 'default';
 
-export class Theme {
-  styles: any = {};
+export interface ITheme {
+  styles: any;
 
-  public addTemplate(styleId: string|undefined = defaultStyle, displayMode: string|undefined = defaultStyle, template: any) {
+  addTemplate(styleId: string|undefined, displayMode: string|undefined, template: any): void;
+  getTemplate(dataId: string|undefined, itemType: string|undefined, styleName: string|undefined, displayMode: string|undefined): void;
+}
+
+const Theme: ITheme = {
+  styles: {},
+
+  addTemplate(styleId: string|undefined = defaultStyle, displayMode: string|undefined = defaultStyle, template: any) {
     if (!styleId) {
       return;
     }
     
     const style = this.styles[styleId] || {};
     style[displayMode] = template;
-  }
+    this.styles[styleId] = style;
+  },
 
-  public getStyle(dataId: string, itemType: string = '', styleName: string = '', displayMode: string = defaultStyle) {
+  getTemplate(dataId: string, itemType: string = '', styleName: string = '', displayMode: string = defaultStyle) {
     let style: any;
 
     if (dataId) {
@@ -36,3 +43,5 @@ export class Theme {
     return style[displayMode] || style;
   }
 }
+
+export default Theme;

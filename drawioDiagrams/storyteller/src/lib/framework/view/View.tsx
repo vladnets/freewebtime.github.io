@@ -1,16 +1,16 @@
-import { IItem } from '../appData/IItem';
+import { IAppItem } from '../appData/IAppItem';
 import { IAction } from '../actions/IAction';
 import * as React from 'react';
 import { IViewData } from './IViewData';
 import { Dispatch } from 'redux';
 
-export class View<TData extends IItem> extends React.Component<{data: TData, viewData: IViewData}> {
+export class View<TData extends IAppItem> extends React.Component<{data: TData, viewData: IViewData}> {
 
-  renderCustom(data: IItem, viewData: IViewData) {
+  renderCustom(data: IAppItem, viewData: IViewData) {
 
     const findTemplate = (viewData: IViewData) => {
 
-      const styleNotFound = (data: IItem) => {
+      const styleNotFound = (data: IAppItem) => {
         return (<span className={'style-not-found'}>{(data || 'undefined').toString()}</span>);
       }
       
@@ -18,8 +18,8 @@ export class View<TData extends IItem> extends React.Component<{data: TData, vie
         return styleNotFound;
       }
   
-      const style: any = viewData.theme.getStyle(data.Id, data.ItemType, viewData.styleName, viewData.displayMode);
-      return style || styleNotFound;
+      const style: any = viewData.theme.getTemplate(data.Id, data.ItemType, viewData.styleName, viewData.displayMode);
+      return style || styleNotFound; 
     }
 
     const renderer = findTemplate(viewData);
@@ -36,6 +36,32 @@ export class View<TData extends IItem> extends React.Component<{data: TData, vie
     if (this.props.data) {
       return this.renderCustom(this.props.data, this.props.viewData); 
     }
+  }
+
+  renderContent(context: {data: IAppItem, viewData: IViewData}) {
+    const result = (content: any, context: {data: IAppItem, viewData: IViewData}) => {
+      return (<div className={context.data.ItemType}>{content}</div>)
+    }
+
+    const content = context.data.Content;
+    if (!content) {
+      return result('', context);  
+    }
+
+    const contentAsItem: IAppItem = content;
+    if (contentAsItem) {
+      return result (
+        (<View data={contentAsItem} viewData={{...context.viewData, styleName: undefined}} key={contentAsItem.Id} />),
+        context
+      )
+    }
+
+    return result (
+      content.map((child: IAppItem) => 
+        <View data={contentAsItem} viewData={{...context.viewData, styleName: undefined}} key={child.Id} />,
+      ),
+      context
+    )
   }
 
   dispatchAction(action: IAction) {
