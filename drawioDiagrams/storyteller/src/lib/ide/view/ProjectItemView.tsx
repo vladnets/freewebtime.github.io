@@ -12,7 +12,7 @@ export class ProjectItemView extends View<IAppItem> {
         <h3 onClick={() => {this.dispatchAction(Actions.project.projectSelectItem(this.props.data.Id))}}>
           {this.props.data.Content}
         </h3>
-      </div>
+      </div> 
     );
   } 
 }

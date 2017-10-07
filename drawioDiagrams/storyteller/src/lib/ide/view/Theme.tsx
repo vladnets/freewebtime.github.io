@@ -1,7 +1,6 @@
 import { IAppItem } from '../../framework/appData/IAppItem';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { IdeView } from './IdeView';
 import { IApp } from '../appData/IApp';
 import { AppView } from '../view/AppView';
 import { IViewData } from '../../framework/view/IViewData';
@@ -18,10 +17,6 @@ const fillTemplate = (theme: ITheme) => {
       <div className={'default-renderer'}>{data.toString()}</div>
     )
   });
-
-  theme.addTemplate(ItemTypes.ITEM_TYPE_IDE, undefined, (data: IAppItem, viewData: IViewData) => {
-      return (<IdeView data={data} viewData={viewData} key={data.Id} />);
-    });
 
   theme.addTemplate(ItemTypes.ITEM_TYPE_APP, undefined, (data: IApp, viewData: IViewData) => {
       return (<AppView data={data} viewData={viewData} key={data.Id} />);
