@@ -27,13 +27,7 @@ const appReducer = (state: IApp, action: {type: string, payload?: any}): IApp =>
         ItemType: ItemTypes.ITEM_TYPE_APP,
         Name: 'Initial app',
         IsRequired: true,
-        Content: {
-            Id: CreateGuid(),
-            ItemType: ItemTypes.ITEM_TYPE_IDE,
-            Name: 'Initial ide',
-            IsRequired: true,
-            Content: 'This is an Ide content'
-        }
+        Content: 'content app'
     }
 }
 

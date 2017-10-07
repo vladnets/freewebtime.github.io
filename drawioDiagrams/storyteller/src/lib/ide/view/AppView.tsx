@@ -6,15 +6,7 @@ import { IdeView } from './IdeView';
 import { IAppItem } from '../../framework/appData/IAppItem';
 
 export class AppView extends View<IApp> {
-
   render() {
-
-    return (
-      <div className={'AppView'}>
-        {
-          this.renderContent(this.props)
-        }
-      </div>
-    );
+    return (this.renderContent(this.props));
   }
 }
