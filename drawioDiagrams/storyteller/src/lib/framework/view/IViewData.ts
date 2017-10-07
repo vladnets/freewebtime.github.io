@@ -1,7 +1,9 @@
-export interface IViewData<TData extends any> {
+import { IAction } from '../actions/IAction';
+export interface IViewData {
+  itemType?: string,
   styleName?: string,
   id?: string,
   displayMode?: string,
-  data?: TData,
-  template?: any
+  theme?: any,
+  callback(action: IAction): void
 }

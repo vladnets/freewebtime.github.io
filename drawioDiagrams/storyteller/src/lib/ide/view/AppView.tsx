@@ -1,11 +1,21 @@
+import Theme from './Theme';
 import { View } from '../../framework/view/View';
 import * as React from 'react';
 import { IViewData } from '../../framework/view/IViewData';
 import { IApp } from '../appData/IApp';
+import { IdeView } from './IdeView';
 
-export class AppView<IApp> extends View<IApp> {
+export class AppView extends View<IApp> {
 
   render(){
-    return this.renderCustom(this.props, this.props.template);
+    if (this.props.data) {
+      return (
+        <div className={'AppView'}>
+          <View data={this.props.data.Ide} viewData={{...this.props.viewData, id: 'ide', itemType: 'ide'}} />
+        </div>
+      );
+    }
+
+    return (<div>template not found</div>);
   }
 }

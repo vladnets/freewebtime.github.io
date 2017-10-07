@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import projectReducer from './projectReducer';
+import { projectReducer } from './projectReducer';
 import instanceIdReducer from './instanceIdReducer';
 import { IIde } from '../appData/IIde';
 

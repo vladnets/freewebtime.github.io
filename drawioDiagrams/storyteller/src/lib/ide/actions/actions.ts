@@ -1,3 +1,4 @@
+import { IAction } from '../../framework/actions/IAction';
 import { createAction } from 'redux-actions';
 import { assign } from 'lodash';
 import * as ActionTypes from './actionTypes';
@@ -30,9 +31,8 @@ export const projectChangeName = (newName: string) => {
   }
 };
 
-export const noOperation = createAction<void>(
-  ActionTypes.NO_OPERATION,
-  () => { 
-    // none
+export const noOperation = (): IAction => {
+  return {
+    type: ActionTypes.NO_OPERATION
   }
-)
+}
