@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import { assign } from 'lodash';
 import * as ActionTypes from './actionTypes';
-import { IProject } from '../appState/IProject';
+import { IProject } from '../appData/IProject';
 
 export const projectCreate = createAction<IProject, string>(
   ActionTypes.PROJECT_CREATE,
@@ -20,10 +20,12 @@ export const projectUnload = createAction<void>(
   }
 );
 
-export const projectChangeName = createAction<IProject, IProject, string>(
-  ActionTypes.PROJECT_EDIT_NAME,
-  (proj: IProject, newName: string) => <IProject> assign(proj, { Name: newName })
-);
+export const projectChangeName = (newName: string) => {
+  return {
+    type: ActionTypes.PROJECT_CHANGE_NAME,
+    payload: newName
+  }
+};
 
 export const noOperation = createAction<void>(
   ActionTypes.NO_OPERATION,

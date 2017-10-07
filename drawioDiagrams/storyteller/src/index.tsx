@@ -6,13 +6,15 @@ import reduxLogger from 'redux-logger';
 
 import { App } from './App';
 import './index.css';
-import rootReducer from './lib/ide/reducers/rootReducer';
+import appReducer from './lib/ide/reducers/appReducer';
+import * as Actions from './lib/ide/actions/actions';
+import { projectChangeName } from './lib/ide/actions/actions';
 
 const initialState: any = {
 };
 
 const store: Store<any> = createStore(
-  rootReducer,
+  appReducer,
   initialState,
   applyMiddleware(reduxLogger)
 );
@@ -26,6 +28,5 @@ ReactDOM.render(
 
 console.log(store.getState());
 
-// store.dispatch(Actions.noOperation());
-// store.dispatch(Actions.ideInitialize());
-// store.dispatch(Actions.projectCreate('new project name'));
+store.dispatch(Actions.noOperation());
+store.dispatch(Actions.projectChangeName('Supercool project'));

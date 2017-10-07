@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { IViewData } from './IViewData';
 
-export class View<TData extends any> extends React.Component<TData> {
+export class View<TData> extends React.Component<IViewData<TData>> {
 
   renderCustom(data: TData, template: any) {
 
@@ -36,9 +37,9 @@ export class View<TData extends any> extends React.Component<TData> {
     }
 
     let dataTypeName: string = data.constructor.name;
-    let styleName: string = data[('styleName')] 
-    let dataId: string = data[('id')];
-    let displayMode: string = data[('displayMode')]; 
+    let styleName: string = data[('styleName')] as string;
+    let dataId: string = data[('id')] as string;
+    let displayMode: string = data[('displayMode')] as string; 
 
     let internalData = data[('data')] || data;
 

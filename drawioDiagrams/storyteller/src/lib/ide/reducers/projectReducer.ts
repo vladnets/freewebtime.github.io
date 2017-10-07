@@ -1,13 +1,13 @@
+import { IProject } from '../appData/IProject';
 import * as ActionTypes from '../actions/actionTypes';
 
-export default function (state: any, action: { type: string }) {
+export default function (state: IProject, action: { type: string, payload: any }) {
     switch (action.type) {
         
-        case ActionTypes.PROJECT_CREATE:
+        case ActionTypes.PROJECT_CHANGE_NAME:
             return {
                 ...state,
-                Project: {},
-                Name: 'ProjType'
+                Name: action.payload
             }
 
         default:

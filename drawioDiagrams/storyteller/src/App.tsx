@@ -1,23 +1,20 @@
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import * as React  from 'react';
 import './App.css';
-// import { IAppState } from './lib/ide/state/IAppState';
+import { View } from './lib/framework/view/View';
+import { IApp } from './lib/ide/appData/IApp';
+import { IViewData } from './lib/framework/view/IViewData';
 
-export class App<TData> extends React.Component<TData> { 
-//React.Component<{data: any}> {
+export class App extends View<IApp> {
 
   render() {
 
-    // const { IdeState } = this.props;
+    console.log('App state: ', this.props, this.props.data as IApp);
 
-    // if (IdeState){
-    //   return (
-    //     <div className="App">
-    //       <GraphEditorIde data={IdeState} />
-    //     </div>
-    //   );
-    // }
-
+    if (this.props.data) {
+      return this.renderCustom(this.props.data, this.props.template); 
+    }
+    
     return (
       <div className="App">
         Application is loading now...
@@ -26,5 +23,5 @@ export class App<TData> extends React.Component<TData> {
   }
 }
 
-// const mapStateToProps = (state: IAppState) => ({...state});
-// export default connect(mapStateToProps)(App);
+const mapStateToProps = (state: IViewData<IApp>) => ({...state});
+export default connect(mapStateToProps)(App);
