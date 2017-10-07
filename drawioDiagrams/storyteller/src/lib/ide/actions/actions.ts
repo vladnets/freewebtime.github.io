@@ -2,11 +2,14 @@ import { createAction } from 'redux-actions';
 import { assign } from 'lodash';
 import * as ActionTypes from './actionTypes';
 import { IProject } from '../appData/IProject';
+import { IPayloadCreateProject } from './payloads/IPayloadCreateProject';
 
-export const projectCreate = createAction<IProject, string>(
-  ActionTypes.PROJECT_CREATE,
-  (projectName: string) => (<IProject> {Name: projectName, Created: new Date()})
-);
+export const projectCreate = (payload: IPayloadCreateProject) => {
+  return {
+    type: ActionTypes.PROJECT_CREATE,
+    payload: payload
+  }
+};
 
 export const projectLoad = createAction<IProject, IProject>(
   ActionTypes.PROJECT_LOAD,

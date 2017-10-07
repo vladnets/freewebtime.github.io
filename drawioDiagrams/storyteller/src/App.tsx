@@ -9,10 +9,8 @@ export class App extends View<IApp> {
 
   render() {
 
-    console.log('App state: ', this.props, this.props.data as IApp);
-
     if (this.props.data) {
-      return this.renderCustom(this.props.data, this.props.template); 
+      return this.renderCustom(this.props, this.props.template); 
     }
     
     return (

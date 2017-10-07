@@ -9,6 +9,7 @@ import './index.css';
 import appReducer from './lib/ide/reducers/appReducer';
 import * as Actions from './lib/ide/actions/actions';
 import { projectChangeName } from './lib/ide/actions/actions';
+import { Templates } from './lib/ide/view/Templates';
 
 const initialState: any = {
 };
@@ -19,14 +20,23 @@ const store: Store<any> = createStore(
   applyMiddleware(reduxLogger)
 );
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('appRoot')
-);
 
-console.log(store.getState());
+const domElement = document.getElementById('appRoot');
+store.subscribe(() => {
+  ReactDOM.render(
+    <App data={store.getState()} template={Templates.Templates}/>,
+    domElement
+  )
+});
+
+let projectTemplates = {
+  story: {
+    Items: [
+
+    ]
+  }
+}
 
 store.dispatch(Actions.noOperation());
+store.dispatch(Actions.projectCreate({templateName: 'story', name: 'Amazing story project', templates: projectTemplates}));
 store.dispatch(Actions.projectChangeName('Supercool project'));
