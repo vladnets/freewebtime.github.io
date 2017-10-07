@@ -11,7 +11,7 @@ export class View<TData extends IAppItem> extends React.Component<{data: TData, 
     const findTemplate = (viewData: IViewData) => {
 
       const styleNotFound = (data: IAppItem) => {
-        return (<span className={'style-not-found'}>{(data || 'undefined').toString()}</span>);
+        return (<span className={'style-not-found ' + JSON.stringify(data)}>{(data || 'undefined').toString()}</span>);
       }
       
       if (!data || !viewData || !viewData.theme) {
@@ -48,17 +48,9 @@ export class View<TData extends IAppItem> extends React.Component<{data: TData, 
       return result('', context);  
     }
 
-    const contentAsItem: IAppItem = content;
-    if (contentAsItem) {
-      return result (
-        (<View data={contentAsItem} viewData={{...context.viewData, styleName: undefined}} key={contentAsItem.Id} />),
-        context
-      )
-    }
-
     return result (
       content.map((child: IAppItem) => 
-        <View data={contentAsItem} viewData={{...context.viewData, styleName: undefined}} key={child.Id} />,
+        <View data={child} viewData={{...context.viewData, styleName: undefined}} key={child.Id} />,
       ),
       context
     )

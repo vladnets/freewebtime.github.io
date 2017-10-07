@@ -13,6 +13,7 @@ const storyEdtorApp: IApp = {
       IsRequired: true,
       Name: 'Blank project',
       ItemType: ItemTypes.ITEM_TYPE_PROJECT,
+      Content: 'here is a content for the project...'
     }
   }
 }

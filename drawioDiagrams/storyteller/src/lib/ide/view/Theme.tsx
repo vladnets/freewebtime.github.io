@@ -19,16 +19,20 @@ const fillTemplate = (theme: ITheme) => {
   });
 
   theme.addTemplate(ItemTypes.ITEM_TYPE_APP, undefined, (data: IApp, viewData: IViewData) => {
-      return (<AppView data={data} viewData={viewData} key={data.Id} />);
-    });
-      
-  theme.addTemplate(undefined, undefined, (data: IAppItem, viewData: IViewData) => {
-      return (<ProjectView data={data} viewData={viewData} key={data.Id} />);
-    });
+    return (<AppView data={data} viewData={viewData} key={data.Id} />);
+  });
+    
+  theme.addTemplate(ItemTypes.ITEM_TYPE_APP, undefined, (data: IApp, viewData: IViewData) => {
+    return (<AppView data={data} viewData={viewData} key={data.Id} />);
+  });
+    
+  theme.addTemplate(ItemTypes.ITEM_TYPE_PROJECT, undefined, (data: IAppItem, viewData: IViewData) => {
+    return (<ProjectView data={data} viewData={viewData} key={data.Id} />);
+  });
         
-  theme.addTemplate(undefined, undefined, (data: IAppItem, viewData: IViewData) => {
-      return (<ProjectItemView data={data} viewData={viewData} key={data.Id} />);
-    });
+  theme.addTemplate(ItemTypes.ITEM_TYPE_PROJECT_ITEM, undefined, (data: IAppItem, viewData: IViewData) => {
+    return (<ProjectItemView data={data} viewData={viewData} key={data.Id} />);
+  });
 
   return theme;
 }

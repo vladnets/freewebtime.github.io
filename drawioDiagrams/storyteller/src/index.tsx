@@ -14,9 +14,11 @@ import Theme from './lib/ide/view/Theme';
 import { IApp } from './lib/ide/appData/IApp';
 import ItemTypes from './lib/ide/appData/ItemTypes'
 import { NO_OPERATION } from './lib/ide/actions/actionTypes';
+import StoryEditorTemplate from './lib/ide/appData/Templates/StoryEditorApp';
 
 const store: Store<IApp> = createStore(
   appReducer,
+  StoryEditorTemplate,
   applyMiddleware(reduxLogger)
 ) as Store<IApp>;
 
@@ -34,6 +36,4 @@ store.subscribe(() => {
   );
 });
 
-
-
-store.dispatch(Actions.app.noOperation());
+store.dispatch(Actions.app.noOperation()); 
