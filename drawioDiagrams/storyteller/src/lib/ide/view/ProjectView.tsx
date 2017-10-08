@@ -13,11 +13,7 @@ export class ProjectView extends View<IAppItem> {
       <div>
         <h1>{this.props.data.Name}</h1>
         <ul>
-          {(this.props.data.Content || {}).map((item: IAppItem)=> {
-            return (
-              <View data={item} viewData={this.props.viewData} key={item.Id} />
-            );
-          })}
+          {this.renderContent({data: this.props.data, viewData: this.props.viewData})}
         </ul>
       </div>
     );

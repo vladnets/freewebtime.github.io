@@ -48,12 +48,19 @@ export class View<TData extends IAppItem> extends React.Component<{data: TData, 
       return result('', context);  
     }
 
-    return result (
-      content.map((child: IAppItem) => 
-        <View data={child} viewData={{...context.viewData, styleName: undefined}} key={child.Id} />,
-      ),
-      context
-    )
+    if (Array.isArray(content)) {
+      return result (
+        content.map((child: IAppItem) => { return (<View data={child} viewData={{...context.viewData, styleName: undefined}} key={child.Id} />) }), 
+        context
+      )
+    }
+
+    const appItem = content as IAppItem;
+    if (appItem) {
+      return (<View viewData={context.viewData} data={appItem} key={appItem.Id}/>);
+    }
+
+    return result('', context);
   }
 
   dispatchAction(action: IAction) {

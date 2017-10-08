@@ -15,6 +15,7 @@ import { IApp } from './lib/ide/appData/IApp';
 import ItemTypes from './lib/ide/appData/ItemTypes'
 import { NO_OPERATION } from './lib/ide/actions/actionTypes';
 import StoryEditorTemplate from './lib/ide/appData/Templates/StoryEditorApp';
+import { IAppItem } from './lib/framework/appData/IAppItem';
 
 const store: Store<IApp> = createStore(
   appReducer,

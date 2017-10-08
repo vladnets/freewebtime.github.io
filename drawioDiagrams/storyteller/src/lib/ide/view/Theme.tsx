@@ -9,6 +9,7 @@ import { ProjectItemView } from './ProjectItemView';
 import Theme from '../../framework/view/Theme';
 import ItemTypes from '../appData/ItemTypes';
 import { ITheme } from '../../framework/view/Theme';
+import { View } from '../../framework/view/View';
 
 const fillTemplate = (theme: ITheme) => {
 
@@ -32,6 +33,10 @@ const fillTemplate = (theme: ITheme) => {
         
   theme.addTemplate(ItemTypes.ITEM_TYPE_PROJECT_ITEM, undefined, (data: IAppItem, viewData: IViewData) => {
     return (<ProjectItemView data={data} viewData={viewData} key={data.Id} />);
+  });
+
+  theme.addTemplate(ItemTypes.ITEM_TYPE_STRING, undefined, (data: IAppItem, viewData: IViewData) => {
+    return (<div>{data.toString()}</div>);
   });
 
   return theme;

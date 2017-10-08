@@ -8,13 +8,20 @@ const storyEdtorApp: IApp = {
   Name: 'Fwt Story Editor',
   ItemType: ItemTypes.ITEM_TYPE_APP,
   Content: {
-    Project: {
-      Id: CreateGuid(),
-      IsRequired: true,
-      Name: 'Blank project',
-      ItemType: ItemTypes.ITEM_TYPE_PROJECT,
-      Content: 'here is a content for the project...'
-    }
+    Id: CreateGuid(),
+    IsRequired: true,
+    Name: 'Blank project',
+    ItemType: ItemTypes.ITEM_TYPE_PROJECT,
+    Content: [
+      'text item',
+      'another text item',
+      {
+        Id: CreateGuid(),
+        Name: 'subitem',
+        ItemType: ItemTypes.ITEM_TYPE_STRING,
+        Content: 'some text as value of string type'
+      }
+    ],
   }
 }
 
