@@ -1,27 +1,20 @@
-import { IAction } from './lib/framework/actions/IAction';
-import { IViewData } from './lib/framework/view/IViewData';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Store, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reduxLogger from 'redux-logger';
 
-import { View } from './lib/framework/view/View';
 import './index.css';
-import appReducer from './lib/ide/reducers/appReducer';
-import Actions from './lib/ide/actions';
-import Theme from './lib/ide/view/Theme';
-import { IApp } from './lib/ide/appData/IApp';
-import ItemTypes from './lib/ide/appData/ItemTypes'
-import { NO_OPERATION } from './lib/ide/actions/actionTypes';
-import StoryEditorTemplate from './lib/ide/appData/Templates/StoryEditorApp';
-import { IAppItem } from './lib/framework/appData/IAppItem';
+import { IAction } from './lib/IAction';
+import { View } from './lib/View';
+import initialState from './lib/initialState';
+import appReducer from './lib/appReducer';
 
-const store: Store<IApp> = createStore(
+const store: Store<any> = createStore(
   appReducer,
-  StoryEditorTemplate,
+  initialState,
   applyMiddleware(reduxLogger)
-) as Store<IApp>;
+) as Store<any>;
 
 const dispatchAction = function(action: IAction)
 {
@@ -30,11 +23,11 @@ const dispatchAction = function(action: IAction)
 
 const domElement = document.getElementById('appRoot');
 store.subscribe(() => {
-  const state = store.getState() as IApp;
+  const state = store.getState();
   ReactDOM.render(
-    <View data={state} viewData={{theme: Theme, callback: dispatchAction}} />,
+    <View data={state.appRoot} viewContext={state.viewContext} />,
     domElement
   );
 });
 
-store.dispatch(Actions.app.noOperation()); 
+store.dispatch({type: 'No operation'}); 
