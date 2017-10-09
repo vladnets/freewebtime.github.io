@@ -13,13 +13,23 @@ const storyEdtorApp: IApp = {
     Name: 'Blank project',
     ItemType: ItemTypes.ITEM_TYPE_PROJECT,
     Content: [
-      'text item',
-      'another text item',
       {
         Id: CreateGuid(),
         Name: 'subitem',
         ItemType: ItemTypes.ITEM_TYPE_STRING,
         Content: 'some text as value of string type'
+      },
+      {
+        Id: CreateGuid(),
+        Name: 'subitem 2',
+        ItemType: ItemTypes.ITEM_TYPE_STRING,
+        Content: 'some text as value of string type'
+      },
+      {
+        Id: CreateGuid(),
+        Name: 'subitem 3',
+        ItemType: ItemTypes.ITEM_TYPE_INT,
+        Content: 10
       }
     ],
   }

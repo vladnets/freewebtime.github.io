@@ -23,10 +23,6 @@ const fillTemplate = (theme: ITheme) => {
     return (<AppView data={data} viewData={viewData} key={data.Id} />);
   });
     
-  theme.addTemplate(ItemTypes.ITEM_TYPE_APP, undefined, (data: IApp, viewData: IViewData) => {
-    return (<AppView data={data} viewData={viewData} key={data.Id} />);
-  });
-    
   theme.addTemplate(ItemTypes.ITEM_TYPE_PROJECT, undefined, (data: IAppItem, viewData: IViewData) => {
     return (<ProjectView data={data} viewData={viewData} key={data.Id} />);
   });
