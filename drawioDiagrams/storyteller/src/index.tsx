@@ -12,7 +12,8 @@ import { View } from './lib/components/View';
 import { appConfig } from './lib/config/appConfig';
 
 const store: Store<any> = createStore(
-  (state: any, action: IAction) => { return constructor(state, action) },
+  (state: any, action: IAction) => { return constructor(state, action, state) },
+  appConfig.InitialState,
   applyMiddleware(reduxLogger)
 ) as Store<any>;
 
@@ -22,14 +23,14 @@ const dispatchAction = function(action: IAction)
 }
 
 const renderState = function(state: any, dispatchAction: (action: IAction)=> void) {
-  state.viewContext.Callback = dispatchAction;
+  // state.viewContext.Callback = dispatchAction;
   ReactDOM.render(
     <View data={state.App} viewContext={state.viewContext} />,
     domElement
   );
 }
 
-store.dispatch({type: appConfig.ObjectTypes.APP_ACTION_EXECUTE, payload: appConfig.InitialState}); 
+store.dispatch({type: appConfig.ActionTypes.APP_ACTION_EXECUTE, payload: appConfig.InitialState}); 
 
 const domElement = document.getElementById('appRoot');
 store.subscribe(() => {
@@ -37,5 +38,5 @@ store.subscribe(() => {
   renderState(state, dispatchAction);
 });
 
-renderState(store.getState(), dispatchAction);
+renderState(store.getState(), dispatchAction); 
 

@@ -1,26 +1,17 @@
 import { IAction } from '../api/IAction';
 import { IObject } from '../api/IObject';
 
-export const getValueByReference = function(state: IObject, action: IAction): IObject|undefined|any {
-  console.log('reference', state, 'other', action);
-
-  if (!state || !action || !action.payload) {
+export const reference = function(state: any, path: string): IObject|undefined|any {
+  if (!state || !path) {
     return undefined;
   }
 
-  if (typeof action.payload === 'string') {
-    return state[action.payload];    
-  }
-
-  if (Array.isArray(action.payload)) {
-    return getValueByReference(state[action.payload[0]], {...action, payload: action.payload.shift()});
-  }
-
-  return undefined;
+  return state[path];    
 }
 
-export const reference = function(path: string|string[]) {
-  return function(state: IObject, action: IAction) {
-    getValueByReference(state, {...action, payload: path});
+export const ref = function(path: string) {
+  return function(state: any, action: IAction, context: any) {
+    let result = reference(context, path);
+    return result; 
   }
 }

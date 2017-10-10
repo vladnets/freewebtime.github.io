@@ -4,8 +4,6 @@ import { IViewContext } from '../api/IVIewContext';
 
 export class View extends React.Component<{data: any, viewContext: IViewContext, isContainer?: boolean}> {
   render(): any {
-    console.log(this.props.data, this.props.viewContext, this.props.isContainer)
-  
     if (!this.props.data) {
       return false;
     }

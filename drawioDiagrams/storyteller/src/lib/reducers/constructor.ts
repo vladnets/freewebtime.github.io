@@ -1,46 +1,77 @@
+import { appConfig } from '../config/appConfig';
 import { IAction } from '../api/IAction';
 import { IObject } from '../api/IObject';
 
-export const constructor = function(state: IObject, action: IAction): IObject|undefined|any {
-  if (!state && (!action || !action.payload)) {
+export const constructor = function(state: any, action: IAction, context: any) {
+
+  const createItem = function(prototype: any, state: any, action: IAction, context: any) {
+    let typeofProto = typeof prototype;
+    if (typeof prototype === 'function') {
+      let result = prototype(state, action, context);
+      result.Prototype = prototype;
+      return result;
+    }
+    
+    else if (typeof prototype === 'string') {
+      return prototype;
+    }
+
+    else if (Array.isArray(prototype)) {
+      let result: any = [];
+      prototype.map(subitem=>result.push(createItem(subitem, state, action, context)));
+      return result;
+    }
+
+    else if (prototype) {
+      //if object
+      return constructor(prototype, action, context);
+    }
+
     return undefined;
   }
 
-  let prototype: IObject|undefined = state;
-  if (typeof prototype === 'string') {
-    return (action.payload as string) || prototype;
-  }
+  if (state) {
+    if (action.type === appConfig.ActionTypes.APP_ACTION_EXECUTE) {
+      
+      if (typeof state === 'function') {
+        let result = state(state, action, context);
+        return result;
+      }
 
-  if (Array.isArray(prototype)) {
-    const result: any[] = [];
-    prototype.map(item => result.push(item));
-    return result;
-  }
+      else if (Array.isArray(state)) {
+        let result: any[] = [];
+        state.map(item=>result.push(constructor(item, action, context)));
+        return result;
+      }
 
-  let args = action.payload || {};
-  if (!prototype) {
-    prototype = action.payload;
-  }
-  else {
-    prototype = {...prototype, ...action.payload};
-  }
+      else if (typeof state === 'object') {
+        let result = {...state};
 
-  if (prototype) {
-    const result: IObject = {};
-    for (let fieldName in prototype) {
-      if (prototype.hasOwnProperty(fieldName)) {
-        let field = prototype[fieldName];
-        if (typeof field === 'function') {
-          result[fieldName] = field(state, action);
+        for (let fieldName in state) {
+          if (state.hasOwnProperty(fieldName)) {
+            let fieldValue = state[fieldName];
+            
+            if (fieldValue) {
+              let prototype = fieldValue[('Prototype')];
+              
+              if (prototype) {
+                result[fieldName] = createItem(prototype, fieldValue, action, state);
+              }
+  
+              else {
+                result[fieldName] = constructor(fieldValue, action, state);
+              }
+            }
+          }
         }
-        else {
-          result[fieldName] = constructor(field, {...action, payload: args[fieldName]})
-        }
+
+        return result;
+      }
+
+      else {
+        return state;
       }
     }
-
-    return result;
   }
-
-  return undefined;
+  return state;
 }

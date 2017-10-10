@@ -1,30 +1,16 @@
-import { reference } from '../reducers/reference';
+import { wrap } from '../reducers/wrap';
+import { ref } from '../reducers/reference';
 import { themeReducer } from '../reducers/themeReducer';
+import { sum } from '../reducers/sum';
+import { constructor } from '../reducers/constructor';
 
 export const initialState = {
-  viewContext: {
-    Theme: themeReducer,
-    Name: 'default theme',
-  },
+  // viewContext: {
+  //   Theme: themeReducer,
+  // },
   App: {
-    Greetings: 'Hello world from app!!!',
-    Status: 'work in progress',
-    Values: [
-      'first value',
-      'second value',
-      'third value',
-      (5 + 2),
-    ],
-    Ide: {
-      Graph1: {
-        Name: 'Graph 1',
-        Value: 'Graph1 value',
-      },
-      Graph2: {
-        Name: 'Graph 2',
-        Value: 'Graph2 value',
-      },
-      Reference: reference(['Graph2', 'Value'])
-    }
+    Title: 'Storyeditor',
+    Link: ref('Title'),
+    Link2: ref('Link'),
   }
 }
