@@ -1,4 +1,4 @@
-import { objectReducer } from './lib/reducers/objectReducer';
+import { constructor } from './lib/reducers/constructor';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Store, createStore, applyMiddleware } from 'redux';
@@ -12,7 +12,7 @@ import { View } from './lib/components/View';
 import { appConfig } from './lib/config/appConfig';
 
 const store: Store<any> = createStore(
-  (state: any, action: IAction) => { return objectReducer(state, action) },
+  (state: any, action: IAction) => { return constructor(state, action) },
   applyMiddleware(reduxLogger)
 ) as Store<any>;
 
