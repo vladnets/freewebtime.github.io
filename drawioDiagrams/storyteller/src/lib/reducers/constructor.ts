@@ -13,7 +13,7 @@ export const constructor = function(state: IObject, action: IAction): IObject|un
 
   if (Array.isArray(prototype)) {
     const result: any[] = [];
-    prototype.map(result.push);
+    prototype.map(item => result.push(item));
     return result;
   }
 

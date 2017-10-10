@@ -2,6 +2,8 @@ import { IAction } from '../api/IAction';
 import { IObject } from '../api/IObject';
 
 export const reference = function(state: IObject, action: IAction): IObject|undefined|any {
+  console.log('reference', state, 'other', action);
+
   if (!state || !action || !action.payload) {
     return undefined;
   }
@@ -15,4 +17,10 @@ export const reference = function(state: IObject, action: IAction): IObject|unde
   }
 
   return undefined;
+}
+
+export const ref = function(path: string|string[]) {
+  return function(state: IObject, action: IAction) {
+    reference(state, {...action, payload: path});
+  }
 }
