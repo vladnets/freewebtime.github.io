@@ -1,7 +1,7 @@
 import { IAction } from '../api/IAction';
 import { IObject } from '../api/IObject';
 
-export const reference = function(state: IObject, action: IAction): IObject|undefined|any {
+export const getValueByReference = function(state: IObject, action: IAction): IObject|undefined|any {
   console.log('reference', state, 'other', action);
 
   if (!state || !action || !action.payload) {
@@ -13,14 +13,14 @@ export const reference = function(state: IObject, action: IAction): IObject|unde
   }
 
   if (Array.isArray(action.payload)) {
-    return reference(state[action.payload[0]], {...action, payload: action.payload.shift()});
+    return getValueByReference(state[action.payload[0]], {...action, payload: action.payload.shift()});
   }
 
   return undefined;
 }
 
-export const ref = function(path: string|string[]) {
+export const reference = function(path: string|string[]) {
   return function(state: IObject, action: IAction) {
-    reference(state, {...action, payload: path});
+    getValueByReference(state, {...action, payload: path});
   }
 }

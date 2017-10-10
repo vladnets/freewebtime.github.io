@@ -1,4 +1,4 @@
-import { reference, ref } from '../reducers/reference';
+import { reference } from '../reducers/reference';
 import { themeReducer } from '../reducers/themeReducer';
 
 export const initialState = {
@@ -24,7 +24,7 @@ export const initialState = {
         Name: 'Graph 2',
         Value: 'Graph2 value',
       },
-      Reference: ref(['Graph2', 'Value'])
+      Reference: reference(['Graph2', 'Value'])
     }
   }
 }
