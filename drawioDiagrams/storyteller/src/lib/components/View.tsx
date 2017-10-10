@@ -1,9 +1,11 @@
-import { IViewContext } from './IViewData';
 import * as React from 'react';
-import { IViewItem } from './IViewItem';
+import { IViewItem } from '../api/IViewItem';
+import { IViewContext } from '../api/IVIewContext';
 
 export class View extends React.Component<{data: any, viewContext: IViewContext, isContainer?: boolean}> {
   render(): any {
+    console.log(this.props.data, this.props.viewContext, this.props.isContainer)
+  
     if (!this.props.data) {
       return false;
     }
@@ -18,21 +20,21 @@ export class View extends React.Component<{data: any, viewContext: IViewContext,
 
     if (viewItem) {
       if (viewItem.Id) {
-        const template = this.props.viewContext.theme['#'+viewItem.Id];
+        const template = this.props.viewContext.Theme['#'+viewItem.Id];
         if (template) {
           return template(this.props.data, this.props.viewContext);
         }
       }
   
       if (viewItem.ClassName) {
-        const template = this.props.viewContext.theme['.'+viewItem.ClassName];
+        const template = this.props.viewContext.Theme['.'+viewItem.ClassName];
         if (template) {
           return template(this.props.data, this.props.viewContext);
         }
       }
   
       if (viewItem.ItemType) {
-        const template = this.props.viewContext.theme[viewItem.ItemType];
+        const template = this.props.viewContext.Theme[viewItem.ItemType];
         if (template) {
           return template(this.props.data, this.props.viewContext);
         }
@@ -40,6 +42,14 @@ export class View extends React.Component<{data: any, viewContext: IViewContext,
 
       if (viewItem.Content) {
         if (Array.isArray(viewItem.Content)) {
+          if (this.props.isContainer) {
+            return (
+              <div className={'container ' + viewItem.ClassName} id={viewItem.Id}> 
+                {viewItem.Content.map((item, index)=> <View data={item} viewContext={this.props.viewContext} key={index} />)}
+              </div>
+            );
+          }
+          
           return (viewItem.Content.map((item, index)=>
             <View data={item} viewContext={this.props.viewContext} key={index} />
           ));
@@ -47,6 +57,6 @@ export class View extends React.Component<{data: any, viewContext: IViewContext,
       }
     }
 
-    return (<div className={'no-template itemtype:' + viewItem.ItemType + ' className:' + viewItem.ClassName + ' Id:' + viewItem.Id}>{this.props.data}</div>)
+    return (<div className={'no-template itemtype:' + viewItem.ItemType + ' className:' + viewItem.ClassName + ' Id:' + viewItem.Id}>{JSON.stringify(this.props.data)}</div>)
   }
 }
