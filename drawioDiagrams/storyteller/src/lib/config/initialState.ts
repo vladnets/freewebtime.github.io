@@ -1,3 +1,5 @@
+import { IAction } from '../api/IAction';
+import { nodeReducer, getNodeValue } from '../reducers/nodeReducer';
 export const initialState = {
   app: {
     name: 'Storyteller 0.01a',
@@ -10,40 +12,51 @@ export const initialState = {
             id: 'timeMachine',
             name: 'Time machine',
             input: {
-              'input.protagonist': {
-                id: 'input.protagoinst',
+
+            },
+            locals: {
+              protagonist: {
+                id: 'protagoinst',
                 name: 'Protagonist',
                 value: 'Jack Dreamer',
               },
-              'input.villan': {
-                id: 'input.villan',
+              villan: {
+                id: 'villan',
                 name: 'Villan',
                 value: 'Emily Blunt',
-              },
-            },
-            locals: {
-              'locals.duration': {
-                id: 'locals.duration',
-                name: 'Duration',
-                value: 1.5,
-              }
-            },
-            value: {
-              winner: {
-                id: 'winner',
-                name: 'Winner',
-                reference: 'input.protagonist',
-              },
-              looser: {
-                id: 'looser',
-                name: 'Looser',
-                reference: 'input.villan'
               },
               duration: {
                 id: 'duration',
                 name: 'Duration',
-                reference: 'locals.duration',
+                value: 1.5,
               },
+              doubleDuration: {
+                id: 'doubleDuration',
+                name: 'Double duration',
+                function: (state: any, action: IAction, context: any) => getNodeValue('duration')(action, context) * 2,
+              }
+            },
+            output: {
+              winner: {
+                id: 'winner',
+                name: 'Winner',
+                reference: 'protagonist',
+              },
+              looser: {
+                id: 'looser',
+                name: 'Looser',
+                reference: 'villan'
+              },
+              duration: {
+                id: 'duration',
+                name: 'Duration',
+                reference: 'duration',
+              },
+              doubleDuration: {
+                id: 'doubleDuration',
+                name: 'Double Duration',
+                reference: 'doubleDuration',
+              }
             },
           }
         }

@@ -10,38 +10,45 @@ export const nodeReducer = function(state: INode|undefined, action: IAction, con
   const execContext = {...state.input, ...state.locals, ...context};
   let execResult: any;
   
-  if (!state.value) {
-    if (state.reference) {
-      //get referenced node
-      execResult = nodeReducer(execContext[state.reference], action, context);
-    }
+  if (typeof state.function === 'function') {
+    execResult = state.function(state, action, context);
   }
-  else {
-
-    if (typeof state.value === 'object') {
-      execResult = {};
-      
-      for (let subnodeId in state.value) {
-        if (state.value.hasOwnProperty(subnodeId)) {
-          
-          let subnode = state.value[subnodeId] as INode;
-          if (subnode) {
-            execResult[subnodeId] = nodeReducer(subnode, action, execContext);
-          }
-    
-          else {
-            execResult[subnodeId] = subnode;
-          }
-        }
+  else if (state.reference) {
+    //get referenced node
+    execResult = getNodeValue(state.reference)(action, context);
+  }
+  else if (state.output) {
+    execResult = {};
+    for (var outputName in state.output) {
+      if (state.output.hasOwnProperty(outputName)) {
+        var outputValue = state.output[outputName];
+        
+        execResult[outputName] = nodeReducer(outputValue, action, execContext);
       }
     }
-
-    else {
-      return state.value;
-    }
+  }
+  else if (state.value) {
+    execResult = state.value;
+  }
+  else {
+    execResult = state.default_value;
   }
 
   const resultNode = {...state, value: execResult};
-  
   return resultNode;
+}
+
+export const getNodeValue = function(path: string) {
+  return function(action: IAction, context: any) {
+    if (!context) {
+      return context;
+    }
+  
+    const result = nodeReducer(context[path], action, context);
+    if (result) {
+      return result.value;
+    }
+
+    return undefined;
+  }
 }
