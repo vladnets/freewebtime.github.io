@@ -1,5 +1,4 @@
 export interface IObject {
-  Id?: string,
-  Name?: string,
-  Prototype?: IObject
+  id: string,
+  name?: string,
 }

@@ -13,6 +13,7 @@ export const appConfig = {
   InitialState: initialState,
   ActionTypes: {
     APP_ACTION_EXECUTE: 'APP_ACTION_EXECUTE',
+    PROJECT_ADD_NODE: 'PROJECT_ADD_NODE',
   } 
 }
 

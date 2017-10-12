@@ -2,7 +2,7 @@ import { createGuid } from './createGuid';
 
 export const Utils = {
   createGuid: createGuid,
-  ForeachFields: function<TContext>(obj: any, context: TContext, callback: (fieldName: string, field: any, context: TContext) => void) {
+  foreachFields: function<TContext>(obj: any, context: TContext, callback: (fieldName: string, fieldValue: any, context: TContext) => void) {
     if (!obj) {
       return;
     }
@@ -13,8 +13,8 @@ export const Utils = {
         continue;
       }
   
-      const field = obj[fieldName];
-      callback(fieldName, field, context);
+      const fieldValue = obj[fieldName];
+      callback(fieldName, fieldValue, context);
     }
   }
 }

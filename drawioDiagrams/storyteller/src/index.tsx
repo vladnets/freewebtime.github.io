@@ -1,4 +1,4 @@
-import { constructor } from './lib/reducers/constructor';
+import { rootReducer } from './lib/reducers/rootReducer';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Store, createStore, applyMiddleware } from 'redux';
@@ -12,7 +12,7 @@ import { View } from './lib/components/View';
 import { appConfig } from './lib/config/appConfig';
 
 const store: Store<any> = createStore(
-  (state: any, action: IAction) => { return constructor(state, action, state) },
+  rootReducer,
   appConfig.InitialState,
   applyMiddleware(reduxLogger)
 ) as Store<any>;
@@ -25,7 +25,7 @@ const dispatchAction = function(action: IAction)
 const renderState = function(state: any, dispatchAction: (action: IAction)=> void) {
   // state.viewContext.Callback = dispatchAction;
   ReactDOM.render(
-    <View data={state.App} viewContext={state.viewContext} />,
+    <View data={state.app} viewContext={state.viewContext} />,
     domElement
   );
 }

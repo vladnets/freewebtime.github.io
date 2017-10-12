@@ -1,16 +1,53 @@
-import { wrap } from '../reducers/wrap';
-import { ref } from '../reducers/reference';
-import { themeReducer } from '../reducers/themeReducer';
-import { sum } from '../reducers/sum';
-import { constructor } from '../reducers/constructor';
-
 export const initialState = {
-  // viewContext: {
-  //   Theme: themeReducer,
-  // },
-  App: {
-    Title: 'Storyeditor',
-    Link: ref('Title'),
-    Link2: ref('Link'),
+  app: {
+    name: 'Storyteller 0.01a',
+    ide: {
+      project: {
+        name: 'Example story',
+        nodes: {
+
+          timeMachine: {
+            id: 'timeMachine',
+            name: 'Time machine',
+            input: {
+              'input.protagonist': {
+                id: 'input.protagoinst',
+                name: 'Protagonist',
+                value: 'Jack Dreamer',
+              },
+              'input.villan': {
+                id: 'input.villan',
+                name: 'Villan',
+                value: 'Emily Blunt',
+              },
+            },
+            locals: {
+              'locals.duration': {
+                id: 'locals.duration',
+                name: 'Duration',
+                value: 1.5,
+              }
+            },
+            value: {
+              winner: {
+                id: 'winner',
+                name: 'Winner',
+                reference: 'input.protagonist',
+              },
+              looser: {
+                id: 'looser',
+                name: 'Looser',
+                reference: 'input.villan'
+              },
+              duration: {
+                id: 'duration',
+                name: 'Duration',
+                reference: 'locals.duration',
+              },
+            },
+          }
+        }
+      }   
+    }
   }
 }

@@ -17,8 +17,8 @@ export class View extends React.Component<{data: any, viewContext: IViewContext,
     const viewItem: IViewItem = this.props.data;
 
     if (viewItem) {
-      if (viewItem.Id) {
-        const template = this.props.viewContext.Theme['#'+viewItem.Id];
+      if (viewItem.id) {
+        const template = this.props.viewContext.Theme['#'+viewItem.id];
         if (template) {
           return template(this.props.data, this.props.viewContext);
         }
@@ -42,7 +42,7 @@ export class View extends React.Component<{data: any, viewContext: IViewContext,
         if (Array.isArray(viewItem.Content)) {
           if (this.props.isContainer) {
             return (
-              <div className={'container ' + viewItem.ClassName} id={viewItem.Id}> 
+              <div className={'container ' + viewItem.ClassName} id={viewItem.id}> 
                 {viewItem.Content.map((item, index)=> <View data={item} viewContext={this.props.viewContext} key={index} />)}
               </div>
             );
@@ -55,6 +55,6 @@ export class View extends React.Component<{data: any, viewContext: IViewContext,
       }
     }
 
-    return (<div className={'no-template itemtype:' + viewItem.ItemType + ' className:' + viewItem.ClassName + ' Id:' + viewItem.Id}>{JSON.stringify(this.props.data)}</div>)
+    return (<div className={'no-template itemtype:' + viewItem.ItemType + ' className:' + viewItem.ClassName + ' Id:' + viewItem.id}>{JSON.stringify(this.props.data)}</div>)
   }
 }
