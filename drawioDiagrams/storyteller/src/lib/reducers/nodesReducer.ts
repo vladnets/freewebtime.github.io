@@ -18,12 +18,5 @@ export const nodesReducer = function(state: any, action: IAction) {
     }
   }
 
-  if (action.type === appConfig.ActionTypes.PROJECT_ADD_NODE) {
-    let node = nodeReducer(undefined, action);
-    if (node) {
-      result[node.id] = node;
-    } 
-  }
-
   return result;
 }

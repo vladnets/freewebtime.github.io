@@ -1,5 +1,5 @@
 import { IAction } from '../api/IAction';
-import { nodeReducer, getNodeValue } from '../reducers/nodeReducer';
+import { nodeReducer } from '../reducers/nodeReducer';
 export const initialState = {
   app: {
     name: 'Storyteller 0.01a',
@@ -24,16 +24,17 @@ export const initialState = {
                 id: 'villan',
                 name: 'Villan',
                 value: 'Emily Blunt',
+                age: 25,
               },
               duration: {
                 id: 'duration',
                 name: 'Duration',
                 value: 1.5,
               },
-              doubleDuration: {
-                id: 'doubleDuration',
-                name: 'Double duration',
-                function: (state: any, action: IAction, context: any) => getNodeValue('duration')(action, context) * 2,
+              subduration: {
+                id: 'subduration',
+                name: 'subduration',
+                reference: 'duration',
               }
             },
             output: {
@@ -50,13 +51,8 @@ export const initialState = {
               duration: {
                 id: 'duration',
                 name: 'Duration',
-                reference: 'duration',
+                reference: 'subduration',
               },
-              doubleDuration: {
-                id: 'doubleDuration',
-                name: 'Double Duration',
-                reference: 'doubleDuration',
-              }
             },
           }
         }

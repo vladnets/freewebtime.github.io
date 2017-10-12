@@ -8,5 +8,5 @@ export interface INode extends IObject {
   value?: any;
   reference?: string;
   default_value?: any;
-  function: (state: INode, action: IAction, context: any) => INode;
+  function?: (state: INode, action: IAction) => any;
 }

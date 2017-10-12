@@ -1,6 +1,6 @@
 import { IObject } from './IObject';
 
-export interface IAction extends IObject {
+export interface IAction {
   type: string,
   payload?: any
 }

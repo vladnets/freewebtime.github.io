@@ -1,54 +1,82 @@
 import { IAction } from '../api/IAction';
 import { INode } from '../api/INode';
+import { appConfig } from '../config/appConfig';
 
-export const nodeReducer = function(state: INode|undefined, action: IAction, context?: INode|undefined) {
+export const nodeReducer = function(node: INode|undefined, action: IAction): any|undefined {
 
-  if (!state) {
-    return state;
-  }
+  if (node && action.type === appConfig.ActionTypes.NODE_CALC_VALUE) {
+    const parentNode: INode|undefined = action.payload;
 
-  const execContext = {...state.input, ...state.locals, ...context};
-  let execResult: any;
-  
-  if (typeof state.function === 'function') {
-    execResult = state.function(state, action, context);
-  }
-  else if (state.reference) {
-    //get referenced node
-    execResult = getNodeValue(state.reference)(action, context);
-  }
-  else if (state.output) {
-    execResult = {};
-    for (var outputName in state.output) {
-      if (state.output.hasOwnProperty(outputName)) {
-        var outputValue = state.output[outputName];
-        
-        execResult[outputName] = nodeReducer(outputValue, action, execContext);
+    if (node.reference && parentNode) {
+      let newValue: any|undefined = undefined;
+
+      if (parentNode.locals && parentNode.locals[node.reference]) {
+        newValue = parentNode.locals[node.reference];
       }
+      else if (parentNode.input && typeof parentNode.input === 'object') {
+        let targetNode = parentNode.input[node.reference] as INode;
+        if (!targetNode) {
+          newValue = parentNode.input[node.reference];
+        }
+        else {
+          newValue = targetNode.value;
+        }
+      }
+      
+      return {...node, value: newValue}
     }
-  }
-  else if (state.value) {
-    execResult = state.value;
-  }
-  else {
-    execResult = state.default_value;
+    if (typeof node.function === 'function') {
+      return {...node, value: node.function(node, action)};
+    }
+    if (node.output && typeof node.output === 'object') {
+      return nodeReducer(node, {type: appConfig.ActionTypes.NODE_CALC_OUTPUT});
+    }
+    if (!node.value && node.default_value) {
+      return {...node, value: node.default_value};
+    }
+
+    return node;
   }
 
-  const resultNode = {...state, value: execResult};
-  return resultNode;
+  if (node && node.output && action.type === appConfig.ActionTypes.NODE_CALC_OUTPUT) {
+
+    const newOutput = {};
+    for (let outputItemName in node.output) {
+      if (!node.output.hasOwnProperty(outputItemName)) {
+        continue;
+      }
+
+      newOutput[outputItemName] = nodeReducer(node.output[outputItemName], {type: appConfig.ActionTypes.NODE_CALC_VALUE, payload: node});
+    }
+
+    return {...node, output: newOutput};
+  }
+
+  return node;
 }
 
-export const getNodeValue = function(path: string) {
-  return function(action: IAction, context: any) {
-    if (!context) {
-      return context;
-    }
-  
-    const result = nodeReducer(context[path], action, context);
-    if (result) {
-      return result.value;
+export const updateOutput = function(node: INode, action: IAction, parent: INode) {
+  if (!node || !node.output) {
+    return;
+  }
+
+  const newOutput = {...node.output}
+
+  for (let outputItemName in newOutput) {
+    if (!newOutput.hasOwnProperty(outputItemName)) {
+      continue;
     }
 
-    return undefined;
+    var oldOutputItem = newOutput[outputItemName];
+    var oldOutputItemNode = oldOutputItem as INode;
+    if (oldOutputItemNode) {
+      updateNode(oldOutputItemNode, action, node);
+    }
   }
+
+  return {...node, output: newOutput}
+}
+
+export const updateNode = function(node: INode, action: IAction, parent: INode) {
+
 }

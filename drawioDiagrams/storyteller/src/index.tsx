@@ -30,7 +30,7 @@ const renderState = function(state: any, dispatchAction: (action: IAction)=> voi
   );
 }
 
-store.dispatch({type: appConfig.ActionTypes.APP_ACTION_EXECUTE, payload: appConfig.InitialState}); 
+store.dispatch({type: appConfig.ActionTypes.NODE_CALC_OUTPUT, payload: appConfig.InitialState}); 
 
 const domElement = document.getElementById('appRoot');
 store.subscribe(() => {
