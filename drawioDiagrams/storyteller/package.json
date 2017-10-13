@@ -3,21 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/lodash": "^4.14.77",
-    "@types/react-bootstrap": "^0.31.4",
-    "@types/react-redux": "^5.0.10",
-    "@types/redux-actions": "^2.2.2",
-    "@types/redux-logger": "^3.0.4",
+    "antd": "^2.13.6",
     "axios": "^0.16.2",
+    "enzyme": "^3.1.0",
     "google-drive-api-manager": "0.0.8",
+    "lodash": "^4.17.4",
     "react": "^16.0.0",
-    "react-bootstrap": "^0.31.3",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-scripts-ts": "2.7.0",
+    "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "semantic-ui-react": "^0.74.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -26,10 +25,21 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/enzyme": "^2.8.12",
     "@types/jest": "^21.1.2",
+    "@types/lodash": "^4.14.77",
     "@types/node": "^8.0.32",
     "@types/react": "^16.0.9",
+    "@types/react-bootstrap": "^0.31.4",
     "@types/react-dom": "^16.0.0",
+    "@types/react-redux": "^5.0.10",
+    "@types/react-tap-event-plugin": "0.0.30",
+    "@types/redux-actions": "^2.2.2",
+    "@types/redux-logger": "^3.0.4",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-env": "^1.6.0",
+    "install-peers": "^1.0.2",
     "redux-devtools": "^3.4.0"
   }
 }

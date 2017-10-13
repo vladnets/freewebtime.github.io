@@ -21,6 +21,7 @@
         "interface-name": [true, "always-prefix"],
         "jsdoc-format": true,
         "jsx-no-lambda": false,
+        "jsx-boolean-value": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
         "max-line-length": false, // [ true, 120 ],

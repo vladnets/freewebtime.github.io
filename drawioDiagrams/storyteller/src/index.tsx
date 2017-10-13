@@ -1,4 +1,4 @@
-import { rootReducer } from './lib/reducers/rootReducer';
+import { AppView } from './view/App';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Store, createStore, applyMiddleware } from 'redux';
@@ -6,16 +6,17 @@ import { Provider } from 'react-redux';
 import reduxLogger from 'redux-logger';
 
 import './index.css';
-import { IObject } from './lib/api/IObject';
-import { IAction } from './lib/api/IAction';
-import { View } from './lib/components/View';
-import { appConfig } from './lib/config/appConfig';
+import 'antd/dist/antd.css';
+import { IApp } from './api/IApp';
+import { appConfig } from './config/appConfig';
+import { IAction } from './api/IAction';
+import { appReducer } from './reducers/appReducer';
 
-const store: Store<any> = createStore(
-  rootReducer,
+const store: Store<IApp> = createStore(
+  appReducer,
   appConfig.InitialState,
   applyMiddleware(reduxLogger)
-) as Store<any>;
+) as Store<IApp>;
 
 const dispatchAction = function(action: IAction)
 {
@@ -23,9 +24,8 @@ const dispatchAction = function(action: IAction)
 }
 
 const renderState = function(state: any, dispatchAction: (action: IAction)=> void) {
-  // state.viewContext.Callback = dispatchAction;
   ReactDOM.render(
-    <View data={state.app} viewContext={state.viewContext} />,
+    <AppView app={state} />,
     domElement
   );
 }
