@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "storyteller", "storyteller\storyteller.njsproj", "{BAFDAAC3-484B-4E80-8FD3-1C48EF419CDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAFDAAC3-484B-4E80-8FD3-1C48EF419CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAFDAAC3-484B-4E80-8FD3-1C48EF419CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAFDAAC3-484B-4E80-8FD3-1C48EF419CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAFDAAC3-484B-4E80-8FD3-1C48EF419CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {909D8555-35F6-42B3-AF5C-7DFDB3D779E5}
+	EndGlobalSection
+EndGlobal

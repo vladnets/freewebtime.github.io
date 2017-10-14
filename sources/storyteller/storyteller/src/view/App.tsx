@@ -50,7 +50,7 @@ export class AppView extends React.Component<{app: IApp}> {
             <div className={'app-content'}>
               Center content
               <Card color={'red'} className={'cardclass'}>
-                <Image src={'https://react.semantic-ui.com/assets/images/avatar/large/matthew.png'} size={'mini'} />
+                <Image src={'https://react.semantic-ui.com/assets/images/avatar/large/matthew.png'} />
                 <Card.Content>
                   <Card.Header>
                     Matthew
