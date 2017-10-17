@@ -1,24 +1,14 @@
-import { IGraphNode } from '../../api/IGraphNode';
 import { IGraph } from '../../api/IGraph';
 import { IAction } from '../../api/IAction';
-import { graphNodeReducer } from './graphNodeReducer';
+import { INode } from '../../api/INode';
+import { nodeReducer } from './nodeReducer';
 
 export const graphReducer = function(state: IGraph, action: IAction) {
   if (!state) {
     return state;
   }
 
-  Object.keys(state.nodes).map((nodeId: string) => {
-    console.log('nodeId, nodes: ', nodeId, state.nodes);
-
-    let node: IGraphNode = graphNodeReducer(state.nodes[nodeId], action);
-    if (!node) {
-      delete state.nodes[nodeId];
-    }
-    else {
-      state.nodes[nodeId] = node;
-    }
-  });
+  state.root = nodeReducer(state.root, action);
 
   return state;
 }

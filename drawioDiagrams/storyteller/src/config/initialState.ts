@@ -1,5 +1,6 @@
 import { IAction } from '../api/IAction';
 import { IApp } from '../api/IApp';
+import { NodeType } from '../api/NodeType';
 
 export const initialState: IApp = {
   resources: {
@@ -10,8 +11,15 @@ export const initialState: IApp = {
     project: {
       name: 'Example story',
       graph: {
-        nodes: {
-          
+        root: {
+          type: NodeType.Object,
+          name: 'root',
+          size: {x: 250, y: 180},
+          position: {x: 0, y: 0},
+          context: undefined,
+          input: {},
+          value: {},
+          content: {},
         }
       }
     }   

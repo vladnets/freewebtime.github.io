@@ -1,6 +1,6 @@
-import { IGraphNode } from './IGraphNode';
+import { INode } from './INode';
 import { IHash } from './IHash';
 
 export interface IGraph {
-  nodes: IHash<IGraphNode>;
+  root: INode;
 }

@@ -1,3 +1,3 @@
 export interface IHash<TItem> {
-  [details: string]: TItem
+  [key: string]: TItem
 }
