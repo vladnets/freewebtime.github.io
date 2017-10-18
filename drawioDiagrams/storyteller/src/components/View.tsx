@@ -2,7 +2,10 @@ import * as React from 'react';
 import { IAppResources } from '../api/IAppResources';
 import { IViewItem } from '../api/IViewItem';
 
-export class View extends React.Component<{data: any, resources: IAppResources, isContainer?: boolean}> {
+export class ViewBase<TProps> extends React.Component<TProps> {
+}
+
+export class View extends ViewBase<{data: any, resources: IAppResources, isContainer?: boolean}> {
   render(): any {
     if (!this.props.data) {
       return false;
@@ -24,37 +27,37 @@ export class View extends React.Component<{data: any, resources: IAppResources, 
         }
       }
   
-      if (viewItem.ClassName) {
-        const template = this.props.resources.theme['.'+viewItem.ClassName];
+      if (viewItem.className) {
+        const template = this.props.resources.theme['.'+viewItem.className];
         if (template) {
           return template(this.props.data, this.props.resources);
         }
       }
   
-      if (viewItem.ItemType) {
-        const template = this.props.resources.theme[viewItem.ItemType];
+      if (viewItem.itemType) {
+        const template = this.props.resources.theme[viewItem.itemType];
         if (template) {
           return template(this.props.data, this.props.resources);
         }
       }
 
-      if (viewItem.Content) {
-        if (Array.isArray(viewItem.Content)) {
+      if (viewItem.content) {
+        if (Array.isArray(viewItem.content)) {
           if (this.props.isContainer) {
             return (
-              <div className={'container ' + viewItem.ClassName} id={viewItem.id}> 
-                {viewItem.Content.map((item, index)=> <View data={item} resources={this.props.resources} key={index} />)}
+              <div className={'container ' + viewItem.className} id={viewItem.id}> 
+                {viewItem.content.map((item, index)=> <View data={item} resources={this.props.resources} key={index} />)}
               </div>
             );
           }
           
-          return (viewItem.Content.map((item, index)=>
+          return (viewItem.content.map((item, index)=>
             <View data={item} resources={this.props.resources} key={index} />
           ));
         }
       }
     }
 
-    return (<div className={'no-template itemtype:' + viewItem.ItemType + ' className:' + viewItem.ClassName + ' Id:' + viewItem.id}>{JSON.stringify(this.props.data)}</div>)
+    return (<div className={'no-template itemtype:' + viewItem.itemType + ' className:' + viewItem.className + ' Id:' + viewItem.id}>{JSON.stringify(this.props.data)}</div>)
   }
 }

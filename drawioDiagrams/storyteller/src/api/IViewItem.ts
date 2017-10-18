@@ -1,6 +1,11 @@
+import { INode } from './project/INode';
+import { IVector2 } from './IVector2';
+
 export interface IViewItem {
   id: string,
-  ItemType?: string,
-  ClassName?: string,
-  Content?: any,
+  itemType?: string,
+  className?: string,
+  position?: IVector2;
+  size?: IVector2;
+  content?: any;
 }

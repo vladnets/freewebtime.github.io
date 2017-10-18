@@ -1,8 +1,8 @@
 import { IAppResources } from '../../api/IAppResources';
-import { IAction } from '../../api/IAction';
-import { View } from '../../view/View';
 import * as React from 'react';
 import { ITheme } from '../../api/index';
+import { IAction } from '../../api/actions/IAction';
+import { View } from '../../components/View';
 
 export const themeReducer = function(state: ITheme, action: IAction) {
   
