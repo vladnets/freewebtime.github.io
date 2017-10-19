@@ -19,28 +19,18 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
     const activeItem = this.state.selectedItem;
 
     return (
-      <Segment compact className={className}>
-        <List verticalAlign={'middle'}>
-          <List.Item size={'small'}>
-            <List.Icon name={'folder'} />
-            <List.Content>
-              <List.Header>Root</List.Header>
-              <List.Description>Description of the root</List.Description>
-              <List verticalAlign={'middle'}>
-              {
-                Object.keys(this.props.data.nodes).map((key: string, index: number) => (
-                  <List.Item size={'small'} key={key} className={'project-explorer-item'} name={key} active={activeItem === key} onClick={this.handleItemClick} >
-                    <List.Icon name={'file'} /> 
-                    <List.Content>
-                      <List.Header>{this.props.data.nodes[key].name}</List.Header>
-                      <List.Description>{this.props.data.nodes[key].id}</List.Description>
-                    </List.Content>
-                  </List.Item>
-                ))
-              }
-              </List>
-            </List.Content>
-          </List.Item>
+      <Segment color={'black'} className={className}>
+        <List divided selection verticalAlign={'middle'}>
+        {
+          Object.keys(this.props.data.nodes).map((key: string, index: number) => (
+            <List.Item size={'small'} key={key} className={'project-explorer-item'} name={key} active={activeItem === key} onClick={this.handleItemClick} >
+              <List.Icon name={'file'} /> 
+              <List.Content>
+                <List.Header>{this.props.data.nodes[key].name}</List.Header>
+              </List.Content>
+            </List.Item>
+          ))
+        }
         </List>
       </Segment>
     );

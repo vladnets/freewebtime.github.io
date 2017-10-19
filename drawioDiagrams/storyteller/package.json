@@ -7,6 +7,8 @@
     "axios": "^0.16.2",
     "google-drive-api-manager": "0.0.8",
     "lodash": "^4.17.4",
+    "material-ui": "^1.0.0-beta.17",
+    "material-ui-icons": "^1.0.0-beta.17",
     "node-uuid": "^1.4.8",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -17,6 +19,7 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-logger": "^3.0.6",
+    "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.74.2"
   },
   "scripts": {
@@ -28,6 +31,7 @@
   "devDependencies": {
     "@types/jest": "^21.1.2",
     "@types/lodash": "^4.14.77",
+    "@types/material-ui": "^0.18.3",
     "@types/node": "^8.0.32",
     "@types/node-uuid": "0.0.28",
     "@types/react": "^16.0.9",

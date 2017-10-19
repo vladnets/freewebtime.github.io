@@ -5,6 +5,8 @@ import * as React from 'react';
 import { IAppState } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
+import Button from 'material-ui/Button';
+
 
 export class AppView extends ViewBase<{data: IAppState}> {
   render() {

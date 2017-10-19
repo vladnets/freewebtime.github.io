@@ -3,7 +3,6 @@
 }
 
 #appRoot {
-  background: gray;
   height: 100%;
 }
 
@@ -18,7 +17,17 @@
 .project-explorer {
   height: 100%;
   width: 40px;
-  background: #feffc7;
+  padding: 5px;
+}
+
+.container-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.container-vertical {
+  display: flex;
+  flex-direction: column;
 }
 
 .project-explorer.collapsed {
@@ -27,4 +36,15 @@
 
 .project-explorer.expanded {
   width: 300px;
+}
+
+.ui.segment {
+  padding: 0.5pt;
+  margin: 0pt;
+  border-radius: 0px;
+}
+
+.ui.menu .dropdown.item .ui.dropdown {
+  margin: 0px;
+  border-radius: 0px;
 }
