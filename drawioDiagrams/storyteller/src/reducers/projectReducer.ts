@@ -1,11 +1,9 @@
-import { IProject } from '../api/IProject';
-import { IAction } from '../api/IAction';
+import { combineReducers } from 'redux';
+import { projectDataReducer } from './projectDataReducer';
+import { nodesReducer } from './nodesReducer';
 
-export const projectReducer = function(state: IProject = initialState, action: IAction) {
-  return state;
-}
+export const projectReducer = combineReducers({
+  projectData: projectDataReducer,
+  nodes: nodesReducer,
+});
 
-const initialState: IProject  = {
-  name: 'Unnamed project',
-  nodes: {},
-}

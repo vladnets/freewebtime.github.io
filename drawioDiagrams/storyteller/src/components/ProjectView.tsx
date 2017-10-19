@@ -1,8 +1,7 @@
-import { IProject } from '../api/IProject';
 import { ViewBase } from './View';
 import * as React from 'react';
 
-export class ProjectView extends ViewBase<{data: IProject}> {
+export class ProjectView extends ViewBase<{data: any}> {
   render() {
     console.log(this.props.data);
 
