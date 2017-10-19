@@ -1,4 +1,5 @@
 import { IAction } from '../api/IAction';
+import { INode } from '../api/INode';
 export const appConfig = {
   NodeTypes: {
     NODE_TYPE_STRING: 'NODE_TYPE_STRING',
@@ -12,19 +13,34 @@ export const appConfig = {
     Types: {
       NO_OPERATION: 'NO_OPERATION',
       
-      PROJECT_CREATE_EMPTY: 'PROJECT_CREATE_EMPTY',
-      NODE_CREATE_NEW_VALUE: 'NODE_CREATE_NEW_VALUE',
-      NODE_CREATE_NEW_CONTENT: 'NODE_CREATE_NEW_CONTENT',
-      NODE_CREATE_NEW_INPUT: 'NODE_CREATE_NEW_INPUT',
+      NODE_CREATE_NEW: 'NODE_CREATE_NEW',
+      NODE_REMOVE: 'NODE_REMOVE',
+      NODE_UPDATE: 'NODE_UPDATE',
     },
 
-    CreateEmptyProject: function(): IAction {
-      return <IAction> {type: appConfig.Actions.Types.PROJECT_CREATE_EMPTY};
+    NoOperation: (): IAction => {
+      return {type: appConfig.Actions.Types.NO_OPERATION};
     },
 
-    NoOperation: () => {
-      return <IAction> {type: appConfig.Actions.Types.NO_OPERATION};
-    }
+    NodeCreateNew: (newNode: INode): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODE_CREATE_NEW,
+        payload: newNode
+      };
+    },
+    NodeRemove: (nodeId: string): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODE_CREATE_NEW,
+        payload: nodeId
+      };
+    },
+    NodeUpdate: (updatedNode: INode): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODE_UPDATE,
+        payload: updatedNode,
+      }
+    },
+
 
   }
 }
