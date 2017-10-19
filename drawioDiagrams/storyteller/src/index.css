@@ -1,4 +1,30 @@
-#appRoot {
+.fullheight {
   height: 100%;
+}
+
+#appRoot {
   background: gray;
+  height: 100%;
+}
+
+.app-content {
+  height: 100%;
+}
+
+.project-view {
+  height: 100%;
+}
+
+.project-explorer {
+  height: 100%;
+  width: 40px;
+  background: #feffc7;
+}
+
+.project-explorer.collapsed {
+  width: 40px;
+}
+
+.project-explorer.expanded {
+  width: 300px;
 }

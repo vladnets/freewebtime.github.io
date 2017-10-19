@@ -6,10 +6,19 @@ import { v4 } from 'node-uuid';
 import { appConfig } from '../config/appConfig';
 
 const emptyNodeId = v4();
+const emptyNodeId2 = v4();
+
 const initialState: IHash<INode> = {
   [emptyNodeId]: {
     id: emptyNodeId,
     name: 'Empty',
+    nodeType: NodeType.Unknown,
+    position: {x: 0, y: 0},
+    size: {x: 250, y: 180},
+  },
+  [emptyNodeId2]: {
+    id: emptyNodeId2,
+    name: 'Empty 2',
     nodeType: NodeType.Unknown,
     position: {x: 0, y: 0},
     size: {x: 250, y: 180},

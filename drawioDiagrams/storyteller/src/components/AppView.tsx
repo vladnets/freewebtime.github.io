@@ -9,9 +9,8 @@ import { ProjectView } from './ProjectView';
 export class AppView extends ViewBase<{data: IAppState}> {
   render() {
     return (
-      <div>
-        App content!
-        {JSON.stringify(this.props.data)}
+      <div className={'app-content'}>
+        <ProjectView data={this.props.data.project} />
       </div>
     );
   }

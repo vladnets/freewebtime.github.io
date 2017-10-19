@@ -11,7 +11,7 @@ export class RootView extends ViewBase<{store: any}> {
   render() {
     return (
       <Provider store={this.props.store}>
-        <AppView data={this.props.store.getState()}/>
+        <AppView data={this.props.store.getState()} />
       </Provider>
     );
   }

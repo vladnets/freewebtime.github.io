@@ -4,8 +4,15 @@ import { IHash } from './IHash';
 import { IViewItem } from './IViewItem';
 
 export interface IAppState {
-  project: {
-    projectData: { name: string },
-    nodes: IHash<INode>,
-  };
+  project: IProject;
+}
+
+export interface IProject {
+  projectData: IProjectData;
+  nodes: IHash<INode>;
+}
+
+export interface IProjectData {
+  name: string;
+  selectedNodeId: string;
 }
