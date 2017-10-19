@@ -44,7 +44,26 @@
   border-radius: 0px;
 }
 
-.ui.menu .dropdown.item .ui.dropdown {
+.ui.menu {
   margin: 0px;
   border-radius: 0px;
+  padding: 0px;
+}
+
+.dropdown.item {
+  margin: 0px;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+.ui.dropdown {
+  margin: 0px;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+.ui.menu .dropdown.item .menu {
+  margin: 0px;
+  border-radius: 0px;
+  padding: 0px;
 }

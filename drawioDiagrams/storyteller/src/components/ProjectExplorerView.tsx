@@ -19,7 +19,7 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
     const activeItem = this.state.selectedItem;
 
     return (
-      <Segment color={'black'} className={className}>
+      <Segment className={className}>
         <List divided selection verticalAlign={'middle'}>
         {
           Object.keys(this.props.data.nodes).map((key: string, index: number) => (
