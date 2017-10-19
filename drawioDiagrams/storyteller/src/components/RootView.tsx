@@ -5,14 +5,14 @@ import * as React from 'react';
 import { IAppState } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
+import { AppView } from './AppView';
 
-export class AppView extends ViewBase<{data: IAppState}> {
+export class RootView extends ViewBase<{store: any}> {
   render() {
     return (
-      <div>
-        App content!
-        {JSON.stringify(this.props.data)}
-      </div>
+      <Provider store={this.props.store}>
+        <AppView data={this.props.store.getState()}/>
+      </Provider>
     );
   }
 } 

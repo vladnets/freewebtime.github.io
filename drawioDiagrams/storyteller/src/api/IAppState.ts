@@ -1,9 +1,8 @@
 import { IAppResources } from './IAppResources';
 import { IHash } from './IHash';
-import { IProject } from './project/IProject';
 import { IViewItem } from './IViewItem';
+import { IProject } from './IProject';
 
-export interface IAppData {
-  content: IViewItem;
-  resources: IAppResources;
+export interface IAppState {
+  project: IProject;
 }

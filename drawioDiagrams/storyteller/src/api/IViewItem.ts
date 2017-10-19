@@ -1,4 +1,3 @@
-import { INode } from './project/INode';
 import { IVector2 } from './IVector2';
 
 export interface IViewItem {
