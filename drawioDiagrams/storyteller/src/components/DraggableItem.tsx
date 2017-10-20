@@ -9,7 +9,7 @@ import { ProjectView } from './ProjectView';
 import Button from 'material-ui/Button';
 
 export type DiDragCallback = (id: string, deltaPos: {x: number, y: number}, newPosition?: {x: number, y: number})=>void;
-export class DraggableItem extends ViewBase<{id?: string, position?: {x: number, y: number}, onDrag?: DiDragCallback, }> {
+export class DraggableItem extends ViewBase<{id?: string, className?: string, position?: {x: number, y: number}, size?: {x: number, y: number}, onDrag?: DiDragCallback, style?: React.CSSProperties}> {
   state = {
     dragging: false,
     dragStart: {x: 0, y: 0}, 
@@ -80,6 +80,18 @@ export class DraggableItem extends ViewBase<{id?: string, position?: {x: number,
 
   render () {
     const position = this.state.position;
+    let style = {
+      left: position.x, 
+      top: position.y, 
+    } as React.CSSProperties;
+    if (this.props.size) {
+      style.width = this.props.size.x;
+      style.height = this.props.size.y;
+    }
+    if (this.props.style) {
+      style = {...style, ...this.props.style}
+    }
+    const className = 'draggable-item ' + this.props.className || '';
 
     return (
       <div 
@@ -87,7 +99,8 @@ export class DraggableItem extends ViewBase<{id?: string, position?: {x: number,
         onMouseUp={(e: any) => this.onMouseUp(e, this)}
         onMouseMove={(e: any) => this.onMouseMove(e, this)}
         onMouseOut={(e: any) => this.onMouseOut(e, this)}
-        style={{left: position.x, top: position.y, position: 'relative'}}
+        style={style}
+        className={className}
       >
         {this.props.children}
       </div>

@@ -20,6 +20,7 @@ export const appConfig = {
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
       NODE_MOVE: 'NODE_MOVE',
+      NODE_RESIZE: 'NODE_RESIZE',
 
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
@@ -54,6 +55,12 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.NODE_MOVE,
         payload: {nodeId, offset},
+      }
+    },
+    NodeResize: (nodeId: string, deltaSize: IVector2) => {
+      return {
+        type: appConfig.Actions.Types.NODE_RESIZE,
+        payload: {nodeId, deltaSize},
       }
     }
 

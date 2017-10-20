@@ -19,6 +19,9 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
   dragNode(node: INode, deltaPos: any, callback: ICallback) {
     callback(appConfig.Actions.NodeMove(node.id, deltaPos));
   }
+  resizeNode(node: INode, deltaSize: any, callback: ICallback) {
+    callback(appConfig.Actions.NodeResize(node.id, deltaSize));
+  }
   handleStop() {
   }
 
@@ -27,20 +30,30 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
     const position = this.props.node.position 
       ? {x: this.props.node.position.x, y: this.props.node.position.y}
       : undefined; 
+    const resizeHandlerSize = 30;
 
     return (
       <DraggableItem
+        size={this.props.node.size}
         position={position}
         onDrag={(id: string, deltaPos: {x: number, y: number}, newPosition?: {x: number, y: number}) => this.dragNode(this.props.node, deltaPos, this.props.resources.callback)}
+        style={{position: 'absolute'}}
       >
-        <Segment.Group className={className} size={'tiny'} compact >
-          <Segment className={'handle'}>
+        <div className={'node-view'}>
+          <div className={'node-header'}>
             {this.props.node.name}
-          </Segment>
-          <Segment>
+          </div>
+          <div className={'node-content'}>
             {this.props.node.id}
-          </Segment>
-        </Segment.Group>
+          </div>
+        </div>
+
+        <DraggableItem 
+          className={'node-resize-handler'}
+          position={{x: (this.props.node.size || {x: 0, y: 0}).x - resizeHandlerSize - 1, y: (this.props.node.size || {x: 0, y: 0}).y - resizeHandlerSize - 1}}
+          style={{width: resizeHandlerSize + 'px', height: resizeHandlerSize + 'px', position: 'absolute'}}
+          onDrag={(id: string, deltaPos: {x: number, y: number}, newPosition?: {x: number, y: number}) => this.resizeNode(this.props.node, deltaPos, this.props.resources.callback)}
+        />
       </DraggableItem>
     );
   }

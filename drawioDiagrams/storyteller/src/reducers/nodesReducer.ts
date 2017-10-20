@@ -54,10 +54,23 @@ export const nodesReducer = function(state: IHash<INode> = initialState, action:
       const nodeId = action.payload.nodeId;
       const node = state[nodeId];
       if (node) {
-        const currentPos = node.position ? node.position : {x: 0, y: 0};
+        const currentPos = node.position || {x: 0, y: 0};
         const offset = action.payload.offset;
         const newPosition = {x: currentPos.x + offset.x, y: currentPos.y + offset.y};
         state = {...state, [nodeId]: {...node, position: newPosition}}
+      }
+    }
+    break;
+
+    case appConfig.Actions.Types.NODE_RESIZE:
+    {
+      const nodeId = action.payload.nodeId;
+      const node = state[nodeId];
+      if (node) {
+        const currentSize = node.size || {x: 0, y: 0};
+        const deltaSize = action.payload.deltaSize;
+        const newSize = {x: currentSize.x + deltaSize.x, y: currentSize.y + deltaSize.y};
+        state = {...state, [nodeId]: {...node, size: newSize}}
       }
     }
     break;
