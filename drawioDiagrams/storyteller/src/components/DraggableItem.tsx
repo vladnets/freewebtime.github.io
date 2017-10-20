@@ -1,19 +1,19 @@
-import { NodeView } from './NodeView';
+import { IVector2 } from '../api/IVector2';
 import { Store } from 'redux';
 import { ViewBase } from './View';
 import { IAppResources } from '../api/IAppResources';
 import * as React from 'react';
-import { IAppState, IProject } from '../api/IAppState';
+import { IAppState } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
-import { Segment } from 'semantic-ui-react';
-import { DraggableItem } from './DraggableItem';
+import Button from 'material-ui/Button';
 
-export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
+export type DiDragCallback = (id: string, deltaPos: {x: number, y: number}, newPosition?: {x: number, y: number})=>void;
+export class DraggableItem extends ViewBase<{id?: string, position?: {x: number, y: number}, onDrag?: DiDragCallback, }> {
   state = {
     dragging: false,
     dragStart: {x: 0, y: 0}, 
-    position: {x: 0, y: 0},
+    position: this.props.position || {x: 0, y: 0},
   };
   
   onMouseDown(e: any, context: React.Component) {
@@ -49,41 +49,48 @@ export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppReso
       return;
     }
 
-    this.setState({
+    const deltaPos = {
+      x: (e.pageX - context.state[('dragStart')].x),
+      y: (e.pageY - context.state[('dragStart')].y)
+    }
+
+    const position = context.state[('position')];
+    
+    const newPosition = {
+      x: position.x + deltaPos.x,
+      y: position.y + deltaPos.y,
+    };
+
+    context.setState({
       ...context.state, 
-      position: {
-        x: context.state[('position')].x + (e.pageX - context.state[('dragStart')].x),
-        y: context.state[('position')].y + (e.pageY - context.state[('dragStart')].y),
-      },
+      position: newPosition,
       dragStart: {x: e.pageX, y: e.pageY},
     });
     
     e.stopPropagation()
     e.preventDefault()
+
+
+    const callback = (context.props as any).onDrag;
+    const itemId = (context.props as any).id;
+    if (callback) {
+      callback(itemId, deltaPos, newPosition)
+    }
   } 
 
-  render() {
-    const className = 'fullheight node-graph-view';
-    const areaSize = 1000;
-
+  render () {
+    const position = this.state.position;
 
     return (
       <div 
-        className={'fullheight'} 
-        style={{position: 'relative', overflow: 'hidden'}}
         onMouseDown={(e: any) => this.onMouseDown(e, this)}
         onMouseUp={(e: any) => this.onMouseUp(e, this)}
         onMouseMove={(e: any) => this.onMouseMove(e, this)}
         onMouseOut={(e: any) => this.onMouseOut(e, this)}
+        style={{left: position.x, top: position.y, position: 'relative'}}
       >
-        <div style={{left: this.state.position.x, top: this.state.position.y, background: 'yellow', position: 'relative', width: '0px', height: areaSize}}>
-          {
-            Object.keys(this.props.data.nodes).map((key: string, index: number) => (
-              <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]} resources={this.props.resources}/>
-            ))          
-          }
-        </div>
+        {this.props.children}
       </div>
-    );
+    )
   }
-} 
+}

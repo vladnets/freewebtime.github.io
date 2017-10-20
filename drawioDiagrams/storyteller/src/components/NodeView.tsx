@@ -1,3 +1,4 @@
+import { DraggableItem } from './DraggableItem';
 import { ICallback } from '../api/index';
 import { Store } from 'redux';
 import { ViewBase } from './View';
@@ -15,8 +16,8 @@ import { appConfig } from '../config/appConfig';
 export class NodeView extends ViewBase<{data: IProject, node: INode, resources: IAppResources}> {
   handleStart() {
   }
-  dragNode(node: INode, dd: any, callback: ICallback) {
-    callback(appConfig.Actions.NodeMove(node.id, {x: dd.deltaX, y: dd.deltaY}));
+  dragNode(node: INode, deltaPos: any, callback: ICallback) {
+    callback(appConfig.Actions.NodeMove(node.id, deltaPos));
   }
   handleStop() {
   }
@@ -27,17 +28,10 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
       ? {x: this.props.node.position.x, y: this.props.node.position.y}
       : undefined; 
 
-    console.log('node pos is ', position);
-
     return (
-      <Draggable
-        handle=".handle"
-        // defaultPosition={{x: 0, y: 0}}
-        //position={position}
-        grid={[25, 25]}
-        // onStart={this.handleStart}
-        onDrag={(e: any, dd: any)=> this.dragNode(this.props.node, dd, this.props.resources.callback)}
-        // onStop={this.handleStop}
+      <DraggableItem
+        position={position}
+        onDrag={(id: string, deltaPos: {x: number, y: number}, newPosition?: {x: number, y: number}) => this.dragNode(this.props.node, deltaPos, this.props.resources.callback)}
       >
         <Segment.Group className={className} size={'tiny'} compact >
           <Segment className={'handle'}>
@@ -47,7 +41,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
             {this.props.node.id}
           </Segment>
         </Segment.Group>
-      </Draggable>
+      </DraggableItem>
     );
   }
 } 

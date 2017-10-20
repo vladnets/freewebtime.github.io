@@ -20,7 +20,7 @@ const initialState: IHash<INode> = {
     id: emptyNodeId2,
     name: 'Empty 2',
     nodeType: NodeType.Unknown,
-    position: {x: 0, y: 0},
+    position: {x: 150, y: 250},
     size: {x: 250, y: 180},
   }
 }

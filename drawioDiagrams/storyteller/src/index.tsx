@@ -5,9 +5,17 @@ import './index.css';
 import { configureStore } from './configureStore';
 import * as React from 'react';
 
-const store = configureStore();
+const renderView = (store: any) => {
+    render(
+        <RootView store={store} />,
+        document.getElementById('appRoot')
+    );
+}
 
-render(
-    <RootView store={store} />,
-    document.getElementById('appRoot')
-);
+const store = configureStore();
+store.subscribe(()=>{
+    renderView(store);
+});
+
+renderView(store);
+

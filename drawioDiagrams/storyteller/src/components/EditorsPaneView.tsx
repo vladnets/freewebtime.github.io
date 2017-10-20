@@ -1,3 +1,4 @@
+import { start } from 'repl';
 import { ICallback } from '../api/index';
 import { Store } from 'redux';
 import { ViewBase } from './View';
@@ -16,9 +17,18 @@ import { NodeGraphView } from './NodeGraphView';
 export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppResources}> {
 
   render() {
+    const nodeStyle = {
+      width: '120px', 
+      height: '80px', 
+      background: 'maroon', 
+      color: 'white',
+      position: 'absolute',
+      top: '120px',
+      left: '-80px',
+    } as React.CSSProperties;
+    
     return (
       <div className={'fullheight fullwidth'} style={{display: 'flex', flexDirection: 'column'}}>
-        Editors Pane View
         <NodeGraphView data={this.props.data} resources={this.props.resources}/>
       </div>
     );
