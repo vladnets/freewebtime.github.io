@@ -12,7 +12,7 @@ export class AppView extends ViewBase<{data: IAppState}> {
   render() {
     return (
       <div className={'app-content'}>
-        <ProjectView data={this.props.data.project} />
+        <ProjectView data={this.props.data.project} resources={this.props.data.resources} />
       </div>
     );
   }

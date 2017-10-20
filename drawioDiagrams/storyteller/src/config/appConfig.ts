@@ -1,3 +1,4 @@
+import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import { INode } from '../api/INode';
 export const appConfig = {
@@ -16,10 +17,16 @@ export const appConfig = {
       NODE_CREATE_NEW: 'NODE_CREATE_NEW',
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
+    
+      APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
 
     NoOperation: (): IAction => {
       return {type: appConfig.Actions.Types.NO_OPERATION};
+    },
+
+    SetCallback: (callback: ICallback): IAction => {
+      return {type: appConfig.Actions.Types.APP_SET_CALLBACK, payload: callback}
     },
 
     NodeCreateNew: (newNode: INode): IAction => {

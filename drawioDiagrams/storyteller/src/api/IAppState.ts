@@ -5,6 +5,7 @@ import { IViewItem } from './IViewItem';
 
 export interface IAppState {
   project: IProject;
+  resources: IAppResources;
 }
 
 export interface IProject {

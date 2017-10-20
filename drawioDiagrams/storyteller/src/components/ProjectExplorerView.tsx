@@ -5,7 +5,7 @@ import * as React from 'react';
 import { IProject } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
-import { List, Segment, Icon, Card, Menu } from 'semantic-ui-react';
+import { List, Segment, Icon, Card, Menu, Button } from 'semantic-ui-react';
 
 export class ProjectExplorerView extends React.Component<{data: IProject}, {isExpanded: boolean, selectedItem: string}> {
   state = {
@@ -32,6 +32,12 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
           ))
         }
         </List>
+
+        <Button.Group >
+          <Button>Add</Button>
+          <Button>Remove</Button>
+        </Button.Group>
+
       </Segment>
     );
   }
