@@ -10,7 +10,7 @@ import { Segment, Menu, Dropdown, Icon } from 'semantic-ui-react';
 export class MainMenuView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {
     return (
-      <Menu size="small">
+      <Menu size="small" inverted>
         <Dropdown item simple text={'Main menu'}>
           <Dropdown.Menu>
             <Dropdown.Item>

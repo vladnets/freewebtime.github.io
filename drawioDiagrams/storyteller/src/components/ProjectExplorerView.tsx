@@ -19,8 +19,8 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
     const activeItem = this.state.selectedItem;
 
     return (
-      <Segment className={className}>
-        <List divided selection verticalAlign={'middle'}>
+      <div className={className}>
+        <List inverted divided selection verticalAlign={'middle'}>
         {
           Object.keys(this.props.data.nodes).map((key: string, index: number) => (
             <List.Item size={'small'} key={key} className={'project-explorer-item'} name={key} active={activeItem === key} onClick={this.handleItemClick} >
@@ -38,7 +38,7 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
           <Button>Remove</Button>
         </Button.Group>
 
-      </Segment>
+      </div>
     );
   }
 } 

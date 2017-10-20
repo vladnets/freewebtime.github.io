@@ -6,7 +6,6 @@ import * as React from 'react';
 import { IAppState, IProject } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
-import { Segment } from 'semantic-ui-react';
 import { DraggableItem } from './DraggableItem';
 
 export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
@@ -63,13 +62,13 @@ export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppReso
   } 
 
   render() {
-    const className = 'fullheight node-graph-view';
+    const className = 'node-graph-view';
     const areaSize = 1000;
 
 
     return (
       <div 
-        className={'fullheight'} 
+        className={className} 
         style={{position: 'relative', overflow: 'hidden'}}
         onMouseDown={(e: any) => this.onMouseDown(e, this)}
         onMouseUp={(e: any) => this.onMouseUp(e, this)}

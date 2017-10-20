@@ -10,9 +10,9 @@ import { Segment } from 'semantic-ui-react';
 export class StatusBarView extends ViewBase<{data: IProject}> {
   render() {
     return (
-      <Segment>
+      <div className={'status-bar-view'}>
         Application status...
-      </Segment>
+      </div>
     );
   }
 } 

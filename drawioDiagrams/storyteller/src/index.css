@@ -1,3 +1,9 @@
+body {
+  background: #1b1c1d;
+  color: white;
+  font-weight: bold;
+}
+
 .fullheight {
   height: 100%;
 }
@@ -70,8 +76,12 @@
   padding: 0px;
 }
 
+.ui {
+}
+
 .node-graph-view {
   width: 100%;
+  background: url('./resources/pattern2.jpg')
 }
 
 .node-view {
@@ -100,4 +110,13 @@
   background: rgb(255, 254, 187);
   height: 100%;
   padding: 5px;
+  color: rgb(61, 61, 61);
+}
+
+.sidebar {
+  background: #232324;
+}
+
+.status-bar-view {
+  background: #242627;
 }

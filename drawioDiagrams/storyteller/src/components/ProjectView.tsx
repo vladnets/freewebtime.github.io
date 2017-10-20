@@ -17,16 +17,16 @@ export class ProjectView extends ViewBase<{data: IProject, resources: IAppResour
           <MainMenuView data={this.props.data} resources={this.props.resources}/>
         </div>
         <div className={'middle-line-container'} style={{display: 'flex', flexDirection: 'row', flexGrow: 1}}>
-          <div className={'sidebar-left'}>
+          <div className={'sidebar sidebar-left'}>
             <ProjectExplorerView data={this.props.data}/>
           </div>
           <div className={'openned-editors-container'} style={{flexGrow: 1}}>
             <EditorsPaneView data={this.props.data} resources={this.props.resources}/>
           </div>
-          <div className={'sidebar-right'} style={{width: '80px'}}>
-            <Segment className={'fullheight fullwidth'}>
+          <div className={'sidebar sidebar-right'} style={{width: '80px'}}>
+            <div className={'fullheight fullwidth'}>
               Right sidebar content
-            </Segment>
+            </div>
           </div>
         </div>
         <div className={'bottom-line-container'}>

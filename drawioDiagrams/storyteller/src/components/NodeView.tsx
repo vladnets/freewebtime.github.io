@@ -7,7 +7,6 @@ import * as React from 'react';
 import { IAppState, IProject } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
-import { Card, Segment } from 'semantic-ui-react';
 import { INode } from '../api/INode';
 import * as ReactDom from 'react-dom';
 import Draggable from 'react-draggable';
