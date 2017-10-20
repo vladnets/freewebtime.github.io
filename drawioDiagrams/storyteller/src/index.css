@@ -86,13 +86,14 @@ body {
 
 .node-view {
   height: 100%;
-  border: 1px solid black;
+  border: 2px solid rgb(20, 44, 54);
+  /* box-shadow: 0 0 0.5em rgb(0, 255, 34); */
   border-radius: 10px;
   overflow: hidden;
 }
 
 .node-header {
-  background: gray;
+  background: linear-gradient(to bottom right, rgb(19, 70, 100), rgb(124, 168, 194));
   color: white;
   font-weight: bold;
   padding: 5px;
@@ -107,10 +108,10 @@ body {
 }
 
 .node-content {
-  background: rgb(255, 254, 187);
+  background: linear-gradient(to bottom, rgb(3, 7, 14), rgb(19, 46, 68) );
   height: 100%;
   padding: 5px;
-  color: rgb(61, 61, 61);
+  color: rgb(255, 255, 255);
 }
 
 .sidebar {
