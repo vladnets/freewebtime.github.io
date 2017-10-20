@@ -1,3 +1,4 @@
+import { ICallback } from '../api/index';
 import { Store } from 'redux';
 import { ViewBase } from './View';
 import { IAppResources } from '../api/IAppResources';
@@ -9,30 +10,34 @@ import { Card, Segment } from 'semantic-ui-react';
 import { INode } from '../api/INode';
 import * as ReactDom from 'react-dom';
 import Draggable from 'react-draggable';
+import { appConfig } from '../config/appConfig';
 
-export class NodeView extends ViewBase<{data: IProject, node: INode}> {
+export class NodeView extends ViewBase<{data: IProject, node: INode, resources: IAppResources}> {
   handleStart() {
-    console.log('start: ', arguments);  
   }
-  handleDrag() {
-    console.log('drag: ', arguments);  
+  dragNode(node: INode, dd: any, callback: ICallback) {
+    callback(appConfig.Actions.NodeMove(node.id, {x: dd.deltaX, y: dd.deltaY}));
   }
   handleStop() {
-    console.log('stop ', arguments);  
   }
 
   render() {
     const className = 'node-view'
+    const position = this.props.node.position 
+      ? {x: this.props.node.position.x, y: this.props.node.position.y}
+      : undefined; 
+
+    console.log('node pos is ', position);
 
     return (
       <Draggable
-        //axis="x"
         handle=".handle"
-        defaultPosition={{x: 0, y: 0}}
+        // defaultPosition={{x: 0, y: 0}}
+        //position={position}
         grid={[25, 25]}
-        onStart={this.handleStart}
-        onDrag={this.handleDrag}
-        onStop={this.handleStop}
+        // onStart={this.handleStart}
+        onDrag={(e: any, dd: any)=> this.dragNode(this.props.node, dd, this.props.resources.callback)}
+        // onStop={this.handleStop}
       >
         <Segment.Group className={className} size={'tiny'} compact >
           <Segment className={'handle'}>

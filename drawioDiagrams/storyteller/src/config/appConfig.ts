@@ -1,6 +1,8 @@
+import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import { INode } from '../api/INode';
+import Typography from 'material-ui/Typography';
 export const appConfig = {
   NodeTypes: {
     NODE_TYPE_STRING: 'NODE_TYPE_STRING',
@@ -17,7 +19,8 @@ export const appConfig = {
       NODE_CREATE_NEW: 'NODE_CREATE_NEW',
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
-    
+      NODE_MOVE: 'NODE_MOVE',
+
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
 
@@ -47,6 +50,12 @@ export const appConfig = {
         payload: updatedNode,
       }
     },
+    NodeMove: (nodeId: string, offset: IVector2) => {
+      return {
+        type: appConfig.Actions.Types.NODE_MOVE,
+        payload: {nodeId, offset},
+      }
+    }
 
 
   }

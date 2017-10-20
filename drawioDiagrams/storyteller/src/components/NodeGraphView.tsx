@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
 import { Segment } from 'semantic-ui-react';
 
-export class NodeGraphView extends ViewBase<{data: IProject}> {
+export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {
     const className = 'fullheight node-graph-view'
 
@@ -16,7 +16,7 @@ export class NodeGraphView extends ViewBase<{data: IProject}> {
       <Segment className={className} >
       {
         Object.keys(this.props.data.nodes).map((key: string, index: number) => (
-          <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]}/>
+          <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]} resources={this.props.resources}/>
         ))          
       }
       </Segment>

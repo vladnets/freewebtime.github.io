@@ -17,7 +17,7 @@ export class ProjectView extends ViewBase<{data: IProject, resources: IAppResour
 
           <div className={'container-horizontal fullheight'}>
             <ProjectExplorerView data={this.props.data}/>
-            <NodeGraphView data={this.props.data}/>
+            <NodeGraphView data={this.props.data} resources={this.props.resources}/>
           </div>
 
           <StatusBarView data={this.props.data}/>

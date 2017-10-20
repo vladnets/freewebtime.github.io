@@ -49,6 +49,19 @@ export const nodesReducer = function(state: IHash<INode> = initialState, action:
     }
     break;
 
+    case appConfig.Actions.Types.NODE_MOVE:
+    {
+      const nodeId = action.payload.nodeId;
+      const node = state[nodeId];
+      if (node) {
+        const currentPos = node.position ? node.position : {x: 0, y: 0};
+        const offset = action.payload.offset;
+        const newPosition = {x: currentPos.x + offset.x, y: currentPos.y + offset.y};
+        state = {...state, [nodeId]: {...node, position: newPosition}}
+      }
+    }
+    break;
+
     default: break;
   }
   
