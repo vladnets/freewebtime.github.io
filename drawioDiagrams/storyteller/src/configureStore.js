@@ -8,7 +8,7 @@ export const configureStore = () => {
     rootReducer,
     compose (
       applyMiddleware(reduxLogger),
-      window.devToolsExtension ? window.devToolsExtension() : f => f      
+      //window.devToolsExtension ? window.devToolsExtension() : f => f      
     )
   );
   
