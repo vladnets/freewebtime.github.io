@@ -67,3 +67,10 @@
   border-radius: 0px;
   padding: 0px;
 }
+
+.node-graph-view {
+  width: 100%;
+}
+
+.node-view {
+}

@@ -1,3 +1,4 @@
+import { NodeView } from './NodeView';
 import { Store } from 'redux';
 import { ViewBase } from './View';
 import { IAppResources } from '../api/IAppResources';
@@ -9,10 +10,15 @@ import { Segment } from 'semantic-ui-react';
 
 export class NodeGraphView extends ViewBase<{data: IProject}> {
   render() {
+    const className = 'fullheight node-graph-view'
+
     return (
-      <Segment>
-        App content!
-        {JSON.stringify(this.props.data)}
+      <Segment className={className} >
+      {
+        Object.keys(this.props.data.nodes).map((key: string, index: number) => (
+          <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]}/>
+        ))          
+      }
       </Segment>
     );
   }
