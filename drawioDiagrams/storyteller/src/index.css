@@ -1,6 +1,9 @@
 .fullheight {
   height: 100%;
 }
+.fullwidth {
+  height: 100%;
+}
 
 #appRoot {
   height: 100%;
@@ -15,7 +18,6 @@
 }
 
 .project-explorer {
-  height: 100%;
   width: 40px;
   padding: 5px;
 }
@@ -35,7 +37,7 @@
 }
 
 .project-explorer.expanded {
-  width: 300px;
+  width: 220px;
 }
 
 .ui.segment {
