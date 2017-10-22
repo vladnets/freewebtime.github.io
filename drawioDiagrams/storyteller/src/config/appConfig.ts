@@ -1,3 +1,4 @@
+import { IProjectItem } from '../api/IAppState';
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
@@ -21,6 +22,11 @@ export const appConfig = {
       NODE_UPDATE: 'NODE_UPDATE',
       NODE_MOVE: 'NODE_MOVE',
       NODE_RESIZE: 'NODE_RESIZE',
+
+      PROJECT_ITEM_ADD: 'PROJECT_ITEM_ADD',
+      PROJECT_ITEM_REMOVE: 'PROJECT_ITEM_REMOVE',
+      PROJECT_ITEM_UPDATE: 'PROJECT_ITEM_UPDATE',
+      PROJECT_ITEM_RELOCATE: 'PROJECT_ITEM_RELOCATE',
 
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
@@ -62,8 +68,26 @@ export const appConfig = {
         type: appConfig.Actions.Types.NODE_RESIZE,
         payload: {nodeId, deltaSize},
       }
-    }
+    },
 
+    ProjectItemAdd: (newItem: IProjectItem): IAction => {
+      return {
+        type: appConfig.Actions.Types.PROJECT_ITEM_ADD,
+        payload: newItem,
+      }
+    },
+    ProjectItemRemove: (itemId: string): IAction => {
+      return {
+        type: appConfig.Actions.Types.PROJECT_ITEM_ADD,
+        payload: itemId,
+      }
+    },
+    ProjectItemUpdate: (updatedItem: IProjectItem): IAction => {
+      return {
+        type: appConfig.Actions.Types.PROJECT_ITEM_ADD,
+        payload: updatedItem,
+      }
+    },
 
   }
 }

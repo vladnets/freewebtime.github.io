@@ -10,10 +10,24 @@ export interface IAppState {
 
 export interface IProject {
   projectData: IProjectData;
+  projectItems: IHash<IProjectItem>;
   nodes: IHash<INode>;
 }
 
 export interface IProjectData {
   name: string;
   selectedNodeId: string;
+}
+
+export enum ProjectItemType {
+  Unknown,
+  Folder,
+  File,
+}
+
+export interface IProjectItem {
+  id: string;
+  name: string;
+  type: ProjectItemType;
+  subitems: IHash<IProjectItem>;
 }

@@ -1,7 +1,19 @@
+:root {
+  --main-bg-color: #2D2D2D;
+  --main-bg-color-accent: #424242;
+  --secondary-bg-color: #5d83ac;
+  --secondary-bg-color-accent: #6b95c2;
+  --main-text-color: #EAE6DE;
+  --main-text-color-accent: #f5f0e7;
+  --selection-color: #D86A46;
+  --selection-color-accent: #c0512f;
+  --hightlignt-color: #78aeb0;
+  --hightlignt-color-accent: #a3ebec;
+}
+
 body {
-  background: #1b1c1d;
-  color: white;
-  font-weight: bold;
+  color: var(--main-text-color);
+  background: var(--main-bg-color);
 }
 
 .fullheight {
@@ -25,6 +37,23 @@ body {
 
 .project-explorer {
   width: 40px;
+}
+
+.panel {
+  background: var(--main-bg-color-accent);
+  border-top: 1px solid var(--secondary-bg-color);
+  margin: 2px;
+}
+
+.panel-header {
+  border-bottom: 1px solid var(--secondary-bg-color);
+  background: var(--secondary-bg-color-accent);
+  padding: 2px;
+  color: var(--main-bg-color);
+  font-weight: bold;
+}
+
+.padding {
   padding: 5px;
 }
 
@@ -46,42 +75,8 @@ body {
   width: 220px;
 }
 
-.ui.segment {
-  padding: 0.5pt;
-  margin: 0pt;
-  border-radius: 0px;
-}
-
-.ui.menu {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
-}
-
-.dropdown.item {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
-}
-
-.ui.dropdown {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
-}
-
-.ui.menu .dropdown.item .menu {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
-}
-
-.ui {
-}
-
 .node-graph-view {
   width: 100%;
-  background: url('./resources/pattern2.jpg')
 }
 
 .node-view {
@@ -113,11 +108,38 @@ body {
   padding: 5px;
   color: rgb(255, 255, 255);
 }
-
 .sidebar {
-  background: #232324;
 }
 
 .status-bar-view {
-  background: #242627;
+}
+
+
+.main-menu-view {
+}
+.main-menu-view-container {
+}
+.main-menu-item {
+  margin-right: 3px;
+  /* border-left: 1px solid var(--main-bg-color-accent); */
+  /* border-right: 1px solid var(--main-bg-color-accent); */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ui.list {
+  margin: 0px;
 }
