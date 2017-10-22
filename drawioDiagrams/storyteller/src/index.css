@@ -35,10 +35,6 @@ body {
   height: 100%;
 }
 
-.project-explorer {
-  width: 40px;
-}
-
 .panel {
   background: var(--main-bg-color-accent);
   border-top: 1px solid var(--secondary-bg-color);
@@ -65,6 +61,29 @@ body {
 .container-vertical {
   display: flex;
   flex-direction: column;
+}
+
+.project-explorer {
+}
+
+.project-explorer ul {
+  list-style-type: none;
+  padding: 3px;
+  margin: 0px;
+}
+
+.project-explorer ul li ul {
+  padding-left: 1rem;
+}
+
+.project-explorer li {
+  cursor: pointer;
+}
+
+.project-explorer li.hightlighted {
+  background: var(--selection-color);
+  color: var(--main-bg-color);
+  font-weight: bold;
 }
 
 .project-explorer.collapsed {
@@ -140,6 +159,3 @@ body {
 
 
 
-.ui.list {
-  margin: 0px;
-}

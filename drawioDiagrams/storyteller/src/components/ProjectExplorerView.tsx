@@ -13,7 +13,9 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
     isExpanded: true,
     selectedItem: '',
   };
-  handleItemClick = (e, { name }) => this.setState({...this.state, selectedItem: name });
+  handleItemClick = (itemId: string) => {
+    this.setState({...this.state, selectedItem: itemId });
+  };
 
   render() {
     const className = 'fullheight project-explorer' + (this.state.isExpanded ? ' expanded' : ' collapsed');
@@ -25,60 +27,51 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
         <div className={'panel-header'}>
           Project items
         </div>
-      
-        <List inverted divided selection verticalAlign={'middle'}>
+
+        <ul>
         {
           Object.keys(items).map((key: string, index: number) => (
             <PiTreeViewItem data={items[key]} key={key} handleItemClick={this.handleItemClick} selectedItemId={this.state.selectedItem}/>
           ))
         }
-        </List>
-
-        <Button.Group >
-          <Button>Add</Button>
-          <Button>Remove</Button>
-        </Button.Group>
-
+        </ul>
       </div>
     );
   }
 }
 
-export class PiTreeViewItem extends ViewBase<{data: IProjectItem, selectedItemId: string, handleItemClick: (e: any, { name }: { name: any; }) => void}> {
-  state = {
-    isExpanded: true,
-    selectedItem: '',
-  };
-  handleItemClick = (e, { name }) => this.setState({...this.state, selectedItem: name });
-
+export class PiTreeViewItem extends ViewBase<{data: IProjectItem, selectedItemId: string, handleItemClick: (itemId: string) => void}> {
   render() {
     const item = this.props.data;
     const items = item.subitems;
     let subitemsCount = 0;
     let subitemsView = (
-      <List.Content>
-        <List inverted divided selection verticalAlign={'middle'}>
-        {
-          Object.keys(items).map((key: string, index: number) => {
-            subitemsCount++;
-            return (<PiTreeViewItem data={items[key]} key={key} handleItemClick={this.handleItemClick} selectedItemId={this.state.selectedItem}/>)
-          })
-        }
-        </List>
-      </List.Content>
+      <ul>
+      {
+        Object.keys(items).map((key: string, index: number) => {
+          subitemsCount++;
+          return (<PiTreeViewItem data={items[key]} key={key} handleItemClick={this.props.handleItemClick} selectedItemId={this.props.selectedItemId}/>)
+        })
+      }
+      </ul>
     );
     if (subitemsCount <= 0) {
       subitemsView = false;
     }
 
+    const className = this.props.data.id === this.props.selectedItemId ? 'hightlighted' : '';
+    const handleItemClick = (e: any)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      this.props.handleItemClick(this.props.data.id)
+    };
+
     return (
-      <List.Item size={'small'} key={item.id} className={'project-explorer-item'} name={item.id} active={this.props.selectedItemId === item.id} onClick={this.props.handleItemClick} >
-        <List.Icon name={item.type === ProjectItemType.File ? 'file' : 'folder'} /> 
-        <List.Content>
-          <List.Header>{item.name}</List.Header>
-        </List.Content>
+      <li className={className} onClick={handleItemClick}>
+        <Icon name={item.type === ProjectItemType.File ? 'file' : 'folder'} /> 
+        {item.name}
         {subitemsView}
-      </List.Item>
+      </li>
     )
   }
 }
