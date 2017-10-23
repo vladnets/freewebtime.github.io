@@ -7,6 +7,7 @@ import { IAppState, IProject } from '../api/IAppState';
 import { Provider } from 'react-redux';
 import { ProjectView } from './ProjectView';
 import { DraggableItem } from './DraggableItem';
+import Draggable from 'react-draggable';
 
 export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
   state = {
@@ -67,14 +68,7 @@ export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppReso
 
 
     return (
-      <div 
-        className={className} 
-        style={{position: 'relative', overflow: 'hidden'}}
-        onMouseDown={(e: any) => this.onMouseDown(e, this)}
-        onMouseUp={(e: any) => this.onMouseUp(e, this)}
-        onMouseMove={(e: any) => this.onMouseMove(e, this)}
-        onMouseOut={(e: any) => this.onMouseOut(e, this)}
-      >
+      <div className={className} style={{position: 'relative', overflow: 'hidden'}}>
         <div style={{left: this.state.position.x, top: this.state.position.y, background: 'yellow', position: 'relative', width: '0px', height: areaSize}}>
           {
             Object.keys(this.props.data.nodes).map((key: string, index: number) => (
