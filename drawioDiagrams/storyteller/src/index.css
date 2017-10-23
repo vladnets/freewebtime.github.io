@@ -100,32 +100,21 @@ body {
 
 .node-view {
   height: 100%;
-  border: 2px solid rgb(20, 44, 54);
-  /* box-shadow: 0 0 0.5em rgb(0, 255, 34); */
-  border-radius: 10px;
+  box-shadow: 0 0 0.5em var(--secondary-bg-color);
   overflow: hidden;
+  background: var(--main-bg-color);
 }
 
 .node-header {
-  background: linear-gradient(to bottom right, rgb(19, 70, 100), rgb(124, 168, 194));
-  color: white;
-  font-weight: bold;
   padding: 5px;
-}
-
-.node-resize-handler {
-  cursor: se-resize;
-}
-
-.draggable-item {
-  position: relative;
+  font-weight: bold;
 }
 
 .node-content {
-  background: linear-gradient(to bottom, rgb(3, 7, 14), rgb(19, 46, 68) );
-  height: 100%;
+  /* height: 100%; */
+  border: 5px solid var(--main-bg-color);
   padding: 5px;
-  color: rgb(255, 255, 255);
+  background: var(--main-bg-color-accent);
 }
 .sidebar {
 }
@@ -143,26 +132,6 @@ body {
   /* border-left: 1px solid var(--main-bg-color-accent); */
   /* border-right: 1px solid var(--main-bg-color-accent); */
 }
-
-.react-resizable {
-  position: relative;
-}
-
-.react-resizable-handle {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  bottom: 0;
-  right: 0;
-  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2IDYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iNnB4Ij48ZyBvcGFjaXR5PSIwLjMwMiI+PHBhdGggZD0iTSA2IDYgTCAwIDYgTCAwIDQuMiBMIDQgNC4yIEwgNC4yIDQuMiBMIDQuMiAwIEwgNiAwIEwgNiA2IEwgNiA2IFoiIGZpbGw9IiMwMDAwMDAiLz48L2c+PC9zdmc+');
-  background-position: bottom right;
-  padding: 0 3px 3px 0;
-  background-repeat: no-repeat;
-  background-origin: content-box;
-  box-sizing: border-box;
-  cursor: se-resize;
-}
-
 
 
 

@@ -45,6 +45,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
         onResize={(e, direction, ref, delta, position) => {
           this.resizeNode(node, delta, this.props.resources.callback)
         }}
+        dragHandleClassName={'.node-header'}
       >
         <div className={'node-view'}>
           <div className={'node-header'}>
