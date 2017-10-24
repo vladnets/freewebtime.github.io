@@ -5,6 +5,8 @@ import { IAction } from '../api/IAction';
 import { INode, IType } from '../api/INode';
 import Typography from 'material-ui/Typography';
 export const appConfig = {
+  IsSaveStateToLocalStorage: true,
+  SaveStateToLocalStorageInterval: 1000,
   NodeTypes: {
     NODE_TYPE_STRING: 'NODE_TYPE_STRING',
     NODE_TYPE_NUMBER: 'NODE_TYPE_NUMBER',

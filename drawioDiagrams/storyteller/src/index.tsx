@@ -1,3 +1,5 @@
+import { appConfig } from './config/appConfig';
+import { saveState } from './helpers/LocalStorageHelper';
 import { RootView } from './components/RootView';
 import { render } from 'react-dom';
 import 'react-contexify/dist/ReactContexify.min.css';
@@ -5,18 +7,26 @@ import './components/Theme.css';
 import './index.css';
 import { configureStore } from './configureStore';
 import * as React from 'react';
+import throttle from 'lodash/throttle';
 
 const renderView = (store: any) => {
-    render(
-        <RootView store={store} />,
-        document.getElementById('appRoot')
-    );
+  render(
+    <RootView store={store} />,
+    document.getElementById('appRoot')
+  );
 }
-
+  
 const store = configureStore();
 store.subscribe(()=>{
-    renderView(store);
+  renderView(store);
 });
+
+store.subscribe(throttle(() => {
+    if (appConfig.IsSaveStateToLocalStorage) {
+      saveState(store.getState());
+    }
+  }, appConfig.SaveStateToLocalStorageInterval)
+)
 
 renderView(store);
 

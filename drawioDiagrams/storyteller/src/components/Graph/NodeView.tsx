@@ -1,3 +1,4 @@
+import { IVector2 } from '../../api/IVector2';
 import * as React from 'react';
 import './Node.css';
 import { ICallback } from '../../api/index';
@@ -15,7 +16,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
     callback: undefined,
   }
   
-  moveNode(self: NodeView, deltaPos: any, callback: ICallback) {
+  moveNode(self: NodeView, deltaPos: IVector2, callback: ICallback) {
     const node = self.props.node;
     const newPos = {
       x: node.position.x + deltaPos.x, 
@@ -25,19 +26,24 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
 
     callback(appConfig.Actions.NodeUpdate(newNode));
   }
-  placeNode(self: NodeView, newPos: any, callback: ICallback) {
+  placeNode(self: NodeView, newPos: IVector2, callback: ICallback) {
     const node = self.props.node;
     const newNode = {...node, position: newPos};
 
     callback(appConfig.Actions.NodeUpdate(newNode));
   }
-  resizeNode(self: NodeView, deltaSize: any, callback: ICallback) {
+  resizeNode(self: NodeView, deltaSize: IVector2, newPos: IVector2, callback: ICallback) {
     const node = self.props.node;
-    const newSize = {
+    const newSize1 = {
       x: node.size.x + deltaSize.x, 
       y: node.size.y + deltaSize.y
     }
-    const newNode = {...node, size: newSize};
+    const newSize = deltaSize;
+
+    newSize.x = Math.max(newSize.x, 10);
+    newSize.y = Math.max(newSize.y, 10);
+    
+    const newNode = {...node, size: newSize, position: newPos};
 
     callback(appConfig.Actions.NodeUpdate(newNode));
   }
@@ -96,14 +102,19 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
 
     return (
       <Rnd 
-        size={{width: node.size.x, height: node.size.y}}
-        position={node.position}
+        default={{
+          x: node.position.x,
+          y: node.position.y,
+          width: node.size.x,
+          height: node.size.y,
+        }}
+        // size={{width: node.size.x, height: node.size.y}}
+        // position={node.position}
         onDragStop={(e, d)=>{
           this.placeNode(this, {x: d.x, y: d.y}, this.props.resources.callback)
         }}
-        onResize={(e, direction, ref, delta, position) => {
-          this.resizeNode(this, delta, this.props.resources.callback)
-          this.placeNode(this, position, this.props.resources.callback)
+        onResizeStop={(e, direction, ref, delta, position) => {
+          this.resizeNode(this, {x: ref.offsetWidth, y: ref.offsetHeight}, position, this.props.resources.callback)
         }}
         dragHandleClassName={'.node-header'}
       >

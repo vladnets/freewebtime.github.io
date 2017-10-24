@@ -2,10 +2,14 @@ import { applyMiddleware, compose, createStore, Store } from 'redux';
 import reduxLogger from 'redux-logger';
 import { rootReducer } from './reducers/rootReducer';
 import { appConfig } from './config/appConfig';
+import { loadState } from './helpers/LocalStorageHelper';
+
+const initialState = loadState();
 
 export const configureStore = () => {
   const store = createStore(
     rootReducer,
+    initialState,
     compose (
       applyMiddleware(reduxLogger),
       window[('devToolsExtension')] ? window[('devToolsExtension')]() : f => f      
