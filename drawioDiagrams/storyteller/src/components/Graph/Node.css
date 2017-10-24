@@ -1,22 +1,31 @@
 .node-view {
-  height: 100%;
   box-shadow: 0 0 0.5em var(--selection-color);
   background: var(--main-bg-color);
-  border: 3px solid var(--main-bg-color);
+  /* border: 3px solid var(--main-bg-color); */
   overflow: hidden;
+  border-radius: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .node-header {
-  /* padding: 5px; */
   font-weight: bold;
-  padding-bottom: 5px;
   cursor: grab;
+  background: var(--main-bg-color-accent);
+  padding: 4px;
+}
+.node-footer {
+  font-weight: bold;
+  background: var(--main-bg-color-accent);
+  padding: 4px;
 }
 
 .node-content {
   display: flex;
   flex-direction: row;
   width: 100%;
+  flex-grow: 1;
 }
 
 .node-output {
@@ -33,7 +42,9 @@
   flex-grow: 1;
   text-align: center;
   padding: 5px;
-  background: var(--main-bg-color-accent);
+  /* background: var(--main-bg-color-dark); */
+  background: #242424;
+  border-radius: 5px;
 }
 
 .node-input-item {
@@ -41,5 +52,5 @@
 }
 
 .node-output-item {
-  
+
 }

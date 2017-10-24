@@ -99,7 +99,22 @@ body {
   /* border-right: 1px solid var(--main-bg-color-accent); */
 }
 
+svg {
+  pointer-events: none;
+}
 
+.svg-spline {
+  pointer-events: painted;
+  fill: none;
+  stroke: darkkhaki;
+  color: aquamarine;
+  stroke-width: 5px;
+  cursor: pointer;
+}
+
+.connector.selected {
+  stroke: aqua;
+}
 
 
 

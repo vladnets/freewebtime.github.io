@@ -1,3 +1,4 @@
+import Spline from '../Spline';
 import { NodeView } from './NodeView';
 import { Store } from 'redux';
 import { ViewBase } from '../View';
@@ -8,6 +9,7 @@ import * as ReactDom from 'react-dom';
 import Rnd from 'react-rnd';
 import { IProject } from '../../api/IAppState';
 import './Graph.css';
+import SvgComponent from '../SvgComponent';
 
 export class GraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
   state = {
@@ -92,8 +94,16 @@ export class GraphView extends ViewBase<{data: IProject, resources: IAppResource
             <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]} resources={this.props.resources}/>
           ))          
         }
-        </div>
+
       </div>
+      <SvgComponent ref="svgComponent">
+        <Spline 
+          mousePos={{x: 150, y: 150}}
+          start={{x: 50, y: 50}}
+          end={{x: 300, y: 300}}
+        />
+      </SvgComponent>
+    </div>
     );
   }
 } 

@@ -60,9 +60,9 @@ class Spline extends React.Component<ISplineProps> {
         let className = 'connector' + (selected ? ' selected' : '');
 
         return (
-                <g>
-                <circle cx={start.x} cy={start.y} r="3"  fill="#337ab7" />
-                <circle cx={end.x} cy={end.y} r="3"  fill="#9191A8" />
+                <g className={'svg-spline'}>
+                <circle cx={start.x} cy={start.y} r="3"  fill="#337ab7" className={className}/>
+                <circle cx={end.x} cy={end.y} r="3"  fill="#9191A8" className={className}/>
                 <path className="connector-click-area" d={pathString} onClick={(e) => {this.handleClick(e)}} />
                 <path className={className} d={pathString} onClick={(e) => {this.handleClick(e)}} />
                 { selected 
