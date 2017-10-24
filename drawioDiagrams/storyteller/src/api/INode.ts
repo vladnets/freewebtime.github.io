@@ -1,13 +1,6 @@
 import { IHash } from './IHash';
 import { IVector2 } from './IVector2';
 
-export enum NodeType {
-  Unknown,
-  Value,
-  Function,
-  Type,
-}
-
 export interface IUniqueObject {
   id: string;
   name: string;
@@ -48,16 +41,16 @@ export interface IFunction extends IUniqueObject {
   connectionsTo: IHash<IHash<IConnectionReference>>; //connections sorted by 'toId' field
 }
 
+export enum NodeType {
+  Unknown,
+  Value,
+  Function,
+  Type,
+}
+
 export interface INode extends IUniqueObject {
-  typeId?: string;
+  reference?: string;
   nodeType: NodeType;
   size: IVector2;
   position: IVector2;
-}
-
-export interface INodeMember {
-  id: string;
-  name: string;
-  reference?: string|string[];
-  value: INode|IHash<INodeMember>;
 }

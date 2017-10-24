@@ -23,13 +23,13 @@ const createTypeReference = (typeId: string) => {
 }
 
 const createFunction = function(
+  id: string,
   outputTypeId: string, 
   input: IHash<ITypeReference>, 
   output: IHash<ITypeReference>, 
   locals: IHash<ITypeReference>,
   connections: IHash<IConnection>,
 ): IFunction {
-  const id = v4(); 
   const connectionsFrom: IHash<IHash<IConnectionReference>> = {};
   const connectionsTo: IHash<IHash<IConnectionReference>> = {};
 
@@ -64,6 +64,7 @@ const createFunction = function(
 }
 
 const stringFunction = () => {
+  const id = appConfig.SystemTypeNames.TYPE_CONSTRUCTOR_STRING;
   const inputId = v4();
   const outputId = v4();
   const connectionId = v4();
@@ -92,7 +93,7 @@ const stringFunction = () => {
     }
   }
 
-  return createFunction(appConfig.SystemTypeNames.TYPE_STRING, input, output, locals, connections);
+  return createFunction(id, appConfig.SystemTypeNames.TYPE_STRING, input, output, locals, connections);
 }
 
 const initialCreators = [

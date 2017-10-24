@@ -1,3 +1,4 @@
+import { getFunctionById, getTypeById } from '../../helpers/index';
 import { IVector2 } from '../../api/IVector2';
 import * as React from 'react';
 import './Node.css';
@@ -5,7 +6,7 @@ import { ICallback } from '../../api/index';
 import { appConfig } from '../../config/appConfig';
 import { ViewBase } from '../View';
 import { IProject } from '../../api/IAppState';
-import { INode } from '../../api/INode';
+import { INode, ITypeReference, IFunction, IType } from '../../api/INode';
 import { IAppResources } from '../../api/IAppResources';
 import Rnd from 'react-rnd';
 import * as FA from 'react-fontawesome';
@@ -50,35 +51,76 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
 
   render() {
     const node = this.props.node;
-    const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    const func: IFunction = getFunctionById(node.reference, this.props.data) as IFunction;
+    const type: IType = func 
+      ? getTypeById(func.outputTypeId, this.props.data) as IType
+      : getTypeById(node.reference, this.props.data) as IType;
 
-    const outputItems = (
-      items.map((item: number, index) => {
-        return (
-          <div key={item}>
-            Hello world {item}
-          </div>
-        )
-      })
-    );
+    console.log('node, func, type', node, func, type);
+
+    const outputItems = (): any|false => {
+      if (func) {
+        return Object.keys(func.output).map((key: string, index: number) => {
+          const item = func.output[key];
+          const outputType = getTypeById(item.typeId, this.props.data);
+          const outputTypeName = outputType ? outputType.name : 'Unknown';
+          return (
+            <div key={item.id}>
+              {item.name} ({outputTypeName})
+            </div>
+          )
+        }); 
+      }
+      else if (type && type.properties) {
+        const typeProperties = type.properties;
+        if (typeProperties) {
+          return Object.keys(type.properties).map((key: string, index: number) => {
+            const item = typeProperties[key];
+            const outputType = getTypeById(item.typeId, this.props.data);
+            const outputTypeName = outputType ? outputType.name : 'Unknown';
+            return (
+              <div key={item.id}>
+                {item.name} ({outputTypeName})
+              </div>
+            )
+          }); 
+        }
+      }
+
+      return false;
+    };
+
+    const inputItems = (): any|false => {
+      if (func) {
+        return Object.keys(func.input).map((key: string, index: number) => {
+          const item = func.input[key];
+          const inputType = getTypeById(item.typeId, this.props.data);
+          const inputTypeName = inputType ? inputType.name : 'Unknown';
+          return (
+            <div key={item.id}>
+              {item.name} ({inputTypeName})
+            </div>
+          )
+        }); 
+      }
+
+      return false;
+    };
 
     const nodeOutputView = (
       <div className={'node-output'}>
-        {outputItems}
+        {outputItems()}
       </div>
     );
     const nodeInputView = (
       <div className={'node-input'}>
-        Input item 1<br />
-        Input item 2<br />
-        Input item 3<br />
-        Input item 4<br />
+        {inputItems()}
       </div>
     );
 
     const nodeBodyView = (
       <div className={'node-body'}>
-      Водитель банды грабителей банков в день ограбления просыпается в квартире любовницы, врет подельникам, что уже выехал, и выясняет, что любовница уже ушла на работу, квартиру заперла и ключей ему не оставила, а ограбление, с которого он должен забрать грабителей, уже началось.
+        {}
       </div>
     );
 
