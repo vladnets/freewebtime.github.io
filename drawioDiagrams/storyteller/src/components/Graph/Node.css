@@ -1,9 +1,9 @@
 .node-view {
   height: 100%;
   box-shadow: 0 0 0.5em var(--selection-color);
-  overflow: hidden;
   background: var(--main-bg-color);
-  border: 5px solid var(--main-bg-color);
+  border: 3px solid var(--main-bg-color);
+  overflow: hidden;
 }
 
 .node-header {
@@ -14,7 +14,32 @@
 }
 
 .node-content {
-  height: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.node-output {
+  min-width: 120px;
+  padding: 5px;
+}
+
+.node-input {
+  min-width: 120px;
+  padding: 5px;
+}
+
+.node-body {
+  flex-grow: 1;
+  text-align: center;
   padding: 5px;
   background: var(--main-bg-color-accent);
+}
+
+.node-input-item {
+
+}
+
+.node-output-item {
+  
 }

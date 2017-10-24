@@ -43,21 +43,35 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
 
   render() {
     const node = this.props.node;
+    const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+    const outputItems = (
+      items.map((item: number, index) => {
+        return (
+          <div key={item}>
+            Hello world {item}
+          </div>
+        )
+      })
+    );
 
     const nodeOutputView = (
       <div className={'node-output'}>
-        Node output
+        {outputItems}
       </div>
     );
     const nodeInputView = (
       <div className={'node-input'}>
-        Node input
+        Input item 1<br />
+        Input item 2<br />
+        Input item 3<br />
+        Input item 4<br />
       </div>
     );
 
     const nodeBodyView = (
       <div className={'node-body'}>
-        Node content
+      Водитель банды грабителей банков в день ограбления просыпается в квартире любовницы, врет подельникам, что уже выехал, и выясняет, что любовница уже ушла на работу, квартиру заперла и ключей ему не оставила, а ограбление, с которого он должен забрать грабителей, уже началось.
       </div>
     );
 
@@ -66,7 +80,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
         {nodeInputView}
         {nodeBodyView}
         {nodeOutputView}
-      </div>
+        </div>
     );
 
     const nodeRootView = (

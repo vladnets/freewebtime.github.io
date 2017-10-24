@@ -18,10 +18,13 @@ export class ProjectView extends ViewBase<{data: IProject, resources: IAppResour
           <div className={'sidebar sidebar-left panel'}>
             <ProjectExplorerView data={this.props.data}/>
           </div>
-          <div className={'openned-editors-container panel padding'} style={{flexGrow: 1}}>
+          <div className={'openned-editors-container '} style={{flexGrow: 1}}>
+            <div className={'panel padding'}>
+              Project > Root Item > Types > etc.
+            </div>
             <EditorsPaneView data={this.props.data} resources={this.props.resources}/>
           </div>
-          <div className={'sidebar sidebar-right panel padding'} style={{width: '80px'}}>
+          <div className={'sidebar sidebar-right panel padding'} style={{width: '80px', display: 'none'}}>
             <div className={'fullheight fullwidth'}>
               Right sidebar content
             </div>

@@ -25,6 +25,8 @@
         "jsx-no-multiline-js": false,
         "label-position": true,
         "max-line-length": false, // [ true, 120 ],
+        "jsx-no-string-ref": false,
+        "jsx-alignment": false,
         "member-ordering": [
             true,
             "public-before-private",
