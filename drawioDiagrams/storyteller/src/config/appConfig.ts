@@ -26,7 +26,6 @@ export const appConfig = {
       PROJECT_ITEM_ADD: 'PROJECT_ITEM_ADD',
       PROJECT_ITEM_REMOVE: 'PROJECT_ITEM_REMOVE',
       PROJECT_ITEM_UPDATE: 'PROJECT_ITEM_UPDATE',
-      PROJECT_ITEM_RELOCATE: 'PROJECT_ITEM_RELOCATE',
 
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
@@ -55,18 +54,6 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.NODE_UPDATE,
         payload: updatedNode,
-      }
-    },
-    NodeMove: (nodeId: string, offset: IVector2) => {
-      return {
-        type: appConfig.Actions.Types.NODE_MOVE,
-        payload: {nodeId, offset},
-      }
-    },
-    NodeResize: (nodeId: string, deltaSize: IVector2) => {
-      return {
-        type: appConfig.Actions.Types.NODE_RESIZE,
-        payload: {nodeId, deltaSize},
       }
     },
 

@@ -13,8 +13,8 @@ export interface INode {
   name: string;
   nodeType: NodeType;
   referencedId?: string;
-  size?: IVector2;
-  position?: IVector2;
+  size: IVector2;
+  position: IVector2;
   input?: IHash<INode>;
   output?: IHash<INode>;
   locals?: IHash<INode>;
