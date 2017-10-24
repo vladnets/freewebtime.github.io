@@ -10,6 +10,8 @@ import Rnd from 'react-rnd';
 import { IProject } from '../../api/IAppState';
 import './Graph.css';
 import SvgComponent from '../SvgComponent';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import * as FA from 'react-fontawesome';
 
 export class GraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
   state = {
@@ -76,34 +78,52 @@ export class GraphView extends ViewBase<{data: IProject, resources: IAppResource
     } 
   }
 
+  handleClick(e, data) {
+    console.log(data);
+  }
+  
   render() {
     const className = 'node-graph-view';
     const areaSize = 1000;
 
     return (
-      <div 
-        className={className} 
-        style={{position: 'relative', overflow: 'hidden'}} 
-        onWheel={(e)=> {this.onMouseWheel(this, e)}}
-      >
+      <ContextMenuTrigger id="some_unique_identifier">
         <div 
-          style={{transform: 'scale(' + this.state.scale + ')'}}
+          className={className} 
+          style={{position: 'relative', overflow: 'hidden'}} 
+          onWheel={(e)=> {this.onMouseWheel(this, e)}}
         >
-        {
-          Object.keys(this.props.data.nodes).map((key: string, index: number) => (
-            <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]} resources={this.props.resources}/>
-          ))          
-        }
+          <div 
+            style={{transform: 'scale(' + this.state.scale + ')'}}
+          >
+          {
+            Object.keys(this.props.data.nodes).map((key: string, index: number) => (
+              <NodeView key={key} data={this.props.data} node={this.props.data.nodes[key]} resources={this.props.resources}/>
+            ))  
+          }
 
+        </div>
+        <SvgComponent ref="svgComponent">
+          <Spline 
+            mousePos={{x: 150, y: 450}}
+            start={{x: 450, y: 460}}
+            end={{x: 700, y: 50}}
+          />
+        </SvgComponent>
+
+        <ContextMenu id="some_unique_identifier">
+          <MenuItem data={{'some data': 'some_data 1'}} onClick={this.handleClick}>
+            ContextMenu Item 1
+          </MenuItem>
+          <MenuItem data={{'some data': 'some_data 2'}} onClick={this.handleClick}>
+            ContextMenu Item 2
+          </MenuItem>
+          <MenuItem divider />
+          <MenuItem data={{'some data': 'some_data 3'}} onClick={this.handleClick}>
+            ContextMenu Item 3
+          </MenuItem>
+        </ContextMenu>
       </div>
-      <SvgComponent ref="svgComponent">
-        <Spline 
-          mousePos={{x: 150, y: 450}}
-          start={{x: 450, y: 460}}
-          end={{x: 700, y: 50}}
-        />
-      </SvgComponent>
-    </div>
-    );
-  }
+    </ContextMenuTrigger>
+  )}
 } 

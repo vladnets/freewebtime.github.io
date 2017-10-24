@@ -1,4 +1,4 @@
-import { INode } from './INode';
+import { INode, IType } from './INode';
 import { IAppResources } from './IAppResources';
 import { IHash } from './IHash';
 import { IViewItem } from './IViewItem';
@@ -12,6 +12,7 @@ export interface IProject {
   projectData: IProjectData;
   projectItems: IHash<IProjectItem>;
   nodes: IHash<INode>;
+  types: IHash<IType>;
 }
 
 export interface IProjectData {

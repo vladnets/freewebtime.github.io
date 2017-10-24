@@ -7,6 +7,7 @@ import { IProject } from '../../api/IAppState';
 import { INode } from '../../api/INode';
 import { IAppResources } from '../../api/IAppResources';
 import Rnd from 'react-rnd';
+import * as FA from 'react-fontawesome';
 
 export class NodeView extends ViewBase<{data: IProject, node: INode, resources: IAppResources}> {
   state = {

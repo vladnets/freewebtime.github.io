@@ -2,7 +2,7 @@ import { IProjectItem } from '../api/IAppState';
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
-import { INode } from '../api/INode';
+import { INode, IType } from '../api/INode';
 import Typography from 'material-ui/Typography';
 export const appConfig = {
   NodeTypes: {
@@ -20,8 +20,11 @@ export const appConfig = {
       NODE_CREATE_NEW: 'NODE_CREATE_NEW',
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
-      NODE_MOVE: 'NODE_MOVE',
-      NODE_RESIZE: 'NODE_RESIZE',
+
+      TYPE_CREATE: 'TYPE_CREATE',
+      TYPE_REMOVE: 'TYPE_REMOVE',
+      TYPE_UPDATE: 'TYPE_UPDATE',
+
 
       PROJECT_ITEM_ADD: 'PROJECT_ITEM_ADD',
       PROJECT_ITEM_REMOVE: 'PROJECT_ITEM_REMOVE',
@@ -56,6 +59,26 @@ export const appConfig = {
         payload: updatedNode,
       }
     },
+
+    TypeCreateNew: (newType: IType): IAction => {
+      return {
+        type: appConfig.Actions.Types.TYPE_CREATE,
+        payload: newType
+      };
+    },
+    TypeRemove: (typeId: string): IAction => {
+      return {
+        type: appConfig.Actions.Types.TYPE_REMOVE,
+        payload: typeId
+      };
+    },
+    TypeUpdate: (updatedType: IType): IAction => {
+      return {
+        type: appConfig.Actions.Types.TYPE_UPDATE,
+        payload: updatedType,
+      }
+    },
+
 
     ProjectItemAdd: (newItem: IProjectItem): IAction => {
       return {

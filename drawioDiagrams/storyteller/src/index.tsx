@@ -1,5 +1,6 @@
 import { RootView } from './components/RootView';
 import { render } from 'react-dom';
+import 'react-contexify/dist/ReactContexify.min.css';
 import './components/Theme.css';
 import './index.css';
 import { configureStore } from './configureStore';
