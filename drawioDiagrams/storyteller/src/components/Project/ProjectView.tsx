@@ -1,13 +1,11 @@
-import { IAppResources } from '../api/IAppResources';
-import { StatusBarView } from './StatusBarView';
-import { NodeGraphView } from './NodeGraphView';
-import { ViewBase } from './View';
-import * as React from 'react';
-import { IProject } from '../api/IAppState';
-import { ProjectExplorerView } from './ProjectExplorerView';
-import { Segment, Menu, Dropdown, Icon } from 'semantic-ui-react';
 import { MainMenuView } from './MainMenuView';
+import { ProjectExplorerView } from './ProjectExplorerView';
 import { EditorsPaneView } from './EditorsPaneView';
+import { StatusBarView } from './StatusBarView';
+import { ViewBase } from '../View';
+import { IProject } from '../../api/IAppState';
+import { IAppResources } from '../../api/IAppResources';
+import * as React from 'react';
 
 export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {
@@ -36,17 +34,3 @@ export class ProjectView extends ViewBase<{data: IProject, resources: IAppResour
     )
   }
 }
-
-
-// <div className={'main-menu container-vertical fullheight'}>
-// <MainMenuView data={this.props.data} resources={this.props.resources}/>
-
-// <div className={'container-horizontal fullheight'}>
-//   <ProjectExplorerView data={this.props.data}/>
-//   <NodeGraphView data={this.props.data} resources={this.props.resources}/>
-// </div>
-
-// <StatusBarView data={this.props.data}/>
-// </div>
-
-

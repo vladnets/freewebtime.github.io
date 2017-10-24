@@ -1,11 +1,7 @@
-import { IAppResources } from '../api/IAppResources';
-import { StatusBarView } from './StatusBarView';
-import { NodeGraphView } from './NodeGraphView';
-import { ViewBase } from './View';
+import { ViewBase } from '../View';
+import { IProject } from '../../api/IAppState';
+import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
-import { IProject } from '../api/IAppState';
-import { ProjectExplorerView } from './ProjectExplorerView';
-import { Segment, Menu, Dropdown, Icon } from 'semantic-ui-react';
 
 export class MainMenuView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {

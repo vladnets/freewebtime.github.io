@@ -1,15 +1,15 @@
 import { NodeView } from './NodeView';
 import { Store } from 'redux';
-import { ViewBase } from './View';
-import { IAppResources } from '../api/IAppResources';
+import { ViewBase } from '../View';
+import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
-import { IAppState, IProject } from '../api/IAppState';
 import { Provider } from 'react-redux';
-import { ProjectView } from './ProjectView';
 import * as ReactDom from 'react-dom';
 import Rnd from 'react-rnd';
+import { IProject } from '../../api/IAppState';
+import './Graph.css';
 
-export class NodeGraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
+export class GraphView extends ViewBase<{data: IProject, resources: IAppResources}> {
   state = {
     dragging: false,
     dragStart: {x: 0, y: 0}, 

@@ -1,12 +1,8 @@
+import { IProject, IProjectItem, ProjectItemType } from '../../api/IAppState';
+import { ViewBase } from '../View';
 import { Store } from 'redux';
-import { ViewBase } from './View';
-import { IAppResources } from '../api/IAppResources';
 import * as React from 'react';
-import { IProject, ProjectItemType, IProjectItem } from '../api/IAppState';
-import { Provider } from 'react-redux';
-import { ProjectView } from './ProjectView';
-import { List, Segment, Icon, Card, Menu, Button } from 'semantic-ui-react';
-import { foreachFields } from '../helpers/index';
+import { Icon } from 'semantic-ui-react';
 
 export class ProjectExplorerView extends React.Component<{data: IProject}, {isExpanded: boolean, selectedItem: string}> {
   state = {
