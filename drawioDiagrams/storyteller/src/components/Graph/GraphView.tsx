@@ -98,9 +98,9 @@ export class GraphView extends ViewBase<{data: IProject, resources: IAppResource
       </div>
       <SvgComponent ref="svgComponent">
         <Spline 
-          mousePos={{x: 150, y: 150}}
-          start={{x: 50, y: 50}}
-          end={{x: 300, y: 300}}
+          mousePos={{x: 150, y: 450}}
+          start={{x: 50, y: 460}}
+          end={{x: 500, y: 50}}
         />
       </SvgComponent>
     </div>
