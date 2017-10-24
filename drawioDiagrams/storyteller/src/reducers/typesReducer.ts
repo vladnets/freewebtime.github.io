@@ -5,24 +5,24 @@ import { combineReducers } from 'redux';
 import { v4 } from 'node-uuid';
 import { appConfig } from '../config/appConfig';
 
-const stringTypeId = v4();
-const numberTypeId = v4();
-const booleanTypeId = v4();
+const stringTypeId = appConfig.SystemTypeNames.TYPE_STRING;
+const numberTypeId = appConfig.SystemTypeNames.TYPE_NUMBER;
+const booleanTypeId = appConfig.SystemTypeNames.TYPE_BOOLEAN;
 
 const initialState: IHash<IType> = {
   [stringTypeId]: {
     id: stringTypeId,
-    name: 'String',
+    name: stringTypeId,
     category: TypeCategory.Value,
   },
   [numberTypeId]: {
     id: numberTypeId,
-    name: 'Number',
+    name: numberTypeId,
     category: TypeCategory.Value,
   },
   [booleanTypeId]: {
     id: numberTypeId,
-    name: 'Boolean',
+    name: booleanTypeId,
     category: TypeCategory.Value,
   },
 }

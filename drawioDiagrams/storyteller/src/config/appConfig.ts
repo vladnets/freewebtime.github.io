@@ -6,12 +6,17 @@ import { INode, IType } from '../api/INode';
 import Typography from 'material-ui/Typography';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
+  IsLoadStateFromLocalStorage: false,
   SaveStateToLocalStorageInterval: 1000,
 
   SystemTypeNames: {
-    TYPE_STRING: 'TYPE_STRING',
-    TYPE_NUMBER: 'TYPE_NUMBER',
-    TYPE_BOOLEAN: 'TYPE_BOOLEAN',
+    TYPE_STRING: 'System.String',
+    TYPE_NUMBER: 'System.Number',
+    TYPE_BOOLEAN: 'System.Boolean',
+
+    TYPE_CONSTRUCTOR_STRING: 'TYPE_CONSTRUCTOR_STRING',
+    TYPE_CONSTRUCTOR_NUMBER: 'TYPE_CONSTRUCTOR_NUMBER',
+    TYPE_CONSTRUCTOR_BOOLEAN: 'TYPE_CONSTRUCTOR_BOOLEAN',
   },
 
   NodeTypes: {
@@ -34,6 +39,9 @@ export const appConfig = {
       TYPE_REMOVE: 'TYPE_REMOVE',
       TYPE_UPDATE: 'TYPE_UPDATE',
 
+      FUNCTION_CREATE: 'FUNCTION_CREATE',
+      FUNCTION_REMOVE: 'FUNCTION_REMOVE',
+      FUNCTION_UPDATE: 'FUNCTION_UPDATE',
 
       PROJECT_ITEM_ADD: 'PROJECT_ITEM_ADD',
       PROJECT_ITEM_REMOVE: 'PROJECT_ITEM_REMOVE',

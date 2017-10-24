@@ -1,4 +1,9 @@
+import { appConfig } from '../config/appConfig';
 export const loadState = () => {
+  if (!appConfig.IsLoadStateFromLocalStorage) {
+    return undefined;
+  }
+  
   try {
     const serializedState = localStorage.getItem('state');
     if (!serializedState) {

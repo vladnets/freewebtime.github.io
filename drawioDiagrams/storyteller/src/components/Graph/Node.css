@@ -26,6 +26,7 @@
   cursor: grab;
   background: rgba(55, 143, 55, 0.533);
   padding: 4px;
+  text-shadow: 2px 2px rgb(49, 49, 49); 
 }
 .node-footer {
   font-weight: bold;

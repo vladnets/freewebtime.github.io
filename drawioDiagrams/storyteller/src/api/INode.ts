@@ -8,55 +8,51 @@ export enum NodeType {
   Type,
 }
 
+export interface IUniqueObject {
+  id: string;
+  name: string;
+}
+
+export interface ITypeReference extends IUniqueObject {
+  typeId: string;
+}
 export enum TypeCategory {
   Value,
   Object,
+  Function,
+  Constant,
 }
 
-export interface ITypeField {
-  id: string;
-  name: string;
-  typeId: string;
-  isArray: boolean;
-  value?: any;
-}
-
-export interface IType {
-  id: string;
-  name: string;
+export interface IType extends IUniqueObject {
   category: TypeCategory;
 
-  fields?: IHash<ITypeField>;
-  colorRgba?: number[];
+  properties?: IHash<ITypeReference>;
 }
 
-export interface ITypeFieldValue {
-  id: string;
-  name: string;
-  fieldId: string;
-  reference?: string|string[];
-  value?: any;
+export interface IConnection extends IUniqueObject {
+  fromId: string;
+  toId: string;
 }
 
-export interface IFunction {
-  id: string;
-  name: string;
+export interface IConnectionReference {
+  connectionId: string;
+}
+
+export interface IFunction extends IUniqueObject {
   outputTypeId: string;
-  arguments: IHash<ITypeField>;
-  locals: IHash<ITypeField>;
-  values: IHash<ITypeFieldValue>; 
+  locals: IHash<ITypeReference>;
+  input: IHash<ITypeReference>;
+  output: IHash<ITypeReference>;
+  connections: IHash<IConnection>;
+  connectionsFrom: IHash<IHash<IConnectionReference>>; //connections sorted by 'fromId' field
+  connectionsTo: IHash<IHash<IConnectionReference>>; //connections sorted by 'toId' field
 }
 
-export interface INode {
-  id: string;
-  name: string;
+export interface INode extends IUniqueObject {
+  typeId?: string;
   nodeType: NodeType;
-  references?: string|string[];
   size: IVector2;
   position: IVector2;
-  input?: IHash<INode>;
-  output?: IHash<INode>;
-  locals?: IHash<INode>;
 }
 
 export interface INodeMember {

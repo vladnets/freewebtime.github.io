@@ -5,31 +5,34 @@ import { combineReducers } from 'redux';
 import { v4 } from 'node-uuid';
 import { appConfig } from '../config/appConfig';
 
-const emptyNodeId = v4();
-const emptyNodeId2 = v4();
-const emptyNodeId3 = v4();
+const stringTypeId = appConfig.SystemTypeNames.TYPE_STRING;
+const numberTypeId = appConfig.SystemTypeNames.TYPE_NUMBER;
+const booleanTypeId = appConfig.SystemTypeNames.TYPE_BOOLEAN;
 
 const initialState: IHash<INode> = {
-  [emptyNodeId]: {
-    id: emptyNodeId,
-    name: 'String',
+  [stringTypeId]: {
+    id: stringTypeId,
+    name: 'Text',
     nodeType: NodeType.Value,
     position: {x: 20, y: 10},
     size: {x: 250, y: 180},
+    typeId: stringTypeId,
   },
-  [emptyNodeId2]: {
-    id: emptyNodeId2,
+  [numberTypeId]: {
+    id: numberTypeId,
     name: 'Number',
     nodeType: NodeType.Value,
     position: {x: 150, y: 230},
     size: {x: 250, y: 180},
+    typeId: stringTypeId,
   },
-  [emptyNodeId3]: {
-    id: emptyNodeId3,
+  [booleanTypeId]: {
+    id: booleanTypeId,
     name: 'Boolean',
     nodeType: NodeType.Value,
     position: {x: 350, y: 250},
     size: {x: 250, y: 180},
+    typeId: stringTypeId,
   }
 }
 
