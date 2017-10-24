@@ -56,8 +56,6 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
       ? getTypeById(func.outputTypeId, this.props.data) as IType
       : getTypeById(node.reference, this.props.data) as IType;
 
-    console.log('node, func, type', node, func, type);
-
     const outputItems = (): any|false => {
       if (func) {
         return Object.keys(func.output).map((key: string, index: number) => {

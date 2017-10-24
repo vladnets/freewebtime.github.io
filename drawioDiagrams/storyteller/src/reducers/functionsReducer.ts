@@ -106,8 +106,6 @@ initialCreators.reduce((result: any, item: any, index: any, array: any) => {
   initialState[func.id] = func;
 }, {});
 
-console.log(initialState);
-
 export const functionsReducer = function(state: IHash<IFunction> = initialState, action: IAction) {
   
   switch (action.type) {
