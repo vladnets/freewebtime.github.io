@@ -7,6 +7,13 @@ import Typography from 'material-ui/Typography';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
+
+  SystemTypeNames: {
+    TYPE_STRING: 'TYPE_STRING',
+    TYPE_NUMBER: 'TYPE_NUMBER',
+    TYPE_BOOLEAN: 'TYPE_BOOLEAN',
+  },
+
   NodeTypes: {
     NODE_TYPE_STRING: 'NODE_TYPE_STRING',
     NODE_TYPE_NUMBER: 'NODE_TYPE_NUMBER',

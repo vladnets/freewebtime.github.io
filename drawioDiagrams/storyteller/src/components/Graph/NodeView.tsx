@@ -108,8 +108,6 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
           width: node.size.x,
           height: node.size.y,
         }}
-        // size={{width: node.size.x, height: node.size.y}}
-        // position={node.position}
         onDragStop={(e, d)=>{
           this.placeNode(this, {x: d.x, y: d.y}, this.props.resources.callback)
         }}
