@@ -89,9 +89,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
           {this.props.node.name}
         </div>
         {nodeContentView}
-        <div className={'node-footer'}>
-        {this.props.node.name} ({this.props.node.id}) 
-        </div>
+        <div className={'node-inner-shadow'} />
       </div>
     );
 

@@ -1,6 +1,5 @@
 import { RootView } from './components/RootView';
 import { render } from 'react-dom';
-import 'semantic-ui-css/semantic.min.css';
 import './components/Theme.css';
 import './index.css';
 import { configureStore } from './configureStore';

@@ -1,6 +1,7 @@
 .node-view {
-  box-shadow: 0 0 0.5em var(--selection-color);
-  background: var(--main-bg-color);
+  box-shadow: 0 0 5px rgba(245, 240, 231, 1);
+  /* border: 3px solid var(--main-bg-color-dark); */
+  background: rgb(43, 56, 43);
   /* border: 3px solid var(--main-bg-color); */
   overflow: hidden;
   border-radius: 5px;
@@ -9,10 +10,21 @@
   flex-direction: column;
 }
 
+.node-inner-shadow {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  box-shadow: inset 0 0 50px rgba(245, 240, 231, 0.3);
+  pointer-events: none;
+  border-radius: 5px;
+}
+
 .node-header {
   font-weight: bold;
   cursor: grab;
-  background: var(--main-bg-color-accent);
+  background: rgba(55, 143, 55, 0.533);
   padding: 4px;
 }
 .node-footer {
@@ -43,7 +55,7 @@
   text-align: center;
   padding: 5px;
   /* background: var(--main-bg-color-dark); */
-  background: #242424;
+  /* background: #242424; */
   border-radius: 5px;
 }
 

@@ -64,7 +64,6 @@ export class PiTreeViewItem extends ViewBase<{data: IProjectItem, selectedItemId
 
     return (
       <li className={className} onClick={handleItemClick}>
-        <Icon name={item.type === ProjectItemType.File ? 'file' : 'folder'} /> 
         {item.name}
         {subitemsView}
       </li>

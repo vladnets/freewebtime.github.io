@@ -5,14 +5,14 @@ export enum NodeType {
   Unknown,
   Value,
   Function,
-  Object,
+  Type,
 }
 
 export interface INode {
   id: string;
   name: string;
   nodeType: NodeType;
-  referencedId?: string;
+  references?: string|string[];
   size: IVector2;
   position: IVector2;
   input?: IHash<INode>;

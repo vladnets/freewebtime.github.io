@@ -1,6 +1,14 @@
+html, body {
+  height: 100%;
+}
+
 body {
   color: var(--main-text-color);
   background: var(--main-bg-color);
+  font-size: 10pt;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0px;
+  padding: 0px;
 }
 
 .fullheight {
