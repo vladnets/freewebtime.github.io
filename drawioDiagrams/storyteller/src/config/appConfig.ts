@@ -6,7 +6,7 @@ import { INode, IType } from '../api/INode';
 import Typography from 'material-ui/Typography';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: false,
+  IsLoadStateFromLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
 
   SystemTypeNames: {
