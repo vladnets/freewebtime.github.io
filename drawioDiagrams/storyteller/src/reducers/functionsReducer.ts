@@ -106,19 +106,152 @@ const textFunction = () => {
   return createFunction(id, outputType, input, output, locals, connections);
 }
 
+const numberFunction = () => {
+  const id = appConfig.SystemTypeNames.TYPE_CONSTRUCTOR_NUMBER;
+  const inputId = v4();
+  const outputId = v4();
+  const connectionId = v4();
+  const outputArgId = v4();
+  const outputReferenceId = v4();
+  const outputTypeId = v4();
+
+  const input: IHash<IReference> = {
+    [inputId]: {
+      id: inputId,
+      name: 'Value',
+      referenceId: appConfig.SystemTypeNames.TYPE_NUMBER,
+      moduleId: 'System',
+    }
+  }
+  
+  const output: IHash<IFunctionCall> = {
+    [outputId]: {
+      
+      id: outputId,
+      name: 'Result',
+      reference: {
+        id: v4(),
+        name: '',
+        referenceId: appConfig.SystemTypeNames.TYPE_NUMBER,
+        moduleId: 'System',
+      },
+      
+      args: {
+        [outputArgId]: {
+          reference: {
+            id: outputReferenceId,
+            name: outputReferenceId,
+            referenceId: inputId,
+          }
+        }
+      }
+
+    }
+  }
+
+  const locals: IHash<IFunctionCall> = {}
+  const connections: IHash<IConnection> = {
+    [connectionId]: {
+      id: connectionId,
+      name: connectionId,
+      fromId: outputId,
+      toId: inputId,
+    }
+  }
+
+  const outputType: IReference = {
+    id: outputTypeId,
+    name: outputTypeId,
+    referenceId: appConfig.SystemTypeNames.TYPE_STRING,
+    moduleId: 'System',
+  }
+
+  return createFunction(id, outputType, input, output, locals, connections);
+}
+
+const booleanFunction = () => {
+  const id = appConfig.SystemTypeNames.TYPE_CONSTRUCTOR_BOOLEAN;
+  const inputId = v4();
+  const outputId = v4();
+  const connectionId = v4();
+  const outputArgId = v4();
+  const outputReferenceId = v4();
+  const outputTypeId = v4();
+
+  const input: IHash<IReference> = {
+    [inputId]: {
+      id: inputId,
+      name: 'Value',
+      referenceId: appConfig.SystemTypeNames.TYPE_BOOLEAN,
+      moduleId: 'System',
+    }
+  }
+  
+  const output: IHash<IFunctionCall> = {
+    [outputId]: {
+      
+      id: outputId,
+      name: 'Result',
+      reference: {
+        id: v4(),
+        name: '',
+        referenceId: appConfig.SystemTypeNames.TYPE_BOOLEAN,
+        moduleId: 'System',
+      },
+      
+      args: {
+        [outputArgId]: {
+          reference: {
+            id: outputReferenceId,
+            name: outputReferenceId,
+            referenceId: inputId,
+          }
+        }
+      }
+
+    }
+  }
+
+  const locals: IHash<IFunctionCall> = {}
+  const connections: IHash<IConnection> = {
+    [connectionId]: {
+      id: connectionId,
+      name: connectionId,
+      fromId: outputId,
+      toId: inputId,
+    }
+  }
+
+  const outputType: IReference = {
+    id: outputTypeId,
+    name: outputTypeId,
+    referenceId: appConfig.SystemTypeNames.TYPE_STRING,
+    moduleId: 'System',
+  }
+
+  return createFunction(id, outputType, input, output, locals, connections);
+}
+
 const initialCreators = [
   textFunction,
+  numberFunction,
+  booleanFunction,
 ]
 
-const initialState: IHash<IFunction> = {};
+const systemFunctions: IHash<IFunction> = {};
 initialCreators.reduce((result: any, item: any, index: any, array: any) => {
   const func = item();
-  initialState[func.id] = func;
+  systemFunctions[func.id] = func;
 }, {});
 
-export const functionsReducer = function(state: IHash<IFunction> = initialState, action: IAction) {
+export const functionsReducer = function(state: IHash<IFunction> = {}, action: IAction) {
 
   switch (action.type) {
+    case appConfig.Actions.Types.FUNCTIONS_CREATE_SYSTEM: {
+      state = {...state, ...systemFunctions};
+    }
+    break;
+
     case appConfig.Actions.Types.FUNCTION_CREATE:
     {
       const id = v4();

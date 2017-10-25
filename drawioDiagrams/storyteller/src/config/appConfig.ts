@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: false,
+  IsLoadStateFromLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
 
   SystemTypeNames: {
@@ -19,14 +19,6 @@ export const appConfig = {
     TYPE_CONSTRUCTOR_BOOLEAN: 'Bool',
   },
 
-  NodeTypes: {
-    NODE_TYPE_STRING: 'NODE_TYPE_STRING',
-    NODE_TYPE_NUMBER: 'NODE_TYPE_NUMBER',
-    NODE_TYPE_IMAGE: 'NODE_TYPE_IMAGE',
-    NODE_TYPE_BOOL: 'NODE_TYPE_BOOL',
-    NODE_TYPE_ICON: 'NODE_TYPE_ICON',
-    NODE_TYPE_OBJECT: 'NODE_TYPE_OBJECT',
-  },
   Actions: {
     Types: {
       NO_OPERATION: 'NO_OPERATION',
@@ -34,20 +26,22 @@ export const appConfig = {
       NODE_CREATE_NEW: 'NODE_CREATE_NEW',
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
-      NODES_CREATE_SYSTEM: 'NODES_CREATE_SYSTEM',
 
       TYPE_CREATE: 'TYPE_CREATE',
       TYPE_REMOVE: 'TYPE_REMOVE',
       TYPE_UPDATE: 'TYPE_UPDATE',
+      TYPES_CREATE_SYSTEM: 'TYPES_CREATE_SYSTEM',
 
       FUNCTION_CREATE: 'FUNCTION_CREATE',
       FUNCTION_REMOVE: 'FUNCTION_REMOVE',
       FUNCTION_UPDATE: 'FUNCTION_UPDATE',
+      FUNCTIONS_CREATE_SYSTEM: 'FUNCTIONS_CREATE_SYSTEM',
 
       MODULE_ADD: 'MODULE_ADD',
       MODULE_REMOVE: 'MODULE_REMOVE',
       MODULE_UPDATE: 'MODULE_UPDATE',
       MODULE_CREATE: 'MODULE_CREATE',
+      MODULES_CREATE_SYSTEM: 'MODULES_CREATE_SYSTEM',
 
       PROJECT_SELECT_MODULE: 'PROJECT_SELECT_MODULE',
 
@@ -81,12 +75,6 @@ export const appConfig = {
       }
     },
 
-    NodesCreateSystem: (): IAction => {
-      return {
-        type: appConfig.Actions.Types.NODES_CREATE_SYSTEM,
-      }
-    },
-
     TypeCreateNew: (newType: IType): IAction => {
       return {
         type: appConfig.Actions.Types.TYPE_CREATE,
@@ -103,6 +91,11 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.TYPE_UPDATE,
         payload: updatedType,
+      }
+    },
+    TypesCreateSystem: (): IAction => {
+      return {
+        type: appConfig.Actions.Types.TYPES_CREATE_SYSTEM
       }
     },
 
@@ -122,6 +115,11 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.FUNCTION_UPDATE,
         payload: updatedFunction,
+      }
+    },
+    FunctionsCreateSystem: (): IAction => {
+      return {
+        type: appConfig.Actions.Types.FUNCTIONS_CREATE_SYSTEM
       }
     },
 
@@ -147,6 +145,11 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.MODULE_CREATE,
         payload: data,
+      }
+    },
+    ModulesCreateSystem: (): IAction => {
+      return {
+        type: appConfig.Actions.Types.MODULES_CREATE_SYSTEM
       }
     },
 

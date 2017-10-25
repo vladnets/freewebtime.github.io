@@ -21,10 +21,12 @@ export class NodeView extends ViewBase<{module: IModule, func: IFunction, resour
   }
 
   componentWillMount() {
-    if (!this.state.node && this.state.func) {
-      const func = this.state.func;
-      const node = {
-        id: v4(),
+    const func = this.props.func;
+    let node = this.props.module.nodes[func.id];
+
+    if (!node) {
+      node = {
+        id: func.id,
         name: func.name,
         reference: func.id,
         nodeType: NodeType.Function,

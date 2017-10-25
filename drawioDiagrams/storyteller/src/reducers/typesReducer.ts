@@ -9,7 +9,7 @@ const stringTypeId = appConfig.SystemTypeNames.TYPE_STRING;
 const numberTypeId = appConfig.SystemTypeNames.TYPE_NUMBER;
 const booleanTypeId = appConfig.SystemTypeNames.TYPE_BOOLEAN;
 
-const initialState: IHash<IType> = {
+const systemTypes: IHash<IType> = {
   [stringTypeId]: {
     id: stringTypeId,
     name: stringTypeId,
@@ -27,9 +27,15 @@ const initialState: IHash<IType> = {
   },
 }
 
-export const typesReducer = function(state: IHash<IType> = initialState, action: IAction) {
+export const typesReducer = function(state: IHash<IType> = {}, action: IAction) {
   
   switch (action.type) {
+    
+    case appConfig.Actions.Types.TYPES_CREATE_SYSTEM: {
+      state = {...state, ...systemTypes};
+    }
+    break;
+
     case appConfig.Actions.Types.TYPE_CREATE:
     {
       const typeId = v4();

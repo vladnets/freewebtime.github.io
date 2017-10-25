@@ -5,6 +5,7 @@ import { appConfig } from './config/appConfig';
 import { loadState } from './helpers/LocalStorageHelper';
 
 const initialState = loadState();
+console.log(initialState);
 
 export const configureStore = () => {
   const store = createStore(

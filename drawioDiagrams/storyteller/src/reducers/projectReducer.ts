@@ -13,13 +13,17 @@ const createRootModuleAction = appConfig.Actions.ModuleCreate({
   name: 'New Module',
 });
 
+const systemModule = modulesReducer(undefined, appConfig.Actions.ModulesCreateSystem());
+const modules = modulesReducer(systemModule, createRootModuleAction);
+console.log('system module, modules', systemModule, modules);
+
 const initialState: IProject = {
   id: v4(),
   name: 'New Project',
   imports: {},
   exports: {},
 
-  modules: modulesReducer(undefined, createRootModuleAction),
+  modules: modules,
   rootModuleId: rootModuleId,
 }
 

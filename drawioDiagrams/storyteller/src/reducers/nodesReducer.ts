@@ -10,42 +10,6 @@ const numberTypeId = appConfig.SystemTypeNames.TYPE_NUMBER;
 const booleanTypeId = appConfig.SystemTypeNames.TYPE_BOOLEAN;
 const stringConstructorId = appConfig.SystemTypeNames.TYPE_CONSTRUCTOR_STRING;
 
-const systemNodes: IHash<INode> = {
-  [stringTypeId]: {
-    id: stringTypeId,
-    name: stringTypeId,
-    nodeType: NodeType.Value,
-    position: {x: 20, y: 10},
-    size: {x: 250, y: 180},
-    reference: stringTypeId,
-  },
-  [numberTypeId]: {
-    id: numberTypeId,
-    name: numberTypeId,
-    nodeType: NodeType.Value,
-    position: {x: 150, y: 230},
-    size: {x: 250, y: 180},
-    reference: numberTypeId,
-  },
-  [booleanTypeId]: {
-    id: booleanTypeId,
-    name: booleanTypeId,
-    nodeType: NodeType.Value,
-    position: {x: 350, y: 250},
-    size: {x: 250, y: 180},
-    reference: booleanTypeId,
-  },
-
-  [stringConstructorId]: {
-    id: stringConstructorId,
-    name: stringConstructorId,
-    nodeType: NodeType.Function,
-    position: {x: 30, y: 400},
-    size: {x: 130, y: 70},
-    reference: stringConstructorId,
-  }
-}
-
 const emptyNode: INode = {
   id: v4(),
   name: 'new node',
@@ -57,11 +21,6 @@ const emptyNode: INode = {
 export const nodesReducer = function(state: IHash<INode> = {}, action: IAction) {
   
   switch (action.type) {
-    case appConfig.Actions.Types.NODES_CREATE_SYSTEM:
-    {
-      state = {...systemNodes};
-    }
-    break;
 
     case appConfig.Actions.Types.NODE_CREATE_NEW:
     {
