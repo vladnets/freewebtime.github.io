@@ -46,6 +46,14 @@ const systemNodes: IHash<INode> = {
   }
 }
 
+const emptyNode: INode = {
+  id: v4(),
+  name: 'new node',
+  nodeType: NodeType.Function,
+  position: {x: 30, y: 400},
+  size: {x: 130, y: 70},
+}
+
 export const nodesReducer = function(state: IHash<INode> = {}, action: IAction) {
   
   switch (action.type) {
@@ -58,21 +66,21 @@ export const nodesReducer = function(state: IHash<INode> = {}, action: IAction) 
     case appConfig.Actions.Types.NODE_CREATE_NEW:
     {
       const nodeId = v4();
-      state = {...state, [nodeId]: {...action.payload, id: nodeId}}
+      state = {...state, [nodeId]: {...emptyNode, ...action.payload.data, id: nodeId}}
     }
     break;
 
     case appConfig.Actions.Types.NODE_REMOVE:
     {
       state = {...state}
-      delete state[action.payload]; 
+      delete state[action.payload.nodeId]; 
     }
     break;
 
     case appConfig.Actions.Types.NODE_UPDATE:
     {
-      const nodeId = action.payload.id;
-      state = {...state, [nodeId]: action.payload}
+      const nodeId = action.payload.node.id;
+      state = {...state, [nodeId]: action.payload.node}
     }
     break;
 

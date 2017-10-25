@@ -10,6 +10,7 @@ import { IAppResources } from '../../api/IAppResources';
 import Rnd from 'react-rnd';
 import * as FA from 'react-fontawesome';
 import { IProject } from '../../api/IAppState';
+import { v4 } from 'node-uuid';
 
 export class NodeView extends ViewBase<{module: IModule, func: IFunction, resources: IAppResources, project: IProject}> {
   state = {
@@ -18,8 +19,29 @@ export class NodeView extends ViewBase<{module: IModule, func: IFunction, resour
     func: this.props.func,
     module: this.props.module,
   }
-  
-  moveNode(self: NodeView, deltaPos: IVector2, callback: ICallback) {
+
+  componentWillMount() {
+    if (!this.state.node && this.state.func) {
+      const func = this.state.func;
+      const node = {
+        id: v4(),
+        name: func.name,
+        reference: func.id,
+        nodeType: NodeType.Function,
+        size: {x: 120, y: 80},
+        position: {x: 100, y: 100},
+      };
+
+      this.setState({
+        ...this.state,
+        node: node
+      });
+
+      this.props.resources.callback(appConfig.Actions.NodeUpdate(node, this.state.module.id));
+    }
+  }
+
+  moveNode(self: NodeView, deltaPos: IVector2, callback: ICallback, module: IModule) {
     const node = self.state.node;
     const newPos = {
       x: node.position.x + deltaPos.x, 
@@ -27,15 +49,15 @@ export class NodeView extends ViewBase<{module: IModule, func: IFunction, resour
     }
     const newNode = {...node, position: newPos};
 
-    callback(appConfig.Actions.NodeUpdate(newNode));
+    callback(appConfig.Actions.NodeUpdate(newNode, module.id));
   }
-  placeNode(self: NodeView, newPos: IVector2, callback: ICallback) {
+  placeNode(self: NodeView, newPos: IVector2, callback: ICallback, module: IModule) {
     const node = self.state.node;
     const newNode = {...node, position: newPos};
 
-    callback(appConfig.Actions.NodeUpdate(newNode));
+    callback(appConfig.Actions.NodeUpdate(newNode, module.id));
   }
-  resizeNode(self: NodeView, deltaSize: IVector2, newPos: IVector2, callback: ICallback) {
+  resizeNode(self: NodeView, deltaSize: IVector2, newPos: IVector2, callback: ICallback, module: IModule) {
     const node = self.state.node;
     const newSize1 = {
       x: node.size.x + deltaSize.x, 
@@ -48,20 +70,15 @@ export class NodeView extends ViewBase<{module: IModule, func: IFunction, resour
     
     const newNode = {...node, size: newSize, position: newPos};
 
-    callback(appConfig.Actions.NodeUpdate(newNode));
+    callback(appConfig.Actions.NodeUpdate(newNode, module.id));
   }
 
   render() {
     
-    const func = this.props.func;
-    const module = this.props.module;
+    const func = this.state.func;
+    const module = this.state.module;
     const project = this.props.project;
-    const node = module.nodes[func.id] || {
-      reference: func.id,
-      nodeType: NodeType.Function,
-      size: {x: 120, y: 80},
-      position: {x: 100, y: 100},
-    };
+    const node = this.state.node;
 
     const outputItem = (key, func, type) => (
       <div key={key}>
@@ -137,10 +154,10 @@ export class NodeView extends ViewBase<{module: IModule, func: IFunction, resour
         // size={{width: node.size.x, height: node.size.y}}
         // position={node.position}
         onDragStop={(e, d)=>{
-          this.placeNode(this, {x: d.x, y: d.y}, this.props.resources.callback)
+          this.placeNode(this, {x: d.x, y: d.y}, this.props.resources.callback, this.state.module)
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
-          this.resizeNode(this, {x: ref.offsetWidth, y: ref.offsetHeight}, position, this.props.resources.callback)
+          this.resizeNode(this, {x: ref.offsetWidth, y: ref.offsetHeight}, position, this.props.resources.callback, this.state.module)
         }}
         dragHandleClassName={'.node-header'}
       >

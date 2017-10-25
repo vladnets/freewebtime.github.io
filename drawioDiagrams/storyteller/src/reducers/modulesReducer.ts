@@ -12,9 +12,9 @@ const systemModuleId = v4();
 const createSystemModuleAction = appConfig.Actions.ModuleCreate({
   id: systemModuleId, 
   name: 'System',
-  types: typesReducer(undefined, {type: ''}),
-  functions: functionsReducer(undefined, {type: ''}),
-  nodes: nodesReducer(undefined, appConfig.Actions.NodesCreateSystem()),
+  types: typesReducer(undefined, appConfig.Actions.NoOperation()),
+  functions: functionsReducer(undefined, appConfig.Actions.NoOperation()),
+  nodes: nodesReducer(undefined, appConfig.Actions.NoOperation()),
 });
 
 const initialState: IHash<IModule> = {

@@ -30,9 +30,11 @@ export const moduleReducer = (state: IModule = emptyModule, action: IAction) => 
     case appConfig.Actions.Types.NODE_REMOVE:
     case appConfig.Actions.Types.NODE_UPDATE:
     {
-      const nodes = nodesReducer(state.nodes, action);
-      if (nodes !== state.nodes) {
-        state = {...state, nodes: nodes}
+      if (state.id === action.payload.moduleId) {
+        const nodes = nodesReducer(state.nodes, action);
+        if (nodes !== state.nodes) {
+          state = {...state, nodes: nodes}
+        }
       }
     }
     break;

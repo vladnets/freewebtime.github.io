@@ -62,22 +62,22 @@ export const appConfig = {
       return {type: appConfig.Actions.Types.APP_SET_CALLBACK, payload: callback}
     },
 
-    NodeCreateNew: (data): IAction => {
+    NodeCreateNew: (data: {}, moduleId: string): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_CREATE_NEW,
-        payload: data
+        payload: {data: data, moduleId: moduleId}
       };
     },
-    NodeRemove: (nodeId: string): IAction => {
+    NodeRemove: (nodeId: string, moduleId: string): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_CREATE_NEW,
-        payload: nodeId
+        payload: {nodeId: nodeId, moduleId: moduleId}
       };
     },
-    NodeUpdate: (updatedNode: INode): IAction => {
+    NodeUpdate: (updatedNode: INode, moduleId: string): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_UPDATE,
-        payload: updatedNode,
+        payload: {node: updatedNode, moduleId: moduleId},
       }
     },
 
