@@ -11,11 +11,13 @@ const rootModuleId = v4();
 const initialState: IProject = {
   id: v4(),
   name: 'New Project',
-  
+  imports: {},
+  exports: {},
+
   modules: {
     [rootModuleId]: {
       id: rootModuleId,
-      name: 'New Project',
+      name: 'New Module',
       types: {},
       functions: {},
       imports: {},
@@ -49,6 +51,12 @@ export const projectReducer = (state: IProject = initialState, action: IAction) 
     }
     break;
     
+    case appConfig.Actions.Types.PROJECT_SELECT_MODULE:
+    {
+      state = {...state, selectedModuleId: action.payload}
+    }
+    break;
+
     case appConfig.Actions.Types.MODULE_CREATE:
     {
       const id = v4();

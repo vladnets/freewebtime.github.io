@@ -89,6 +89,19 @@ body {
 .project-explorer.expanded {
   width: 220px;
 }
+.tree-view-item {
+}
+.tree-view-item-caption {
+  padding: 2px;
+  margin-right: 2px;
+  background: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+.tree-view-item-caption.selected {
+  background: var(--selection-color);
+  color: var(--main-text-color);
+  font-weight: bold;
+}
 
 .sidebar {
 }

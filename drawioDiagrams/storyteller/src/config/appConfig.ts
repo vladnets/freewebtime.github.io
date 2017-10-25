@@ -1,4 +1,3 @@
-import { IProjectItem } from '../api/IAppState';
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
@@ -46,6 +45,8 @@ export const appConfig = {
       MODULE_CREATE: 'MODULE_CREATE',
       MODULE_REMOVE: 'MODULE_REMOVE',
       MODULE_UPDATE: 'MODULE_UPDATE',
+
+      PROJECT_SELECT_MODULE: 'PROJECT_SELECT_MODULE',
 
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
@@ -133,6 +134,13 @@ export const appConfig = {
         payload: updatedModule,
       }
     },
+
+    ProjectSelectModule: (moduleId: string): IAction => {
+      return {
+        type: appConfig.Actions.Types.PROJECT_SELECT_MODULE,
+        payload: moduleId
+      }
+    }
 
   }
 }

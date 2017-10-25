@@ -1,4 +1,4 @@
-import { IFunction, INode, IType, IModule } from './INode';
+import { IFunction, IModule, IModuleReference, INode, IType, IUniqueObject } from './INode';
 import { IAppResources } from './IAppResources';
 import { IHash } from './IHash';
 import { IViewItem } from './IViewItem';
@@ -8,22 +8,15 @@ export interface IAppState {
   resources: IAppResources;
 }
 
-export interface IProject {
-  name: string;
-  id: string;
+export interface IModuleImportReference extends IUniqueObject {
+  moduleId: string;
+  url: string;
+}
+
+export interface IProject extends IUniqueObject {
   modules: IHash<IModule>;
+  imports: IHash<IModuleImportReference>;
+  exports: IHash<IModuleReference>;
   rootModuleId: string;
-}
-
-export enum ProjectItemType {
-  Unknown,
-  Folder,
-  File,
-}
-
-export interface IProjectItem {
-  id: string;
-  name: string;
-  type: ProjectItemType;
-  subitems: IHash<IProjectItem>;
+  selectedModuleId?: string;
 }
