@@ -1,9 +1,11 @@
+import { getModuleById } from '../../helpers/index';
+import { IProject } from '../../api/IAppState';
 import { GraphView } from '../Graph/GraphView';
 import { ViewBase } from '../View';
-import { IProject } from '../../api/IAppState';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
+import { IModule } from '../../api/INode';
 
 export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppResources}> {
 
@@ -18,9 +20,14 @@ export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppRe
       left: '-80px',
     } as React.CSSProperties;
     
+    const rootModule = getModuleById(this.props.data.rootModuleId, this.props.data);
+    if (!rootModule) {
+      return false;
+    }
+
     return (
       <div className={'fullheight fullwidth'} style={{display: 'flex', flexDirection: 'column'}}>
-        <GraphView data={this.props.data} resources={this.props.resources}/>
+        <GraphView data={rootModule} resources={this.props.resources}/>
       </div>
     );
   }

@@ -3,6 +3,8 @@ import { ViewBase } from '../View';
 import { Store } from 'redux';
 import * as React from 'react';
 import { Icon } from 'semantic-ui-react';
+import { IFunction, IModule } from '../../api/INode';
+import { getModuleById } from '../../helpers/index';
 
 export class ProjectExplorerView extends React.Component<{data: IProject}, {isExpanded: boolean, selectedItem: string}> {
   state = {
@@ -16,7 +18,8 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
   render() {
     const className = 'fullheight project-explorer' + (this.state.isExpanded ? ' expanded' : ' collapsed');
     const activeItem = this.state.selectedItem;
-    const items = this.props.data.projectItems;
+    const rootModule = getModuleById(this.props.data.rootModuleId, this.props.data);
+    const items = rootModule ? rootModule.functions : {};
 
     return (
       <div className={className}>
@@ -36,24 +39,9 @@ export class ProjectExplorerView extends React.Component<{data: IProject}, {isEx
   }
 }
 
-export class PiTreeViewItem extends ViewBase<{data: IProjectItem, selectedItemId: string, handleItemClick: (itemId: string) => void}> {
+export class PiTreeViewItem extends ViewBase<{data: IFunction, selectedItemId: string, handleItemClick: (itemId: string) => void}> {
   render() {
     const item = this.props.data;
-    const items = item.subitems;
-    let subitemsCount = 0;
-    let subitemsView = (
-      <ul>
-      {
-        Object.keys(items).map((key: string, index: number) => {
-          subitemsCount++;
-          return (<PiTreeViewItem data={items[key]} key={key} handleItemClick={this.props.handleItemClick} selectedItemId={this.props.selectedItemId}/>)
-        })
-      }
-      </ul>
-    );
-    if (subitemsCount <= 0) {
-      subitemsView = false;
-    }
 
     const className = this.props.data.id === this.props.selectedItemId ? 'hightlighted' : '';
     const handleItemClick = (e: any)=>{
@@ -65,7 +53,6 @@ export class PiTreeViewItem extends ViewBase<{data: IProjectItem, selectedItemId
     return (
       <li className={className} onClick={handleItemClick}>
         {item.name}
-        {subitemsView}
       </li>
     )
   }

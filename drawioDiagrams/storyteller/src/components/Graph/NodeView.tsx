@@ -5,13 +5,12 @@ import './Node.css';
 import { ICallback } from '../../api/index';
 import { appConfig } from '../../config/appConfig';
 import { ViewBase } from '../View';
-import { IProject } from '../../api/IAppState';
-import { INode, ITypeReference, IFunction, IType } from '../../api/INode';
+import { INode, ITypeReference, IFunction, IType, IModule } from '../../api/INode';
 import { IAppResources } from '../../api/IAppResources';
 import Rnd from 'react-rnd';
 import * as FA from 'react-fontawesome';
 
-export class NodeView extends ViewBase<{data: IProject, node: INode, resources: IAppResources}> {
+export class NodeView extends ViewBase<{data: IModule, node: INode, resources: IAppResources}> {
   state = {
     node: undefined,
     callback: undefined,

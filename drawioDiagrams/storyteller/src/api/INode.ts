@@ -8,7 +8,9 @@ export interface IUniqueObject {
 
 export interface ITypeReference extends IUniqueObject {
   typeId: string;
+  moduleId?: string;
 }
+
 export enum TypeCategory {
   Value,
   Object,
@@ -39,6 +41,26 @@ export interface IFunction extends IUniqueObject {
   connections: IHash<IConnection>;
   connectionsFrom: IHash<IHash<IConnectionReference>>; //connections sorted by 'fromId' field
   connectionsTo: IHash<IHash<IConnectionReference>>; //connections sorted by 'toId' field
+}
+
+export interface IFunctionReference extends IUniqueObject {
+  functionId: string;
+  moduleId?: string;
+}
+
+export interface IModuleReference extends IUniqueObject {
+  moduleId: string;
+}
+
+export interface IModule extends IUniqueObject {
+  types: IHash<IType>;
+  functions: IHash<IFunction>;
+  imports: IHash<IModuleReference>;
+  exports: {
+    types: IHash<ITypeReference>, 
+    functions: IHash<IFunctionReference>
+  },
+  nodes: IHash<INode>;
 }
 
 export enum NodeType {

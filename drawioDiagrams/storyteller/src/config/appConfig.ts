@@ -2,11 +2,11 @@ import { IProjectItem } from '../api/IAppState';
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
-import { INode, IType } from '../api/INode';
+import { INode, IType, IModule, IFunction } from '../api/INode';
 import Typography from 'material-ui/Typography';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: true,
+  IsLoadStateFromLocalStorage: false,
   SaveStateToLocalStorageInterval: 1000,
 
   SystemTypeNames: {
@@ -43,9 +43,9 @@ export const appConfig = {
       FUNCTION_REMOVE: 'FUNCTION_REMOVE',
       FUNCTION_UPDATE: 'FUNCTION_UPDATE',
 
-      PROJECT_ITEM_ADD: 'PROJECT_ITEM_ADD',
-      PROJECT_ITEM_REMOVE: 'PROJECT_ITEM_REMOVE',
-      PROJECT_ITEM_UPDATE: 'PROJECT_ITEM_UPDATE',
+      MODULE_CREATE: 'MODULE_CREATE',
+      MODULE_REMOVE: 'MODULE_REMOVE',
+      MODULE_UPDATE: 'MODULE_UPDATE',
 
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
@@ -96,23 +96,41 @@ export const appConfig = {
       }
     },
 
+    FunctionCreateNew: (newFunction: IFunction): IAction => {
+      return {
+        type: appConfig.Actions.Types.FUNCTION_CREATE,
+        payload: newFunction
+      };
+    },
+    FunctionRemove: (functionId: string): IAction => {
+      return {
+        type: appConfig.Actions.Types.FUNCTION_REMOVE,
+        payload: functionId
+      };
+    },
+    FunctionUpdate: (updatedFunction: IFunction): IAction => {
+      return {
+        type: appConfig.Actions.Types.FUNCTION_UPDATE,
+        payload: updatedFunction,
+      }
+    },
 
-    ProjectItemAdd: (newItem: IProjectItem): IAction => {
+    ModuleCreate: (newModule: IModule): IAction => {
       return {
-        type: appConfig.Actions.Types.PROJECT_ITEM_ADD,
-        payload: newItem,
+        type: appConfig.Actions.Types.MODULE_CREATE,
+        payload: newModule,
       }
     },
-    ProjectItemRemove: (itemId: string): IAction => {
+    ModuleRemove: (moduleId: string): IAction => {
       return {
-        type: appConfig.Actions.Types.PROJECT_ITEM_ADD,
-        payload: itemId,
+        type: appConfig.Actions.Types.MODULE_REMOVE,
+        payload: moduleId,
       }
     },
-    ProjectItemUpdate: (updatedItem: IProjectItem): IAction => {
+    ModuleUpdate: (updatedModule: IModule): IAction => {
       return {
-        type: appConfig.Actions.Types.PROJECT_ITEM_ADD,
-        payload: updatedItem,
+        type: appConfig.Actions.Types.MODULE_UPDATE,
+        payload: updatedModule,
       }
     },
 

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { projectReducer } from './projectReducer';
 import { appResourcesReducer } from './appResourcesReducer';
+import { projectReducer } from './projectReducer';
 
 export const rootReducer = combineReducers({
   project: projectReducer,

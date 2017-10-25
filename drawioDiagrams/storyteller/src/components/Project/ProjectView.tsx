@@ -1,11 +1,13 @@
+import { IProject } from '../../api/IAppState';
 import { MainMenuView } from './MainMenuView';
 import { ProjectExplorerView } from './ProjectExplorerView';
 import { EditorsPaneView } from './EditorsPaneView';
 import { StatusBarView } from './StatusBarView';
 import { ViewBase } from '../View';
-import { IProject } from '../../api/IAppState';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
+import { IModule } from '../../api/INode';
+import { IHash } from '../../api/IHash';
 
 export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {

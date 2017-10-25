@@ -1,4 +1,4 @@
-import { IFunction, INode, IType } from './INode';
+import { IFunction, INode, IType, IModule } from './INode';
 import { IAppResources } from './IAppResources';
 import { IHash } from './IHash';
 import { IViewItem } from './IViewItem';
@@ -9,16 +9,10 @@ export interface IAppState {
 }
 
 export interface IProject {
-  projectData: IProjectData;
-  projectItems: IHash<IProjectItem>;
-  nodes: IHash<INode>;
-  types: IHash<IType>;
-  functions: IHash<IFunction>;
-}
-
-export interface IProjectData {
   name: string;
-  selectedNodeId: string;
+  id: string;
+  modules: IHash<IModule>;
+  rootModuleId: string;
 }
 
 export enum ProjectItemType {
