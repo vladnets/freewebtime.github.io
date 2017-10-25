@@ -2,7 +2,6 @@
   "name": "storyteller",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/drawioDiagrams/storyteller/build",
   "dependencies": {
     "antd": "^2.13.6",
     "axios": "^0.16.2",

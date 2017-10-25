@@ -72,7 +72,7 @@ export class TreeViewItem extends ViewBase<TviProps> {
           <TreeViewItem 
             key={subitems[key].id}
             caption={subitems[key].caption} 
-            id={subitems[key].caption}
+            id={subitems[key].id}
             isExpanded={subitems[key].isExpanded}
             indent={subitems[key].indent + 1}
             subitems={subitems[key].subitems}

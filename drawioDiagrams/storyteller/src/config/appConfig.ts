@@ -42,9 +42,10 @@ export const appConfig = {
       FUNCTION_REMOVE: 'FUNCTION_REMOVE',
       FUNCTION_UPDATE: 'FUNCTION_UPDATE',
 
-      MODULE_CREATE: 'MODULE_CREATE',
+      MODULE_ADD: 'MODULE_ADD',
       MODULE_REMOVE: 'MODULE_REMOVE',
       MODULE_UPDATE: 'MODULE_UPDATE',
+      MODULE_CREATE: 'MODULE_CREATE',
 
       PROJECT_SELECT_MODULE: 'PROJECT_SELECT_MODULE',
 
@@ -116,9 +117,9 @@ export const appConfig = {
       }
     },
 
-    ModuleCreate: (newModule: IModule): IAction => {
+    ModuleAdd: (newModule: IModule): IAction => {
       return {
-        type: appConfig.Actions.Types.MODULE_CREATE,
+        type: appConfig.Actions.Types.MODULE_ADD,
         payload: newModule,
       }
     },
@@ -132,6 +133,12 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.MODULE_UPDATE,
         payload: updatedModule,
+      }
+    },
+    ModuleCreate: (data): IAction => {
+      return {
+        type: appConfig.Actions.Types.MODULE_CREATE,
+        payload: data,
       }
     },
 
