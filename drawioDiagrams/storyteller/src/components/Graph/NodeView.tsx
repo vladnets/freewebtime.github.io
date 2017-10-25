@@ -64,7 +64,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
           const outputTypeName = outputType ? outputType.name : 'Unknown';
           return (
             <div key={item.id}>
-              {item.name} ({outputTypeName})
+              {item.name}
             </div>
           )
         }); 
@@ -74,11 +74,11 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
         if (typeProperties) {
           return Object.keys(type.properties).map((key: string, index: number) => {
             const item = typeProperties[key];
-            const outputType = getTypeById(item.typeId, this.props.data);
-            const outputTypeName = outputType ? outputType.name : 'Unknown';
+            const propertyType = getTypeById(item.typeId, this.props.data);
+            const propertyTypeName = propertyType ? propertyType.name : 'Unknown';
             return (
               <div key={item.id}>
-                {item.name} ({outputTypeName})
+                {item.name}
               </div>
             )
           }); 
@@ -96,7 +96,7 @@ export class NodeView extends ViewBase<{data: IProject, node: INode, resources: 
           const inputTypeName = inputType ? inputType.name : 'Unknown';
           return (
             <div key={item.id}>
-              {item.name} ({inputTypeName})
+              {item.name}
             </div>
           )
         }); 
