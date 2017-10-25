@@ -6,29 +6,19 @@ import { v4 } from 'node-uuid';
 import { moduleReducer } from './moduleReducer';
 import { appConfig } from '../config/appConfig';
 import { functionsReducer } from './functionsReducer';
-
-const emptyModule: IModule = {
-  id: v4(),
-  name: 'New Module',
-  types: {},
-  functions: {},
-  imports: {},
-  exports: {
-    types: {}, 
-    functions: {}
-  },
-  nodes: {}
-}
+import { nodesReducer } from './nodesReducer';
 
 const systemModuleId = v4();
+const createSystemModuleAction = appConfig.Actions.ModuleCreate({
+  id: systemModuleId, 
+  name: 'System',
+  types: typesReducer(undefined, {type: ''}),
+  functions: functionsReducer(undefined, {type: ''}),
+  nodes: nodesReducer(undefined, appConfig.Actions.NodesCreateSystem()),
+});
+
 const initialState: IHash<IModule> = {
-  [systemModuleId]: {
-    ...emptyModule,
-    id: systemModuleId,
-    name: 'System',
-    types: typesReducer(undefined, {type: ''}),
-    functions: functionsReducer(undefined, {type: ''}),
-  }
+  [systemModuleId]: moduleReducer(undefined, createSystemModuleAction)
 }
 
 export const modulesReducer = (state: IHash<IModule> = initialState, action: IAction) => {
@@ -36,7 +26,7 @@ export const modulesReducer = (state: IHash<IModule> = initialState, action: IAc
   switch (action.type) {
     case appConfig.Actions.Types.MODULE_CREATE:
     {
-      const newModule: IModule = {...emptyModule, ...action.payload}  
+      const newModule: IModule = moduleReducer(undefined, action);  
       state = {...state, [newModule.id]: newModule};
     }
     break;

@@ -20,14 +20,14 @@ export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppRe
       left: '-80px',
     } as React.CSSProperties;
     
-    const rootModule = getModuleById(this.props.data.rootModuleId, this.props.data);
-    if (!rootModule) {
+    const selectedModule = getModuleById(this.props.data.selectedModuleId, this.props.data);
+    if (!selectedModule) {
       return false;
     }
 
     return (
       <div className={'fullheight fullwidth'} style={{display: 'flex', flexDirection: 'column'}}>
-        <GraphView data={rootModule} resources={this.props.resources}/>
+        <GraphView data={selectedModule} resources={this.props.resources}/>
       </div>
     );
   }

@@ -10,7 +10,7 @@ const numberTypeId = appConfig.SystemTypeNames.TYPE_NUMBER;
 const booleanTypeId = appConfig.SystemTypeNames.TYPE_BOOLEAN;
 const stringConstructorId = appConfig.SystemTypeNames.TYPE_CONSTRUCTOR_STRING;
 
-const initialState: IHash<INode> = {
+const systemNodes: IHash<INode> = {
   [stringTypeId]: {
     id: stringTypeId,
     name: stringTypeId,
@@ -46,9 +46,15 @@ const initialState: IHash<INode> = {
   }
 }
 
-export const nodesReducer = function(state: IHash<INode> = initialState, action: IAction) {
+export const nodesReducer = function(state: IHash<INode> = {}, action: IAction) {
   
   switch (action.type) {
+    case appConfig.Actions.Types.NODES_CREATE_SYSTEM:
+    {
+      state = {...systemNodes};
+    }
+    break;
+
     case appConfig.Actions.Types.NODE_CREATE_NEW:
     {
       const nodeId = v4();

@@ -3,6 +3,7 @@ import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import { INode, IType, IModule, IFunction } from '../api/INode';
 import Typography from 'material-ui/Typography';
+
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
   IsLoadStateFromLocalStorage: false,
@@ -33,6 +34,7 @@ export const appConfig = {
       NODE_CREATE_NEW: 'NODE_CREATE_NEW',
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
+      NODES_CREATE_SYSTEM: 'NODES_CREATE_SYSTEM',
 
       TYPE_CREATE: 'TYPE_CREATE',
       TYPE_REMOVE: 'TYPE_REMOVE',
@@ -60,10 +62,10 @@ export const appConfig = {
       return {type: appConfig.Actions.Types.APP_SET_CALLBACK, payload: callback}
     },
 
-    NodeCreateNew: (newNode: INode): IAction => {
+    NodeCreateNew: (data): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_CREATE_NEW,
-        payload: newNode
+        payload: data
       };
     },
     NodeRemove: (nodeId: string): IAction => {
@@ -76,6 +78,12 @@ export const appConfig = {
       return {
         type: appConfig.Actions.Types.NODE_UPDATE,
         payload: updatedNode,
+      }
+    },
+
+    NodesCreateSystem: (): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODES_CREATE_SYSTEM,
       }
     },
 
@@ -149,6 +157,23 @@ export const appConfig = {
       }
     }
 
+  },
+  SystemFunctions: {
+    ['System.String'] : (args) => {
+      if (args[('value')]) {
+        return args[('value')];
+      }
+    },
+    'System.Boolean': (args) => {
+      if (args[('value')]) {
+        return args[('value')];
+      }
+    },
+    'System.Number': (args) => {
+      if (args[('value')]) {
+        return args[('value')];
+      }
+    },
   }
 }
 

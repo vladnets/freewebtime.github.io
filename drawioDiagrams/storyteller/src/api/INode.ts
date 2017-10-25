@@ -33,19 +33,26 @@ export interface IConnectionReference {
   connectionId: string;
 }
 
-export interface IFunction extends IUniqueObject {
-  outputTypeId: string;
-  locals: IHash<ITypeReference>;
-  input: IHash<ITypeReference>;
-  output: IHash<ITypeReference>;
-  connections: IHash<IConnection>;
-  connectionsFrom: IHash<IHash<IConnectionReference>>; //connections sorted by 'fromId' field
-  connectionsTo: IHash<IHash<IConnectionReference>>; //connections sorted by 'toId' field
+export interface IReference extends IUniqueObject {
+  referenceId: string;
+  moduleId?: string;
 }
 
-export interface IFunctionReference extends IUniqueObject {
+export interface IValue {
+  reference?: IReference;
+  value?: any;
+}
+
+export interface IFunctionCall extends IUniqueObject {
   functionId: string;
-  moduleId?: string;
+  args: IHash<IValue>;
+}
+
+export interface IFunction extends IUniqueObject {
+  outputType: ITypeReference;
+  locals: IHash<IFunctionCall>;
+  input: IHash<ITypeReference>;
+  output: IHash<IFunctionCall>;
 }
 
 export interface IModuleReference extends IUniqueObject {
@@ -58,7 +65,7 @@ export interface IModule extends IUniqueObject {
   imports: IHash<IModuleReference>;
   exports: {
     types: IHash<ITypeReference>, 
-    functions: IHash<IFunctionReference>
+    functions: IHash<IReference>
   },
   nodes: IHash<INode>;
 }

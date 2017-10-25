@@ -87,6 +87,18 @@ export class GraphView extends ViewBase<{data: IModule, resources: IAppResources
     const areaSize = 1000;
     const module = this.props.data;
 
+    const graphView = (
+      <div style={{transform: 'scale(' + this.state.scale + ')'}} >
+      {
+        Object.keys(module.nodes).map((key: string, index: number) => {
+          return (
+            <NodeView key={key} data={this.props.data} node={module.nodes[key]} resources={this.props.resources}/>
+          )
+        })  
+      }
+      </div>
+    );
+
     return (
       <ContextMenuTrigger id="some_unique_identifier">
         <div 
@@ -94,16 +106,7 @@ export class GraphView extends ViewBase<{data: IModule, resources: IAppResources
           style={{position: 'relative', overflow: 'hidden'}} 
           onWheel={(e)=> {this.onMouseWheel(this, e)}}
         >
-          <div 
-            style={{transform: 'scale(' + this.state.scale + ')'}}
-          >
-          {
-            Object.keys(module.nodes).map((key: string, index: number) => (
-              <NodeView key={key} data={this.props.data} node={module.nodes[key]} resources={this.props.resources}/>
-            ))  
-          }
-
-        </div>
+        {graphView}
         <SvgComponent ref="svgComponent">
           <Spline 
             mousePos={{x: 150, y: 450}}

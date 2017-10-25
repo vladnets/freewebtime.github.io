@@ -51,15 +51,12 @@ export class NodeView extends ViewBase<{data: IModule, node: INode, resources: I
   render() {
     const node = this.props.node;
     const func: IFunction = getFunctionById(node.reference, this.props.data) as IFunction;
-    const type: IType = func 
-      ? getTypeById(func.outputTypeId, this.props.data) as IType
-      : getTypeById(node.reference, this.props.data) as IType;
 
     const outputItems = (): any|false => {
       if (func) {
         return Object.keys(func.output).map((key: string, index: number) => {
           const item = func.output[key];
-          const outputType = getTypeById(item.typeId, this.props.data);
+          const outputType = getFunctionById(item.functionId, this.props.data);
           const outputTypeName = outputType ? outputType.name : 'Unknown';
           return (
             <div key={item.id}>
@@ -68,39 +65,11 @@ export class NodeView extends ViewBase<{data: IModule, node: INode, resources: I
           )
         }); 
       }
-      else if (type && type.properties) {
-        const typeProperties = type.properties;
-        if (typeProperties) {
-          return Object.keys(type.properties).map((key: string, index: number) => {
-            const item = typeProperties[key];
-            const propertyType = getTypeById(item.typeId, this.props.data);
-            const propertyTypeName = propertyType ? propertyType.name : 'Unknown';
-            return (
-              <div key={item.id}>
-                {item.name}
-              </div>
-            )
-          }); 
-        }
-      }
 
       return false;
     };
 
     const inputItems = (): any|false => {
-      if (func) {
-        return Object.keys(func.input).map((key: string, index: number) => {
-          const item = func.input[key];
-          const inputType = getTypeById(item.typeId, this.props.data);
-          const inputTypeName = inputType ? inputType.name : 'Unknown';
-          return (
-            <div key={item.id}>
-              {item.name}
-            </div>
-          )
-        }); 
-      }
-
       return false;
     };
 

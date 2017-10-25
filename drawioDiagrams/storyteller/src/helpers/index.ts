@@ -1,6 +1,6 @@
 import { IProject } from '../api/IAppState';
 import { IHash } from '../api/IHash';
-import { IModule } from '../api/INode';
+import { IModule, IReference } from '../api/INode';
 export const foreachFields = (obj: {}, callback: (fieldName: string, index: number, fieldValue: any)=>void) => {
   Object.keys(obj).map((key: string, index: number) => {
     console.log('before call callback', obj, key, index, obj[key]);
@@ -39,3 +39,4 @@ export const getModuleById = (id: string|undefined, project: IProject) => {
   
   return project.modules[id];
 }
+

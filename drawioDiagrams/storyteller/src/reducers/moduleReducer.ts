@@ -6,22 +6,26 @@ import { IModule } from '../api/INode';
 import { v4 } from 'node-uuid';
 import { functionsReducer } from './functionsReducer';
 
-const initialState: IModule = {
+const emptyModule: IModule = {
   id: v4(),
   name: 'New Module',
-  types: typesReducer(undefined, {type:''}),
-  functions: functionsReducer(undefined, {type:''}),
+  types: {},
+  functions: {},
   imports: {},
   exports: {
     types: {},
     functions: {},
   },
-  nodes: nodesReducer(undefined, {type:''}),
+  nodes: {},
 }
 
-export const moduleReducer = (state: IModule = initialState, action: IAction) => {
+export const moduleReducer = (state: IModule = emptyModule, action: IAction) => {
   
   switch (action.type) {
+    case appConfig.Actions.Types.MODULE_CREATE: {
+      state = {...state, id: v4(), ...action.payload}
+    }
+
     case appConfig.Actions.Types.NODE_CREATE_NEW:
     case appConfig.Actions.Types.NODE_REMOVE:
     case appConfig.Actions.Types.NODE_UPDATE:
