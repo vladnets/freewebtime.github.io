@@ -1,23 +1,26 @@
-import { getFunctionById, getTypeById } from '../../helpers/index';
+import { getFunctionById, getTypeById, getTypeByReference, getFunctionOfFunctionCall } from '../../helpers/index';
 import { IVector2 } from '../../api/IVector2';
 import * as React from 'react';
 import './Node.css';
 import { ICallback } from '../../api/index';
 import { appConfig } from '../../config/appConfig';
 import { ViewBase } from '../View';
-import { INode, ITypeReference, IFunction, IType, IModule } from '../../api/INode';
+import { IFunction, IFunctionCall, IModule, INode, IType, NodeType } from '../../api/INode';
 import { IAppResources } from '../../api/IAppResources';
 import Rnd from 'react-rnd';
 import * as FA from 'react-fontawesome';
+import { IProject } from '../../api/IAppState';
 
-export class NodeView extends ViewBase<{data: IModule, node: INode, resources: IAppResources}> {
+export class NodeView extends ViewBase<{module: IModule, func: IFunction, resources: IAppResources, project: IProject}> {
   state = {
-    node: undefined,
-    callback: undefined,
+    node: this.props.module.nodes[this.props.func.id],
+    callback: this.props.resources.callback,
+    func: this.props.func,
+    module: this.props.module,
   }
   
   moveNode(self: NodeView, deltaPos: IVector2, callback: ICallback) {
-    const node = self.props.node;
+    const node = self.state.node;
     const newPos = {
       x: node.position.x + deltaPos.x, 
       y: node.position.y + deltaPos.y
@@ -27,13 +30,13 @@ export class NodeView extends ViewBase<{data: IModule, node: INode, resources: I
     callback(appConfig.Actions.NodeUpdate(newNode));
   }
   placeNode(self: NodeView, newPos: IVector2, callback: ICallback) {
-    const node = self.props.node;
+    const node = self.state.node;
     const newNode = {...node, position: newPos};
 
     callback(appConfig.Actions.NodeUpdate(newNode));
   }
   resizeNode(self: NodeView, deltaSize: IVector2, newPos: IVector2, callback: ICallback) {
-    const node = self.props.node;
+    const node = self.state.node;
     const newSize1 = {
       x: node.size.x + deltaSize.x, 
       y: node.size.y + deltaSize.y
@@ -49,38 +52,53 @@ export class NodeView extends ViewBase<{data: IModule, node: INode, resources: I
   }
 
   render() {
-    const node = this.props.node;
-    const func: IFunction = getFunctionById(node.reference, this.props.data) as IFunction;
-
-    const outputItems = (): any|false => {
-      if (func) {
-        return Object.keys(func.output).map((key: string, index: number) => {
-          const item = func.output[key];
-          const outputType = getFunctionById(item.functionId, this.props.data);
-          const outputTypeName = outputType ? outputType.name : 'Unknown';
-          return (
-            <div key={item.id}>
-              {item.name}
-            </div>
-          )
-        }); 
-      }
-
-      return false;
+    
+    const func = this.props.func;
+    const module = this.props.module;
+    const project = this.props.project;
+    const node = module.nodes[func.id] || {
+      reference: func.id,
+      nodeType: NodeType.Function,
+      size: {x: 120, y: 80},
+      position: {x: 100, y: 100},
     };
 
-    const inputItems = (): any|false => {
-      return false;
-    };
+    const outputItem = (key, func, type) => (
+      <div key={key}>
+      {func.output[key].name}
+      <br />
+      {type.name}
+      </div>
+    );
 
+    const outputItems = func
+      ? (Object.keys(func.output).map((key: string, index: number) => (
+        outputItem(key, func, getFunctionOfFunctionCall(func.output[key], module, project))
+      ))) 
+      : false;
+
+    const inputItem = (key, func, type) => (
+      <div key={key}>
+      {func.input[key].name}
+      <br />
+      {type.name}
+      </div>
+    );
+
+    const inputItems = func
+      ? (Object.keys(func.input).map((key: string, index: number) => (
+        inputItem(key, func, getTypeByReference(func.input[key], module, project))
+      ))) 
+      : false;
+  
     const nodeOutputView = (
       <div className={'node-output'}>
-        {outputItems()}
+        {outputItems}
       </div>
     );
     const nodeInputView = (
       <div className={'node-input'}>
-        {inputItems()}
+        {inputItems}
       </div>
     );
 
@@ -101,7 +119,7 @@ export class NodeView extends ViewBase<{data: IModule, node: INode, resources: I
     const nodeRootView = (
       <div className={'node-view'}>
         <div className={'node-header'}>
-          {this.props.node.name}
+          {node.name}
         </div>
         {nodeContentView}
         <div className={'node-inner-shadow'} />

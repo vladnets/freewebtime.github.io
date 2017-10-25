@@ -27,7 +27,7 @@ export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppRe
 
     return (
       <div className={'fullheight fullwidth'} style={{display: 'flex', flexDirection: 'column'}}>
-        <GraphView data={selectedModule} resources={this.props.resources}/>
+        <GraphView data={selectedModule} project={this.props.data} resources={this.props.resources}/>
       </div>
     );
   }

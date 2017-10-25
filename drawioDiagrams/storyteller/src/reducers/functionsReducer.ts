@@ -4,7 +4,6 @@ import {
   IFunction,
   INode,
   IType,
-  ITypeReference,
   NodeType,
   TypeCategory,
 } from '../api/INode';
@@ -25,8 +24,8 @@ const createTypeReference = (typeId: string) => {
 
 const createFunction = function(
   id: string,
-  outputType: ITypeReference, 
-  input: IHash<ITypeReference>, 
+  outputType: IReference, 
+  input: IHash<IReference>, 
   output: IHash<IFunctionCall>, 
   locals: IHash<IFunctionCall>,
   connections: IHash<IConnection>,
@@ -53,11 +52,11 @@ const textFunction = () => {
   const outputReferenceId = v4();
   const outputTypeId = v4();
 
-  const input: IHash<ITypeReference> = {
+  const input: IHash<IReference> = {
     [inputId]: {
       id: inputId,
       name: 'Value',
-      typeId: appConfig.SystemTypeNames.TYPE_STRING,
+      referenceId: appConfig.SystemTypeNames.TYPE_STRING,
       moduleId: 'System',
     }
   }
@@ -67,7 +66,12 @@ const textFunction = () => {
       
       id: outputId,
       name: 'Result',
-      functionId: appConfig.SystemTypeNames.TYPE_STRING,
+      reference: {
+        id: v4(),
+        name: '',
+        referenceId: appConfig.SystemTypeNames.TYPE_STRING,
+        moduleId: 'System',
+      },
       
       args: {
         [outputArgId]: {
@@ -92,10 +96,10 @@ const textFunction = () => {
     }
   }
 
-  const outputType: ITypeReference = {
+  const outputType: IReference = {
     id: outputTypeId,
     name: outputTypeId,
-    typeId: appConfig.SystemTypeNames.TYPE_STRING,
+    referenceId: appConfig.SystemTypeNames.TYPE_STRING,
     moduleId: 'System',
   }
 
@@ -113,8 +117,6 @@ initialCreators.reduce((result: any, item: any, index: any, array: any) => {
 }, {});
 
 export const functionsReducer = function(state: IHash<IFunction> = initialState, action: IAction) {
-
-  console.log(state);
 
   switch (action.type) {
     case appConfig.Actions.Types.FUNCTION_CREATE:

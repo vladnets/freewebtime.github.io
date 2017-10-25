@@ -6,11 +6,6 @@ export interface IUniqueObject {
   name: string;
 }
 
-export interface ITypeReference extends IUniqueObject {
-  typeId: string;
-  moduleId?: string;
-}
-
 export enum TypeCategory {
   Value,
   Object,
@@ -21,7 +16,7 @@ export enum TypeCategory {
 export interface IType extends IUniqueObject {
   category: TypeCategory;
 
-  properties?: IHash<ITypeReference>;
+  properties?: IHash<IReference>;
 }
 
 export interface IConnection extends IUniqueObject {
@@ -44,14 +39,14 @@ export interface IValue {
 }
 
 export interface IFunctionCall extends IUniqueObject {
-  functionId: string;
+  reference: IReference;
   args: IHash<IValue>;
 }
 
 export interface IFunction extends IUniqueObject {
-  outputType: ITypeReference;
+  outputType: IReference;
   locals: IHash<IFunctionCall>;
-  input: IHash<ITypeReference>;
+  input: IHash<IReference>;
   output: IHash<IFunctionCall>;
 }
 
@@ -64,7 +59,7 @@ export interface IModule extends IUniqueObject {
   functions: IHash<IFunction>;
   imports: IHash<IModuleReference>;
   exports: {
-    types: IHash<ITypeReference>, 
+    types: IHash<IReference>, 
     functions: IHash<IReference>
   },
   nodes: IHash<INode>;
