@@ -1,8 +1,9 @@
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
-import { INode, IType, IModule, IFunction } from '../api/INode';
 import Typography from 'material-ui/Typography';
+import { INode } from '../api/INode';
+import { IFunction } from '../api/project/IFunction';
 
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
@@ -75,30 +76,6 @@ export const appConfig = {
       }
     },
 
-    TypeCreateNew: (newType: IType): IAction => {
-      return {
-        type: appConfig.Actions.Types.TYPE_CREATE,
-        payload: newType
-      };
-    },
-    TypeRemove: (typeId: string): IAction => {
-      return {
-        type: appConfig.Actions.Types.TYPE_REMOVE,
-        payload: typeId
-      };
-    },
-    TypeUpdate: (updatedType: IType): IAction => {
-      return {
-        type: appConfig.Actions.Types.TYPE_UPDATE,
-        payload: updatedType,
-      }
-    },
-    TypesCreateSystem: (): IAction => {
-      return {
-        type: appConfig.Actions.Types.TYPES_CREATE_SYSTEM
-      }
-    },
-
     FunctionCreateNew: (newFunction: IFunction): IAction => {
       return {
         type: appConfig.Actions.Types.FUNCTION_CREATE,
@@ -120,36 +97,6 @@ export const appConfig = {
     FunctionsCreateSystem: (): IAction => {
       return {
         type: appConfig.Actions.Types.FUNCTIONS_CREATE_SYSTEM
-      }
-    },
-
-    ModuleAdd: (newModule: IModule): IAction => {
-      return {
-        type: appConfig.Actions.Types.MODULE_ADD,
-        payload: newModule,
-      }
-    },
-    ModuleRemove: (moduleId: string): IAction => {
-      return {
-        type: appConfig.Actions.Types.MODULE_REMOVE,
-        payload: moduleId,
-      }
-    },
-    ModuleUpdate: (updatedModule: IModule): IAction => {
-      return {
-        type: appConfig.Actions.Types.MODULE_UPDATE,
-        payload: updatedModule,
-      }
-    },
-    ModuleCreate: (data): IAction => {
-      return {
-        type: appConfig.Actions.Types.MODULE_CREATE,
-        payload: data,
-      }
-    },
-    ModulesCreateSystem: (): IAction => {
-      return {
-        type: appConfig.Actions.Types.MODULES_CREATE_SYSTEM
       }
     },
 

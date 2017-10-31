@@ -1,11 +1,9 @@
-import { IProject } from '../../api/IAppState';
 import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
-import { IModule } from '../../api/INode';
-import { getModuleById } from '../../helpers/index';
+import { IProject } from '../../api/project/IProject';
 
-export class MainMenuView extends ViewBase<{data: IProject, resources: IAppResources}> {
+export class MainMenuView extends ViewBase<{data: IProject, resources: IAppResources}, {}> {
   render() {
     const projectName = this.props.data.name;
     

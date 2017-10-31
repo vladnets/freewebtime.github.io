@@ -1,5 +1,4 @@
-import { IProject } from '../../api/IAppState';
-import { IModule } from '../../api/INode';
+import { IFunction } from '../../api/project/IFunction';
 import Spline from '../Spline';
 import { NodeView } from './NodeView';
 import { Store } from 'redux';
@@ -13,8 +12,15 @@ import './Graph.css';
 import SvgComponent from '../SvgComponent';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import * as FA from 'react-fontawesome';
+import { IProject } from '../../api/project/IProject';
 
-export class GraphView extends ViewBase<{data: IModule, resources: IAppResources, project: IProject}> {
+interface IGraphViewProps {
+}
+
+interface IGraphViewState {
+}
+
+export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
   state = {
     dragging: false,
     dragStart: {x: 0, y: 0}, 
@@ -86,16 +92,16 @@ export class GraphView extends ViewBase<{data: IModule, resources: IAppResources
   render() {
     const className = 'node-graph-view';
     const areaSize = 1000;
-    const module = this.props.data;
 
     const functions = (
-      Object.keys(module.functions).map((key: string, index: number) => {
-        const func = module.functions[key];
+      // Object.keys(module.functions).map((key: string, index: number) => {
+      //   const func = module.functions[key];
 
-        return (
-          <NodeView key={key} module={module} func={func} project={this.props.project} resources={this.props.resources}/>
-        )
-      })  
+      //   return (
+      //     <NodeView key={key} module={module} func={func} project={this.props.project} resources={this.props.resources}/>
+      //   )
+      // })
+      false  
     );
 
     const graphView = (

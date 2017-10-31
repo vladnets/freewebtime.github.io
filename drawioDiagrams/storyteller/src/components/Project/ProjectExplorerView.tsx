@@ -1,17 +1,14 @@
 import { IAppResources } from '../../api/IAppResources';
-import { IProject } from '../../api/IAppState';
 import { ViewBase } from '../View';
 import { Store } from 'redux';
 import * as React from 'react';
-import { Icon } from 'semantic-ui-react';
-import { IFunction, IModule } from '../../api/INode';
-import { getModuleById } from '../../helpers/index';
 import { IHash } from '../../api/IHash';
 import { v4 } from 'node-uuid';
 import { ICallback } from '../../api/index';
 import { appConfig } from '../../config/appConfig';
+import { IProject } from '../../api/project/IProject';
 
-export class ProjectExplorerView extends React.Component<{data: IProject, resources: IAppResources}, {isExpanded: boolean, selectedItem: string}> {
+export class ProjectExplorerView extends ViewBase<{data: IProject, resources: IAppResources}, {isExpanded: boolean, selectedItem: string}> {
   state = {
     isExpanded: true,
     selectedItem: '',
@@ -55,7 +52,7 @@ export class ProjectExplorerView extends React.Component<{data: IProject, resour
 }
 
 declare type TviProps = {caption: string, id: string, isExpanded: boolean, indent: number, subitems?: IHash<TviProps>, selectedItemId: string, handleItemClick: (itemId: string)=>void};
-export class TreeViewItem extends ViewBase<TviProps> {
+export class TreeViewItem extends ViewBase<TviProps, {}> {
   
   render () {
     const rootClassName = 'tree-view-item ' 

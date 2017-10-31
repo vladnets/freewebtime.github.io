@@ -1,4 +1,3 @@
-import { IProject } from '../../api/IAppState';
 import { MainMenuView } from './MainMenuView';
 import { ProjectExplorerView } from './ProjectExplorerView';
 import { EditorsPaneView } from './EditorsPaneView';
@@ -6,10 +5,10 @@ import { StatusBarView } from './StatusBarView';
 import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
-import { IModule } from '../../api/INode';
 import { IHash } from '../../api/IHash';
+import { IProject } from '../../api/project/IProject';
 
-export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}> {
+export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}, {}> {
   render() {
     return (
       <div className={'project-view'} style={{display: 'flex', flexDirection: 'column'}}>

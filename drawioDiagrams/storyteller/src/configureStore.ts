@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore, Store } from 'redux';
 import reduxLogger from 'redux-logger';
-import { rootReducer } from './reducers/rootReducer';
+import { appReducer } from './reducers/appReducer';
 import { appConfig } from './config/appConfig';
 import { loadState } from './helpers/LocalStorageHelper';
 
@@ -9,7 +9,7 @@ console.log(initialState);
 
 export const configureStore = () => {
   const store = createStore(
-    rootReducer,
+    appReducer,
     initialState,
     compose (
       applyMiddleware(reduxLogger),

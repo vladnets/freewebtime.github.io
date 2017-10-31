@@ -4,7 +4,7 @@ import { IAppState } from '../api/IAppState';
 import { Store } from 'redux';
 import * as React from 'react';
 
-export class AppView extends ViewBase<{data: IAppState}> {
+export class AppView extends ViewBase<{data: IAppState}, {}> {
   render() {
     return (
       <div className={'app-content'}>

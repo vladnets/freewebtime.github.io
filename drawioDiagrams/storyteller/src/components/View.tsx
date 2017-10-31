@@ -2,10 +2,10 @@ import * as React from 'react';
 import { IAppResources } from '../api/IAppResources';
 import { IViewItem } from '../api/IViewItem';
 
-export class ViewBase<TProps> extends React.Component<TProps> {
+export class ViewBase<TProps, TState> extends React.Component<TProps, TState> {
 }
 
-export class View extends ViewBase<{data: any, resources: IAppResources, isContainer?: boolean}> {
+export class View extends ViewBase<{data: any, resources: IAppResources, isContainer?: boolean}, {}> {
   render(): any {
     if (!this.props.data) {
       return false;

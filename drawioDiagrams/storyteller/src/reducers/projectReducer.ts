@@ -1,30 +1,13 @@
-import { modulesReducer } from './modulesReducer';
-import { typesReducer } from './typesReducer';
-import { IProject } from '../api/IAppState';
 import { IAction } from '../api/IAction';
 import { v4 } from 'node-uuid';
-import { nodesReducer } from './nodesReducer';
-import { functionsReducer } from './functionsReducer';
 import { appConfig } from '../config/appConfig';
-
-const rootModuleId = v4();
-const createRootModuleAction = appConfig.Actions.ModuleCreate({
-  id: rootModuleId, 
-  name: 'New Module',
-});
-
-const systemModule = modulesReducer(undefined, appConfig.Actions.ModulesCreateSystem());
-const modules = modulesReducer(systemModule, createRootModuleAction);
-console.log('system module, modules', systemModule, modules);
+import { IProject } from '../api/project/IProject';
 
 const initialState: IProject = {
   id: v4(),
-  name: 'New Project',
+  name: 'Empty project',
   imports: {},
-  exports: {},
-
-  modules: modules,
-  rootModuleId: rootModuleId,
+  modules: {},
 }
 
 export const projectReducer = (state: IProject = initialState, action: IAction) => {
@@ -59,12 +42,6 @@ export const projectReducer = (state: IProject = initialState, action: IAction) 
     break;
 
     default:
-    {
-      const modules = modulesReducer(state.modules, action);
-      if (modules !== state.modules) {
-        state = {...state, modules: modules}
-      }
-    }
     break;
   }
   
