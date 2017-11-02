@@ -13,33 +13,6 @@ const initialState: IProject = {
 export const projectReducer = (state: IProject = initialState, action: IAction) => {
   
   switch (action.type) {
-    
-    case appConfig.Actions.Types.PROJECT_SELECT_MODULE:
-    {
-      state = {...state, selectedModuleId: action.payload}
-    }
-    break;
-
-    case appConfig.Actions.Types.MODULE_ADD:
-    {
-      const id = v4();
-      state = {...state, [id]: {...action.payload, id: id}}
-    }
-    break;
-
-    case appConfig.Actions.Types.MODULE_REMOVE:
-    {
-      state = {...state}
-      delete state[action.payload]; 
-    }
-    break;
-
-    case appConfig.Actions.Types.MODULE_UPDATE:
-    {
-      const id = action.payload.id;
-      state = {...state, [id]: action.payload}
-    }
-    break;
 
     default:
     break;

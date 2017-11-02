@@ -11,6 +11,8 @@
     "material-ui": "^1.0.0-beta.17",
     "material-ui-icons": "^1.0.0-beta.17",
     "node-uuid": "^1.4.8",
+    "postcss": "^6.0.13",
+    "postcss-cssnext": "^3.0.2",
     "react": "^16.0.0",
     "react-contexify": "^2.1.4",
     "react-contextmenu": "^2.8.0",

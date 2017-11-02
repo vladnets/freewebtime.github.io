@@ -104,6 +104,34 @@ export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
       false  
     );
 
+    const connections = (
+      <div>
+        heyhohohoho
+        <SvgComponent ref="svgComponent">
+          <Spline 
+            mousePos={{x: 150, y: 450}}
+            start={{x: 450, y: 460}}
+            end={{x: 700, y: 50}}
+          />
+        </SvgComponent>
+      </div>
+    );
+
+    const contextMenu = (
+      <ContextMenu id="some_unique_identifier">
+        <MenuItem data={{'some data': 'some_data 1'}} onClick={this.handleClick}>
+          ContextMenu Item 1
+        </MenuItem>
+        <MenuItem data={{'some data': 'some_data 2'}} onClick={this.handleClick}>
+          ContextMenu Item 2
+        </MenuItem>
+        <MenuItem divider />
+        <MenuItem data={{'some data': 'some_data 3'}} onClick={this.handleClick}>
+          ContextMenu Item 3
+        </MenuItem>
+      </ContextMenu>
+    );
+
     const graphView = (
       <div style={{transform: 'scale(' + this.state.scale + ')'}} >
       {functions}
@@ -118,26 +146,10 @@ export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
           onWheel={(e)=> {this.onMouseWheel(this, e)}}
         >
         {graphView}
-        <SvgComponent ref="svgComponent">
-          <Spline 
-            mousePos={{x: 150, y: 450}}
-            start={{x: 450, y: 460}}
-            end={{x: 700, y: 50}}
-          />
-        </SvgComponent>
-
-        <ContextMenu id="some_unique_identifier">
-          <MenuItem data={{'some data': 'some_data 1'}} onClick={this.handleClick}>
-            ContextMenu Item 1
-          </MenuItem>
-          <MenuItem data={{'some data': 'some_data 2'}} onClick={this.handleClick}>
-            ContextMenu Item 2
-          </MenuItem>
-          <MenuItem divider />
-          <MenuItem data={{'some data': 'some_data 3'}} onClick={this.handleClick}>
-            ContextMenu Item 3
-          </MenuItem>
-        </ContextMenu>
+        {
+          // connections
+        }
+        {contextMenu}
       </div>
     </ContextMenuTrigger>
   )}

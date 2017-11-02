@@ -16,7 +16,7 @@ export class ProjectExplorerView extends ViewBase<{data: IProject, resources: IA
 
   handleItemClick = (itemId: string, callback: ICallback) => {
     //this.setState({...this.state, selectedItem: itemId });
-    callback(appConfig.Actions.ProjectSelectModule(itemId));
+    //callback(appConfig.Actions.ProjectSelectModule(itemId));
   };
 
   render() {

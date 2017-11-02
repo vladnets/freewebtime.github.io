@@ -28,24 +28,6 @@ export const appConfig = {
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
 
-      TYPE_CREATE: 'TYPE_CREATE',
-      TYPE_REMOVE: 'TYPE_REMOVE',
-      TYPE_UPDATE: 'TYPE_UPDATE',
-      TYPES_CREATE_SYSTEM: 'TYPES_CREATE_SYSTEM',
-
-      FUNCTION_CREATE: 'FUNCTION_CREATE',
-      FUNCTION_REMOVE: 'FUNCTION_REMOVE',
-      FUNCTION_UPDATE: 'FUNCTION_UPDATE',
-      FUNCTIONS_CREATE_SYSTEM: 'FUNCTIONS_CREATE_SYSTEM',
-
-      MODULE_ADD: 'MODULE_ADD',
-      MODULE_REMOVE: 'MODULE_REMOVE',
-      MODULE_UPDATE: 'MODULE_UPDATE',
-      MODULE_CREATE: 'MODULE_CREATE',
-      MODULES_CREATE_SYSTEM: 'MODULES_CREATE_SYSTEM',
-
-      PROJECT_SELECT_MODULE: 'PROJECT_SELECT_MODULE',
-
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
     },
 
@@ -76,36 +58,7 @@ export const appConfig = {
       }
     },
 
-    FunctionCreateNew: (newFunction: IFunction): IAction => {
-      return {
-        type: appConfig.Actions.Types.FUNCTION_CREATE,
-        payload: newFunction
-      };
-    },
-    FunctionRemove: (functionId: string): IAction => {
-      return {
-        type: appConfig.Actions.Types.FUNCTION_REMOVE,
-        payload: functionId
-      };
-    },
-    FunctionUpdate: (updatedFunction: IFunction): IAction => {
-      return {
-        type: appConfig.Actions.Types.FUNCTION_UPDATE,
-        payload: updatedFunction,
-      }
-    },
-    FunctionsCreateSystem: (): IAction => {
-      return {
-        type: appConfig.Actions.Types.FUNCTIONS_CREATE_SYSTEM
-      }
-    },
-
-    ProjectSelectModule: (moduleId: string): IAction => {
-      return {
-        type: appConfig.Actions.Types.PROJECT_SELECT_MODULE,
-        payload: moduleId
-      }
-    }
+    
 
   },
   SystemFunctions: {
