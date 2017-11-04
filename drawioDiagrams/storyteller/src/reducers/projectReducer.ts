@@ -33,67 +33,18 @@ export const projectReducer = (state: IProject = createInitialState(), action: I
 
 export const graphNodesReducer = (state: IHash<IGraphNode>, action: IAction) => {
   switch (action.type) {
-    case appConfig.Actions.Types.NODE_REMOVE:
-    {
-      state = {...state}
-      delete state[action.payload];
-    }
-    break;
-
-    case appConfig.Actions.Types.NODE_UPDATE:
-    {
-      const node = state[action.payload.nodeId];
-      if (node) {
-        state = {
-          ...state, 
-          [node.id]: {
-            ...node, 
-            ...action.payload.newValues
-          }
-        }
-      }
-
-      state = {...state, ...action.payload}
-    }
-    break;
-  
-    case appConfig.Actions.Types.NODE_UPDATE_VIEW_DATA:
-    {
-      const node = state[action.payload.nodeId];
-      if (node) {
-        const viewData = node.viewData || {};
-        state = {
-          ...state, 
-          [node.id]: {
-            ...node, 
-            viewData: {
-              ...viewData, 
-              ...action.payload.newValues
-            }
-          }
-        }
-      }
-
-      state = {...state, ...action.payload}
-    }
-    break;
-  
-    case appConfig.Actions.Types.NODE_UPDATE:
-    {
-      state = {...state, ...action.payload}
-    }
-    break;
-
     default:
     {
       let isChanged = false;
       const newValues = {}
       Object.keys(state).map((key: string, index: number)=>{
         const oldValue = state[key];
-        const newValue = graphNodeReducer(oldValue, action);
-        if (oldValue !== newValue) {
-          newValues[key] = newValue;
-          isChanged = true;
+        if (oldValue) {
+          const newValue = graphNodeReducer(oldValue, action);
+          if (oldValue !== newValue) {
+            newValues[key] = newValue;
+            isChanged = true;
+          }
         }
       });
 
@@ -108,5 +59,62 @@ export const graphNodesReducer = (state: IHash<IGraphNode>, action: IAction) => 
 }
 
 export const graphNodeReducer = (state: IGraphNode, action: IAction) => {
+  
+  const updateSubnodes = (state: IGraphNode, action: IAction) => {
+    let isChanged = false;
+    const subnodes = state.subnodes || {};
+    const newValues = {}
+    Object.keys(subnodes).map((key: string, index: number)=>{
+      const oldValue = subnodes[key];
+      if (oldValue) {
+        const newValue = graphNodeReducer(oldValue, action);
+        if (oldValue !== newValue) {
+          newValues[key] = newValue;
+          isChanged = true;
+        }
+      }
+    });
+
+    if (isChanged) {
+      state = {...state, subnodes: {...subnodes, ...newValues}}
+    }
+
+    return state;
+  }
+
+  switch (action.type) {
+    case appConfig.Actions.Types.NODE_UPDATE:
+    {
+      if (state.id === action.payload.nodeId) {
+        state = {...state, ...action.payload.newValues}
+      }
+      else {
+        state = updateSubnodes(state, action);
+      }
+    }
+    break;
+
+    case appConfig.Actions.Types.NODE_UPDATE_VIEW_DATA:
+    {
+      if (state.id === action.payload.nodeId) {
+        state = {
+          ...state, 
+          viewData: {
+            ...state.viewData, 
+            ...action.payload.newValues
+          }
+        }
+      }
+      else {
+        state = updateSubnodes(state, action);
+      }
+    }
+    break;
+
+    default:
+    state = updateSubnodes(state, action);
+    break;
+  }
+
   return state;
 }

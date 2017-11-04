@@ -6,7 +6,7 @@ import { IGraphNode, IGraphNodeViewData } from '../api/graph/IGraph';
 
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: false,
+  IsLoadStateFromLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
 
   PrimitiveTypes: {

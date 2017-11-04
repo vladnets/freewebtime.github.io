@@ -74,22 +74,29 @@ export class TreeViewItem extends ViewBase<TviProps, {}> {
     const captionClassName = 'tree-view-item-caption' + (this.props.selectedItemId === this.props.id ? ' selected' : '');
     const subitemsClassName = 'tree-view-item-subitems';
     const style = {marginLeft: (this.props.indent * 5 + 2) + 'px'};
-    const subitems = this.props.subitems;
 
-    const subitemsView = subitems 
-      ? (Object.keys(subitems).map((key: string, index: number) => (
-          <TreeViewItem 
-            key={subitems[key].id}
-            caption={subitems[key].caption} 
-            id={subitems[key].id}
-            isExpanded={subitems[key].isExpanded}
-            indent={subitems[key].indent + 1}
-            subitems={subitems[key].subitems}
-            selectedItemId={this.props.selectedItemId}
-            handleItemClick={this.props.handleItemClick}
-          />
-        )))
-      : false;
+    const subitemsView = () => {
+      const subitems = this.props.subitems;
+      console.log(subitems);
+      if (subitems) {
+        return (Object.keys(subitems).map((key: string, index: number)=> {
+          return (
+            <TreeViewItem 
+              key={subitems[key].id}
+              caption={subitems[key].caption} 
+              id={subitems[key].id}
+              isExpanded={subitems[key].isExpanded}
+              indent={subitems[key].indent + 1}
+              subitems={subitems[key].subitems}
+              selectedItemId={this.props.selectedItemId}
+              handleItemClick={this.props.handleItemClick}
+            />
+          )
+        }))
+      }
+
+      return false;
+    }
 
     return (
       <div 
@@ -104,7 +111,7 @@ export class TreeViewItem extends ViewBase<TviProps, {}> {
       >
         <div className={foldIconClassName} />
         <div className={captionClassName}>{this.props.caption}</div>
-        {subitemsView}
+        {subitemsView()}
       </div>
     )
   }

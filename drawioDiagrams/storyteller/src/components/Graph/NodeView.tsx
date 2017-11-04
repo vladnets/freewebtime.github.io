@@ -43,8 +43,8 @@ export class NodeView extends React.Component<INodeViewProps> {
     const currentPos = node.viewData.position;
     const currentSize = node.viewData.size;
     const newSize = {
-      x: Math.max(currentSize.x + deltaSize.x, 10), 
-      y: Math.max(currentSize.y + deltaSize.y, 10)
+      x: Math.max(deltaSize.x, 10), 
+      y: Math.max(deltaSize.y, 10)
     }
     const newValues = {
       position: newPos,
