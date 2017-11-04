@@ -7,7 +7,7 @@ import { IFunction } from '../api/project/IFunction';
 
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: true,
+  IsLoadStateFromLocalStorage: false,
   SaveStateToLocalStorageInterval: 1000,
 
   SystemTypeNames: {

@@ -1,11 +1,20 @@
 import { IHash } from '../IHash';
-import { IMember } from './IMember';
 import { IReference } from './IReference';
+import { IUniqueObject } from '../IUniqueObject';
 
-export interface IObject {
-  id: string;
-  name: string;
-  type: IReference;
-  members?: IHash<IObject>;
-  value: any;
+export enum ObjectType {
+  Primitive,
+  Function,
+  Object,
+  Array,
+  FunctionCall,
+}
+
+export interface IObject extends IUniqueObject {
+  objectType: ObjectType;
+  typeReference: IReference;
+
+  value?: any; //for primitives
+  params?: IHash<IReference>; //for function call
+  targetFunction?: IReference; //for function call
 }
