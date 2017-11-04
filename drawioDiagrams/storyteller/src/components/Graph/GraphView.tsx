@@ -1,4 +1,3 @@
-import { IFunction } from '../../api/project/IFunction';
 import Spline from '../Spline';
 import { NodeView } from './NodeView';
 import { Store } from 'redux';
@@ -13,8 +12,12 @@ import SvgComponent from '../SvgComponent';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import * as FA from 'react-fontawesome';
 import { IProject } from '../../api/project/IProject';
+import { IGraphNode } from '../../api/graph/IGraph';
 
 interface IGraphViewProps {
+  project: IProject;
+  rootNode: IGraphNode;
+  resources: IAppResources;
 }
 
 interface IGraphViewState {
@@ -93,16 +96,22 @@ export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
     const className = 'node-graph-view';
     const areaSize = 1000;
 
-    const functions = (
-      // Object.keys(module.functions).map((key: string, index: number) => {
-      //   const func = module.functions[key];
+    const project = this.props.project;
+    const rootNode = this.props.rootNode;
+    const subnodes = rootNode.subnodes;
+    const subnodesView = () => {
+      if (subnodes) {
+        return (Object.keys(subnodes).map((key: string, index: number) => {
+          const subnode = subnodes[key];
+  
+          return (
+            <NodeView key={key} resources={this.props.resources} node={subnode}  />
+          )
+        }))
+      }
 
-      //   return (
-      //     <NodeView key={key} module={module} func={func} project={this.props.project} resources={this.props.resources}/>
-      //   )
-      // })
-      false  
-    );
+      return false;
+    }
 
     const connections = (
       <div>
@@ -134,7 +143,7 @@ export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
 
     const graphView = (
       <div style={{transform: 'scale(' + this.state.scale + ')'}} >
-      {functions}
+      {subnodesView()}
       </div>
     );
 

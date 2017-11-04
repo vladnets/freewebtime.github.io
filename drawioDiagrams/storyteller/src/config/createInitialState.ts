@@ -1,18 +1,53 @@
-import { ObjectType } from '../api/project/IObject';
-import { MemberType } from '../api/project/MemberType';
-import { IFunction } from '../api/project/IFunction';
 import { IProject } from '../api/project/IProject';
 import { v4 } from 'node-uuid';
+import { IGraphNode, GraphNodeType } from '../api/graph/IGraph';
+import { appConfig } from './appConfig';
 
 export const createInitialState = (): IProject => {
   
-  const createSystemModule = (): IFunction => {
+  const createSystemModule = (): IGraphNode => {
     
-    const result = {
+    const result: IGraphNode = {
       id: 'System',
       name: 'System',
-      objectType: ObjectType.Function,
-      typeReference: {targets: {}}
+      nodeType: GraphNodeType.Construction,
+      viewData: {
+        position: {x: 0, y: 0},
+        size: {x: 120, y: 80},
+        isCollapsed: false,
+      },
+      subnodes: {
+        [appConfig.PrimitiveTypes.string]: {
+          id: appConfig.PrimitiveTypes.string,
+          name: appConfig.PrimitiveTypes.string,
+          nodeType: GraphNodeType.Primitive,
+          viewData: {
+            position: {x: 50, y: 0},
+            size: {x: 120, y: 80},
+            isCollapsed: false,
+          },
+        },
+        [appConfig.PrimitiveTypes.number]: {
+          id: appConfig.PrimitiveTypes.number,
+          name: appConfig.PrimitiveTypes.number,
+          nodeType: GraphNodeType.Primitive,
+          viewData: {
+            position: {x: 50, y: 100},
+            size: {x: 120, y: 80},
+            isCollapsed: false,
+          },
+        },
+        [appConfig.PrimitiveTypes.boolean]: {
+          id: appConfig.PrimitiveTypes.boolean,
+          name: appConfig.PrimitiveTypes.boolean,
+          nodeType: GraphNodeType.Primitive,
+          viewData: {
+            position: {x: 50, y: 200},
+            size: {x: 120, y: 80},
+            isCollapsed: false,
+          },
+        },
+      } 
     }
 
     return result;
@@ -24,9 +59,10 @@ export const createInitialState = (): IProject => {
     id: v4(),
     name: 'New project',
     modules: {
+    },
+    imports: {
       [systemModule.id]: systemModule
     },
-    imports: {},
   };
   return result;
 }

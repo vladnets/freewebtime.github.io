@@ -1,10 +1,10 @@
 import { IUniqueObject } from '../IUniqueObject';
-import { IFunction } from './IFunction';
 import { IHash } from '../IHash';
+import { IGraphNode } from '../graph/IGraph';
 
 export interface IProject extends IUniqueObject {
-  modules: IHash<IFunction>;
-  imports: IHash<IFunction>;
+  modules: IHash<IGraphNode>;
+  imports: IHash<IGraphNode>;
 
   selectedModuleId?: string;
 }

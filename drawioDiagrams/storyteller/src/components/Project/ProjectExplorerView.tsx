@@ -15,8 +15,8 @@ export class ProjectExplorerView extends ViewBase<{data: IProject, resources: IA
   };
 
   handleItemClick = (itemId: string, callback: ICallback) => {
-    //this.setState({...this.state, selectedItem: itemId });
-    //callback(appConfig.Actions.ProjectSelectModule(itemId));
+    this.setState({...this.state, selectedItem: itemId });
+    callback(appConfig.Actions.ProjectSelectModule(itemId));
   };
 
   render() {
@@ -25,11 +25,23 @@ export class ProjectExplorerView extends ViewBase<{data: IProject, resources: IA
 
     const modules = this.props.data.modules;
     const modulesSubitems = {}
-    Object.keys(this.props.data.modules).map((key: string, index: number) => {
-      const module = this.props.data.modules[key];
+    Object.keys(modules).map((key: string, index: number) => {
+      const subitem = modules[key];
       modulesSubitems[key] = {
-        caption: module.name,
-        id: module.id,
+        caption: subitem.name,
+        id: subitem.id,
+        isExpanded: true,
+        indent: 1,
+      }
+    });
+
+    const imports = this.props.data.imports;
+    const importsSubitems = {}
+    Object.keys(imports).map((key: string, index: number) => {
+      const subitem = imports[key];
+      importsSubitems[key] = {
+        caption: subitem.name,
+        id: subitem.id,
         isExpanded: true,
         indent: 1,
       }
@@ -44,8 +56,8 @@ export class ProjectExplorerView extends ViewBase<{data: IProject, resources: IA
           Project items
         </div>
 
-        <TreeViewItem caption={'imports'} id={'imports'} isExpanded={true} indent={1} selectedItemId={selectedModuleId} handleItemClick={handleItemClick}/>
-        <TreeViewItem caption={'modules'} id={'modules'} isExpanded={true} indent={1} selectedItemId={selectedModuleId} subitems={modulesSubitems} handleItemClick={handleItemClick}/>
+        <TreeViewItem key={'imports'} caption={'imports'} id={'imports'} isExpanded={true} indent={0} selectedItemId={selectedModuleId} subitems={importsSubitems} handleItemClick={handleItemClick}/>
+        <TreeViewItem key={'modules'} caption={'modules'} id={'modules'} isExpanded={true} indent={0} selectedItemId={selectedModuleId} subitems={modulesSubitems} handleItemClick={handleItemClick}/>
         </div>
     );
   }
@@ -61,7 +73,7 @@ export class TreeViewItem extends ViewBase<TviProps, {}> {
     const foldIconClassName = 'tree-view-item-fold-icon ' + this.props.isExpanded ? 'expanded' : 'collapsed';
     const captionClassName = 'tree-view-item-caption' + (this.props.selectedItemId === this.props.id ? ' selected' : '');
     const subitemsClassName = 'tree-view-item-subitems';
-    const style = {marginLeft: (this.props.indent * 0.4) + 'em'};
+    const style = {marginLeft: (this.props.indent * 5 + 2) + 'px'};
     const subitems = this.props.subitems;
 
     const subitemsView = subitems 

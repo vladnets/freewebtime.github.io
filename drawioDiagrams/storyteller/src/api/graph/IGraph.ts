@@ -1,5 +1,6 @@
 import { IUniqueObject } from '../IUniqueObject';
 import { IHash } from '../IHash';
+import { IVector2 } from '../IVector2';
 
 export enum GraphNodeType {
   Primitive,
@@ -17,12 +18,19 @@ export interface IReference {
   referencePath: string;
 }
 
+export interface IGraphNodeViewData {
+  position: IVector2;
+  size: IVector2;
+  isCollapsed: boolean;
+}
+
 export interface IGraphNode extends IUniqueObject {
   nodeType: GraphNodeType;
-  imports: IHash<IReference>;
-  typeReference: IReference;
-  inputReference: IReference;
-  subnodes: IHash<IGraphNode>;
+  viewData: IGraphNodeViewData;
+  imports?: IHash<IReference>;
+  typeReference?: IReference;
+  inputReference?: IReference;
+  subnodes?: IHash<IGraphNode>;
 }
 
 export interface IPrimitiveNode extends IGraphNode {
