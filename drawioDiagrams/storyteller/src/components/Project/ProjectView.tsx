@@ -1,3 +1,4 @@
+import { FindGraphNodeDialog } from './FindGraphNodeDialog';
 import { MainMenuView } from './MainMenuView';
 import { ProjectExplorerView } from './ProjectExplorerView';
 import { EditorsPaneView } from './EditorsPaneView';
@@ -7,6 +8,7 @@ import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import { IHash } from '../../api/IHash';
 import { IProject } from '../../api/project/IProject';
+import './Project.css';
 
 export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}, {}> {
   render() {
@@ -34,6 +36,7 @@ export class ProjectView extends ViewBase<{data: IProject, resources: IAppResour
         <div className={'bottom-line-container panel padding'}>
           <StatusBarView data={this.props.data}/>
         </div>
+        <FindGraphNodeDialog project={this.props.data} resources={this.props.resources} />
       </div>
     )
   }

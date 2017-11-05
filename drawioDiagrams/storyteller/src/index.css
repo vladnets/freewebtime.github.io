@@ -59,36 +59,6 @@ body {
   flex-direction: column;
 }
 
-.project-explorer {
-}
-
-.project-explorer ul {
-  list-style-type: none;
-  padding: 3px;
-  margin: 0px;
-}
-
-.project-explorer ul li ul {
-  padding-left: 1rem;
-}
-
-.project-explorer li {
-  cursor: pointer;
-}
-
-.project-explorer li.hightlighted {
-  background: var(--selection-color);
-  color: var(--main-bg-color);
-  font-weight: bold;
-}
-
-.project-explorer.collapsed {
-  width: 40px;
-}
-
-.project-explorer.expanded {
-  width: 220px;
-}
 .tree-view-item {
 }
 .tree-view-item-caption {
@@ -101,23 +71,6 @@ body {
   background: var(--selection-color);
   color: var(--main-text-color);
   font-weight: bold;
-}
-
-.sidebar {
-}
-
-.status-bar-view {
-}
-
-
-.main-menu-view {
-}
-.main-menu-view-container {
-}
-.main-menu-item {
-  margin-right: 3px;
-  /* border-left: 1px solid var(--main-bg-color-accent); */
-  /* border-right: 1px solid var(--main-bg-color-accent); */
 }
 
 svg {
@@ -137,16 +90,29 @@ svg {
   stroke: aqua;
 }
 
-
-
-
 .rect-background {
   background-color: transparent;
   background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent);
   background-size: 60px 60px;
 }
 
-
+.modal-dialog-background {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+}
+.modal-dialog {
+  background-color: var(--main-bg-color);
+  border: 3px solid var(--main-bg-color-dark);
+  position: relative;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+}
 
 
 
