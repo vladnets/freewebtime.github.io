@@ -1,3 +1,4 @@
+import { IProject } from '../api/project/IProject';
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
@@ -94,22 +95,11 @@ export const appConfig = {
     
 
   },
+  
   SystemFunctions: {
-    ['System.String'] : (args) => {
-      if (args[('value')]) {
-        return args[('value')];
-      }
-    },
-    'System.Boolean': (args) => {
-      if (args[('value')]) {
-        return args[('value')];
-      }
-    },
-    'System.Number': (args) => {
-      if (args[('value')]) {
-        return args[('value')];
-      }
-    },
+    'string_concat': (graphNode: IGraphNode, project: IProject) => {
+      return 'string_concat\'s function result';
+    }
   }
 }
 

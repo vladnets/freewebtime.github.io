@@ -9,8 +9,6 @@ export const getSelectedNode = (project: IProject): IGraphNode|undefined => {
   }
 
   const selectedNode = resolveReference(project.selectedNode, project, project);
-  
-  console.log('selected node is ', selectedNode);
   return selectedNode;
 }
 

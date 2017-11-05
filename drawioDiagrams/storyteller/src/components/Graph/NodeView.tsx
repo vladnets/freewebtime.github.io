@@ -1,5 +1,5 @@
 import { resolveReference } from '../../helpers';
-import { IGraphNode, GraphNodeType } from '../../api/graph/IGraph';
+import { IGraphNode, GraphNodeType, IFunctionNode } from '../../api/graph/IGraph';
 import * as React from 'react';
 import './Node.css';
 import { IVector2 } from '../../api/IVector2';
@@ -13,6 +13,8 @@ import * as FA from 'react-fontawesome';
 import { v4 } from 'node-uuid';
 import { IHash } from '../../api/IHash';
 import { IProject } from '../../api/project/IProject';
+import SvgComponent from '../SvgComponent';
+import * as ReactDOM from 'react-dom';
 
 export enum NodeViewDrawType {
   Node,
@@ -69,10 +71,52 @@ export class NodeView extends React.Component<INodeViewProps> {
     const isMovable = this.props.drawType === NodeViewDrawType.Node;
 
     const outputItems = () => {
+      const fNode = node as IFunctionNode;
+      if (fNode && fNode.output && fNode.subnodes) {
+        return (
+          Object.keys(fNode.output).map((key: string)=> {
+            if (!fNode.subnodes) {
+              return false;
+            }
+
+            const subnodeId = fNode.output[key];
+            const subnode = fNode.subnodes[subnodeId];
+            if (!subnode) {
+              return false;
+            }
+
+            return (
+              <NodeView key={key} drawType={NodeViewDrawType.Subnode} node={subnode} project={this.props.project} resources={this.props.resources} />
+            )
+          })
+        )
+      }
+
       return false;
     }
 
     const inputItems = () => {
+      const fNode = node as IFunctionNode;
+      if (fNode && fNode.input && fNode.subnodes) {
+        return (
+          Object.keys(fNode.input).map((key: string)=> {
+            if (!fNode.subnodes) {
+              return false;
+            }
+
+            const subnodeId = fNode.input[key];
+            const subnode = fNode.subnodes[subnodeId];
+            if (!subnode) {
+              return false;
+            }
+
+            return (
+              <NodeView key={key} drawType={NodeViewDrawType.Subnode} node={subnode} project={this.props.project} resources={this.props.resources} />
+            )
+          })
+        )
+      }
+
       return false;
     }
 
@@ -83,7 +127,6 @@ export class NodeView extends React.Component<INodeViewProps> {
       
       return (
         <div className={'node-output'}>
-        Output area  
         {outputItems()}
         </div>
       )
@@ -96,7 +139,6 @@ export class NodeView extends React.Component<INodeViewProps> {
 
       return (
         <div className={'node-input'}>
-        Input area
         {inputItems()}
         </div>
       )
@@ -151,26 +193,29 @@ export class NodeView extends React.Component<INodeViewProps> {
       )
     }
 
-    const nodeRootView = () =>
-    {
+    const nodeRootView = () => {
       const className = 'node-view ' + 
         (this.props.drawType === NodeViewDrawType.Node
           ? 'fullheight'
           : ''
         )
 
-      let typeName = node.name;
+      let typeName = '';
       if (node.typeReference) {
         const typeNode = resolveReference(node.typeReference, node, this.props.project);
         if (typeNode) {
-          typeName = typeNode.name;
+          typeName = '(' + typeNode.name + ')';
         }
       }
 
       return (
         <div className={className}>
           <div className={'node-header'}>
-            {node.name} ({typeName})
+            <GraphNodeInOutSoket socketType={SocketType.Input} node={node} resources={this.props.resources}/>
+            <div className={'node-header-content'}>
+            {node.name} {typeName}
+            </div>
+            <GraphNodeInOutSoket socketType={SocketType.Output} node={node} resources={this.props.resources}/>
           </div>
           {nodeContentView()}
           <div className={'node-inner-shadow1'} />
@@ -214,4 +259,30 @@ export class NodeView extends React.Component<INodeViewProps> {
     );
   }
 } 
+
+
+export enum SocketType {Input, Output}
+export class GraphNodeInOutSoket extends React.Component<{socketType: SocketType, node: IGraphNode, resources: IAppResources}> {
+  componentDidMount() {
+    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect()
+  }
+  
+  render () {
+
+    const className = 'inout-socket ' + (this.props.socketType === SocketType.Input
+      ? 'input-socket'
+      : 'output-socket'
+    );
+
+    return (
+      <div className={className}>
+        <svg>
+          <g>
+            <circle cx={10} cy={10} r="9" stroke="#0d2b18" fill="#4e6957" />
+          </g>
+        </svg>
+      </div>
+    )
+  }
+}
 

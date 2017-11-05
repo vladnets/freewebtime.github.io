@@ -26,8 +26,18 @@
   cursor: grab;
   background: rgba(55, 143, 55, 0.533);
   padding: 4px;
+  display: flex;
+  flex-direction: row;
   /* text-shadow: 2px 2px rgb(49, 49, 49);  */
 }
+
+.node-header-content {
+  flex-grow: 1;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+
 .node-footer {
   font-weight: bold;
   background: var(--main-bg-color-accent);
@@ -65,5 +75,19 @@
 }
 
 .node-output-item {
+
+}
+
+.inout-socket {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.input-socket {
+  color: #4e6957;
+}
+
+.output-socket {
 
 }

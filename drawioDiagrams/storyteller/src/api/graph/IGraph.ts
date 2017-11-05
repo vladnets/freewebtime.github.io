@@ -52,5 +52,5 @@ export interface IFunctionNode extends IGraphNode {
   input: IHash<string>; //keys to the subnodes hashset
   output: IHash<string>; //keys to the subnodes hashset
   locals: IHash<string>; //keys to the subnodes hashset
-  function?: (node: IFunctionNode, root: IFunctionNode) => any;
+  systemFunctionId?: string;
 }

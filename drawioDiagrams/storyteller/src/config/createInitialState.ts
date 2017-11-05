@@ -31,6 +31,10 @@ export const createInitialState = (): IProject => {
     return createNode({...params, nodeType: GraphNodeType.Construction});
   }
 
+  const createFunctionNode = (params: {}): IGraphNode => {
+    return createNode({...params, nodeType: GraphNodeType.Function});
+  }
+
   const nodeSetParent = (node: IGraphNode, parent: IGraphNode) => {
     node.fullId = parent.fullId + '.' + node.id;
     if (!parent.subnodes) {
@@ -82,6 +86,58 @@ export const createInitialState = (): IProject => {
     });
     nodeSetParent(charNameNode, characterNode);
     nodeSetParent(charAgeNode, characterNode);
+
+    //create function
+    const concatNode = createFunctionNode({
+      id: 'Combine string',
+      systemFunctionId: 'string_concat',
+      input: {
+        'Prefix': 'Prefix',
+        'Separator': 'Separator',
+        'Postfix': 'Postfix',
+      },
+      locals: {},
+      output: {
+        'Result': 'Result'
+      }
+    })
+    concatNode.viewData.size = {x: 500, y: 204}
+    concatNode.viewData.position = {x: 400, y: 100}
+    nodeSetParent(concatNode, systemNode);
+
+    const concatNodePrefix = createPrimitiveNode({
+      id: 'Prefix', 
+      typeReference: {
+        referenceType: ReferenceType.Global,
+        referencePath: ['System', 'string'],
+      }
+    })
+    nodeSetParent(concatNodePrefix, concatNode);
+    const concatNodeSeparator = createPrimitiveNode({
+      id: 'Separator', 
+      typeReference: {
+        referenceType: ReferenceType.Global,
+        referencePath: ['System', 'string'],
+      }
+    })
+    nodeSetParent(concatNodeSeparator, concatNode);
+    const concatNodePostfix = createPrimitiveNode({
+      id: 'Postfix', 
+      typeReference: {
+        referenceType: ReferenceType.Global,
+        referencePath: ['System', 'string'],
+      }
+    })
+    nodeSetParent(concatNodePostfix, concatNode);
+
+    const concatNodeResult = createPrimitiveNode({
+      id: 'Result', 
+      typeReference: {
+        referenceType: ReferenceType.Global,
+        referencePath: ['System', 'string'],
+      }
+    })
+    nodeSetParent(concatNodeResult, concatNode);
 
     return systemNode;
   }
