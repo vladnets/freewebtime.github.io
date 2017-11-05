@@ -10,19 +10,14 @@ export const projectReducer = (state: IProject = createInitialState(), action: I
   
   switch (action.type) {
     case appConfig.Actions.Types.PROJECT_SELECT_MODULE: {
-      state = {...state, selectedModuleId: action.payload};
+      state = {...state, selectedNode: action.payload};
     }
 
     default:
     {
-      const newModules = graphNodesReducer(state.modules, action);
-      if (newModules !== state.modules) {
-        state = {...state, modules: newModules}
-      }
-
-      const newImports = graphNodesReducer(state.imports, action);
-      if (newImports !== state.imports) {
-        state = {...state, imports: newImports}
+      const newSubnodes = graphNodesReducer(state.subnodes, action);
+      if (newSubnodes !== state.subnodes) {
+        state = {...state, subnodes: newSubnodes}
       }
     }
     break;
@@ -31,7 +26,7 @@ export const projectReducer = (state: IProject = createInitialState(), action: I
   return state;
 }
 
-export const graphNodesReducer = (state: IHash<IGraphNode>, action: IAction) => {
+export const graphNodesReducer = (state: IHash<IGraphNode> = {}, action: IAction) => {
   switch (action.type) {
     default:
     {
@@ -85,7 +80,7 @@ export const graphNodeReducer = (state: IGraphNode, action: IAction) => {
   switch (action.type) {
     case appConfig.Actions.Types.NODE_UPDATE:
     {
-      if (state.id === action.payload.nodeId) {
+      if (state.fullId === action.payload.nodeFullId) {
         state = {...state, ...action.payload.newValues}
       }
       else {
@@ -96,7 +91,7 @@ export const graphNodeReducer = (state: IGraphNode, action: IAction) => {
 
     case appConfig.Actions.Types.NODE_UPDATE_VIEW_DATA:
     {
-      if (state.id === action.payload.nodeId) {
+      if (state.fullId === action.payload.nodeFullId) {
         state = {
           ...state, 
           viewData: {

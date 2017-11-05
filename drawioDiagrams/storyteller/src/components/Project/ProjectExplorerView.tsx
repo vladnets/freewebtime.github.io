@@ -7,110 +7,87 @@ import { v4 } from 'node-uuid';
 import { ICallback } from '../../api/index';
 import { appConfig } from '../../config/appConfig';
 import { IProject } from '../../api/project/IProject';
+import { IGraphNode, IReference, ReferenceType, ReferencePath } from '../../api/graph/IGraph';
 
-export class ProjectExplorerView extends ViewBase<{data: IProject, resources: IAppResources}, {isExpanded: boolean, selectedItem: string}> {
-  state = {
-    isExpanded: true,
-    selectedItem: '',
-  };
-
-  handleItemClick = (itemId: string, callback: ICallback) => {
-    this.setState({...this.state, selectedItem: itemId });
-    callback(appConfig.Actions.ProjectSelectModule(itemId));
-  };
-
+export class ProjectExplorerView extends React.Component<{data: IProject, resources: IAppResources}> {
   render() {
-    const className = 'fullheight project-explorer' + (this.state.isExpanded ? ' expanded' : ' collapsed');
-    const activeItem = this.state.selectedItem;
-
-    const modules = this.props.data.modules;
-    const modulesSubitems = {}
-    Object.keys(modules).map((key: string, index: number) => {
-      const subitem = modules[key];
-      modulesSubitems[key] = {
-        caption: subitem.name,
-        id: subitem.id,
-        isExpanded: true,
-        indent: 1,
-      }
-    });
-
-    const imports = this.props.data.imports;
-    const importsSubitems = {}
-    Object.keys(imports).map((key: string, index: number) => {
-      const subitem = imports[key];
-      importsSubitems[key] = {
-        caption: subitem.name,
-        id: subitem.id,
-        isExpanded: true,
-        indent: 1,
-      }
-    });
-
-    const handleItemClick = (itemId: string) => this.handleItemClick(itemId, this.props.resources.callback);
-    const selectedModuleId = this.props.data.selectedModuleId || '';
+    const className = 'fullheight project-explorer expanded';
+    const callback = this.props.resources.callback;
+    const project = this.props.data;
+    const referencePath = [];
 
     return (
       <div className={className}>
         <div className={'panel-header'}>
           Project items
         </div>
-
-        <TreeViewItem key={'imports'} caption={'imports'} id={'imports'} isExpanded={true} indent={0} selectedItemId={selectedModuleId} subitems={importsSubitems} handleItemClick={handleItemClick}/>
-        <TreeViewItem key={'modules'} caption={'modules'} id={'modules'} isExpanded={true} indent={0} selectedItemId={selectedModuleId} subitems={modulesSubitems} handleItemClick={handleItemClick}/>
+          <ProjectItemView project={project} graphNode={project} resources={this.props.resources} indent={0} referencePath={referencePath} />
         </div>
     );
   }
 }
 
-declare type TviProps = {caption: string, id: string, isExpanded: boolean, indent: number, subitems?: IHash<TviProps>, selectedItemId: string, handleItemClick: (itemId: string)=>void};
-export class TreeViewItem extends ViewBase<TviProps, {}> {
-  
+export class ProjectItemView extends React.Component<{project: IProject, graphNode: IGraphNode, resources: IAppResources, indent: number, referencePath: ReferencePath}> {
   render () {
+    const graphNode = this.props.graphNode;
+    const project = this.props.project;
+    const isExpanded = !graphNode.viewData.isCollapsed;
+    const isSelected = project.selectedNode && project.selectedNode.targetFullId === graphNode.fullId;
+    const indent = this.props.indent;
+
     const rootClassName = 'tree-view-item ' 
-      + (this.props.isExpanded ? 'expanded' : 'collapsed')
+      + (isExpanded ? 'expanded' : 'collapsed')
     ;
-    const foldIconClassName = 'tree-view-item-fold-icon ' + this.props.isExpanded ? 'expanded' : 'collapsed';
-    const captionClassName = 'tree-view-item-caption' + (this.props.selectedItemId === this.props.id ? ' selected' : '');
+    const foldIconClassName = 'tree-view-item-fold-icon ' + isExpanded ? 'expanded' : 'collapsed';
+    const captionClassName = 'tree-view-item-caption' + (isSelected ? ' selected' : '');
     const subitemsClassName = 'tree-view-item-subitems';
-    const style = {marginLeft: (this.props.indent * 5 + 2) + 'px'};
+
+    const captionStyle = {paddingLeft: (indent * 10) + 'px'};
+    const subnodes = graphNode.subnodes;
+    const subitemsCount = subnodes ? Object.keys(subnodes).length : 0;
 
     const subitemsView = () => {
-      const subitems = this.props.subitems;
-      console.log(subitems);
-      if (subitems) {
-        return (Object.keys(subitems).map((key: string, index: number)=> {
-          return (
-            <TreeViewItem 
-              key={subitems[key].id}
-              caption={subitems[key].caption} 
-              id={subitems[key].id}
-              isExpanded={subitems[key].isExpanded}
-              indent={subitems[key].indent + 1}
-              subitems={subitems[key].subitems}
-              selectedItemId={this.props.selectedItemId}
-              handleItemClick={this.props.handleItemClick}
-            />
-          )
-        }))
+      if (!subnodes) {
+        return false;
       }
 
-      return false;
+      return (
+        Object.keys(subnodes).map((key: string, index: number)=> {
+          const subnode = subnodes[key];
+          const subRefPath = this.props.referencePath.concat([key]);
+
+          return (
+            <ProjectItemView key={key} project={project} graphNode={subnode} resources={this.props.resources} indent={indent+1} referencePath={subRefPath}/>
+          )
+        })
+      )
     }
+
+    const handleClick = (self: ProjectItemView) => {
+      const reference: IReference = {
+        referenceType: ReferenceType.Global,
+        referencePath: this.props.referencePath,
+        targetFullId: self.props.graphNode.fullId
+      }
+      self.props.resources.callback(appConfig.Actions.ProjectSelectModule(reference))
+    }
+
+    const caption = ' ⤷ ' + graphNode.name;
+    const subItems = subitemsView();
+
 
     return (
       <div 
         className={rootClassName} 
-        style={style} 
-        key={this.props.id}
+        key={graphNode.id}
         onClick={(e)=>{
           e.stopPropagation();
           e.preventDefault();
-          this.props.handleItemClick(this.props.id);
+          handleClick(this);
         }}
       >
         <div className={foldIconClassName} />
-        <div className={captionClassName}>{this.props.caption}</div>
+        <div className={captionClassName} style={captionStyle}>{caption}</div>
         {subitemsView()}
       </div>
     )

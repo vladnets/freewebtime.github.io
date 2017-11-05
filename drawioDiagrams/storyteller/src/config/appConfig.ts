@@ -2,11 +2,11 @@ import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import Typography from 'material-ui/Typography';
-import { IGraphNode, IGraphNodeViewData } from '../api/graph/IGraph';
+import { IGraphNode, IGraphNodeViewData, IReference } from '../api/graph/IGraph';
 
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: true,
+  IsLoadStateFromLocalStorage: false,
   SaveStateToLocalStorageInterval: 1000,
 
   PrimitiveTypes: {
@@ -34,7 +34,7 @@ export const appConfig = {
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
       NODE_UPDATE_VIEW_DATA: 'NODE_UPDATE_VIEW_DATA',
-
+      
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
 
       PROJECT_SELECT_MODULE: 'PROJECT_SELECT_MODULE',
@@ -48,41 +48,46 @@ export const appConfig = {
       return {type: appConfig.Actions.Types.APP_SET_CALLBACK, payload: callback}
     },
 
-    NodeCreateNew: (data: {}): IAction => {
+    NodeCreateNew: (parentFullId: string, newValues: {}): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_CREATE_NEW,
-        payload: {data: data}
+        payload: {
+          parentFullId: parentFullId,
+          newValues: newValues,
+        }
       };
     },
-    NodeRemove: (nodeId: string): IAction => {
+    NodeRemove: (nodeFullId: string): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_CREATE_NEW,
-        payload: {nodeId: nodeId}
+        payload: {
+          nodeId: nodeFullId, 
+        }
       };
     },
-    NodeUpdate: (nodeId: string, newValues: {}): IAction => {
+    NodeUpdate: (nodeFullId: string, newValues: {}): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_UPDATE,
         payload: {
-          nodeId: nodeId, 
+          nodeFullId: nodeFullId, 
           newValues: newValues
         },
       }
     },
-    NodeUpdateViewData: (nodeId: string, newValues: {}): IAction => {
+    NodeUpdateViewData: (nodeFullId: string, newValues: {}): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_UPDATE_VIEW_DATA,
         payload: {
-          nodeId: nodeId,
+          nodeFullId: nodeFullId,
           newValues: newValues
         }
       }
     },
 
-    ProjectSelectModule: (moduleId: string) => {
+    ProjectSelectModule: (reference: IReference) => {
       return {
         type: appConfig.Actions.Types.PROJECT_SELECT_MODULE,
-        payload: moduleId,
+        payload: reference,
       }
     }
 

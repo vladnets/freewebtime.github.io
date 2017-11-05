@@ -1,5 +1,5 @@
 import Spline from '../Spline';
-import { NodeView } from './NodeView';
+import { NodeView, NodeViewDrawType } from './NodeView';
 import { Store } from 'redux';
 import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
@@ -105,7 +105,7 @@ export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
           const subnode = subnodes[key];
   
           return (
-            <NodeView key={key} resources={this.props.resources} node={subnode}  />
+            <NodeView key={key} resources={this.props.resources} node={subnode} drawType={NodeViewDrawType.Node} project={project}/>
           )
         }))
       }

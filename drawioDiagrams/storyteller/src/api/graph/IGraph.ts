@@ -13,18 +13,25 @@ export enum ReferenceType {
   Global,
 }
 
+export type ReferencePathItem = string|number;
+export type ReferencePath = ReferencePathItem[];
+
 export interface IReference {
   referenceType: ReferenceType;
-  referencePath: string;
+  referencePath: ReferencePath;
+  targetFullId: string;
 }
 
 export interface IGraphNodeViewData {
   position: IVector2;
   size: IVector2;
   isCollapsed: boolean;
+  inputSoketPos?: IVector2;
+  outputSoketPos?: IVector2;
 }
 
 export interface IGraphNode extends IUniqueObject {
+  fullId: string;
   nodeType: GraphNodeType;
   viewData: IGraphNodeViewData;
   imports?: IHash<IReference>;
