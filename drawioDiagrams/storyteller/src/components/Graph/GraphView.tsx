@@ -13,17 +13,18 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import * as FA from 'react-fontawesome';
 import { IProject } from '../../api/project/IProject';
 import { IGraphNode } from '../../api/graph/IGraph';
+import { IHash } from '../../api/IHash';
+import { ISocketsData } from '../../api/IAppState';
 
 interface IGraphViewProps {
   project: IProject;
   rootNode: IGraphNode;
+  visibleSockets: IHash<string>;
+  socketsData: ISocketsData;
   resources: IAppResources;
 }
 
-interface IGraphViewState {
-}
-
-export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
+export class GraphView extends ViewBase<IGraphViewProps> {
   state = {
     dragging: false,
     dragStart: {x: 0, y: 0}, 
@@ -105,7 +106,15 @@ export class GraphView extends ViewBase<IGraphViewProps, IGraphViewState> {
           const subnode = subnodes[key];
   
           return (
-            <NodeView key={key} resources={this.props.resources} node={subnode} drawType={NodeViewDrawType.Node} project={project}/>
+            <NodeView 
+              key={key} 
+              resources={this.props.resources} 
+              node={subnode} 
+              drawType={NodeViewDrawType.Node} 
+              project={project}
+              visibleSockets={this.props.visibleSockets}
+              socketsData={this.props.socketsData}
+            />
           )
         }))
       }

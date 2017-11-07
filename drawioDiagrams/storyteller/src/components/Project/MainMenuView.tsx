@@ -3,7 +3,7 @@ import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import { IProject } from '../../api/project/IProject';
 
-export class MainMenuView extends ViewBase<{data: IProject, resources: IAppResources}, {}> {
+export class MainMenuView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {
     const projectName = this.props.data.name;
     

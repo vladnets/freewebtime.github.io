@@ -4,6 +4,7 @@ import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import Typography from 'material-ui/Typography';
 import { IGraphNode, IGraphNodeViewData, IReference } from '../api/graph/IGraph';
+import { IHash } from '../api/IHash';
 
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
@@ -36,6 +37,9 @@ export const appConfig = {
       NODE_UPDATE: 'NODE_UPDATE',
       NODE_UPDATE_VIEW_DATA: 'NODE_UPDATE_VIEW_DATA',
       
+      INOUT_SOCKET_SET_POSITION: 'INOUT_SOCKET_SET_POSITION',
+      INOUT_SOCKETS_SET_VISIBLE_SOCKETS: 'INOUT_SOCKETS_SET_VISIBLE_SOCKETS',
+
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
 
       PROJECT_SELECT_MODULE: 'PROJECT_SELECT_MODULE',
@@ -82,6 +86,22 @@ export const appConfig = {
           nodeFullId: nodeFullId,
           newValues: newValues
         }
+      }
+    },
+
+    InoutSocketSetPosition: (socketId: string, position: IVector2): IAction => {
+      return {
+        type: appConfig.Actions.Types.INOUT_SOCKET_SET_POSITION,
+        payload: {
+          socketId, 
+          position
+        }
+      }
+    },
+    InoutSocketsSetVisibleSockets: (visibleSockets: IHash<string>): IAction => {
+      return {
+        type: appConfig.Actions.Types.INOUT_SOCKETS_SET_VISIBLE_SOCKETS,
+        payload: visibleSockets
       }
     },
 

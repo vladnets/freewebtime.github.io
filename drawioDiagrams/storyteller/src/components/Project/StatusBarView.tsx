@@ -4,7 +4,7 @@ import { ViewBase } from '../View';
 import * as React from 'react';
 import { getSelectedNode } from '../../helpers/index';
 
-export class StatusBarView extends ViewBase<{data: IProject}, {}> {
+export class StatusBarView extends ViewBase<{data: IProject}> {
   render() {
 
     const project = this.props.data;

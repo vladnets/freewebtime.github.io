@@ -5,8 +5,10 @@ import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { IProject } from '../../api/project/IProject';
+import { IHash } from '../../api/IHash';
+import { ISocketsData } from '../../api/IAppState';
 
-export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppResources}, {}> {
+export class EditorsPaneView extends ViewBase<{data: IProject, visibleSockets: IHash<string>, socketsData: ISocketsData, resources: IAppResources}> {
 
   render() {
     const nodeStyle = {
@@ -26,7 +28,13 @@ export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppRe
 
     return (
       <div className={'fullheight fullwidth'} style={{display: 'flex', flexDirection: 'column'}}>
-        <GraphView project={this.props.data} rootNode={selectedNode} resources={this.props.resources}/>
+        <GraphView 
+          project={this.props.data} 
+          rootNode={selectedNode} 
+          resources={this.props.resources}
+          visibleSockets={this.props.visibleSockets}
+          socketsData={this.props.socketsData}
+        />
       </div>
     );
   }
