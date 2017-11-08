@@ -1,6 +1,6 @@
 import { IProject } from '../api/project/IProject';
 import { v4 } from 'node-uuid';
-import { GraphNodeType, IGraphNode, IReference, ReferencePath, ReferenceType, IGraphNodeViewData } from '../api/graph/IGraph';
+import { GraphNodeType, IGraphNode, IReference, ReferencePath, ReferenceType, IGraphNodeViewData, IGraphNodeSockets, SocketType } from '../api/graph/IGraph';
 import { appConfig } from './appConfig';
 import { parseNodePath, createReference } from '../helpers/index';
 
@@ -17,11 +17,33 @@ export const createInitialState = (): IProject => {
       viewData.size = {...{x: 160, y: 60}, ...uSize}
     }
 
+    const inputSocketId = 'input-' + id;
+    const outputSocketId = 'output-' + id;
+    const sockets: IGraphNodeSockets = {
+      input: {
+        socketType: SocketType.input,
+        id: inputSocketId,
+        name: 'In',
+        nodeId: id,
+        nodeFullId: id,
+        position: {x: 0, y: 0}
+      },
+      output: {
+        socketType: SocketType.output,
+        id: outputSocketId,
+        name: 'Out',
+        nodeId: id,
+        nodeFullId: id,
+        position: {x: 0, y: 0}
+      },
+    }
+
     const result = {
       fullId: id,
       nodeType: GraphNodeType.Primitive,
       ...params,
       viewData: viewData,
+      sockets: sockets,
       id: id,
       name: id,
     }
@@ -43,6 +65,11 @@ export const createInitialState = (): IProject => {
 
   const nodeSetParent = (node: IGraphNode, parent: IGraphNode) => {
     node.fullId = parent.fullId + '.' + node.id;
+    node.sockets.input.nodeFullId = node.fullId;
+    node.sockets.input.id = 'input-' + node.fullId;
+    node.sockets.output.nodeFullId = node.fullId;
+    node.sockets.output.id = 'output-' + node.fullId;
+    
     if (!parent.subnodes) {
       parent.subnodes = {}
     }

@@ -36,7 +36,10 @@ export const appConfig = {
       NODE_REMOVE: 'NODE_REMOVE',
       NODE_UPDATE: 'NODE_UPDATE',
       NODE_UPDATE_VIEW_DATA: 'NODE_UPDATE_VIEW_DATA',
-      
+      NODE_UPDATE_SOCKETS: 'NODE_UPDATE_SOCKETS',
+      NODE_UPDATE_INPUT_SOCKET: 'NODE_UPDATE_INPUT_SOCKET',
+      NODE_UPDATE_OUTPUT_SOCKET: 'NODE_UPDATE_OUTPUT_SOCKET',
+
       INOUT_SOCKET_SET_POSITION: 'INOUT_SOCKET_SET_POSITION',
       INOUT_SOCKETS_SET_VISIBLE_SOCKETS: 'INOUT_SOCKETS_SET_VISIBLE_SOCKETS',
       
@@ -84,6 +87,35 @@ export const appConfig = {
     NodeUpdateViewData: (nodeFullId: string, newValues: {}): IAction => {
       return {
         type: appConfig.Actions.Types.NODE_UPDATE_VIEW_DATA,
+        payload: {
+          nodeFullId: nodeFullId,
+          newValues: newValues
+        }
+      }
+    },
+    NodeUpdateSockets: (nodeFullId: string, newValues: {}): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODE_UPDATE_SOCKETS,
+        payload: {
+          nodeFullId: nodeFullId,
+          newValues: newValues
+        }
+      }
+    },
+
+    NodeUpdateInputSocket: (nodeFullId: string, newValues: {}): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODE_UPDATE_INPUT_SOCKET,
+        payload: {
+          nodeFullId: nodeFullId,
+          newValues: newValues
+        }
+      }
+    },
+
+    NodeUpdateOutputSocket: (nodeFullId: string, newValues: {}): IAction => {
+      return {
+        type: appConfig.Actions.Types.NODE_UPDATE_OUTPUT_SOCKET,
         payload: {
           nodeFullId: nodeFullId,
           newValues: newValues

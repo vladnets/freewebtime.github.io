@@ -1,7 +1,7 @@
 import { resolveReference } from '../../helpers';
 import { IVector2 } from '../../api/IVector2';
 import Spline from '../Spline';
-import { NodeView, NodeViewDrawType, SocketType } from './NodeView';
+import { NodeView, NodeViewDrawType } from './NodeView';
 import { Store } from 'redux';
 import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
@@ -16,16 +16,13 @@ import * as FA from 'react-fontawesome';
 import { IProject } from '../../api/project/IProject';
 import { IGraphNode } from '../../api/graph/IGraph';
 import { IHash } from '../../api/IHash';
-import { IConnection, IDrawState, ISocketsData } from '../../api/IAppState';
-import { createSocketId } from '../../helpers/index';
+import { IConnection, ISocketsData } from '../../api/IAppState';
 import * as ReactDOM from 'react-dom';
 import { appConfig } from '../../config/appConfig';
 
 interface IGraphViewProps {
   project: IProject;
   rootNode: IGraphNode;
-  drawState: IDrawState;
-  socketsData: ISocketsData;
   resources: IAppResources;
 }
 
@@ -97,22 +94,13 @@ export class GraphView extends ViewBase<IGraphViewProps> {
   handleClick(e, data) {
     console.log(data);
   }
-  
-  componentDidMount1() {
-    const rect: any = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    const graphPosition: IVector2 = {
-      x: rect.x,
-      y: rect.y
-    }
-    const action = appConfig.Actions.GraphViewSetPosition(graphPosition);
-    this.props.resources.callback(action);
-  }
 
   render() {
     const className = 'node-graph-view';
     const project = this.props.project;
     const rootNode = this.props.rootNode;
     const subnodes = rootNode.subnodes;
+    
     const subnodesView = () => {
       if (subnodes) {
         return (Object.keys(subnodes).map((key: string, index: number) => {
@@ -125,8 +113,6 @@ export class GraphView extends ViewBase<IGraphViewProps> {
               node={subnode} 
               drawType={NodeViewDrawType.Node} 
               project={project}
-              drawState={this.props.drawState}
-              socketsData={this.props.socketsData}
             />
           )
         }))
@@ -140,13 +126,19 @@ export class GraphView extends ViewBase<IGraphViewProps> {
         const target = resolveReference(node.inputReference, node, project);
         if (target) {
           const connectionId = 'connection-' + node.fullId;
+          const fromPos = target.sockets.output.position;
+          const toPos = node.sockets.input.position;
           const connection: IConnection = {
             connectionId: connectionId,
             fromNodeId: target.id,
             toNodeId: node.id,
             fromNodeFullId: target.fullId,
             toNodeFullId: node.fullId,
+            fromPos: fromPos,
+            toPos: toPos
           }
+          console.log('connection: ', node);
+
           result[connectionId] = connection;
         }
       }
@@ -169,6 +161,7 @@ export class GraphView extends ViewBase<IGraphViewProps> {
 
     const connectionsView = (project: IProject) => {
       const connections = collectConnections(project);
+      console.log('connections are', connections);
 
       return (
         <div>
@@ -176,16 +169,11 @@ export class GraphView extends ViewBase<IGraphViewProps> {
           {
             Object.keys(connections).map((key: string)=> {
               const connection: IConnection = connections[key];
-              const toSocketId = createSocketId(SocketType.Input, connection.toNodeFullId);
-              const fromSocketId = createSocketId(SocketType.Output, connection.fromNodeFullId);
 
-              const socketsData = this.props.socketsData;
-              if (!socketsData || !socketsData.visibleSockets[fromSocketId] || !socketsData.visibleSockets[toSocketId]) {
-                return false;
-              }
+              const fromPos = connection.fromPos;
+              const toPos = connection.toPos;
 
-              const fromPos = socketsData.socketsPositions[fromSocketId];
-              const toPos = socketsData.socketsPositions[toSocketId];
+              console.log('spline drawing');
 
               return (
                 <Spline
@@ -228,6 +216,7 @@ export class GraphView extends ViewBase<IGraphViewProps> {
       <ContextMenuTrigger id="some_unique_identifier">
         <div 
           className={className} 
+          id={'node-graph-view'}
           style={{position: 'relative', overflow: 'hidden'}} 
           onWheel={(e)=> {this.onMouseWheel(this, e)}}
         >

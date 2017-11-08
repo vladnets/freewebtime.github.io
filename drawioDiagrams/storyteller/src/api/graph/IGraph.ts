@@ -31,6 +31,25 @@ export interface IGraphNodeViewData {
   outputSoketPos?: IVector2;
 }
 
+export enum SocketType {
+  input,
+  output,
+}
+
+export interface IGraphNodeSocket {
+  socketType: SocketType,
+  id: string;
+  name: string;
+  nodeFullId: string;
+  nodeId: string;
+  position: IVector2;
+}
+
+export interface IGraphNodeSockets {
+  input: IGraphNodeSocket;
+  output: IGraphNodeSocket;
+}
+
 export interface IGraphNode extends IUniqueObject {
   parentId?: string;
   fullId: string;
@@ -40,6 +59,7 @@ export interface IGraphNode extends IUniqueObject {
   typeReference?: IReference;
   inputReference?: IReference;
   subnodes?: IHash<IGraphNode>;
+  sockets: IGraphNodeSockets; 
 }
 
 export interface IPrimitiveNode extends IGraphNode {

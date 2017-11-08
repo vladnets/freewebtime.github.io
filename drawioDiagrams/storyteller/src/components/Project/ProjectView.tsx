@@ -1,4 +1,4 @@
-import { ISocketsData, IDrawState } from '../../api/IAppState';
+import { ISocketsData } from '../../api/IAppState';
 import { FindGraphNodeDialog } from './FindGraphNodeDialog';
 import { MainMenuView } from './MainMenuView';
 import { ProjectExplorerView } from './ProjectExplorerView';
@@ -11,7 +11,7 @@ import { IHash } from '../../api/IHash';
 import { IProject } from '../../api/project/IProject';
 import './Project.css';
 
-export class ProjectView extends ViewBase<{data: IProject, drawState: IDrawState, socketsData: ISocketsData, resources: IAppResources}> {
+export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}> {
   render() {
     return (
       <div className={'project-view'} style={{display: 'flex', flexDirection: 'column'}}>
@@ -29,8 +29,6 @@ export class ProjectView extends ViewBase<{data: IProject, drawState: IDrawState
             <EditorsPaneView 
               data={this.props.data} 
               resources={this.props.resources} 
-              drawState={this.props.drawState}
-              socketsData={this.props.socketsData}
             />
           </div>
           <div className={'sidebar sidebar-right panel padding'} style={{width: '80px', display: 'none'}}>

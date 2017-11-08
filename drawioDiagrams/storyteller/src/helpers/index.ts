@@ -2,7 +2,6 @@ import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
 import { IProject } from '../api/project/IProject';
 import { IGraphNode, IReference, ReferencePath, ReferencePathItem, ReferenceType } from '../api/graph/IGraph';
-import { SocketType } from '../components/Graph/NodeView';
 
 export const parsePathItem = (pathItem: string): ReferencePathItem => {
   if (pathItem.startsWith(appConfig.GraphConfig.ArrayOpen) && pathItem.endsWith(appConfig.GraphConfig.ArrayClose)) {
@@ -125,13 +124,4 @@ export const createReference = (target: IGraphNode): IReference => {
     referenceType: ReferenceType.Global,
     referencePath: parseNodePath(target.fullId)
   }
-}
-
-export const createSocketId = (socketType: SocketType, nodeFullId: string) => {
-  return (
-    socketType === SocketType.Input
-      ? 'input-'
-      : 'output-'
-    )
-    + nodeFullId;
 }

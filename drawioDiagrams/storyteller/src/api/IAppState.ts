@@ -24,8 +24,3 @@ export interface IConnection {
   fromPos?: IVector2;
   toPos?: IVector2;
 }
-
-export interface IDrawState {
-  visibleSockets: IHash<string>;
-  connections: IHash<IConnection>; 
-}
