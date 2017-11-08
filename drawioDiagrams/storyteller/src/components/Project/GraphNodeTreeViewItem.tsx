@@ -2,6 +2,7 @@ import { IProject } from '../../api/project/IProject';
 import { IGraphNode, IReference, ReferencePath, ReferenceType } from '../../api/graph/IGraph';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
+import { parsePathItem, parseNodePath, createReference } from '../../helpers/index';
 
 export interface IGniviProps {
   project: IProject, 
@@ -57,11 +58,8 @@ export class GraphNodeTreeViewItem extends React.Component<IGniviProps>{
     }
 
     const handleClick = (self: GraphNodeTreeViewItem) => {
-      const reference: IReference = {
-        referenceType: ReferenceType.Global,
-        referencePath: this.props.referencePath,
-        targetFullId: self.props.graphNode.fullId
-      }
+      const reference: IReference = createReference(self.props.graphNode);
+      console.log('create reference', reference, this.props.graphNode);
       self.props.handleClick(reference);
     }
 

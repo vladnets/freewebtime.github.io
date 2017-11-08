@@ -39,6 +39,8 @@ export const appConfig = {
       
       INOUT_SOCKET_SET_POSITION: 'INOUT_SOCKET_SET_POSITION',
       INOUT_SOCKETS_SET_VISIBLE_SOCKETS: 'INOUT_SOCKETS_SET_VISIBLE_SOCKETS',
+      
+      GRAPH_VIEW_SET_POSITION: 'GRAPH_VIEW_SET_POSITION',
 
       APP_SET_CALLBACK: 'APP_SET_CALLBACK',
 
@@ -105,6 +107,13 @@ export const appConfig = {
       }
     },
 
+    GraphViewSetPosition: (graphViewPosition: IVector2): IAction => {
+      return {
+        type: appConfig.Actions.Types.GRAPH_VIEW_SET_POSITION,
+        payload: graphViewPosition,
+      }
+    },
+
     ProjectSelectModule: (reference: IReference) => {
       return {
         type: appConfig.Actions.Types.PROJECT_SELECT_MODULE,
@@ -120,6 +129,12 @@ export const appConfig = {
     'string_concat': (graphNode: IGraphNode, project: IProject) => {
       return 'string_concat\'s function result';
     }
+  },
+
+  GraphConfig: {
+    PathSeparator: '.',
+    ArrayOpen: '[',
+    ArrayClose: ']',
   }
 }
 

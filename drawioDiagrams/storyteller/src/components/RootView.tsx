@@ -3,13 +3,14 @@ import { ViewBase } from './View';
 import { Store } from 'redux';
 import * as React from 'react';
 import { IHash } from '../api/IHash';
+import { IDrawState } from '../api/IAppState';
 
-export class RootView extends ViewBase<{store: any; visibleSockets: IHash<string>}> {
+export class RootView extends ViewBase<{store: any; drawState: IDrawState}> {
   render() {
     return (
       <AppView 
         data={this.props.store.getState()} 
-        visibleSockets={this.props.visibleSockets} 
+        drawState={this.props.drawState} 
       />
     );
   }

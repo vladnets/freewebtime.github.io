@@ -15,7 +15,8 @@ import { IHash } from '../../api/IHash';
 import { IProject } from '../../api/project/IProject';
 import SvgComponent from '../SvgComponent';
 import * as ReactDOM from 'react-dom';
-import { ISocketsData } from '../../api/IAppState';
+import { ISocketsData, IDrawState } from '../../api/IAppState';
+import { createSocketId } from '../../helpers/index';
 
 export enum NodeViewDrawType {
   Node,
@@ -26,7 +27,7 @@ export interface INodeViewProps {
   drawType: NodeViewDrawType;
   node: IGraphNode;
   project: IProject;
-  visibleSockets: IHash<string>;
+  drawState: IDrawState;
   socketsData: ISocketsData;
   resources: IAppResources;
 }
@@ -95,7 +96,7 @@ export class NodeView extends React.Component<INodeViewProps> {
                 node={subnode} 
                 project={this.props.project} 
                 resources={this.props.resources} 
-                visibleSockets={this.props.visibleSockets}
+                drawState={this.props.drawState}
                 socketsData={this.props.socketsData}
               />
             )
@@ -128,7 +129,7 @@ export class NodeView extends React.Component<INodeViewProps> {
                 node={subnode} 
                 project={this.props.project} 
                 resources={this.props.resources} 
-                visibleSockets={this.props.visibleSockets}
+                drawState={this.props.drawState}
                 socketsData={this.props.socketsData}
               />
             )
@@ -173,7 +174,7 @@ export class NodeView extends React.Component<INodeViewProps> {
               node={subnode}
               resources={this.props.resources}
               project={this.props.project}
-              visibleSockets={this.props.visibleSockets}
+              drawState={this.props.drawState}
               key={subnode.id}
               socketsData={this.props.socketsData}
             />
@@ -237,7 +238,7 @@ export class NodeView extends React.Component<INodeViewProps> {
               node={node} 
               resources={this.props.resources}
               socketsData={this.props.socketsData}
-              visibleSockets={this.props.visibleSockets}  
+              drawState={this.props.drawState}  
             />
             <div className={'node-header-content'}>
             {node.name} {typeName}
@@ -245,7 +246,7 @@ export class NodeView extends React.Component<INodeViewProps> {
             <GraphNodeInOutSoket 
               socketType={SocketType.Output} 
               node={node} 
-              visibleSockets={this.props.visibleSockets}
+              drawState={this.props.drawState}
               resources={this.props.resources}
               socketsData={this.props.socketsData}
             />
@@ -257,16 +258,18 @@ export class NodeView extends React.Component<INodeViewProps> {
     }
 
     const movableContainer = (children: any) => {
+      const viewData = node.viewData || {};
+      const pos = viewData.position || {x: 0, y: 0}
+      const size = viewData.size || {x: 120, y: 60}
+
       return (
         <Rnd 
           default={{
-            x: node.viewData.position.x,
-            y: node.viewData.position.y,
-            width: node.viewData.size.x,
-            height: node.viewData.size.y,
+            x: pos.x,
+            y: pos.y,
+            width: size.x,
+            height: size.y,
           }}
-          // size={{width: node.size.x, height: node.size.y}}
-          // position={node.position}
           onDragStop={(e, d)=>{
             this.placeNode(this, {x: d.x, y: d.y}, this.props.resources.callback)
           }}
@@ -280,7 +283,7 @@ export class NodeView extends React.Component<INodeViewProps> {
       )
     }
     const nonMovableContainer = (children: any) => {
-      return (children)
+      return (children);
     }
 
     const finalView = isMovable
@@ -297,41 +300,39 @@ export enum SocketType {Input, Output}
 export interface IGniosProps {
   socketType: SocketType;
   node: IGraphNode;
-  visibleSockets: IHash<string>;
+  drawState: IDrawState,
   socketsData: ISocketsData;
   resources: IAppResources;
 }
 
 export class GraphNodeInOutSoket extends React.Component<IGniosProps> {
-  state = {...this.props};
-
-  componentDidMount() {
-    const rect: any = ReactDOM.findDOMNode(this).getBoundingClientRect();
+  updateSocketPosition(self: GraphNodeInOutSoket) {
+    const rect: any = ReactDOM.findDOMNode(self).getBoundingClientRect();
     const socketPosition: IVector2 = {
       x: rect.x,
       y: rect.y
     }
-    const action = appConfig.Actions.InoutSocketSetPosition(this.state[('socketId')], socketPosition);
-    this.state.resources.callback(action);
-  }
-  
-  componentWillMount() {
-    const newState = {...this.state}
-    const socketId = 
-    (
-      this.props.socketType === SocketType.Input
-      ? 'input-'
-      : 'output-'
-    )
-    + this.props.node.fullId;
-    newState[('socketId')] = socketId;
-    newState[('clientRect')] = undefined;
+    const socketId = createSocketId(self.props.socketType, self.props.node.fullId);
 
-    this.setState(newState);
+    const oldPosition = self.props.socketsData.socketsPositions[socketId];
+    if (oldPosition) {
+      if (oldPosition.x === socketPosition.x && oldPosition.y === socketPosition.y) {
+        return;
+      }
+    }
+    
+    const action = appConfig.Actions.InoutSocketSetPosition(socketId, socketPosition);
+    self.props.resources.callback(action);
+  }
+
+  componentDidMount() {
+    this.updateSocketPosition(this);
+  }
+  componentDidUpdate() {
+    this.updateSocketPosition(this);
   }
 
   render () {
-
     const className = 
     'inout-socket ' + 
     (
@@ -340,8 +341,8 @@ export class GraphNodeInOutSoket extends React.Component<IGniosProps> {
       : 'output-socket'
     );
 
-    const socketId = this.state[('socketId')];
-    this.props.visibleSockets[socketId] = socketId;
+    const socketId = createSocketId(this.props.socketType, this.props.node.fullId);
+    this.props.drawState.visibleSockets[socketId] = socketId;
 
     return (
       <div className={className}>

@@ -20,6 +20,7 @@ export interface IReference {
   referenceType: ReferenceType;
   referencePath: ReferencePath;
   targetFullId: string;
+  targetId: string;
 }
 
 export interface IGraphNodeViewData {
@@ -31,6 +32,7 @@ export interface IGraphNodeViewData {
 }
 
 export interface IGraphNode extends IUniqueObject {
+  parentId?: string;
   fullId: string;
   nodeType: GraphNodeType;
   viewData: IGraphNodeViewData;

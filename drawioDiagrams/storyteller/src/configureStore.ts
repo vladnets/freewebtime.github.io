@@ -11,7 +11,7 @@ export const configureStore = () => {
     appReducer,
     initialState,
     compose (
-      applyMiddleware(reduxLogger),
+      //applyMiddleware(reduxLogger),
       window[('devToolsExtension')] ? window[('devToolsExtension')]() : f => f      
     )
   );

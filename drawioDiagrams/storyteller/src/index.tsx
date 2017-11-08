@@ -1,5 +1,5 @@
 import { areObjectsEqual } from './helpers';
-import { IAppState } from './api/IAppState';
+import { IAppState, IDrawState } from './api/IAppState';
 import { appConfig } from './config/appConfig';
 import { saveState } from './helpers/LocalStorageHelper';
 import { RootView } from './components/RootView';
@@ -12,12 +12,15 @@ import * as React from 'react';
 import throttle from 'lodash/throttle';
 
 const renderView = (store: any) => {
-  const visibleSockets = {};
-
+  const drawState: IDrawState = {
+    visibleSockets: {},
+    connections: {}
+  }
+  const visibleSockets = drawState.visibleSockets;
   const oldState: IAppState = store.getState();
 
   render(
-    <RootView store={store} visibleSockets={visibleSockets} />,
+    <RootView store={store} drawState={drawState} />,
     document.getElementById('appRoot')
   );
 

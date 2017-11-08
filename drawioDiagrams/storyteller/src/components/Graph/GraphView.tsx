@@ -1,5 +1,7 @@
+import { resolveReference } from '../../helpers';
+import { IVector2 } from '../../api/IVector2';
 import Spline from '../Spline';
-import { NodeView, NodeViewDrawType } from './NodeView';
+import { NodeView, NodeViewDrawType, SocketType } from './NodeView';
 import { Store } from 'redux';
 import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
@@ -14,12 +16,15 @@ import * as FA from 'react-fontawesome';
 import { IProject } from '../../api/project/IProject';
 import { IGraphNode } from '../../api/graph/IGraph';
 import { IHash } from '../../api/IHash';
-import { ISocketsData } from '../../api/IAppState';
+import { IConnection, IDrawState, ISocketsData } from '../../api/IAppState';
+import { createSocketId } from '../../helpers/index';
+import * as ReactDOM from 'react-dom';
+import { appConfig } from '../../config/appConfig';
 
 interface IGraphViewProps {
   project: IProject;
   rootNode: IGraphNode;
-  visibleSockets: IHash<string>;
+  drawState: IDrawState;
   socketsData: ISocketsData;
   resources: IAppResources;
 }
@@ -93,10 +98,18 @@ export class GraphView extends ViewBase<IGraphViewProps> {
     console.log(data);
   }
   
+  componentDidMount1() {
+    const rect: any = ReactDOM.findDOMNode(this).getBoundingClientRect();
+    const graphPosition: IVector2 = {
+      x: rect.x,
+      y: rect.y
+    }
+    const action = appConfig.Actions.GraphViewSetPosition(graphPosition);
+    this.props.resources.callback(action);
+  }
+
   render() {
     const className = 'node-graph-view';
-    const areaSize = 1000;
-
     const project = this.props.project;
     const rootNode = this.props.rootNode;
     const subnodes = rootNode.subnodes;
@@ -112,7 +125,7 @@ export class GraphView extends ViewBase<IGraphViewProps> {
               node={subnode} 
               drawType={NodeViewDrawType.Node} 
               project={project}
-              visibleSockets={this.props.visibleSockets}
+              drawState={this.props.drawState}
               socketsData={this.props.socketsData}
             />
           )
@@ -122,18 +135,73 @@ export class GraphView extends ViewBase<IGraphViewProps> {
       return false;
     }
 
-    const connections = (
-      <div>
-        heyhohohoho
-        <SvgComponent ref="svgComponent">
-          <Spline 
-            mousePos={{x: 150, y: 450}}
-            start={{x: 450, y: 460}}
-            end={{x: 700, y: 50}}
-          />
-        </SvgComponent>
-      </div>
-    );
+    const collectConnectionsNode = (node: IGraphNode, result: {}) => {
+      if (node.inputReference) {
+        const target = resolveReference(node.inputReference, node, project);
+        if (target) {
+          const connectionId = 'connection-' + node.fullId;
+          const connection: IConnection = {
+            connectionId: connectionId,
+            fromNodeId: target.id,
+            toNodeId: node.id,
+            fromNodeFullId: target.fullId,
+            toNodeFullId: node.fullId,
+          }
+          result[connectionId] = connection;
+        }
+      }
+
+      if (node.subnodes) {
+        Object.keys(node.subnodes).map((key: string) => {
+          const subnodes = node.subnodes || {}
+          const subnode = subnodes[key];
+          if (subnode) {
+            const subConnection = collectConnectionsNode(subnode, result);
+          }
+        })
+      }
+    }
+    const collectConnections = (project: IProject) => {
+      const connections = {}
+      collectConnectionsNode(project, connections);
+      return connections;
+    }
+
+    const connectionsView = (project: IProject) => {
+      const connections = collectConnections(project);
+
+      return (
+        <div>
+          <SvgComponent ref="svgComponent">
+          {
+            Object.keys(connections).map((key: string)=> {
+              const connection: IConnection = connections[key];
+              const toSocketId = createSocketId(SocketType.Input, connection.toNodeFullId);
+              const fromSocketId = createSocketId(SocketType.Output, connection.fromNodeFullId);
+
+              const socketsData = this.props.socketsData;
+              if (!socketsData || !socketsData.visibleSockets[fromSocketId] || !socketsData.visibleSockets[toSocketId]) {
+                return false;
+              }
+
+              const fromPos = socketsData.socketsPositions[fromSocketId];
+              const toPos = socketsData.socketsPositions[toSocketId];
+
+              return (
+                <Spline
+                  key={connections[key].connectionId}
+                  mousePos={{x: 150, y: 450}}
+                  start={fromPos}
+                  end={toPos}
+                />
+              )
+            })
+          }  
+
+          </SvgComponent>
+        </div>
+      )
+    }
 
     const contextMenu = (
       <ContextMenu id="some_unique_identifier">
@@ -165,7 +233,7 @@ export class GraphView extends ViewBase<IGraphViewProps> {
         >
         {graphView}
         {
-          // connections
+          connectionsView(project)
         }
         {contextMenu}
       </div>

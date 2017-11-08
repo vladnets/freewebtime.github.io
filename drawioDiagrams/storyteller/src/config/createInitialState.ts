@@ -1,21 +1,27 @@
 import { IProject } from '../api/project/IProject';
 import { v4 } from 'node-uuid';
-import { GraphNodeType, IGraphNode, IReference, ReferencePath, ReferenceType } from '../api/graph/IGraph';
+import { GraphNodeType, IGraphNode, IReference, ReferencePath, ReferenceType, IGraphNodeViewData } from '../api/graph/IGraph';
 import { appConfig } from './appConfig';
+import { parseNodePath, createReference } from '../helpers/index';
 
 export const createInitialState = (): IProject => {
   
   const createNode = (params: {}): IGraphNode => {
     const id: string = params[('id')] as string || v4();
+    const uViewData: IGraphNodeViewData = params['viewData'];
+    const viewData: IGraphNodeViewData = {...uViewData};
+    if (uViewData) {
+      const uPos = uViewData.position;
+      const uSize = uViewData.size;
+      viewData.position = {...{x: 10, y: 10}, ...uPos},
+      viewData.size = {...{x: 160, y: 60}, ...uSize}
+    }
+
     const result = {
       fullId: id,
       nodeType: GraphNodeType.Primitive,
-      viewData: {
-        position: {x: 0, y: 0},
-        size: {x: 120, y: 80},
-        isCollapsed: false,
-      },
       ...params,
+      viewData: viewData,
       id: id,
       name: id,
     }
@@ -43,51 +49,21 @@ export const createInitialState = (): IProject => {
     parent.subnodes[node.id] = node;
   }
 
-  const createSystemNode = (): IGraphNode => {
+  const createSystemNode = (projectNode: IProject): IGraphNode => {
     
     const systemNode: IGraphNode = createConstructionNode({id: 'System'});
+    nodeSetParent(systemNode, projectNode);
+    
+    const stringNode = createPrimitiveNode({id: 'string', viewData: {position: {y: 200}}});
+    nodeSetParent(stringNode, systemNode);
 
-    //create primitives
-    const primitiveTypes = ['string', 'number', 'boolean'];
-    primitiveTypes.map((primitiveName: string, index: number)=>{
-      const nodeSize = {x: 130, y: 70}
-      const nodePos = {x: 120, y: 50 + index*nodeSize.y*1.4}
-      const viewData = {
-        position: nodePos,
-        size: nodeSize,
-      }
-      const nodeValues = {
-        id: primitiveName,
-        viewData: viewData,
-      }
-      const primitiveNode = createPrimitiveNode(nodeValues);
-      nodeSetParent(primitiveNode, systemNode);
-    });
+    const numberNode = createPrimitiveNode({id: 'number', viewData: {position: {y: 300}}});
+    nodeSetParent(numberNode, systemNode);
 
-    //create construction
-    const characterNode = createConstructionNode({
-      id: 'Character',
-    })
-    nodeSetParent(characterNode, systemNode);
+    const booleanNode = createPrimitiveNode({id: 'boolean', viewData: {position: {y: 400}}});
+    nodeSetParent(booleanNode, systemNode);
 
-    const charNameNode = createPrimitiveNode({
-      id: 'Name', 
-      typeReference: {
-        referenceType: ReferenceType.Global,
-        referencePath: ['System', 'string'],
-      }
-    });
-    const charAgeNode = createPrimitiveNode({
-      id: 'Age',
-      typeReference: {
-        referenceType: ReferenceType.Global,
-        referencePath: ['System', 'number'],
-      }
-    });
-    nodeSetParent(charNameNode, characterNode);
-    nodeSetParent(charAgeNode, characterNode);
-
-    //create function
+    //combine string
     const concatNode = createFunctionNode({
       id: 'Combine string',
       systemFunctionId: 'string_concat',
@@ -102,7 +78,7 @@ export const createInitialState = (): IProject => {
       }
     })
     concatNode.viewData.size = {x: 500, y: 204}
-    concatNode.viewData.position = {x: 400, y: 100}
+    concatNode.viewData.position = {x: 200, y: 400}
     nodeSetParent(concatNode, systemNode);
 
     const concatNodePrefix = createPrimitiveNode({
@@ -139,22 +115,38 @@ export const createInitialState = (): IProject => {
     })
     nodeSetParent(concatNodeResult, concatNode);
 
-    return systemNode;
-  }
+    //create construction
+    const characterNode = createConstructionNode({
+      id: 'Character',
+      viewData: {
+        position: {x: 800, y: 400},
+        size: {x: 180, y: 150}
+      }
+    })
+    nodeSetParent(characterNode, systemNode);
 
-  const selectedNode: IReference = {
-    referencePath: ['System'],
-    referenceType: ReferenceType.Global,
-    targetFullId: 'NewProject.System',
+    const charNameNode = createPrimitiveNode({
+      id: 'Name', 
+      typeReference: createReference(stringNode),
+      inputReference: createReference(concatNode),
+    });
+    const charAgeNode = createPrimitiveNode({
+      id: 'Age',
+      typeReference: createReference(numberNode),
+    });
+    nodeSetParent(charNameNode, characterNode);
+    nodeSetParent(charAgeNode, characterNode);
+
+    return systemNode;
   }
 
   const result: IProject = createConstructionNode({
     id: 'NewProject',
-    selectedNode: selectedNode,
   })
 
-  const systemNode = createSystemNode();
-  nodeSetParent(systemNode, result);
+  const systemNode = createSystemNode(result);
+
+  result.selectedNode = createReference(systemNode);
   
   return result;
 }

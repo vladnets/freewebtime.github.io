@@ -6,9 +6,9 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { IProject } from '../../api/project/IProject';
 import { IHash } from '../../api/IHash';
-import { ISocketsData } from '../../api/IAppState';
+import { ISocketsData, IDrawState } from '../../api/IAppState';
 
-export class EditorsPaneView extends ViewBase<{data: IProject, visibleSockets: IHash<string>, socketsData: ISocketsData, resources: IAppResources}> {
+export class EditorsPaneView extends ViewBase<{data: IProject, drawState: IDrawState, socketsData: ISocketsData, resources: IAppResources}> {
 
   render() {
     const nodeStyle = {
@@ -32,7 +32,7 @@ export class EditorsPaneView extends ViewBase<{data: IProject, visibleSockets: I
           project={this.props.data} 
           rootNode={selectedNode} 
           resources={this.props.resources}
-          visibleSockets={this.props.visibleSockets}
+          drawState={this.props.drawState}
           socketsData={this.props.socketsData}
         />
       </div>
