@@ -92,7 +92,6 @@ export class GraphView extends ViewBase<IGraphViewProps> {
   }
 
   handleClick(e, data) {
-    console.log(data);
   }
 
   render() {
@@ -137,7 +136,6 @@ export class GraphView extends ViewBase<IGraphViewProps> {
             fromPos: fromPos,
             toPos: toPos
           }
-          console.log('connection: ', node);
 
           result[connectionId] = connection;
         }
@@ -161,7 +159,6 @@ export class GraphView extends ViewBase<IGraphViewProps> {
 
     const connectionsView = (project: IProject) => {
       const connections = collectConnections(project);
-      console.log('connections are', connections);
 
       return (
         <div>
@@ -172,8 +169,6 @@ export class GraphView extends ViewBase<IGraphViewProps> {
 
               const fromPos = connection.fromPos;
               const toPos = connection.toPos;
-
-              console.log('spline drawing');
 
               return (
                 <Spline

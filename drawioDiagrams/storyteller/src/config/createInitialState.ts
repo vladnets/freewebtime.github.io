@@ -110,35 +110,27 @@ export const createInitialState = (): IProject => {
 
     const concatNodePrefix = createPrimitiveNode({
       id: 'Prefix', 
-      typeReference: {
-        referenceType: ReferenceType.Global,
-        referencePath: ['System', 'string'],
-      }
+      typeReference: createReference(stringNode),
+      inputReference: createReference(stringNode),
     })
     nodeSetParent(concatNodePrefix, concatNode);
     const concatNodeSeparator = createPrimitiveNode({
       id: 'Separator', 
-      typeReference: {
-        referenceType: ReferenceType.Global,
-        referencePath: ['System', 'string'],
-      }
+      typeReference: createReference(stringNode),
+      inputReference: createReference(stringNode),
     })
     nodeSetParent(concatNodeSeparator, concatNode);
     const concatNodePostfix = createPrimitiveNode({
       id: 'Postfix', 
-      typeReference: {
-        referenceType: ReferenceType.Global,
-        referencePath: ['System', 'string'],
-      }
+      typeReference: createReference(stringNode),
+      inputReference: createReference(stringNode),
     })
     nodeSetParent(concatNodePostfix, concatNode);
 
     const concatNodeResult = createPrimitiveNode({
       id: 'Result', 
-      typeReference: {
-        referenceType: ReferenceType.Global,
-        referencePath: ['System', 'string'],
-      }
+      typeReference: createReference(stringNode),
+      inputReference: createReference(concatNodePostfix),
     })
     nodeSetParent(concatNodeResult, concatNode);
 
@@ -155,11 +147,12 @@ export const createInitialState = (): IProject => {
     const charNameNode = createPrimitiveNode({
       id: 'Name', 
       typeReference: createReference(stringNode),
-      inputReference: createReference(concatNode),
+      inputReference: createReference(concatNodeResult),
     });
     const charAgeNode = createPrimitiveNode({
       id: 'Age',
       typeReference: createReference(numberNode),
+      inputReference: createReference(numberNode),
     });
     nodeSetParent(charNameNode, characterNode);
     nodeSetParent(charAgeNode, characterNode);
