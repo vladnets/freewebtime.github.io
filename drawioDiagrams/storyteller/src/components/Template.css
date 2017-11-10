@@ -105,12 +105,10 @@ body {
   text-align: center;
   /* font-size: 80%; */
   padding: 3px;
-  background: var(--main-bg-color-accent-2);
 }
 .project-explorer-subheader {
-  display: none;
   background: var(--main-bg-color-accent-2);
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   padding: 3px;
 }
 .project-explorer-content {
@@ -120,7 +118,6 @@ body {
 
 }
 .project-explorer-treeview-item {
-  padding: 3px 0;
 }
 .project-explorer-treeview-item.selected {
   background: var(--selection-color);
@@ -130,11 +127,21 @@ body {
 }
 .project-explorer-treeview-item-content {
   align-items: baseline;
+  padding: 2px;
+}
+.project-explorer-tvi-header-buttons-container {
+}
+.project-explorer-tvi-header-buttons-container .button {
+  background: var(--main-bg-color);
+  border: 1px solid black;
+  cursor: pointer;
+  color: var(--main-text-color);
 }
 .project-explorer-treeview-item-subitems-container {
 }
 .project-explorer-tvi-text {
   padding-left: 5px;
+  flex-grow: 1;
 }
 
 .editor-container {

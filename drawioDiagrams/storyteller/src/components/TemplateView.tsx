@@ -68,9 +68,6 @@ export class ProjectExplorerView extends React.Component<{appState: IAppState}> 
         <div className={'project-explorer-header'}>
           EXPLORER
         </div>
-        <div className={'project-explorer-subheader'}>
-          ITEMS
-        </div>
         <div className={'project-explorer-content'}>
           <ProjectExplorerItemsView appState={this.props.appState} />
         </div>  
@@ -146,9 +143,10 @@ export class ProjectExplorerItemsView extends React.Component<{appState: IAppSta
       ]
     }
 
+    const className = 'project-explorer-items'; 
     return (
-      <div className={'project-explorer-items'}>
-        <ProjectExplorerTreeViewItem data={rootItem} level={1} selectedId={'character'}/>
+      <div className={className}>
+        <ProjectExplorerTreeViewItem data={rootItem} level={0} selectedId={'character'}/>
       </div>
     );
   }
@@ -165,7 +163,7 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
 
     const subitemsView = () => {
       const subitems = this.props.data.subitems;
-      if (subitems) {
+      if (subitems && subitems.length > 0) {
         return (
           subitems.map((subitem: IPetviProps) => {
             return (<ProjectExplorerTreeViewItem data={subitem} key={subitem.id} level={this.props.level+1} selectedId={this.props.selectedId} />)
@@ -181,14 +179,25 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
       (this.props.selectedId === this.props.data.id
         ? ' selected'
         : ''
-      );
+      )
+
+    const contentClassName = 'project-explorer-treeview-item-content container-horizontal' + 
+      (this.props.level === 0
+        ? ' project-explorer-subheader'
+        : ''
+      )
 
     return (
       <div className={className}>
-        <div className={'project-explorer-treeview-item-content container-horizontal'} style={{paddingLeft: (this.props.level) + 'em'}}>
+        <div className={contentClassName} style={{paddingLeft: (0.5 + this.props.level) + 'em'}}>
           <FontAwesome name={this.props.data.icon} className={'project-explorer-tvi-icon'}/>
           <span className={'project-explorer-tvi-text'}>
           {this.props.data.name}
+          </span>
+          <span className={'project-explorer-tvi-header-buttons-container'}>
+            <button className={'button'}>
+              <FontAwesome name={'edit'} className={'project-explorer-tvi-icon'}/>
+            </button>
           </span>
         </div>
         <div className={'project-explorer-treeview-item-subitems-container'}>
