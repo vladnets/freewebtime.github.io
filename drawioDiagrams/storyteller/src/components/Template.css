@@ -137,6 +137,7 @@ body {
   cursor: pointer;
   color: var(--main-text-color);
 }
+
 .project-explorer-treeview-item-subitems-container {
 }
 .project-explorer-tvi-text {
