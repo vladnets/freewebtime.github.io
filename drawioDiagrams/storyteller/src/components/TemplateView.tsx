@@ -3,6 +3,8 @@ import { IAppState } from '../api/IAppState';
 import * as React from 'react';
 import { IHash } from '../api/IHash';
 import FontAwesome from 'react-fontawesome';
+import { GraphView } from './Graph/GraphView';
+import { EditorsPaneView } from './Project/EditorsPaneView';
 
 export class TemplateView extends React.Component<{data: IAppState}> {
   render() {
@@ -43,7 +45,9 @@ export class ProjectView extends React.Component<{appState: IAppState}, IProject
           </div>
           <div className={'container-horizontal middle-content-container'}>
             <LeftSidebarView appState={this.props.appState} pvState={this.state} />
-            <div className={'editor-container'} />
+            <div className={'editor-container'} >
+              <EditorsPaneView data={this.props.appState.project} resources={this.props.appState.resources} />
+            </div>
             <div className={'container-vertical right-sidebar-container app-panel'}>
               Properties
             </div>

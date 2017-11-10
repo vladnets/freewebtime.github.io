@@ -162,3 +162,25 @@ body {
   background: var(--secondary-bg-color);
   padding: 3px;
 }
+
+
+
+
+svg {
+  pointer-events: none;
+}
+
+.svg-spline {
+  pointer-events: painted;
+  fill: none;
+  stroke: darkkhaki;
+  color: aquamarine;
+  stroke-width: 5px;
+  cursor: pointer;
+}
+
+.connector.selected {
+  stroke: aqua;
+}
+
+
