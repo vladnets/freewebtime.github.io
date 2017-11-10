@@ -71,8 +71,7 @@ body {
 }
 
 .main-menu-container {
-  background: var(--main-text-color);
-  color: var(--main-bg-color-dark);
+  background: var(--main-bg-color-accent-2);
   padding: 3px;
 }
 .middle-content-container {
