@@ -119,15 +119,21 @@ body {
 }
 .project-explorer-treeview-item {
 }
-.project-explorer-treeview-item.selected {
+.project-explorer-treeview-item-content.selected {
   background: var(--selection-color);
   color: var(--main-bg-color);
 }
 .project-explorer-tvi-icon {
 }
 .project-explorer-treeview-item-content {
-  align-items: baseline;
+  align-items: center;
   padding: 2px;
+  cursor: pointer;
+}
+.project-explorer-treeview-item-content:hover {
+  align-items: center;
+  padding: 2px;
+  background: var(--secondary-bg-color);
 }
 .project-explorer-tvi-header-buttons-container {
 }
@@ -141,6 +147,7 @@ body {
 .project-explorer-treeview-item-subitems-container {
 }
 .project-explorer-tvi-text {
+  padding: 1px 0px;
   padding-left: 5px;
   flex-grow: 1;
 }
