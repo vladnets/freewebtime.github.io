@@ -21,6 +21,7 @@
     "react-dom": "^16.0.0",
     "react-draggable": "^3.0.3",
     "react-fontawesome": "^1.6.1",
+    "react-modal-dialog": "^4.0.7",
     "react-onclickoutside": "^6.6.2",
     "react-redux": "^5.0.6",
     "react-resizable": "^1.7.5",
@@ -56,9 +57,21 @@
     "babel-preset-env": "^1.6.0",
     "install-peers": "^1.0.2",
     "node-sass": "^4.5.3",
+    "postcss-load-config": "^1.2.0",
+    "postcss-loader": "^2.0.8",
+    "postcss-plugin": "^1.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "redux-devtools": "^3.4.0",
     "sass-loader": "^6.0.6"
+  },
+  "postcss": {
+    "parser": "sugarss",
+    "map": false,
+    "from": "/path/to/src.sss",
+    "to": "/path/to/dest.css",
+    "plugins": {
+      "postcss-plugin": {}
+    }
   }
 }

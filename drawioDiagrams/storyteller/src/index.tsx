@@ -10,8 +10,19 @@ import './index.css';
 import { configureStore } from './configureStore';
 import * as React from 'react';
 import throttle from 'lodash/throttle';
+import { TemplateView } from './components/TemplateView';
 
 const renderView = (store: any) => {
+  
+  if (appConfig.IsShowTemplate) {
+    render(
+      <TemplateView data={store.getState()} />,
+      document.getElementById('appRoot')
+    )
+
+    return;
+  }
+
   render(
     <RootView store={store} />,
     document.getElementById('appRoot')

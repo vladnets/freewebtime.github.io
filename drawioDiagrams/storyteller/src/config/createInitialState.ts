@@ -130,7 +130,6 @@ export const createInitialState = (): IProject => {
     const concatNodeResult = createPrimitiveNode({
       id: 'Result', 
       typeReference: createReference(stringNode),
-      inputReference: createReference(concatNodePostfix),
     })
     nodeSetParent(concatNodeResult, concatNode);
 

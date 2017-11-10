@@ -243,6 +243,22 @@ export class NodeView extends React.Component<INodeViewProps> {
       )
     }
 
+    let typeName = '';
+    if (node.typeReference) {
+      const typeNode = resolveReference(node.typeReference, node, this.props.project);
+      if (typeNode) {
+        typeName = '(' + typeNode.name + ')';
+      }
+    }
+    
+    const nodeHeader = () => {
+      return (
+        <span>
+        {node.name} {typeName}
+        </span>
+      )
+    }
+
     const nodeRootView = () => {
       const className = 'node-view ' + 
         (this.props.drawType === NodeViewDrawType.Node
@@ -250,20 +266,12 @@ export class NodeView extends React.Component<INodeViewProps> {
           : ''
         )
 
-      let typeName = '';
-      if (node.typeReference) {
-        const typeNode = resolveReference(node.typeReference, node, this.props.project);
-        if (typeNode) {
-          typeName = '(' + typeNode.name + ')';
-        }
-      }
-
       return (
         <div className={className}>
           <div className={'node-header'}>
             {inSocketView()}
             <div className={'node-header-content'}>
-            {node.name} {typeName}
+            {nodeHeader()}
             </div>
             {outSocketView()}
           </div>
