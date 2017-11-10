@@ -4,9 +4,9 @@ html, body {
 
 body {
   color: var(--main-text-color);
-  background: var(--main-bg-color);
+  background: var(--main-bg-color-dark);
   font-size: 10pt;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
   margin: 0px;
   padding: 0px;
 }

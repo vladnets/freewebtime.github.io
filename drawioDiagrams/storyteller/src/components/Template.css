@@ -1,0 +1,150 @@
+:root {
+  --app-background: #202020;
+  
+  --main-bg-color: #2c2c2c;
+  --main-bg-color-2: #303030;
+  --main-bg-color-dark: #202020;
+  --main-bg-color-accent: #464646;
+  --main-bg-color-accent-2: #3a3a3a;
+  --main-text-color: #dadada;
+  --main-text-color-accent: #ececec;
+  --main-text-color-dark: #a5a5a5;
+  
+  --secondary-bg-color: #407fb6;
+  --secondary-bg-color-dark: #597ca1;
+  --secondary-bg-color-accent: #6b95c2;
+
+  --selection-color: #D86A46;
+  --selection-color-accent: #c0512f;
+  --hightlignt-color: #78aeb0;
+  --hightlignt-color-accent: #a3ebec;
+
+  --main-font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  color: var(--main-text-color);
+  background: var(--main-bg-color-dark);
+  font-size: 10pt;
+  font-family: var(--main-font-family);
+  margin: 0px;
+  padding: 0px;
+}
+
+.fullheight {
+  height: 100%;
+}
+.fullwidth {
+  height: 100%;
+}
+.fullgrow {
+  flex-grow: 1;
+}
+
+#appRoot {
+  height: 100%;
+}
+
+.app-content {
+  height: 100%;
+}
+
+.project-view {
+  height: 100%;
+}
+
+.project-content {
+  height: 100%;
+}
+
+.container-vertical {
+  display: flex;
+  flex-direction: column;
+}
+.container-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-menu-container {
+  background: var(--main-text-color);
+  color: var(--main-bg-color-dark);
+  padding: 3px;
+}
+.middle-content-container {
+  flex-grow: 1;
+}
+
+
+
+
+.left-sidebar-container {
+  background: var(--main-bg-color);
+}
+.left-sidebar-icons-container {
+  background: var(--main-bg-color-accent);
+}
+.left-sidebar-content {
+  width: 240px;
+}
+.left-sidebar-icons-item {
+  margin: 10px;
+}
+.left-sidebar-icons-item .fa {
+  font-size: 2em;
+}
+.project-explorer {
+  background: var(--main-bg-color-2);
+  flex-grow: 1;
+}
+.project-explorer-header {
+  text-align: center;
+  /* font-size: 80%; */
+  padding: 3px;
+  background: var(--main-bg-color-accent-2);
+}
+.project-explorer-subheader {
+  display: none;
+  background: var(--main-bg-color-accent-2);
+  margin-bottom: 5px;
+  padding: 3px;
+}
+.project-explorer-content {
+  flex-grow: 1;
+}
+.project-explorer-items {
+
+}
+.project-explorer-treeview-item {
+  padding: 3px 0;
+}
+.project-explorer-treeview-item.selected {
+  background: var(--selection-color);
+  color: var(--main-bg-color);
+}
+.project-explorer-tvi-icon {
+}
+.project-explorer-treeview-item-content {
+  align-items: baseline;
+}
+.project-explorer-treeview-item-subitems-container {
+}
+.project-explorer-tvi-text {
+  padding-left: 5px;
+}
+
+.editor-container {
+  flex-grow: 1;
+}
+.right-sidebar-container {
+  background: var(--main-bg-color);
+  min-width: 180px;
+}
+.footer-container {
+  background: var(--secondary-bg-color);
+  padding: 3px;
+}

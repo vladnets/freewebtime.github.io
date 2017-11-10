@@ -10,7 +10,7 @@ export const appConfig = {
   IsSaveStateToLocalStorage: true,
   IsLoadStateFromLocalStorage: false,
   SaveStateToLocalStorageInterval: 1000,
-  IsShowTemplate: false,
+  IsShowTemplate: true,
 
   PrimitiveTypes: {
     string: 'string',
