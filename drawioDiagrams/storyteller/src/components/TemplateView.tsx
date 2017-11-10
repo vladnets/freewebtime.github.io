@@ -15,9 +15,7 @@ export class TemplateView extends React.Component<{data: IAppState}> {
             </div>
             <div className={'container-horizontal middle-content-container'}>
               <LeftSidebarView appState={this.props.data} />
-              <div className={'editor-container'}>
-                Editor
-              </div>
+              <div className={'editor-container'} />
               <div className={'container-vertical right-sidebar-container app-panel'}>
                 Properties
               </div>
