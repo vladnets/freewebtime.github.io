@@ -4,11 +4,11 @@ import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { IProject } from '../../api/project/IProject';
+import { IProjectOld } from '../../api/project/IProject';
 import { IHash } from '../../api/IHash';
 import { ISocketsData } from '../../api/IAppState';
 
-export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppResources}> {
+export class EditorsPaneView extends ViewBase<{project: IProjectOld, resources: IAppResources}> {
 
   render() {
     const nodeStyle = {
@@ -21,7 +21,7 @@ export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppRe
       left: '-80px',
     } as React.CSSProperties;
     
-    const selectedNode = getSelectedNode(this.props.data);
+    const selectedNode = getSelectedNode(this.props.project);
     if (!selectedNode) {
        return false;
     }
@@ -29,7 +29,7 @@ export class EditorsPaneView extends ViewBase<{data: IProject, resources: IAppRe
     return (
       <div className={'fullheight fullwidth'} style={{display: 'flex', flexDirection: 'column'}}>
         <GraphView 
-          project={this.props.data} 
+          project={this.props.project} 
           rootNode={selectedNode} 
           resources={this.props.resources}
         />

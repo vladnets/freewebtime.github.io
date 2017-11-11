@@ -10,7 +10,7 @@ export class AppView extends ViewBase<{data: IAppState}> {
     return (
       <div className={'app-content'}>
         <ProjectView 
-          data={this.props.data.project} 
+          data={this.props.data.projectOld} 
           resources={this.props.data.resources}
         />
       </div>

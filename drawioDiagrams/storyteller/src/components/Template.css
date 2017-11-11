@@ -6,6 +6,7 @@
   --main-bg-color-dark: #202020;
   --main-bg-color-accent: #464646;
   --main-bg-color-accent-2: #3a3a3a;
+  --main-bg-color-accent-light: #6b6b6b;
   --main-text-color: #dadada;
   --main-text-color-accent: #ececec;
   --main-text-color-dark: #a5a5a5;
@@ -13,13 +14,19 @@
   --secondary-bg-color: #407fb6;
   --secondary-bg-color-dark: #597ca1;
   --secondary-bg-color-accent: #6b95c2;
-
+  --secondary-text-color: #2d531b;
+  --secondary-text-color-dark: #77712b;
+  --secondary-text-color-accent: #d6cb4f;
+  
   --selection-color: #D86A46;
   --selection-color-accent: #c0512f;
   --hightlignt-color: #78aeb0;
   --hightlignt-color-accent: #a3ebec;
 
   --main-font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+
+  --explorer-item-color-file: #27ad9b;
+  --explorer-item-color-folder: #D86A46;
 }
 
 html, body {
@@ -39,7 +46,7 @@ body {
   height: 100%;
 }
 .fullwidth {
-  height: 100%;
+  width: 100%;
 }
 .fullgrow {
   flex-grow: 1;
@@ -103,7 +110,11 @@ body {
 .project-explorer-header {
   text-align: center;
   /* font-size: 80%; */
-  padding: 3px;
+  padding: 5px;
+  /* border-bottom: 1px solid var(--app-background); */
+  -webkit-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
 }
 .project-explorer-subheader {
   background: var(--main-bg-color-accent-2);
@@ -119,8 +130,8 @@ body {
 .project-explorer-treeview-item {
 }
 .project-explorer-treeview-item-content.selected {
-  background: var(--selection-color);
-  color: var(--main-bg-color);
+  background: var(--main-bg-color-accent-light);
+  color: var(--main-text-color);
 }
 .project-explorer-tvi-icon {
 }
@@ -132,7 +143,8 @@ body {
 .project-explorer-treeview-item-content:hover {
   align-items: center;
   padding: 2px;
-  background: var(--secondary-bg-color);
+  background: var(--main-bg-color-accent-2);
+  color: var(--main-text-color);
 }
 .project-explorer-tvi-header-buttons-container {
 }
@@ -151,9 +163,93 @@ body {
   flex-grow: 1;
 }
 
-.editor-container {
+
+.right-sidebar-container {
+  background: var(--main-bg-color);
+}
+.right-sidebar-icons-container {
+  background: var(--main-bg-color-accent);
+}
+.right-sidebar-content {
+  width: 240px;
+}
+.right-sidebar-icons-item {
+  margin: 10px;
+}
+.right-sidebar-icons-item .fa {
+  font-size: 2em;
+}
+
+
+
+.object-properties-container {
+  background: var(--main-bg-color-2);
   flex-grow: 1;
 }
+.object-properties-header {
+  text-align: center;
+  /* font-size: 80%; */
+  padding: 5px;
+  /* border-bottom: 1px solid var(--app-background); */
+  -webkit-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+}
+.object-properties-content {
+
+}
+
+
+.editors-container {
+  flex-grow: 1;
+}
+
+.editors-tabs-container {
+  background: var(--main-bg-color-2);
+  -webkit-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  z-index: 10;
+}
+
+.editor-tab-header {
+  padding: 5px 8px;
+  border-left: 1px solid var(--app-background);
+  background: var(--main-bg-color-2);
+  align-items: center;
+  cursor: pointer;
+}
+.editor-tab-header.selected {
+  background: var(--main-bg-color-accent);
+  -webkit-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+}
+.editor-tab-header-item {
+}
+.editor-tab-header-item.text {
+  padding: 0px 5px;
+}
+
+.editor-root {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.editor-root .shadow {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  -webkit-box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
+}
+
+
+
+
 .right-sidebar-container {
   background: var(--main-bg-color);
   min-width: 180px;
@@ -184,3 +280,6 @@ svg {
 }
 
 
+.test {
+  color: #27ad9b;
+}

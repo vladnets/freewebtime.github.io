@@ -16,7 +16,7 @@ export enum ReferenceType {
 export type ReferencePathItem = string|number;
 export type ReferencePath = ReferencePathItem[];
 
-export interface IReference {
+export interface IReferenceOld {
   referenceType: ReferenceType;
   referencePath: ReferencePath;
   targetFullId: string;
@@ -55,9 +55,9 @@ export interface IGraphNode extends IUniqueObject {
   fullId: string;
   nodeType: GraphNodeType;
   viewData: IGraphNodeViewData;
-  imports?: IHash<IReference>;
-  typeReference?: IReference;
-  inputReference?: IReference;
+  imports?: IHash<IReferenceOld>;
+  typeReference?: IReferenceOld;
+  inputReference?: IReferenceOld;
   subnodes?: IHash<IGraphNode>;
   sockets: IGraphNodeSockets; 
 }

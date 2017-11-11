@@ -1,10 +1,10 @@
-import { IProject } from '../api/project/IProject';
+import { IProjectOld } from '../api/project/IProject';
 import { v4 } from 'node-uuid';
-import { GraphNodeType, IGraphNode, IReference, ReferencePath, ReferenceType, IGraphNodeViewData, IGraphNodeSockets, SocketType } from '../api/graph/IGraph';
+import { GraphNodeType, IGraphNode, IReferenceOld, ReferencePath, ReferenceType, IGraphNodeViewData, IGraphNodeSockets, SocketType } from '../api/graph/IGraph';
 import { appConfig } from './appConfig';
 import { parseNodePath, createReference } from '../helpers/index';
 
-export const createInitialState = (): IProject => {
+export const createInitialState = (): IProjectOld => {
   
   const createNode = (params: {}): IGraphNode => {
     const id: string = params[('id')] as string || v4();
@@ -76,7 +76,7 @@ export const createInitialState = (): IProject => {
     parent.subnodes[node.id] = node;
   }
 
-  const createSystemNode = (projectNode: IProject): IGraphNode => {
+  const createSystemNode = (projectNode: IProjectOld): IGraphNode => {
     
     const systemNode: IGraphNode = createConstructionNode({id: 'System'});
     nodeSetParent(systemNode, projectNode);
@@ -159,7 +159,7 @@ export const createInitialState = (): IProject => {
     return systemNode;
   }
 
-  const result: IProject = createConstructionNode({
+  const result: IProjectOld = createConstructionNode({
     id: 'NewProject',
   })
 

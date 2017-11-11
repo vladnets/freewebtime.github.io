@@ -1,9 +1,9 @@
-import { IProject } from '../api/project/IProject';
+import { IProjectOld } from '../api/project/IProject';
 import { IVector2 } from '../api/IVector2';
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import Typography from 'material-ui/Typography';
-import { IGraphNode, IGraphNodeViewData, IReference } from '../api/graph/IGraph';
+import { IGraphNode, IGraphNodeViewData, IReferenceOld } from '../api/graph/IGraph';
 import { IHash } from '../api/IHash';
 
 export const appConfig = {
@@ -147,7 +147,7 @@ export const appConfig = {
       }
     },
 
-    ProjectSelectModule: (reference: IReference) => {
+    ProjectSelectModule: (reference: IReferenceOld) => {
       return {
         type: appConfig.Actions.Types.PROJECT_SELECT_MODULE,
         payload: reference,
@@ -159,7 +159,7 @@ export const appConfig = {
   },
   
   SystemFunctions: {
-    'string_concat': (graphNode: IGraphNode, project: IProject) => {
+    'string_concat': (graphNode: IGraphNode, project: IProjectOld) => {
       return 'string_concat\'s function result';
     }
   },

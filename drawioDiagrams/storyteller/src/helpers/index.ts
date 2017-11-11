@@ -1,7 +1,7 @@
 import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
-import { IProject } from '../api/project/IProject';
-import { IGraphNode, IReference, ReferencePath, ReferencePathItem, ReferenceType } from '../api/graph/IGraph';
+import { IProjectOld } from '../api/project/IProject';
+import { IGraphNode, IReferenceOld, ReferencePath, ReferencePathItem, ReferenceType } from '../api/graph/IGraph';
 
 export const parsePathItem = (pathItem: string): ReferencePathItem => {
   if (pathItem.startsWith(appConfig.GraphConfig.ArrayOpen) && pathItem.endsWith(appConfig.GraphConfig.ArrayClose)) {
@@ -21,7 +21,7 @@ export const parseNodePath = (nodeId: string): ReferencePath => {
   return lines.map(parsePathItem);
 }
 
-export const getSelectedNode = (project: IProject): IGraphNode|undefined => {
+export const getSelectedNode = (project: IProjectOld): IGraphNode|undefined => {
   if (!project.selectedNode) {
     return undefined;
   }
@@ -53,7 +53,7 @@ export const resolveReferenceRaw = (referencePath: ReferencePath, rootNode: IGra
   return undefined;
 }
 
-export const resolveReference = (reference: IReference, context: IGraphNode, project: IProject): IGraphNode|undefined => {
+export const resolveReference = (reference: IReferenceOld, context: IGraphNode, project: IProjectOld): IGraphNode|undefined => {
   if (!project || !reference) {
     return;
   }
@@ -117,7 +117,7 @@ export const areObjectsEqual = ( x, y ) => {
   return true;
 }
 
-export const createReference = (target: IGraphNode): IReference => {
+export const createReference = (target: IGraphNode): IReferenceOld => {
   return {
     targetId: target.id,
     targetFullId: target.fullId,

@@ -1,10 +1,10 @@
 import { IGraphNode } from '../../api/graph/IGraph';
-import { IProject } from '../../api/project/IProject';
+import { IProjectOld } from '../../api/project/IProject';
 import { ViewBase } from '../View';
 import * as React from 'react';
 import { getSelectedNode } from '../../helpers/index';
 
-export class StatusBarView extends ViewBase<{data: IProject}> {
+export class StatusBarView extends ViewBase<{data: IProjectOld}> {
   render() {
 
     const project = this.props.data;

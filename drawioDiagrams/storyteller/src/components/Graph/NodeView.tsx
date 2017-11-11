@@ -1,7 +1,6 @@
 import { resolveReference } from '../../helpers';
 import { GraphNodeType, IFunctionNode, IGraphNode, IGraphNodeSocket, SocketType, IGraphNodeSockets } from '../../api/graph/IGraph';
 import * as React from 'react';
-import './Node.css';
 import { IVector2 } from '../../api/IVector2';
 import './Node.css';
 import { ICallback } from '../../api/index';
@@ -12,7 +11,7 @@ import Rnd from 'react-rnd';
 import * as FA from 'react-fontawesome';
 import { v4 } from 'node-uuid';
 import { IHash } from '../../api/IHash';
-import { IProject } from '../../api/project/IProject';
+import { IProjectOld } from '../../api/project/IProject';
 import SvgComponent from '../SvgComponent';
 import * as ReactDOM from 'react-dom';
 import { ISocketsData } from '../../api/IAppState';
@@ -26,7 +25,7 @@ export enum NodeViewDrawType {
 export interface INodeViewProps {
   drawType: NodeViewDrawType;
   node: IGraphNode;
-  project: IProject;
+  project: IProjectOld;
   resources: IAppResources;
 }
 

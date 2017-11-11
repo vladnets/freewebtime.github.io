@@ -1,16 +1,16 @@
-import { IProject } from '../../api/project/IProject';
-import { IGraphNode, IReference, ReferencePath, ReferenceType } from '../../api/graph/IGraph';
+import { IProjectOld } from '../../api/project/IProject';
+import { IGraphNode, IReferenceOld, ReferencePath, ReferenceType } from '../../api/graph/IGraph';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import { parsePathItem, parseNodePath, createReference } from '../../helpers/index';
 
 export interface IGniviProps {
-  project: IProject, 
+  project: IProjectOld, 
   graphNode: IGraphNode, 
   resources: IAppResources, 
   indent: number, 
   referencePath: ReferencePath,
-  handleClick: (reference: IReference)=> void
+  handleClick: (reference: IReferenceOld)=> void
 }
 
 export class GraphNodeTreeViewItem extends React.Component<IGniviProps>{
@@ -58,7 +58,7 @@ export class GraphNodeTreeViewItem extends React.Component<IGniviProps>{
     }
 
     const handleClick = (self: GraphNodeTreeViewItem) => {
-      const reference: IReference = createReference(self.props.graphNode);
+      const reference: IReferenceOld = createReference(self.props.graphNode);
       console.log('create reference', reference, this.props.graphNode);
       self.props.handleClick(reference);
     }

@@ -8,10 +8,10 @@ import { ViewBase } from '../View';
 import { IAppResources } from '../../api/IAppResources';
 import * as React from 'react';
 import { IHash } from '../../api/IHash';
-import { IProject } from '../../api/project/IProject';
+import { IProjectOld } from '../../api/project/IProject';
 import './Project.css';
 
-export class ProjectView extends ViewBase<{data: IProject, resources: IAppResources}> {
+export class ProjectView extends ViewBase<{data: IProjectOld, resources: IAppResources}> {
   render() {
     return (
       <div className={'project-view'} style={{display: 'flex', flexDirection: 'column'}}>
@@ -27,7 +27,7 @@ export class ProjectView extends ViewBase<{data: IProject, resources: IAppResour
               Project > Root Item > Types > etc.
             </div>
             <EditorsPaneView 
-              data={this.props.data} 
+              project={this.props.data} 
               resources={this.props.resources} 
             />
           </div>

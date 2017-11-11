@@ -13,7 +13,7 @@ import './Graph.css';
 import SvgComponent from '../SvgComponent';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import * as FA from 'react-fontawesome';
-import { IProject } from '../../api/project/IProject';
+import { IProjectOld } from '../../api/project/IProject';
 import { IGraphNode } from '../../api/graph/IGraph';
 import { IHash } from '../../api/IHash';
 import { IConnection, ISocketsData } from '../../api/IAppState';
@@ -21,7 +21,7 @@ import * as ReactDOM from 'react-dom';
 import { appConfig } from '../../config/appConfig';
 
 interface IGraphViewProps {
-  project: IProject;
+  project: IProjectOld;
   rootNode: IGraphNode;
   resources: IAppResources;
 }
@@ -151,13 +151,13 @@ export class GraphView extends ViewBase<IGraphViewProps> {
         })
       }
     }
-    const collectConnections = (project: IProject) => {
+    const collectConnections = (project: IProjectOld) => {
       const connections = {}
       collectConnectionsNode(project, connections);
       return connections;
     }
 
-    const connectionsView = (project: IProject) => {
+    const connectionsView = (project: IProjectOld) => {
       const connections = collectConnections(project);
 
       return (

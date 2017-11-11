@@ -1,4 +1,4 @@
-import { IProject } from './project/IProject';
+import { IProjectOld } from './project/IProject';
 import { IAppResources } from './IAppResources';
 import { IHash } from './IHash';
 import { IVector2 } from './IVector2';
@@ -10,7 +10,7 @@ export interface ISocketsData {
 }
 
 export interface IAppState {
-  project: IProject;
+  projectOld: IProjectOld;
   socketsData: ISocketsData;
   resources: IAppResources;
 }

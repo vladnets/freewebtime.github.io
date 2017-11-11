@@ -21,6 +21,36 @@ export interface IProjectViewState {
   handleItemClick: (itemId: string) => void;
 }
 
+export class EditorsContainerView extends React.Component<{appState: IAppState}> {
+  render () {
+    return (
+      <div className={'editors-container container-vertical'} >
+        <div className={'editors-tabs-container container-horizontal'}>
+          <div className={'editor-tab-header container-horizontal'}>
+            <FontAwesome name={'file'} className={'editor-tab-header-item icon'} />
+            <div className={'editor-tab-header-item text'}>
+              character
+            </div>
+            <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
+          </div>
+          <div className={'editor-tab-header selected container-horizontal'}>
+            <FontAwesome name={'file'} className={'editor-tab-header-item icon'} />
+            <div className={'editor-tab-header-item text'}>
+              character
+            </div>
+            <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
+          </div>
+        </div>
+
+        <div className={'editor-root'}>
+          Editor
+          <div className={'shadow'} />
+        </div>
+      </div>
+    )
+  }
+}
+
 export class ProjectView extends React.Component<{appState: IAppState}, IProjectViewState> {
   state: IProjectViewState = {
     selectedItemId: 'basic types', 
@@ -45,12 +75,8 @@ export class ProjectView extends React.Component<{appState: IAppState}, IProject
           </div>
           <div className={'container-horizontal middle-content-container'}>
             <LeftSidebarView appState={this.props.appState} pvState={this.state} />
-            <div className={'editor-container'} >
-              <EditorsPaneView data={this.props.appState.project} resources={this.props.appState.resources} />
-            </div>
-            <div className={'container-vertical right-sidebar-container app-panel'}>
-              Properties
-            </div>
+            <EditorsContainerView appState={this.props.appState} />
+            <RightSidebarView appState={this.props.appState} pvState={this.state} />
           </div>
           <div className={'container-horizontal footer-container'}>
             Footer content
@@ -90,6 +116,44 @@ export class LeftSidebarView extends React.Component<{appState: IAppState, pvSta
   }
 }
 
+export class ObjectPropertiesView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
+  render() {
+    return (
+      <div className={'object-properties-container container-vertical'}>
+        <div className={'object-properties-header'}>
+          PROPERTIES
+        </div>
+        <div className={'object-properties-content'}>
+          Object properties
+        </div>  
+      </div>      
+    );
+  }
+}
+
+export class RightSidebarView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
+  render() {
+    return (
+      <div className={'container-horizontal right-sidebar-container app-panel'}>
+        <div className={'right-sidebar-content container-vertical'}>
+          <ObjectPropertiesView appState={this.props.appState} pvState={this.props.pvState} />
+        </div>
+        <div className={'container-vertical left-sidebar-icons-container'}>
+          <div className={'left-sidebar-icons-item'}>
+            <FontAwesome name="wrench" />
+          </div>
+          <div className={'left-sidebar-icons-item'}>
+            <FontAwesome name="tag" />
+          </div>
+          <div className={'left-sidebar-icons-item'}>
+            <FontAwesome name="navicon" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 export class ProjectExplorerView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   render() {
     return (
@@ -107,27 +171,34 @@ export class ProjectExplorerView extends React.Component<{appState: IAppState, p
 
 export class ProjectExplorerItemsView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   render () {
-  
+
+    const fileColor = 'var(--explorer-item-color-file)';
+    const folderColor = 'var(--explorer-item-color-folder)';
+    
     const rootItem: IPetviProps = {
       id: 'new story',
       name: 'New story',
       icon: 'caret-down',
+      iconColor: folderColor,
       subitems: [
         {
           id: 'lib',
           icon: 'caret-down',
           name: 'lib',
+          iconColor: folderColor,
           subitems: [
             {
               id: 'system',
               icon: 'file',
               name: 'system',
+              iconColor: fileColor,
               subitems: []
             },
             {
               id: 'markup',
               icon: 'file',
               name: 'markup',
+              iconColor: fileColor,
               subitems: []
             },
           ]
@@ -136,29 +207,34 @@ export class ProjectExplorerItemsView extends React.Component<{appState: IAppSta
           id: 'src',
           icon: 'caret-down',
           name: 'src',
+          iconColor: folderColor,
           subitems: [
             {
               id: 'basic types',
               icon: 'caret-right',
               name: 'basic types',
+              iconColor: folderColor,
               subitems: []
             },
             {
               id: 'character',
               icon: 'file',
               name: 'character',
+              iconColor: fileColor,
               subitems: []
             },
             {
               id: 'storypoint',
               icon: 'file',
               name: 'storypoint',
+              iconColor: fileColor,
               subitems: []
             },
             {
               id: 'location',
               icon: 'file',
               name: 'location',
+              iconColor: fileColor,
               subitems: []
             }
           ]
@@ -167,6 +243,7 @@ export class ProjectExplorerItemsView extends React.Component<{appState: IAppSta
           id: 'story',
           icon: 'file',
           name: 'story',
+          iconColor: fileColor,
           subitems: []
         }
       ]
@@ -185,6 +262,7 @@ export interface IPetviProps {
   id: string;
   name: string;
   icon: string;
+  iconColor?: string;
   subitems: IPetviProps[];
 }
 export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviProps, level: number, pvState: IProjectViewState}> {
@@ -238,12 +316,15 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
 
     const buttonsView = () => {
       const isShowButtons = false;
-      
+
       if (isShowButtons || this.state.isMouseOver) {
         return (
           <span className={'project-explorer-tvi-header-buttons-container'}>
             <button className={'button'}>
-              <FontAwesome name={'edit'} className={'project-explorer-tvi-icon'} style={{color: '#227e2e'}} />
+              <FontAwesome name={'plus'} className={'project-explorer-tvi-icon'} style={{color: '#227e2e'}} />
+            </button>
+            <button className={'button'}>
+              <FontAwesome name={'edit'} className={'project-explorer-tvi-icon'} style={{color: '#a4ad27'}} />
             </button>
             <button className={'button'}>
               <FontAwesome name={'remove'} className={'project-explorer-tvi-icon'} style={{color: '#822'}} />
@@ -255,6 +336,11 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
       return false;
     }
 
+    const iconStyle = {}
+    if (this.props.data.iconColor) {
+      iconStyle['color'] = this.props.data.iconColor
+    }
+
     return (
       <div className={className}>
         <div 
@@ -264,7 +350,7 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
           onMouseLeave={() => this.mouseLeave(this)}
           onClick={(e: any) => this.handleClick(this.props.pvState, this.props.data.id, e)}
         >
-          <FontAwesome name={this.props.data.icon} className={'project-explorer-tvi-icon'}/>
+          <FontAwesome name={this.props.data.icon} className={'project-explorer-tvi-icon'} style={iconStyle}/>
           <span className={'project-explorer-tvi-text'}>
           {this.props.data.name}
           </span>

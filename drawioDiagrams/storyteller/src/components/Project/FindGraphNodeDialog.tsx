@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { IProject } from '../../api/project/IProject';
+import { IProjectOld } from '../../api/project/IProject';
 import { GraphNodeTreeViewItem } from './GraphNodeTreeViewItem';
-import { IReference } from '../../api/graph/IGraph';
+import { IReferenceOld } from '../../api/graph/IGraph';
 import { IAppResources } from '../../api/IAppResources';
 import { appConfig } from '../../config/appConfig';
 
-export class FindGraphNodeDialog extends React.Component<{project: IProject, resources: IAppResources, isVisible?: boolean}> {
+export class FindGraphNodeDialog extends React.Component<{project: IProjectOld, resources: IAppResources, isVisible?: boolean}> {
   
   render () {
 
@@ -26,7 +26,7 @@ export class FindGraphNodeDialog extends React.Component<{project: IProject, res
               resources={this.props.resources} 
               indent={0} 
               referencePath={referencePath} 
-              handleClick={(reference: IReference) => {
+              handleClick={(reference: IReferenceOld) => {
                 this.props.resources.callback(appConfig.Actions.ProjectSelectModule(reference));
               }} 
             />
