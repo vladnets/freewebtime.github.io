@@ -5,6 +5,7 @@ import { IHash } from '../api/IHash';
 import FontAwesome from 'react-fontawesome';
 import { GraphView } from './Graph/GraphView';
 import { EditorsPaneView } from './Project/EditorsPaneView';
+import { CardboardView } from './CarboardView';
 
 export class TemplateView extends React.Component<{data: IAppState}> {
   render() {
@@ -36,15 +37,14 @@ export class EditorsContainerView extends React.Component<{appState: IAppState}>
           <div className={'editor-tab-header selected container-horizontal'}>
             <FontAwesome name={'file'} className={'editor-tab-header-item icon'} />
             <div className={'editor-tab-header-item text'}>
-              character
+              storypoint
             </div>
             <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
           </div>
         </div>
 
-        <div className={'editor-root'}>
-          Editor
-          <div className={'shadow'} />
+        <div className={'editor-root container-vertical'}>
+          <CardboardView appState={this.props.appState}/>
         </div>
       </div>
     )
