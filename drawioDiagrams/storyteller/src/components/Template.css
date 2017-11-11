@@ -106,23 +106,18 @@ body {
 }
 .project-explorer {
   background: var(--main-bg-color-2);
+  border: 2px solid var(--main-bg-color-accent);
   flex-grow: 1;
 }
 .project-explorer-header {
   text-align: center;
-  /* font-size: 80%; */
-  padding: 5px;
-  /* border-bottom: 1px solid var(--app-background); */
-  -webkit-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+  padding: 4px;
 }
 .project-explorer-subheader {
-  background: var(--main-bg-color-accent-2);
-  /* margin-bottom: 5px; */
   padding: 3px;
 }
 .project-explorer-content {
+  background: var(--main-bg-color-accent-2);
   flex-grow: 1;
 }
 .project-explorer-items {
@@ -185,19 +180,20 @@ body {
 
 .object-properties-container {
   background: var(--main-bg-color-2);
+  border: 2px solid var(--main-bg-color-accent);
   flex-grow: 1;
 }
 .object-properties-header {
   text-align: center;
   /* font-size: 80%; */
-  padding: 5px;
+  padding: 4px;
   /* border-bottom: 1px solid var(--app-background); */
-  -webkit-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75);
+  /* box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75); */
 }
 .object-properties-content {
-
+  padding: 5px;
+  background: var(--main-bg-color-accent-2);
+  flex-grow: 1;
 }
 
 
@@ -206,25 +202,22 @@ body {
 }
 
 .editors-tabs-container {
-  background: var(--main-bg-color-2);
-  -webkit-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  background: var(--app-background);
   z-index: 10;
 }
 
 .editor-tab-header {
   padding: 5px 8px;
-  border-left: 1px solid var(--app-background);
-  background: var(--main-bg-color-2);
+  background: var(--main-bg-color-dark);
   align-items: center;
   cursor: pointer;
+  border-right: 1px solid var(--main-bg-color);
+  color: var(--main-text-color-dark);
 }
 .editor-tab-header.selected {
-  background: var(--main-bg-color-accent);
-  -webkit-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 7px 10px -6px rgba(0,0,0,0.75);
+  background: var(--main-bg-color-2);
+  border-bottom-color: var(--main-bg-color-accent-2);
+  color: var(--main-text-color);
 }
 .editor-tab-header-item {
 }
@@ -296,12 +289,16 @@ svg {
 }
 .cardboard-header {
   padding: 10px;
-  box-shadow: inset 0px -3px 20px -9px rgba(0,0,0,0.75);
+  background: var(--main-bg-color-2);
+  color: var(--main-text-color-dark);
+  /* box-shadow: inset 0px -3px 20px -9px rgba(0,0,0,0.75); */
 }
 .cardboard-content {
   flex-grow: 1;
   padding: 5px;
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.75);
+  background: var(--main-bg-color);
+  border: 3px solid var(--main-bg-color-2);
+  border-top: none;
 }
 
 

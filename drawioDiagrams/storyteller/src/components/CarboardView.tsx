@@ -8,7 +8,7 @@ export class CardboardView extends React.Component<{appState: IAppState}> {
     return (
       <div className={'cardboard-container container-vertical'}>
         <div className="cardboard-header">
-          Cardboard header
+          <u>New story</u> > <u>src</u> > storypoint
         </div>
         <div className="cardboard-content">
           Cardboard content

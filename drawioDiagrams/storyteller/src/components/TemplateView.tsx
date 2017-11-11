@@ -41,6 +41,20 @@ export class EditorsContainerView extends React.Component<{appState: IAppState}>
             </div>
             <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
           </div>
+          <div className={'editor-tab-header container-horizontal'}>
+            <FontAwesome name={'file'} className={'editor-tab-header-item icon'} />
+            <div className={'editor-tab-header-item text'}>
+              location
+            </div>
+            <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
+          </div>
+          <div className={'editor-tab-header container-horizontal'}>
+            <FontAwesome name={'file'} className={'editor-tab-header-item icon'} />
+            <div className={'editor-tab-header-item text'}>
+              system
+            </div>
+            <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
+          </div>
         </div>
 
         <div className={'editor-root container-vertical'}>
