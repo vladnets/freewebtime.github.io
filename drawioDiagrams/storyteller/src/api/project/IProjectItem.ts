@@ -8,6 +8,7 @@ export enum ProjectItemType {
 }
 
 export interface IProjectItem extends IUniqueObject {
+  namespace: string;
   projectItemType: ProjectItemType;
   subitems: IHash<IProjectItem>;  
 }

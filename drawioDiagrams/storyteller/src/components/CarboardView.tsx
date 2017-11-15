@@ -11,14 +11,16 @@ export class CardboardView extends React.Component<{appState: IAppState}> {
 
     const card: ICard = {
       id: 'character',
+      namespace: 'system',
       name: 'character',
       projectItemType: ProjectItemType.Card,
       subitems: {},
-      color: 'rgb(4, 58, 27)'
+      color: 'rgb(4, 58, 27)',
     };
     const card2: ICard = {
       id: 'storypoint',
       name: 'storypoint',
+      namespace: 'system',
       projectItemType: ProjectItemType.Card,
       subitems: {},
       color: 'rgb(129, 131, 12)'
@@ -26,6 +28,7 @@ export class CardboardView extends React.Component<{appState: IAppState}> {
     const card3: ICard = {
       id: 'location',
       name: 'location',
+      namespace: 'system',
       projectItemType: ProjectItemType.Card,
       subitems: {},
       color: 'rgb(131, 12, 12)',
@@ -34,6 +37,7 @@ export class CardboardView extends React.Component<{appState: IAppState}> {
     const card4: ICard = {
       id: 'story',
       name: 'story',
+      namespace: 'system',
       projectItemType: ProjectItemType.Card,
       subitems: {},
       color: 'rgb(12, 97, 131)'
