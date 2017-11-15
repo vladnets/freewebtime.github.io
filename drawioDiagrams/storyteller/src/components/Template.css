@@ -479,9 +479,9 @@ svg {
     rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
     rgba(255, 255, 255, .1) 75%, 
     rgba(255, 255, 255, .1) 76%, transparent 77%, transparent);
-  background-size: 50px 50px;
+  background-size: 10px 10px;
 
-  /* box-shadow: inset 0px 0px 5px 0px var(--color-inv); */
+  box-shadow: inset 0px 0px 5px 0px var(--color-main-5);
 }
 
 
@@ -489,17 +489,27 @@ svg {
 /* Card */
 .card-container {
   display: block;
-  background: var(--main-bg-color-accent-light);
+  background: var(--color-main-2);
+  /* padding: 5px; */
+  border-radius: 3px;
+  border: 3px solid var(--color-main-1);
+}
+.card-container.selected {
+  border: 3px solid var(--selection-color);
 }
 .card-container.card {
   overflow: hidden;
-  box-shadow: 1px 1px 5px 0px var(--color-inv);
+  /* box-shadow: 1px 1px 5px 0px var(--color-inv); */
+}
+.card-content {
+  background: var(--color-main-3);
+  flex-grow: 1;
 }
 .card-drag-handler {
   cursor: move;
 }
 .card-header {
-  background: rgb(131, 12, 121);
+  /* background: rgb(131, 12, 121); */
   background-image: linear-gradient(to bottom, 
   rgba(0, 0, 0, 0), 
   rgba(0, 0, 0, 0.0)

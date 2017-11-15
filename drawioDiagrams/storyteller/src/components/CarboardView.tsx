@@ -28,7 +28,8 @@ export class CardboardView extends React.Component<{appState: IAppState}> {
       name: 'location',
       projectItemType: ProjectItemType.Card,
       subitems: {},
-      color: 'rgb(131, 12, 12)'
+      color: 'rgb(131, 12, 12)',
+      isSelected: true,
     };
     const card4: ICard = {
       id: 'story',

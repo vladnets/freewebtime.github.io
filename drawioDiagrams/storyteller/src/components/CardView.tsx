@@ -82,30 +82,37 @@ export class CardView extends React.Component<{card: ICard, appState: IAppState}
     if (this.props.card.color) {
       headerStyle['backgroundColor'] = this.props.card.color;
     }
+    delete headerStyle['backgroundColor'];
+
+    const cardContainerClass = 'card-container card container-vertical fullwidth fullheight'
+      + (this.props.card.isSelected ? ' selected' : '')
+    ;
 
     return (
       movableContainer(
-        <div className={'card-container card container-vertical fullwidth fullheight'}>
-          <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
-            <div className="input-container">
-              Input
+        <div className={cardContainerClass}>
+          <div className={'card-content fullwidth fullheight'}>
+            <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
+              <div className="input-container">
+                Input
+              </div>
+              <div className="content-container">
+                {this.props.card.name}
+              </div>
+              <div className="output-container">
+                Output
+              </div>
             </div>
-            <div className="content-container">
-              {this.props.card.name}
-            </div>
-            <div className="output-container">
-              Output
-            </div>
-          </div>
-          <div className="card-content container-horizontal">
-            <div className="input-container">
-              Input
-            </div>
-            <div className="content-container">
-              Card content
-            </div>
-            <div className="output-container">
-              Output
+            <div className="card-content container-horizontal">
+              <div className="input-container">
+                Input
+              </div>
+              <div className="content-container">
+                Card content
+              </div>
+              <div className="output-container">
+                Output
+              </div>
             </div>
           </div>
         </div>
