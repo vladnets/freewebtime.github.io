@@ -477,7 +477,7 @@ svg {
 }
 .cardboard-content {
   flex-grow: 1;
-  padding: 5px;
+  margin: 3px;
   border-top: none;
   background: var(--color-main);
   background-image: var(--grid-image);
@@ -499,7 +499,7 @@ svg {
 }
 .card-container.card {
   overflow: hidden;
-  box-shadow: 2px 2px 5px 0px var(--color-main-5);
+  box-shadow: 1px 1px 2px 0px var(--color-main-5);
 }
 .card-drag-handler {
   cursor: move;
@@ -538,7 +538,7 @@ svg {
   background: var(--color-main);
   background-image: var(--grid-image);
   background-size: 10px 10px;
-
+  box-shadow: inset 0px 0px 3px 0px var(--color-main-5);
 }
 .card-content .output-container {
   padding: 2px;
