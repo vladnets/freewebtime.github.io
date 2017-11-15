@@ -29,6 +29,17 @@
   --explorer-item-color-file: #27ad9b;
   --explorer-item-color-folder: #D86A46;
 
+  --grid-image: linear-gradient(0deg, transparent 24%, 
+    rgba(255, 255, 255, .1) 25%, 
+    rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
+    rgba(255, 255, 255, .1) 75%, 
+    rgba(255, 255, 255, .1) 76%, transparent 77%, transparent), 
+    linear-gradient(90deg, transparent 24%, 
+    rgba(255, 255, 255, .1) 25%, 
+    rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
+    rgba(255, 255, 255, .1) 75%, 
+    rgba(255, 255, 255, .1) 76%, transparent 77%, transparent);
+
   --color-main-source: rgb(223, 223, 223);
   --color-main-r: 128;
   --color-main-g: 128;
@@ -469,17 +480,8 @@ svg {
   padding: 5px;
   border-top: none;
   background: var(--color-main);
-  background-image: linear-gradient(0deg, transparent 24%, 
-    rgba(255, 255, 255, .1) 25%, 
-    rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
-    rgba(255, 255, 255, .1) 75%, 
-    rgba(255, 255, 255, .1) 76%, transparent 77%, transparent), 
-    linear-gradient(90deg, transparent 24%, 
-    rgba(255, 255, 255, .1) 25%, 
-    rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
-    rgba(255, 255, 255, .1) 75%, 
-    rgba(255, 255, 255, .1) 76%, transparent 77%, transparent);
-  background-size: 10px 10px;
+  background-image: var(--grid-image);
+  background-size: 15px 15px;
 
   box-shadow: inset 0px 0px 5px 0px var(--color-main-5);
 }
@@ -488,22 +490,16 @@ svg {
 
 /* Card */
 .card-container {
-  display: block;
-  background: var(--color-main-2);
-  /* padding: 5px; */
   border-radius: 3px;
-  border: 3px solid var(--color-main-1);
+  border: 2px solid var(--color-main-2);
+  background: var(--color-main-2);
 }
 .card-container.selected {
-  border: 3px solid var(--selection-color);
+  border-color: var(--selection-color);
 }
 .card-container.card {
   overflow: hidden;
-  /* box-shadow: 1px 1px 5px 0px var(--color-inv); */
-}
-.card-content {
-  background: var(--color-main-3);
-  flex-grow: 1;
+  box-shadow: 2px 2px 5px 0px var(--color-main-5);
 }
 .card-drag-handler {
   cursor: move;
@@ -517,6 +513,8 @@ svg {
   padding: 2px;
 }
 .card-content {
+  background: var(--color-main-1);
+  flex-grow: 1;
 }
 .card-header .input-container {
   padding: 2px;
@@ -537,6 +535,10 @@ svg {
   padding: 2px;
   flex-grow: 1;
   text-align: center;
+  background: var(--color-main);
+  background-image: var(--grid-image);
+  background-size: 10px 10px;
+
 }
 .card-content .output-container {
   padding: 2px;

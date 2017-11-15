@@ -91,28 +91,26 @@ export class CardView extends React.Component<{card: ICard, appState: IAppState}
     return (
       movableContainer(
         <div className={cardContainerClass}>
-          <div className={'card-content fullwidth fullheight'}>
-            <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
-              <div className="input-container">
-                Input
-              </div>
-              <div className="content-container">
-                {this.props.card.name}
-              </div>
-              <div className="output-container">
-                Output
-              </div>
+          <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
+            <div className="input-container">
+              Input
             </div>
-            <div className="card-content container-horizontal">
-              <div className="input-container">
-                Input
-              </div>
-              <div className="content-container">
-                Card content
-              </div>
-              <div className="output-container">
-                Output
-              </div>
+            <div className="content-container">
+              {this.props.card.name}
+            </div>
+            <div className="output-container">
+              Output
+            </div>
+          </div>
+          <div className="card-content container-horizontal">
+            <div className="input-container">
+              Input
+            </div>
+            <div className="content-container">
+              Card content
+            </div>
+            <div className="output-container">
+              Output
             </div>
           </div>
         </div>
