@@ -80,7 +80,7 @@ export class CardView extends React.Component<{card: ICard, appState: IAppState}
     
     const headerStyle = {};
     if (this.props.card.color) {
-      headerStyle['background-color'] = this.props.card.color;
+      headerStyle['backgroundColor'] = this.props.card.color;
     }
 
     return (

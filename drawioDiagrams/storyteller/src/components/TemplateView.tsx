@@ -55,6 +55,7 @@ export class EditorsContainerView extends React.Component<{appState: IAppState}>
             </div>
             <FontAwesome name={'remove'} className={'editor-tab-header-item close-button'} />
           </div>
+          <div className={'editors-tabs-container-fill-space'} />
         </div>
 
         <div className={'editor-root container-vertical'}>
@@ -152,7 +153,7 @@ export class RightSidebarView extends React.Component<{appState: IAppState, pvSt
         <div className={'right-sidebar-content container-vertical'}>
           <ObjectPropertiesView appState={this.props.appState} pvState={this.props.pvState} />
         </div>
-        <div className={'container-vertical left-sidebar-icons-container'}>
+        <div className={'container-vertical right-sidebar-icons-container'}>
           <div className={'left-sidebar-icons-item'}>
             <FontAwesome name="wrench" />
           </div>

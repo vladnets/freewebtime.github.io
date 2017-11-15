@@ -1,15 +1,16 @@
 :root {
-  --app-background: #202020;
+  --app-background: #fcfcfc;
   
-  --main-bg-color: #2c2c2c;
-  --main-bg-color-2: #303030;
-  --main-bg-color-dark: #202020;
-  --main-bg-color-accent: #464646;
-  --main-bg-color-accent-2: #3a3a3a;
-  --main-bg-color-accent-light: #6b6b6b;
-  --main-text-color: #dadada;
-  --main-text-color-accent: #ececec;
-  --main-text-color-dark: #a5a5a5;
+  --main-bg-color: #dadada;
+  --main-bg-color-2: #ececec;
+  --main-bg-color-dark: #a5a5a5;
+  --main-bg-color-accent: #dadada;
+  --main-bg-color-accent-2: #dadada;
+  --main-bg-color-accent-light: #dadada;
+
+  --main-text-color: #2c2c2c;
+  --main-text-color-accent: #303030;
+  --main-text-color-dark: #202020;
   
   --secondary-bg-color: #407fb6;
   --secondary-bg-color-dark: #597ca1;
@@ -27,6 +28,162 @@
 
   --explorer-item-color-file: #27ad9b;
   --explorer-item-color-folder: #D86A46;
+
+  --color-main-source: rgb(223, 223, 223);
+  --color-main-r: 216;
+  --color-main-g: 216;
+  --color-main-b: 216;
+  --color-inv-r: calc(255 - var(--color-main-r));
+  --color-inv-g: calc(255 - var(--color-main-g));
+  --color-inv-b: calc(255 - var(--color-main-b));
+  
+  --color-main-step: 17;
+  --color-inv-step: var(--color-main-step);
+  
+  --color-main: rgb(var(--color-main-r), var(--color-main-g), var(--color-main-b));
+  --color-main-1: rgb(
+    calc(
+      var(--color-main-r) - 
+      calc(var(--color-main-step) * 1)
+    ), 
+    calc(
+      var(--color-main-g) - 
+      calc(var(--color-main-step) * 1)
+    ), 
+    calc(
+      var(--color-main-b) - 
+      calc(var(--color-main-step) * 1)
+    )
+  );
+  --color-main-2: rgb(
+    calc(
+      var(--color-main-r) - 
+      calc(var(--color-main-step) * 2)
+    ), 
+    calc(
+      var(--color-main-g) - 
+      calc(var(--color-main-step) * 2)
+    ), 
+    calc(
+      var(--color-main-b) - 
+      calc(var(--color-main-step) * 2)
+    )
+  );
+  --color-main-3: rgb(
+    calc(
+      var(--color-main-r) - 
+      calc(var(--color-main-step) * 3)
+    ), 
+    calc(
+      var(--color-main-g) - 
+      calc(var(--color-main-step) * 3)
+    ), 
+    calc(
+      var(--color-main-b) - 
+      calc(var(--color-main-step) * 3)
+    )
+  );
+  --color-main-4: rgb(
+    calc(
+      var(--color-main-r) - 
+      calc(var(--color-main-step) * 4)
+    ), 
+    calc(
+      var(--color-main-g) - 
+      calc(var(--color-main-step) * 4)
+    ), 
+    calc(
+      var(--color-main-b) - 
+      calc(var(--color-main-step) * 4)
+    )
+  );
+  --color-main-5: rgb(
+    calc(
+      var(--color-main-r) - 
+      calc(var(--color-main-step) * 5)
+    ), 
+    calc(
+      var(--color-main-g) - 
+      calc(var(--color-main-step) * 5)
+    ), 
+    calc(
+      var(--color-main-b) - 
+      calc(var(--color-main-step) * 5)
+    )
+  );
+
+  --color-inv: rgb(var(--color-inv-r), var(--color-inv-g), var(--color-inv-b));
+  --color-inv-1: rgb(
+    calc(
+      var(--color-inv-r) + 
+      calc(var(--color-inv-step) * 1)
+    ), 
+    calc(
+      var(--color-inv-g) + 
+      calc(var(--color-inv-step) * 1)
+    ), 
+    calc(
+      var(--color-inv-b) + 
+      calc(var(--color-inv-step) * 1)
+    )
+  );
+  --color-inv-2: rgb(
+    calc(
+      var(--color-inv-r) + 
+      calc(var(--color-inv-step) * 2)
+    ), 
+    calc(
+      var(--color-inv-g) + 
+      calc(var(--color-inv-step) * 2)
+    ), 
+    calc(
+      var(--color-inv-b) + 
+      calc(var(--color-inv-step) * 2)
+    )
+  );
+  --color-inv-3: rgb(
+    calc(
+      var(--color-inv-r) + 
+      calc(var(--color-inv-step) * 3)
+    ), 
+    calc(
+      var(--color-inv-g) + 
+      calc(var(--color-inv-step) * 3)
+    ), 
+    calc(
+      var(--color-inv-b) + 
+      calc(var(--color-inv-step) * 3)
+    )
+  );
+  --color-inv-4: rgb(
+    calc(
+      var(--color-inv-r) + 
+      calc(var(--color-inv-step) * 4)
+    ), 
+    calc(
+      var(--color-inv-g) + 
+      calc(var(--color-inv-step) * 4)
+    ), 
+    calc(
+      var(--color-inv-b) + 
+      calc(var(--color-inv-step) * 4)
+    )
+  );
+  --color-inv-5: rgb(
+    calc(
+      var(--color-inv-r) + 
+      calc(var(--color-inv-step) * 5)
+    ), 
+    calc(
+      var(--color-inv-g) + 
+      calc(var(--color-inv-step) * 5)
+    ), 
+    calc(
+      var(--color-inv-b) + 
+      calc(var(--color-inv-step) * 5)
+    )
+  );
+
 }
 
 html, body {
@@ -34,8 +191,8 @@ html, body {
 }
 
 body {
-  color: var(--main-text-color);
-  background: var(--main-bg-color-dark);
+  color: var(--color-inv);
+  background: var(--color-main);
   font-size: 10pt;
   font-family: var(--main-font-family);
   margin: 0px;
@@ -78,8 +235,11 @@ body {
 }
 
 .main-menu-container {
-  background: var(--main-bg-color-accent-2);
   padding: 3px;
+  z-index: 3;
+  background: var(--color-main);
+  /* background-image: linear-gradient(to bottom, transparent 0%,var(--color-main-3) 100%); */
+  border-bottom: 1px solid var(--color-main-5);
   display: none;
 }
 .middle-content-container {
@@ -87,16 +247,17 @@ body {
 }
 
 
-
-
 .left-sidebar-container {
-  background: var(--main-bg-color);
+  border-right: 1px solid var(--color-main-5);
+  /* box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.5); */
 }
 .left-sidebar-icons-container {
-  background: var(--main-bg-color-accent);
+  background: var(--color-main-2);
+  /* background-image: linear-gradient(to top left, transparent 0%,var(--color-main-1) 100%); */
 }
 .left-sidebar-content {
   width: 240px;
+  /* display: none; */
 }
 .left-sidebar-icons-item {
   margin: 10px;
@@ -105,19 +266,17 @@ body {
   font-size: 2em;
 }
 .project-explorer {
-  background: var(--main-bg-color-2);
-  border: 2px solid var(--main-bg-color-accent);
   flex-grow: 1;
 }
 .project-explorer-header {
   text-align: center;
-  padding: 4px;
+  padding: 5px;
 }
 .project-explorer-subheader {
   padding: 3px;
 }
 .project-explorer-content {
-  background: var(--main-bg-color-accent-2);
+  background: var(--color-main-3);
   flex-grow: 1;
 }
 .project-explorer-items {
@@ -126,7 +285,7 @@ body {
 .project-explorer-treeview-item {
 }
 .project-explorer-treeview-item-content.selected {
-  background: var(--main-bg-color-accent-light);
+  background: var(--color-main-1);
   color: var(--main-text-color);
 }
 .project-explorer-tvi-icon {
@@ -139,16 +298,17 @@ body {
 .project-explorer-treeview-item-content:hover {
   align-items: center;
   padding: 2px;
-  background: var(--main-bg-color-accent-2);
+  background: var(--color-main);
   color: var(--main-text-color);
 }
 .project-explorer-tvi-header-buttons-container {
 }
 .project-explorer-tvi-header-buttons-container .button {
-  background: var(--main-bg-color);
-  border: 1px solid black;
+  background: var(--color-main);
+  border: 1px solid var(--color-main-5);
   cursor: pointer;
-  color: var(--main-text-color);
+  color: var(--color-inv);
+  margin-left: 2px;
 }
 
 .project-explorer-treeview-item-subitems-container {
@@ -161,13 +321,16 @@ body {
 
 
 .right-sidebar-container {
-  background: var(--main-bg-color);
+  border-left: 1px solid var(--color-main-5);
+  /* box-shadow: -1px 0px 3px 0px rgba(0, 0, 0, 0.5); */
 }
 .right-sidebar-icons-container {
-  background: var(--main-bg-color-accent);
+  background: var(--color-main-2);
+  /* background-image: linear-gradient(to bottom right, transparent 0%,var(--color-main-3) 100%); */
 }
 .right-sidebar-content {
   width: 240px;
+  display: none;
 }
 .right-sidebar-icons-item {
   margin: 10px;
@@ -179,44 +342,43 @@ body {
 
 
 .object-properties-container {
-  background: var(--main-bg-color-2);
-  border: 2px solid var(--main-bg-color-accent);
   flex-grow: 1;
 }
 .object-properties-header {
   text-align: center;
-  /* font-size: 80%; */
-  padding: 4px;
-  /* border-bottom: 1px solid var(--app-background); */
-  /* box-shadow: inset 0px 5px 19px -5px rgba(0,0,0,0.75); */
+  padding: 5px;
 }
 .object-properties-content {
-  padding: 5px;
-  background: var(--main-bg-color-accent-2);
+  background: var(--color-main-3);
   flex-grow: 1;
+  padding: 5px;
 }
 
 
 .editors-container {
+  background: var(--color-main-1);
   flex-grow: 1;
 }
 
 .editors-tabs-container {
-  background: var(--app-background);
-  z-index: 10;
+}
+.editors-tabs-container-fill-space {
+  flex-grow: 1;
+  border-bottom: 1px solid var(--color-main-5);
 }
 
 .editor-tab-header {
   padding: 5px 8px;
-  background: var(--main-bg-color-dark);
+  background: var(--color-main-2);
   align-items: center;
   cursor: pointer;
-  border-right: 1px solid var(--main-bg-color);
+  border-right: 1px solid var(--color-main-5);
+  border-bottom: 1px solid var(--color-main-5);
   color: var(--main-text-color-dark);
 }
 .editor-tab-header.selected {
-  background: var(--main-bg-color-2);
-  border-bottom-color: var(--main-bg-color-accent-2);
+  background: var(--color-main-1);
+  border-bottom-color: var(--color-main-1);
   color: var(--main-text-color);
 }
 .editor-tab-header-item {
@@ -229,9 +391,6 @@ body {
   position: relative;
   flex-grow: 1;
   overflow: hidden;
-  -webkit-box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
 }
 .editor-root .shadow {
   position: absolute;
@@ -239,18 +398,15 @@ body {
   right: 0px;
   bottom: 0px;
   top: 0px;
-  -webkit-box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 0px 29px -2px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 29px -2px var(--color-inv);
 }
 
-.right-sidebar-container {
-  background: var(--main-bg-color);
-  min-width: 180px;
-}
 .footer-container {
-  background: var(--secondary-bg-color);
+  /* display: none; */
   padding: 3px;
+  background: var(--color-main-2);
+  /* background-image: linear-gradient(to bottom, transparent 0%,var(--color-main-3) 100%); */
+  border-top: 1px solid var(--color-main-5);
 }
 
 
@@ -284,21 +440,31 @@ svg {
 
 /* Cardobard */
 .cardboard-container {
-  background: var(--main-bg-color-accent);
   flex-grow: 1;
 }
 .cardboard-header {
-  padding: 10px;
-  background: var(--main-bg-color-2);
-  color: var(--main-text-color-dark);
-  /* box-shadow: inset 0px -3px 20px -9px rgba(0,0,0,0.75); */
+  padding: 5px;
+  background: var(--color-main-1);
+  /* background-image: linear-gradient(to bottom, transparent 0%,var(--color-main-3) 100%); */
 }
 .cardboard-content {
   flex-grow: 1;
   padding: 5px;
-  background: var(--main-bg-color);
-  border: 3px solid var(--main-bg-color-2);
   border-top: none;
+  background: var(--color-main-5);
+  background-image: linear-gradient(0deg, transparent 24%, 
+    rgba(255, 255, 255, .1) 25%, 
+    rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
+    rgba(255, 255, 255, .1) 75%, 
+    rgba(255, 255, 255, .1) 76%, transparent 77%, transparent), 
+    linear-gradient(90deg, transparent 24%, 
+    rgba(255, 255, 255, .1) 25%, 
+    rgba(255, 255, 255, .1) 26%, transparent 27%, transparent 74%, 
+    rgba(255, 255, 255, .1) 75%, 
+    rgba(255, 255, 255, .1) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+
+  box-shadow: inset 0px 0px 5px 0px var(--color-inv);
 }
 
 
@@ -310,7 +476,7 @@ svg {
 }
 .card-container.card {
   overflow: hidden;
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 5px 0px var(--color-inv);
 }
 .card-drag-handler {
   cursor: move;
