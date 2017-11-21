@@ -1,45 +1,31 @@
-import { ProjectItemType } from '../api/project/IProjectItem';
-import { IAppState } from '../api/IAppState';
 import * as React from 'react';
 import { IHash } from '../api/IHash';
 import FontAwesome from 'react-fontawesome';
 import { CardView } from './CardView';
-import { ICard } from '../api/project/ICard';
+import { ICard } from '../api/ICard';
 
-export class CardboardView extends React.Component<{appState: IAppState}> {
+export class CardboardView extends React.Component<{appState: any}> {
   render () {
 
     const card: ICard = {
       id: 'character',
-      namespace: 'system',
       name: 'character',
-      projectItemType: ProjectItemType.Card,
-      subitems: {},
       color: 'rgb(4, 58, 27)',
     };
     const card2: ICard = {
       id: 'storypoint',
       name: 'storypoint',
-      namespace: 'system',
-      projectItemType: ProjectItemType.Card,
-      subitems: {},
       color: 'rgb(129, 131, 12)'
     };
     const card3: ICard = {
       id: 'location',
       name: 'location',
-      namespace: 'system',
-      projectItemType: ProjectItemType.Card,
-      subitems: {},
       color: 'rgb(131, 12, 12)',
       isSelected: true,
     };
     const card4: ICard = {
       id: 'story',
       name: 'story',
-      namespace: 'system',
-      projectItemType: ProjectItemType.Card,
-      subitems: {},
       color: 'rgb(12, 97, 131)'
     };
 

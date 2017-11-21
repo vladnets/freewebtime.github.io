@@ -1,15 +1,13 @@
-import { AppView } from './AppView';
-import { ViewBase } from './View';
-import { Store } from 'redux';
 import * as React from 'react';
-import { IHash } from '../api/IHash';
+import './Template.css';
+import { ProjectView } from './ProjectView';
 
-export class RootView extends ViewBase<{store: any}> {
+export class RootView extends React.Component<{appState: any}> {
   render() {
     return (
-      <AppView 
-        data={this.props.store.getState()} 
-      />
+      <div className={'app-content'}>
+        <ProjectView appState={this.props.appState} />
+      </div>
     );
   }
 } 

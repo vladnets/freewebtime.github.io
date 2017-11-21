@@ -1,18 +1,17 @@
 import { IVector2 } from '../api/IVector2';
-import { IAppState } from '../api/IAppState';
 import * as React from 'react';
 import { IHash } from '../api/IHash';
 import FontAwesome from 'react-fontawesome';
-import { ICard } from '../api/project/ICard';
 import Rnd from 'react-rnd';
 import { appConfig } from '../config/appConfig';
 import { ICallback } from '../api/index';
+import { ICard } from '../api/ICard';
 
 export interface ICardViewState {
   position: IVector2;
   size: IVector2;
 }
-export class CardView extends React.Component<{card: ICard, appState: IAppState}, ICardViewState> {
+export class CardView extends React.Component<{card: ICard, appState: any}, ICardViewState> {
   state = {
     position: {x: 100, y: 100},
     size: {x: 180, y: 70}
