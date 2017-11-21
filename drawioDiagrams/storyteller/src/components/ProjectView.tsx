@@ -3,7 +3,6 @@ import { EditorsContainerView } from './EditorsContainerView';
 import { LeftSidebarView } from './LeftSidebarView';
 import { RightSidebarView } from './RightSidebarView';
 
-
 export interface IProjectViewState {
   selectedItemId: string;
   handleItemClick: (itemId: string) => void;
