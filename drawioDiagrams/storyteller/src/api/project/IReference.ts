@@ -1,6 +1,6 @@
 export enum ReferenceType {
   Interface,
-  Object,
+  Item,
 }
 
 export interface IReference {

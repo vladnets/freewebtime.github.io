@@ -1,5 +1,8 @@
 import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
+import { ISymbol, SymbolType } from '../api/project/ISymbol';
+import { IReference, ReferenceType } from '../api/project/IReference';
+import { IProject } from '../api/project/IProject';
 
 export const areObjectsEqual = ( x, y ) => {
   if ( x === y ) return true;
@@ -34,4 +37,23 @@ export const areObjectsEqual = ( x, y ) => {
       // allows x[ p ] to be set to undefined
   }
   return true;
+}
+
+export const createReference = (symbol: ISymbol): IReference => {
+  let referenceType = ReferenceType.Interface;
+  if (symbol.symbolType === SymbolType.Item) {
+    referenceType = ReferenceType.Item;
+  }
+  return {
+    referenceType: referenceType,
+    targetId: symbol.fullId,
+  }
+}
+
+export const resolveReference = (reference: IReference, project: IProject): ISymbol|undefined => {
+  return resolveReferenceFast(reference.targetId, project);
+}
+
+export const resolveReferenceFast = (targetId: string, project: IProject): ISymbol|undefined => {
+  return project.symbols[targetId];
 }

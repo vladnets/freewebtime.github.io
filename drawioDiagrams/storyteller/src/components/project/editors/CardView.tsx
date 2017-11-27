@@ -1,6 +1,6 @@
-import { IVector2 } from '../../api/IVector2';
-import { ICallback } from '../../api';
-import { ICard } from '../../api/ICard';
+import { IVector2 } from '../../../api/IVector2';
+import { ICallback } from '../../../api';
+import { ICard } from '../../../api/ICard';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import Rnd from 'react-rnd';

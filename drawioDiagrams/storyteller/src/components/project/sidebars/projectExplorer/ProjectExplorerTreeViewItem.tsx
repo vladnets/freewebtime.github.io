@@ -13,11 +13,12 @@ export interface IPetviProps {
   symbol?: ISymbol;
 }
 
-export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviProps, level: number, pvState: IProjectViewState}> {
-  state = {
-    isMouseOver: false
-  }
+interface IPetviState {
+  isMouseOver: boolean;
+  lastTimeClick?: number;
+}
 
+export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviProps, level: number, pvState: IProjectViewState}, IPetviState> {
   mouseEnter = (self: React.Component) => {
     self.setState({...this.state, isMouseOver: true });
   }
@@ -25,9 +26,32 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
     self.setState({...this.state, isMouseOver: false });
   }
   handleClick = (pvState: IProjectViewState, itemId: string, e: any) => {
-    pvState.handleItemClick(itemId);
     e.preventDefault();
     e.stopPropagation();
+
+    const lastTimeClicked = this.state.lastTimeClick;
+    const now = Date.now();
+    const doubleClickInterval = 300;
+    const delta = now - (lastTimeClicked ? lastTimeClicked : 0);
+    const isDoubleClick = delta < doubleClickInterval;
+    
+    this.setState({
+      ...this.state,
+      lastTimeClick: now,
+    })
+    
+    if (isDoubleClick) {
+      pvState.openEditor(itemId);
+    }
+    else {
+      pvState.handleItemClick(itemId);
+    }
+  }
+
+  componentWillMount() {
+    this.setState({
+      ...this.state,
+    });
   }
 
   render () {
