@@ -7,7 +7,7 @@ export enum ItemType {
   Primitive,
   Structure,
   FunctionCall,
-  FunctionBody,
+  Graph,
 }
 
 export interface IItem extends ISymbol {
@@ -23,7 +23,7 @@ export interface IStructureItem extends IItem {
   input: IHash<IReference>;
 }
 
-export interface IFunctionBody extends IStructureItem {
+export interface IGraph extends IStructureItem {
   locals: IHash<IReference>;
   returnsConnections: IHash<IReference>;
   localsConnections: IHash<IReference>;

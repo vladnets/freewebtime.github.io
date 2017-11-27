@@ -1,12 +1,12 @@
 import { IUniqueObject } from '../IUniqueObject';
 
 export enum SymbolType {
-  Interface,
-  Item,
+  Interface = 'Interface',
+  Item = 'Item',
 }
 
 export interface ISymbol extends IUniqueObject {
-  namespace: string;
+  namespace?: string;
   fullId: string;
   symbolType: SymbolType;
 }

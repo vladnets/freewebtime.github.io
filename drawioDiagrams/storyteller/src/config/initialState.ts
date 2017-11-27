@@ -1,15 +1,22 @@
 import {
+  SourceCodeType,
   IFunctionInterface,
+  IGraphSourceCodeInterface,
   IInterface,
   InterfaceType,
   IPrimitiveInterface,
   IStructureInterface,
+  ISystemSourceCodeInterface,
 } from '../api/project/IInterface';
 import { appConfig } from './appConfig';
-import { ReferenceType } from '../api/project/IReference';
+import { IReference, ReferenceType } from '../api/project/IReference';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
+import { IItem, IFunctionCall } from '../api/project/IItem';
 
+// Interfaces
+
+//system
 const stringInterface: IPrimitiveInterface = {
   id: appConfig.PrimitiveTypes.String,
   name: appConfig.PrimitiveTypes.String,
@@ -88,8 +95,8 @@ const characterInterfaceName = 'Character';
 const characterInterface: IStructureInterface = {
   id: characterInterfaceName,
   name: characterInterfaceName,
-  namespace: appConfig.InitialStateConfig.ProjectNamespace,
-  fullId: `${appConfig.InitialStateConfig.ProjectNamespace}.${characterInterfaceName}`,
+  namespace: appConfig.InitialStateConfig.ProjectName,
+  fullId: `${appConfig.InitialStateConfig.ProjectName}.${characterInterfaceName}`,
   symbolType: SymbolType.Interface,
   interfaceType: InterfaceType.Structure,
   subitems: {
@@ -116,8 +123,8 @@ const storyInterfaceName = 'Story';
 const storyInterface: IStructureInterface = {
   id: storyInterfaceName,
   name: storyInterfaceName,
-  namespace: appConfig.InitialStateConfig.ProjectNamespace,
-  fullId: `${appConfig.InitialStateConfig.ProjectNamespace}.${storyInterfaceName}`,
+  namespace: appConfig.InitialStateConfig.ProjectName,
+  fullId: `${appConfig.InitialStateConfig.ProjectName}.${storyInterfaceName}`,
   symbolType: SymbolType.Interface,
   interfaceType: InterfaceType.Structure,
   subitems: {
@@ -144,20 +151,95 @@ const storyInterface: IStructureInterface = {
   }
 }
 
-
-export const interfaces: IHash<IInterface> = {
-  [stringInterface.fullId]: stringInterface,
-  [numberInterface.fullId]: numberInterface,
-  [booleanInterface.fullId]: booleanInterface,
-  [concatStringParamsInterface.fullId]: concatStringParamsInterface,
-  [concatString.fullId]: concatString,
-
-  [characterInterface.fullId]: characterInterface,
-  [storyInterface.fullId]: storyInterface,
+//project root
+const projectRootName = appConfig.InitialStateConfig.ProjectRootName;
+const projectRootId = appConfig.InitialStateConfig.ProjectRootName;
+const projectRootFullId = projectRootName;
+const projectRootParamsName = 'Params';
+const projectRootResultName = 'Result';
+const projectRootParamsInterface: IStructureInterface = {
+  id: projectRootParamsName,
+  name: projectRootParamsName,
+  namespace: projectRootFullId,
+  fullId: `${projectRootFullId}.${projectRootParamsName}`,
+  symbolType: SymbolType.Interface,
+  interfaceType: InterfaceType.Structure,
+  subitems: {},
+}
+const projectRootResultInterface: IStructureInterface = {
+  id: projectRootResultName,
+  name: projectRootResultName,
+  namespace: projectRootFullId,
+  fullId: `${projectRootFullId}.${projectRootResultName}`,
+  symbolType: SymbolType.Interface,
+  interfaceType: InterfaceType.Structure,
+  subitems: {
+    [storyInterface.name]: {
+      referenceType: ReferenceType.Interface,
+      targetId: storyInterface.fullId,
+    }
+  },
+}
+const projectRootInterface: IFunctionInterface = {
+  id: projectRootId,
+  name: projectRootName,
+  fullId: projectRootName,
+  symbolType: SymbolType.Interface,
+  interfaceType: InterfaceType.Function,
+  params: {
+    referenceType: ReferenceType.Interface,
+    targetId: projectRootParamsInterface.fullId,
+  },
+  returns: {
+    referenceType: ReferenceType.Interface,
+    targetId: projectRootResultInterface.fullId,
+  }
 }
 
-export const initialSymbols: IHash<ISymbol> = {
-  // Types
+//function bodies
+
+//concat string
+const concatStringFunctionBodyInterfaceName = 'Body';
+const concatStringFunctionBodyInterface: ISystemSourceCodeInterface = {
+  id: concatStringFunctionBodyInterfaceName,
+  name: concatStringFunctionBodyInterfaceName,
+  namespace: concatString.fullId,
+  fullId: `${concatString.fullId}.${concatStringFunctionBodyInterfaceName}`,
+  functionId: appConfig.SystemFunctionNames.Concat_String,
+  signature: {
+    referenceType: ReferenceType.Interface,
+    targetId: concatString.fullId,
+  },
+  sourceCodeType: SourceCodeType.System,
+  interfaceType: InterfaceType.SourceCode,
+  symbolType: SymbolType.Interface,
+}
+
+//project root
+const projectRootFunctionBodyInterfaceName = 'Body';
+const projectRootFunctionBodyInterface: IGraphSourceCodeInterface = {
+  id: projectRootFunctionBodyInterfaceName,
+  name: projectRootFunctionBodyInterfaceName,
+  namespace: projectRootInterface.fullId,
+  fullId: `${projectRootInterface.fullId}.${projectRootFunctionBodyInterfaceName}`,
+  sourceCodeType: SourceCodeType.Graph,
+  interfaceType: InterfaceType.SourceCode,
+  symbolType: SymbolType.Interface,
+  signature: {
+    referenceType: ReferenceType.Interface,
+    targetId: projectRootInterface.fullId,
+  },
+  locals: {
+
+  },
+  connections: {
+
+  },
+}
+
+
+//all interfaces together
+const interfaces: IHash<IInterface> = {
   [stringInterface.fullId]: stringInterface,
   [numberInterface.fullId]: numberInterface,
   [booleanInterface.fullId]: booleanInterface,
@@ -166,20 +248,33 @@ export const initialSymbols: IHash<ISymbol> = {
 
   [characterInterface.fullId]: characterInterface,
   [storyInterface.fullId]: storyInterface,
+
+  [projectRootParamsInterface.fullId]: projectRootParamsInterface,
+  [projectRootResultInterface.fullId]: projectRootResultInterface,
+  [projectRootInterface.fullId]: projectRootInterface,
+
+  [concatStringFunctionBodyInterface.fullId]: concatStringFunctionBodyInterface,
+  [projectRootFunctionBodyInterface.fullId]: projectRootFunctionBodyInterface,
+}
+
+
+const items: IHash<IItem> = {
+  
+}
+
+//final result
+export const initialSymbols: IHash<ISymbol> = {
+  // Interfaces
+  ...interfaces,
   
   //Items
+  ...items,
 }
 
-export const initialInterfaces: IHash<string> = {
-  [stringInterface.fullId]: stringInterface.fullId,
-  [numberInterface.fullId]: numberInterface.fullId,
-  [booleanInterface.fullId]: booleanInterface.fullId,
-  [concatStringParamsInterface.fullId]: concatStringParamsInterface.fullId,
-  [concatString.fullId]: concatString.fullId,
-
-  [characterInterface.fullId]: characterInterface.fullId,
-  [storyInterface.fullId]: storyInterface.fullId,
-}
+export const initialInterfaces: IHash<string> = {}
+Object.keys(interfaces).map((interfaceId: string)=>{
+  initialInterfaces[interfaceId] = interfaceId;
+});
 
 export const initialItems: IHash<string> = {
   

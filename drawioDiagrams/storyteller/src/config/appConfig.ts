@@ -26,8 +26,18 @@ export const appConfig = {
   InitialStateConfig: {
     ProjectName: 'New Project',
     ProjectId: 'New Project',
-    ProjectNamespace: 'New Project',
+    ProjectRootName: 'New Project',
     SystemNamespace: 'System',
+  },
+
+  SystemFunctionNames: {
+    Concat_String: 'Concat_String',
+  },
+
+  SystemFunctions: {
+    Concat_String: (Prefix: string, Separator: string, Postfix: string): string => {
+      return `${Prefix}${Separator}${Postfix}`;
+    }
   }
 }
 
