@@ -8,12 +8,6 @@ export enum InterfaceType {
   Primitive = 'Primitive',
   Structure = 'Structure',
   Function = 'Function',
-  SourceCode = 'SourceCode',
-}
-
-export enum SourceCodeType {
-  System = 'System',
-  Graph = 'Graph',
 }
 
 export interface IInterface extends ISymbol {
@@ -32,18 +26,3 @@ export interface IFunctionInterface extends IInterface {
   params: IReference;
   returns: IReference;
 }
-
-export interface ISourceCodeInterface extends IInterface {
-  signature: IReference;
-  sourceCodeType: SourceCodeType;
-}
-
-export interface ISystemSourceCodeInterface extends ISourceCodeInterface {
-  functionId: string;  
-}
-  
-export interface IGraphSourceCodeInterface extends ISourceCodeInterface {
-  locals: IHash<IReference>;//name:type
-  connections: IHash<IReference>;
-}
-  

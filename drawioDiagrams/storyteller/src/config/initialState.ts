@@ -1,18 +1,15 @@
 import {
-  SourceCodeType,
   IFunctionInterface,
-  IGraphSourceCodeInterface,
   IInterface,
   InterfaceType,
   IPrimitiveInterface,
   IStructureInterface,
-  ISystemSourceCodeInterface,
 } from '../api/project/IInterface';
 import { appConfig } from './appConfig';
 import { IReference, ReferenceType } from '../api/project/IReference';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
-import { IItem, IFunctionCall } from '../api/project/IItem';
+import { ISystemSourceCodeInterface, ItemType, SourceCodeType, IGraphSourceCodeInterface, IItem } from '../api/project/IItem';
 
 // Interfaces
 
@@ -199,33 +196,33 @@ const projectRootInterface: IFunctionInterface = {
 //function bodies
 
 //concat string
-const concatStringFunctionBodyInterfaceName = 'Body';
-const concatStringFunctionBodyInterface: ISystemSourceCodeInterface = {
-  id: concatStringFunctionBodyInterfaceName,
-  name: concatStringFunctionBodyInterfaceName,
+const concatStringSourceCodeName = 'Body';
+const concatStringSourceCode: ISystemSourceCodeInterface = {
+  id: concatStringSourceCodeName,
+  name: concatStringSourceCodeName,
   namespace: concatString.fullId,
-  fullId: `${concatString.fullId}.${concatStringFunctionBodyInterfaceName}`,
+  fullId: `${concatString.fullId}.${concatStringSourceCodeName}`,
   functionId: appConfig.SystemFunctionNames.Concat_String,
-  signature: {
+  interface: {
     referenceType: ReferenceType.Interface,
     targetId: concatString.fullId,
   },
   sourceCodeType: SourceCodeType.System,
-  interfaceType: InterfaceType.SourceCode,
-  symbolType: SymbolType.Interface,
+  itemType: ItemType.SourceCode,
+  symbolType: SymbolType.Item,
 }
 
 //project root
-const projectRootFunctionBodyInterfaceName = 'Body';
-const projectRootFunctionBodyInterface: IGraphSourceCodeInterface = {
-  id: projectRootFunctionBodyInterfaceName,
-  name: projectRootFunctionBodyInterfaceName,
+const projectRootSourceCodeName = 'Body';
+const projectRootSourceCode: IGraphSourceCodeInterface = {
+  id: projectRootSourceCodeName,
+  name: projectRootSourceCodeName,
   namespace: projectRootInterface.fullId,
-  fullId: `${projectRootInterface.fullId}.${projectRootFunctionBodyInterfaceName}`,
+  fullId: `${projectRootInterface.fullId}.${projectRootSourceCodeName}`,
   sourceCodeType: SourceCodeType.Graph,
-  interfaceType: InterfaceType.SourceCode,
-  symbolType: SymbolType.Interface,
-  signature: {
+  itemType: ItemType.SourceCode,
+  symbolType: SymbolType.Item,
+  interface: {
     referenceType: ReferenceType.Interface,
     targetId: projectRootInterface.fullId,
   },
@@ -252,14 +249,12 @@ const interfaces: IHash<IInterface> = {
   [projectRootParamsInterface.fullId]: projectRootParamsInterface,
   [projectRootResultInterface.fullId]: projectRootResultInterface,
   [projectRootInterface.fullId]: projectRootInterface,
-
-  [concatStringFunctionBodyInterface.fullId]: concatStringFunctionBodyInterface,
-  [projectRootFunctionBodyInterface.fullId]: projectRootFunctionBodyInterface,
 }
 
 
 const items: IHash<IItem> = {
-  
+  [concatStringSourceCode.fullId]: concatStringSourceCode,
+  [projectRootSourceCode.fullId]: projectRootSourceCode,
 }
 
 //final result
@@ -271,11 +266,15 @@ export const initialSymbols: IHash<ISymbol> = {
   ...items,
 }
 
-export const initialInterfaces: IHash<string> = {}
+const interfacesKeys: IHash<string> = {}
 Object.keys(interfaces).map((interfaceId: string)=>{
-  initialInterfaces[interfaceId] = interfaceId;
+  interfacesKeys[interfaceId] = interfaceId;
 });
+export const initialInterfaces = interfacesKeys;
 
-export const initialItems: IHash<string> = {
-  
+const itemsKeys: IHash<string> = {
 }
+Object.keys(items).map((itemId: string)=>{
+  itemsKeys[itemId] = itemId;
+});
+export const initialItems = itemsKeys;

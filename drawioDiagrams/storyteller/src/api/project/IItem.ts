@@ -4,10 +4,10 @@ import { IReference } from './IReference';
 import { IHash } from '../IHash';
 
 export enum ItemType {
-  Primitive,
-  Structure,
-  FunctionCall,
-  Graph,
+  Primitive = 'Primitive',
+  Structure = 'Structure',
+  FunctionCall = 'FunctionCall',
+  SourceCode = 'SourceCode',
 }
 
 export interface IItem extends ISymbol {
@@ -23,13 +23,21 @@ export interface IStructureItem extends IItem {
   input: IHash<IReference>;
 }
 
-export interface IGraph extends IStructureItem {
-  locals: IHash<IReference>;
-  returnsConnections: IHash<IReference>;
-  localsConnections: IHash<IReference>;
+export enum SourceCodeType {
+  System = 'System',
+  Graph = 'Graph',
 }
 
-export interface IFunctionCall extends IItem {
-  paramsConnections: IHash<IReference>;
-  functionBody: IReference;
+export interface ISourceCodeInterface extends IItem {
+  sourceCodeType: SourceCodeType;
 }
+
+export interface ISystemSourceCodeInterface extends ISourceCodeInterface {
+  functionId: string;  
+}
+  
+export interface IGraphSourceCodeInterface extends ISourceCodeInterface {
+  locals: IHash<IReference>;//name:type
+  connections: IHash<IReference>;
+}
+  
