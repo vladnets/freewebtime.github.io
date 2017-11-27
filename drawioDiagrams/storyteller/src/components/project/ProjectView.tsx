@@ -10,7 +10,7 @@ import { resolveReferenceFast, createReference } from '../../helpers/index';
 export interface IProjectViewState {
   selectedItemId: string;
   opennedEditors: IHash<IEditorProps>;
-  selectedEditorId?: string;
+  activeEditorId?: string;
   isLeftSidebarCollapsed: boolean;
   isRightSidebarCollapsed: boolean;
   handleItemClick: (itemId: string) => void;
@@ -99,7 +99,7 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
     if (existedEditor) {
       this.setState({
         ...this.state,
-        selectedEditorId: existedEditor.id,
+        activeEditorId: existedEditor.id,
       });
 
       return;
@@ -123,7 +123,7 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
         ...this.state.opennedEditors,
         [editor.id]: editor,
       },
-      selectedEditorId: editor.id,
+      activeEditorId: editor.id,
     });
   }
 

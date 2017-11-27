@@ -31,7 +31,7 @@ export class EditorTabView extends React.Component<{data: IEditorTabViewProps}> 
   render () {
 
     const pvState = this.props.data.pvState;
-    const isSelected = this.props.data.id === pvState.selectedEditorId;
+    const isSelected = this.props.data.id === pvState.activeEditorId;
     const className = isSelected
       ? 'editor-tab-header selected container-horizontal'
       : 'editor-tab-header container-horizontal';
