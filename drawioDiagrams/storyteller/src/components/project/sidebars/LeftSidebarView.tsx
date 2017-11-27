@@ -28,7 +28,7 @@ export class LeftSidebarView extends React.Component<{appState: any, pvState: IP
 
   render() {
     return (
-      <SidebarView orientation={SidebarOrientation.Left} icons={this.iconsView()}>
+      <SidebarView orientation={SidebarOrientation.Left} icons={this.iconsView()}  isCollapsed={this.props.pvState.isLeftSidebarCollapsed} pvState={this.props.pvState}>
         <ProjectExplorerView appState={this.props.appState} pvState={this.props.pvState} />
       </SidebarView>
     )

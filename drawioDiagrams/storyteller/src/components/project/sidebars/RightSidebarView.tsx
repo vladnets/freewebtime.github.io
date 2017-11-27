@@ -25,7 +25,7 @@ export class RightSidebarView extends React.Component<{appState: any, pvState: I
 
   render() {
     return (
-      <SidebarView orientation={SidebarOrientation.Right} icons={this.iconsView()}>
+      <SidebarView orientation={SidebarOrientation.Right} icons={this.iconsView()} isCollapsed={this.props.pvState.isRightSidebarCollapsed} pvState={this.props.pvState}>
         <ObjectPropertiesView appState={this.props.appState} pvState={this.props.pvState} />
       </SidebarView>
     )

@@ -11,15 +11,25 @@ export interface IProjectViewState {
   selectedItemId: string;
   opennedEditors: IHash<IEditorProps>;
   selectedEditorId?: string;
+  isLeftSidebarCollapsed: boolean;
+  isRightSidebarCollapsed: boolean;
   handleItemClick: (itemId: string) => void;
   openEditor: (itemId: string) => void;
   closeEditor: (itemId: string) => void;
+  openLeftSidebar: () => void;
+  closeLeftSidebar: () => void;
+  toggleLeftSidebar: () => void;
+  openRightSidebar: () => void;
+  closeRightSidebar: () => void;
+  toggleRightSidebar: () => void;
 }
 
 export class ProjectView extends React.Component<{appState: any}, IProjectViewState> {
   state: IProjectViewState = {
     selectedItemId: 'System.Concat_String.SourceCode', 
     opennedEditors: {},
+    isLeftSidebarCollapsed: false,
+    isRightSidebarCollapsed: true,
     handleItemClick: (itemId: string) => {
       this.selectItem(itemId);
     },
@@ -28,9 +38,55 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
     },
     closeEditor: (itemId: string) => {
       this.closeEditor(itemId);
-    }
+    },
+
+    openLeftSidebar: () => {this.openLeftSidebar()},
+    closeLeftSidebar: () => {this.closeLeftSidebar()},
+    toggleLeftSidebar: () => {this.toggleLeftSidebar()},
+    openRightSidebar: () => {this.openRightSidebar()},
+    closeRightSidebar: () => {this.closeRightSidebar()},
+    toggleRightSidebar: () => {this.toggleRightSidebar()},
   }
-  
+
+  openLeftSidebar = () => {
+    this.setState({
+      ...this.state,
+      isLeftSidebarCollapsed: false,
+    })
+  }
+  closeLeftSidebar = () => {
+    this.setState({
+      ...this.state,
+      isLeftSidebarCollapsed: true,
+    })
+  }
+  toggleLeftSidebar = () => {
+    this.setState({
+      ...this.state,
+      isLeftSidebarCollapsed: !this.state.isLeftSidebarCollapsed,
+    })
+  }
+  openRightSidebar = () => {
+    this.setState({
+      ...this.state,
+      isRightSidebarCollapsed: false,
+    })
+  }
+  closeRightSidebar = () => {
+    this.setState({
+      ...this.state,
+      isRightSidebarCollapsed: true,
+    })
+  }
+  toggleRightSidebar = () => {
+    this.setState({
+      ...this.state,
+      isRightSidebarCollapsed: !this.state.isRightSidebarCollapsed,
+    })
+
+    console.log('toggle right sidebar called!', this.state);
+  }
+
   selectItem = (itemId: string) => {
     this.setState({
       ...this.state,
