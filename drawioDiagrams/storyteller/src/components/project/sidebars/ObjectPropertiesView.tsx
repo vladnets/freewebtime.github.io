@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IProjectViewState } from './ProjectView';
+import { IProjectViewState } from '../ProjectView';
 
 export class ObjectPropertiesView extends React.Component<{appState: any, pvState: IProjectViewState}> {
   render() {

@@ -196,7 +196,7 @@ const projectRootInterface: IFunctionInterface = {
 //function bodies
 
 //concat string
-const concatStringSourceCodeName = 'Body';
+const concatStringSourceCodeName = 'SourceCode';
 const concatStringSourceCode: ISystemSourceCodeInterface = {
   id: concatStringSourceCodeName,
   name: concatStringSourceCodeName,
@@ -213,7 +213,7 @@ const concatStringSourceCode: ISystemSourceCodeInterface = {
 }
 
 //project root
-const projectRootSourceCodeName = 'Body';
+const projectRootSourceCodeName = 'SourceCode';
 const projectRootSourceCode: IGraphSourceCodeInterface = {
   id: projectRootSourceCodeName,
   name: projectRootSourceCodeName,
@@ -227,10 +227,8 @@ const projectRootSourceCode: IGraphSourceCodeInterface = {
     targetId: projectRootInterface.fullId,
   },
   locals: {
-
   },
   connections: {
-
   },
 }
 
@@ -250,7 +248,6 @@ const interfaces: IHash<IInterface> = {
   [projectRootResultInterface.fullId]: projectRootResultInterface,
   [projectRootInterface.fullId]: projectRootInterface,
 }
-
 
 const items: IHash<IItem> = {
   [concatStringSourceCode.fullId]: concatStringSourceCode,

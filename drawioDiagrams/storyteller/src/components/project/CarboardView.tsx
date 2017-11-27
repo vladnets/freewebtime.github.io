@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { IHash } from '../api/IHash';
 import FontAwesome from 'react-fontawesome';
 import { CardView } from './CardView';
-import { ICard } from '../api/ICard';
+import { ICard } from '../../api/ICard';
 
 export class CardboardView extends React.Component<{appState: any}> {
   render () {

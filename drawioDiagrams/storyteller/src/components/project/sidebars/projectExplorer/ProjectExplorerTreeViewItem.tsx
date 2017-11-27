@@ -1,13 +1,16 @@
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { IProjectViewState } from './ProjectView';
+import { IProjectViewState } from '../../ProjectView';
+import { IHash } from '../../../../api/IHash';
+import { ISymbol } from '../../../../api/project/ISymbol';
 
 export interface IPetviProps {
   id: string;
   name: string;
   icon: string;
   iconColor?: string;
-  subitems: IPetviProps[];
+  subitems: IHash<IPetviProps>;
+  symbol?: ISymbol;
 }
 
 export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviProps, level: number, pvState: IProjectViewState}> {
@@ -30,7 +33,10 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
   render () {
 
     const subitemsView = () => {
-      const subitems = this.props.data.subitems;
+      const subitems = Object.keys(this.props.data.subitems).map((key: string)=>{
+        return this.props.data.subitems[key];
+      });
+
       if (subitems && subitems.length > 0) {
         return (
           subitems.map((subitem: IPetviProps) => {

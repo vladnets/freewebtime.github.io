@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EditorsContainerView } from './EditorsContainerView';
-import { LeftSidebarView } from './LeftSidebarView';
-import { RightSidebarView } from './RightSidebarView';
+import { LeftSidebarView } from './sidebars/LeftSidebarView';
+import { RightSidebarView } from './sidebars/RightSidebarView';
 
 export interface IProjectViewState {
   selectedItemId: string;

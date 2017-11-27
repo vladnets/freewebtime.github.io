@@ -1,9 +1,8 @@
 import { SidebarView, SidebarOrientation } from './SidebarView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { IProjectViewState } from './ProjectView';
-import { ProjectExplorerView } from './ProjectExplorerView';
-import { appConfig } from '../config/appConfig';
+import { IProjectViewState } from '../ProjectView';
+import { ProjectExplorerView } from './projectExplorer/ProjectExplorerView';
 
 export class LeftSidebarView extends React.Component<{appState: any, pvState: IProjectViewState}> {
   

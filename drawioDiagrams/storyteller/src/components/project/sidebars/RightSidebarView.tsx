@@ -1,8 +1,8 @@
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { IProjectViewState } from './ProjectView';
-import { ObjectPropertiesView } from './ObjectPropertiesView';
+import { IProjectViewState } from '../ProjectView';
 import { SidebarView, SidebarOrientation } from './SidebarView';
+import { ObjectPropertiesView } from './ObjectPropertiesView';
 
 export class RightSidebarView extends React.Component<{appState: any, pvState: IProjectViewState}> {
   iconsView = () => {

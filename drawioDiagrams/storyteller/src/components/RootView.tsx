@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Template.css';
-import { ProjectView } from './ProjectView';
+import { ProjectView } from './project/ProjectView';
 
 export class RootView extends React.Component<{appState: any}> {
   render() {

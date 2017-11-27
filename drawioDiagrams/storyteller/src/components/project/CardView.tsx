@@ -1,11 +1,9 @@
-import { IVector2 } from '../api/IVector2';
+import { IVector2 } from '../../api/IVector2';
+import { ICallback } from '../../api';
+import { ICard } from '../../api/ICard';
 import * as React from 'react';
-import { IHash } from '../api/IHash';
 import FontAwesome from 'react-fontawesome';
 import Rnd from 'react-rnd';
-import { appConfig } from '../config/appConfig';
-import { ICallback } from '../api/index';
-import { ICard } from '../api/ICard';
 
 export interface ICardViewState {
   position: IVector2;

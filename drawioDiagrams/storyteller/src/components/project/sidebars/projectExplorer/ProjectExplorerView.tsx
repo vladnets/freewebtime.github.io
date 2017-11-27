@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IProjectViewState } from './ProjectView';
 import { ProjectExplorerItemsView } from './ProjectExplorerItemsView';
+import { IProjectViewState } from '../../ProjectView';
 
 export class ProjectExplorerView extends React.Component<{appState: any, pvState: IProjectViewState}> {
   render() {
