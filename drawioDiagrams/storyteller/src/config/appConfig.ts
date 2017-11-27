@@ -16,6 +16,18 @@ export const appConfig = {
         payload: callback,
       }
     }
+  },
+
+  PrimitiveTypes: {
+    String: 'string',
+    Number: 'number',
+    Boolean: 'boolean',
+  },
+  InitialStateConfig: {
+    ProjectName: 'New Project',
+    ProjectId: 'New Project',
+    ProjectNamespace: 'New Project',
+    SystemNamespace: 'System',
   }
 }
 

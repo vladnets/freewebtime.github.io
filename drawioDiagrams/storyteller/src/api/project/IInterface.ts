@@ -1,14 +1,16 @@
 import { IUniqueObject } from '../IUniqueObject';
 import { IHash } from '../IHash';
 import { IReference } from './IReference';
+import { IItem } from './IItem';
+import { ISymbol } from './ISymbol';
 
 export enum InterfaceType {
   Primitive,
-  Object,
+  Structure,
   Function,
 }
 
-export interface IInterface extends IUniqueObject {
+export interface IInterface extends ISymbol {
   interfaceType: InterfaceType;
 }
 
@@ -16,7 +18,7 @@ export interface IPrimitiveInterface extends IInterface {
   primitiveType: string;
 }
 
-export interface IObjectInterface extends IInterface {
+export interface IStructureInterface extends IInterface {
   subitems: IHash<IReference>;
 }
 
