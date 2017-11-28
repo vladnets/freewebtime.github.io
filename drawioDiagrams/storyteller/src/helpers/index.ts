@@ -4,6 +4,10 @@ import { appConfig } from '../config/appConfig';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IReference, ReferenceType } from '../api/project/IReference';
 import { IProject } from '../api/project/IProject';
+import { ICardboard } from '../api/project/ICardboard';
+import { ICard } from '../api/project/ICard';
+import { IInterface, InterfaceType } from '../api/project/IInterface';
+import { IItem, ItemType } from '../api/project/IItem';
 
 export const areObjectsEqual = ( x, y ) => {
   if ( x === y ) return true;
@@ -80,4 +84,101 @@ export const parsePath = (path: string): ReferencePath|undefined => {
   });
 
   return result;
+}
+
+export const getSubitemsIds = (namespace: string, project: IProject): IHash<string>|undefined => {
+  const structureItem = project.structure[namespace];
+  if (!structureItem) {
+    return undefined;
+  }
+
+  return structureItem.subitems;
+}
+
+export const getSubitems = (namespace: string, project: IProject): IHash<ISymbol>|undefined => {
+  const idList = getSubitemsIds(namespace, project);
+  if (!idList) {
+    return undefined;
+  }
+
+  const result: IHash<ISymbol> = {};
+  Object.keys(idList).map((symbolId: string) => {
+    const symbol = project.symbols[symbolId];
+    if (symbol) {
+      result[symbol.id] = symbol;
+    }
+  })
+
+  return result;
+}
+
+export const getCardboard = (cardboardId: string, project: IProject): ICardboard|undefined => {
+  return project.cardboards[cardboardId];
+}
+
+export const getCard = (cardboardId: string, cardId: string, project: IProject): ICard|undefined => {
+  const cardboard = getCardboard(cardboardId, project);
+  if (!cardboard) {
+    return undefined;
+  }
+
+  return cardboard.cards[cardId];
+}
+
+export const getIconForSymbol = (symbol: ISymbol) => {
+  switch (symbol.symbolType) {
+    case SymbolType.Interface: {
+      const intrf = symbol as IInterface;
+
+      if (intrf) {
+      
+        switch (intrf.interfaceType) {
+          case InterfaceType.Function: {
+            
+          } break;
+        
+          case InterfaceType.Structure: {
+
+          } break;
+        
+          case InterfaceType.Primitive: {
+
+          } break;
+        
+          default: break;
+        }
+      
+      }
+
+    } break;
+  
+    case SymbolType.Item: {
+      const item = symbol as IItem;
+
+      if (item) {
+      
+        switch (item.itemType) {
+          case ItemType.FunctionCall: {
+
+          } break;
+        
+          case ItemType.Object: {
+
+          } break;
+        
+          case ItemType.SourceCode: {
+
+          } break;
+        
+          default: break;
+        }
+      
+      }
+
+    } break;
+  
+    default: break;
+  }
+
+  return 'wrench';
 }

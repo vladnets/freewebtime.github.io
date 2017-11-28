@@ -9,14 +9,13 @@ import { IItem } from '../../../api/project/IItem';
 export interface ISymbolEditorProps {
   appState: IAppState;
   pvState: IProjectViewState;
-  symbol: ISymbol;
+  symbolId: string;
 }
 
 export class SymbolEditorView extends React.Component<ISymbolEditorProps> {
   render () {
-    const symbol = this.props.symbol;
     return (
-      <CardboardView rootSymbol={symbol} appState={this.props.appState} pvState={this.props.pvState}/>
+      <CardboardView rootSymbolId={this.props.symbolId} appState={this.props.appState} pvState={this.props.pvState}/>
     )
   }
 }

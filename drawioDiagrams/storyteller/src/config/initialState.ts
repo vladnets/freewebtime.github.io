@@ -12,6 +12,8 @@ import { IHash } from '../api/IHash';
 import { ISystemSourceCodeItem, ItemType, SourceCodeType, IGraphSourceCodeItem, IItem, IObjectItem, IFunctionCallItem } from '../api/project/IItem';
 import { ICard } from '../api/project/ICard';
 import { ICardboard } from '../api/project/ICardboard';
+import { IProjectStructureItem } from '../api/project/IProjectStructureItem';
+import { parseProjectStructure } from '../helpers/projectStructureHelper';
 
 // Interfaces
 
@@ -366,3 +368,6 @@ Object.keys(items).map((itemId: string)=>{
 export const initialItems = itemsKeys;
 
 export const initialCardboards: IHash<ICardboard> = {};
+
+export const initialStructure: IHash<IProjectStructureItem> = parseProjectStructure(initialSymbols, projectRootFullId);
+

@@ -45,10 +45,12 @@ export const cardboardsReducer = (state: IHash<ICardboard> = initialCardboards, 
       const changedCardboards = {};
       Object.keys(state).map((cardboardId: string, index: number) => {
         const oldCardboard = state[cardboardId];
-        const newCardboard = cardboardReducer(oldCardboard, action);
-        if (!areObjectsEqual(oldCardboard, newCardboard)) {
-          isChanged = true;
-          changedCardboards[cardboardId] = newCardboard;
+        if (oldCardboard) {
+          const newCardboard = cardboardReducer(oldCardboard, action);
+          if (!areObjectsEqual(oldCardboard, newCardboard)) {
+            isChanged = true;
+            changedCardboards[cardboardId] = newCardboard;
+          }
         }
       })
 

@@ -1,3 +1,4 @@
+import { getCard } from '../../../helpers';
 import { IVector2 } from '../../../api/IVector2';
 import { ICallback } from '../../../api';
 import * as React from 'react';
@@ -7,62 +8,24 @@ import { ICard } from '../../../api/project/ICard';
 import { IAppState } from '../../../api/IAppState';
 import { ISymbol } from '../../../api/project/ISymbol';
 import { IProjectViewState } from '../ProjectView';
-import { createReference } from '../../../helpers/index';
+import { createReference, resolveReferenceFast } from '../../../helpers/index';
 import { appConfig } from '../../../config/appConfig';
 
 export interface ICardViewProps {
-  symbol: ISymbol;
+  symbolId: string;
   cardboardId: string;
   appState: IAppState;
   pvState: IProjectViewState;
 }
 
-interface ICardViewState {
-  card: ICard|undefined;
-}
-
-export class CardView extends React.Component<ICardViewProps, ICardViewState> {
-
-  createCard = (symbol: ISymbol) => {
-    const cardId = symbol.fullId;
-
-    const card = {
-      id: cardId,
-      name: symbol.name,
-      symbol: createReference(symbol),
-      position: {x: 100, y: 200},
-      size: {x: 180, y: 75},
-    }
-
-    return card;
-  }
-
-  componentWillMount() {
-    const appState = this.props.appState;
-    const cardboardId = this.props.cardboardId;
-    const symbol = this.props.symbol;
-    const cardId = symbol.fullId;
-    const cardboard = appState.project.cardboards[cardboardId];
-    let card: ICard|undefined;
-    if (cardboard) {
-      card = cardboard.cards[cardId];
-    }
-
-    if (!card) {
-      card = this.createCard(symbol);
-
-      this.setState({
-        ...this.state,
-        card: card,
-      })
-
-      const action = appConfig.Actions.CardAdd(cardboardId, card);
-      appState.resources.callback(action);
-    }
-  }
+export class CardView extends React.Component<ICardViewProps> {
 
   moveCard = (deltaPos: IVector2, callback: ICallback) => {
-    const card = this.state.card;
+    const cardboardId = this.props.cardboardId;
+    const cardId = this.props.symbolId;
+    const appState = this.props.appState;
+    const project = appState.project;
+    const card = getCard(cardboardId, cardId, project);
     if (card) {
       const currentPos = card.position;
       const newValues = {
@@ -79,7 +42,11 @@ export class CardView extends React.Component<ICardViewProps, ICardViewState> {
     }
   }
   placeCard = (newPos: IVector2, callback: ICallback) => {
-    const card = this.state.card;
+    const cardboardId = this.props.cardboardId;
+    const cardId = this.props.symbolId;
+    const appState = this.props.appState;
+    const project = appState.project;
+    const card = getCard(cardboardId, cardId, project);
     if (card) {
       const currentPos = card.position;
       const newValues = {
@@ -93,7 +60,11 @@ export class CardView extends React.Component<ICardViewProps, ICardViewState> {
     }     
   }
   resizeCard = (deltaSize: IVector2, newPos: IVector2, callback: ICallback) => {
-    const card = this.state.card;
+    const cardboardId = this.props.cardboardId;
+    const cardId = this.props.symbolId;
+    const appState = this.props.appState;
+    const project = appState.project;
+    const card = getCard(cardboardId, cardId, project);
     if (card) {
       const currentPos = card.position;
       const currentSize = card.size;
@@ -113,15 +84,17 @@ export class CardView extends React.Component<ICardViewProps, ICardViewState> {
     }     
   }
 
-  render () {
-
-    const card: ICard = this.state.card || this.createCard(this.props.symbol);
-
-    const movableContainer = (children: any) => {
-
+  movableContainer = (children: any) => {
+    const cardboardId = this.props.cardboardId;
+    const cardId = this.props.symbolId;
+    const appState = this.props.appState;
+    const project = appState.project;
+    const card = getCard(cardboardId, cardId, project);
+    
+    if (card) {
       const pos = card.position;
       const size = card.size;
-
+  
       return (
         <Rnd 
           default={{
@@ -142,44 +115,59 @@ export class CardView extends React.Component<ICardViewProps, ICardViewState> {
         </Rnd>
       )
     }
+
+    return false;
+  }
+
+  render () {
     
-    const headerStyle = {};
-    if (card.color) {
-      headerStyle['backgroundColor'] = card.color;
-    }
-    delete headerStyle['backgroundColor'];
+    const cardboardId = this.props.cardboardId;
+    const cardId = this.props.symbolId;
+    const appState = this.props.appState;
+    const project = appState.project;
+    const card = getCard(cardboardId, cardId, project);
+    
+    if (card) {
+      const headerStyle = {};
+      if (card.color) {
+        headerStyle['backgroundColor'] = card.color;
+      }
+      delete headerStyle['backgroundColor'];
+  
+      const cardContainerClass = 'card-container card container-vertical fullwidth fullheight'
+        + (card.isSelected ? ' selected' : '')
+      ;
 
-    const cardContainerClass = 'card-container card container-vertical fullwidth fullheight'
-      + (card.isSelected ? ' selected' : '')
-    ;
-
-    return (
-      movableContainer(
-        <div className={cardContainerClass}>
-          <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
-            <div className="input-container">
-              Input
+      return (
+        this.movableContainer(
+          <div className={cardContainerClass}>
+            <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
+              <div className="input-container">
+                Input
+              </div>
+              <div className="content-container">
+                {card.name}
+              </div>
+              <div className="output-container">
+                Output
+              </div>
             </div>
-            <div className="content-container">
-              {card.name}
-            </div>
-            <div className="output-container">
-              Output
+            <div className="card-content container-horizontal">
+              <div className="input-container">
+                Input
+              </div>
+              <div className="content-container">
+                Card content
+              </div>
+              <div className="output-container">
+                Output
+              </div>
             </div>
           </div>
-          <div className="card-content container-horizontal">
-            <div className="input-container">
-              Input
-            </div>
-            <div className="content-container">
-              Card content
-            </div>
-            <div className="output-container">
-              Output
-            </div>
-          </div>
-        </div>
+        )
       )
-    )
+    }
+
+    return false;
   }
 }

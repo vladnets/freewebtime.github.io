@@ -1,24 +1,28 @@
+import { resolveReferenceFast } from '../../../../helpers';
+import { getStructureItem, getStructureRoot } from '../../../../helpers/projectStructureHelper';
+import { IAppState } from '../../../../api/IAppState';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { IProjectViewState } from '../../ProjectView';
 import { IHash } from '../../../../api/IHash';
-import { ISymbol } from '../../../../api/project/ISymbol';
+import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
+import { IInterface } from '../../../../api/project/IInterface';
+import { getIconForSymbol } from '../../../../helpers/index';
+import { IProjectStructureItem } from '../../../../api/project/IProjectStructureItem';
 
 export interface IPetviProps {
-  id: string;
-  name: string;
-  icon: string;
-  iconColor?: string;
-  subitems: IHash<IPetviProps>;
-  symbol?: ISymbol;
+  structureItemId: string;
+  level: number;
+  pvState: IProjectViewState;
+  appState: IAppState;
 }
 
 interface IPetviState {
-  isMouseOver: boolean;
+  isMouseOver?: boolean;
   lastTimeClick?: number;
 }
 
-export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviProps, level: number, pvState: IProjectViewState}, IPetviState> {
+export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IPetviState> {
   mouseEnter = (self: React.Component) => {
     self.setState({...this.state, isMouseOver: true });
   }
@@ -29,14 +33,16 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
     e.preventDefault();
     e.stopPropagation();
 
-    const lastTimeClicked = this.state.lastTimeClick;
+    const state: IPetviState = this.state || {}
+
+    const lastTimeClicked = state.lastTimeClick;
     const now = Date.now();
     const doubleClickInterval = 300;
     const delta = now - (lastTimeClicked ? lastTimeClicked : 0);
     const isDoubleClick = delta < doubleClickInterval;
     
     this.setState({
-      ...this.state,
+      ...state,
       lastTimeClick: now,
     })
     
@@ -48,73 +54,86 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
     }
   }
 
-  componentWillMount() {
-    this.setState({
-      ...this.state,
+  subitemsView = (structureItem: IProjectStructureItem) => {
+    const subitems = Object.keys(structureItem.subitems).map((key: string)=>{
+      return structureItem.subitems[key];
     });
+
+    if (subitems && subitems.length > 0) {
+      return (
+        subitems.map((subitemId: string) => {
+          return (
+            <ProjectExplorerTreeViewItem 
+              key={subitemId} 
+              level={this.props.level+1} 
+              pvState={this.props.pvState} 
+              appState={this.props.appState}
+              structureItemId={subitemId}
+            />
+          )
+        })
+      )
+    }
+
+    return false;
   }
 
+  buttonsView = () => {
+    const isShowButtons = false;
+
+    if (isShowButtons || this.state.isMouseOver) {
+      return (
+        <span className={'project-explorer-tvi-header-buttons-container'}>
+          <button className={'button'}>
+            <FontAwesome name={'plus'} className={'project-explorer-tvi-icon'} style={{color: '#227e2e'}} />
+          </button>
+          <button className={'button'}>
+            <FontAwesome name={'edit'} className={'project-explorer-tvi-icon'} style={{color: '#a4ad27'}} />
+          </button>
+          <button className={'button'}>
+            <FontAwesome name={'remove'} className={'project-explorer-tvi-icon'} style={{color: '#822'}} />
+          </button>
+        </span>
+      )
+    }
+
+    return false;
+  }
+
+
+
   render () {
+    const appState = this.props.appState;
+    const project = appState.project;
+    const structItemId = this.props.structureItemId;
+    const structureItem = getStructureItem(structItemId, project);
+    if (!structureItem) {
+      return false;
+    }
+    
+    const pvState = this.props.pvState;
+    const isSelected = pvState.selectedItemId === structItemId;
 
-    const subitemsView = () => {
-      const subitems = Object.keys(this.props.data.subitems).map((key: string)=>{
-        return this.props.data.subitems[key];
-      });
-
-      if (subitems && subitems.length > 0) {
-        return (
-          subitems.map((subitem: IPetviProps) => {
-            return (<ProjectExplorerTreeViewItem data={subitem} key={subitem.id} level={this.props.level+1} pvState={this.props.pvState} />)
-          })
-        )
-      }
-
+    const symbol = resolveReferenceFast(structItemId, project);
+    if (!symbol) {
       return false;
     }
 
-    const className = 
-      'project-explorer-treeview-item' + 
-      (this.props.pvState.selectedItemId === this.props.data.id
-        ? ' selected'
-        : ''
-      )
+    const icon = getIconForSymbol(symbol);
+    
+    const className = 'project-explorer-treeview-item' + (isSelected ? ' selected' : '');
 
     const contentClassName = 'project-explorer-treeview-item-content container-horizontal' + 
       (this.props.level === 0
         ? ' project-explorer-subheader'
         : ''
       ) + 
-      (this.props.pvState.selectedItemId === this.props.data.id
+      (this.props.pvState.selectedItemId === this.props.structureItemId
         ? ' selected'
         : ''
       )
 
-    const buttonsView = () => {
-      const isShowButtons = false;
-
-      if (isShowButtons || this.state.isMouseOver) {
-        return (
-          <span className={'project-explorer-tvi-header-buttons-container'}>
-            <button className={'button'}>
-              <FontAwesome name={'plus'} className={'project-explorer-tvi-icon'} style={{color: '#227e2e'}} />
-            </button>
-            <button className={'button'}>
-              <FontAwesome name={'edit'} className={'project-explorer-tvi-icon'} style={{color: '#a4ad27'}} />
-            </button>
-            <button className={'button'}>
-              <FontAwesome name={'remove'} className={'project-explorer-tvi-icon'} style={{color: '#822'}} />
-            </button>
-          </span>
-        )
-      }
-
-      return false;
-    }
-
     const iconStyle = {}
-    if (this.props.data.iconColor) {
-      iconStyle['color'] = this.props.data.iconColor
-    }
 
     return (
       <div className={className}>
@@ -123,16 +142,16 @@ export class ProjectExplorerTreeViewItem extends React.Component<{data: IPetviPr
           style={{paddingLeft: (0.5 + this.props.level) + 'em'}}
           onMouseEnter={() => this.mouseEnter(this)}
           onMouseLeave={() => this.mouseLeave(this)}
-          onClick={(e: any) => this.handleClick(this.props.pvState, this.props.data.id, e)}
+          onClick={(e: any) => this.handleClick(this.props.pvState, structItemId, e)}
         >
-          <FontAwesome name={this.props.data.icon} className={'project-explorer-tvi-icon'} style={iconStyle}/>
+          <FontAwesome name={icon} className={'project-explorer-tvi-icon'} style={iconStyle}/>
           <span className={'project-explorer-tvi-text'}>
-          {this.props.data.name}
+          {symbol.name}
           </span>
-          {buttonsView()}
+          {this.buttonsView()}
         </div>
         <div className={'project-explorer-treeview-item-subitems-container'}>
-        {subitemsView()}
+        {this.subitemsView(structureItem)}
         </div>
       </div>
     )

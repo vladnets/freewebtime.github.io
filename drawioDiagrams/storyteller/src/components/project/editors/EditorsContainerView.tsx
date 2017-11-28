@@ -5,18 +5,18 @@ import FontAwesome from 'react-fontawesome';
 import { CardboardView } from './CarboardView';
 import { EditorsTabsView } from './EditorsTabsView';
 import { IAppState } from '../../../api/IAppState';
-import { EditorType, IEditorProps } from './EditorView';
 import { SymbolEditorView } from './SymbolEditorView';
-import { resolveReference } from '../../../helpers/index';
+import { resolveReference, resolveReferenceFast } from '../../../helpers/index';
 
 export class EditorsContainerView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   
-  graphEditorView = (editorProps: IEditorProps) => {
+  graphEditorView = (editorId: string) => {
 
-    const symbol = resolveReference(editorProps.symbol, this.props.appState.project);
+    const appState = this.props.appState;
+    const symbol = resolveReferenceFast(editorId, appState.project);
     if (symbol) {
       return (
-        <SymbolEditorView appState={this.props.appState} symbol={symbol} pvState={this.props.pvState} />
+        <SymbolEditorView appState={this.props.appState} symbolId={symbol.fullId} pvState={this.props.pvState} />
       )
     }
 
@@ -24,23 +24,11 @@ export class EditorsContainerView extends React.Component<{appState: IAppState, 
   }
 
   activeEditorView = () => {
-    const pvState = this.props.pvState;
-    const appState = this.props.appState;
-    const activeEditorId = pvState.activeEditorId;
-    if (activeEditorId) {
-      const activeEditorProps = pvState.opennedEditors[activeEditorId];
-      if (activeEditorProps) {
-        switch (activeEditorProps.editorType) {
-          case EditorType.Graph:
-          {
-            return this.graphEditorView(activeEditorProps);
-          } 
-        
-          default: break;
-        }
-      }
+    const editorId = this.props.pvState.activeEditorId;
+    if (editorId) {
+      return this.graphEditorView(editorId);
     }
-    
+
     return false;
   }
   

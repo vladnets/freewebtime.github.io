@@ -1,3 +1,4 @@
+import { IProjectStructureItem } from './IProjectStructureItem';
 import { ICard } from './ICard';
 import { ISymbol } from './ISymbol';
 import { IUniqueObject } from '../IUniqueObject';
@@ -12,4 +13,6 @@ export interface IProject extends IUniqueObject {
   
   symbols: IHash<ISymbol>;
   cardboards: IHash<ICardboard>;
+
+  structure: IHash<IProjectStructureItem>;
 }

@@ -67,8 +67,6 @@ export class SidebarView extends React.Component<ISidebarViewProps> {
       return false;
     }
 
-    console.log('draw children 2 ' + className, this.props);
-
     return (
       <div className={className + ' container-vertical'}>
         {this.props.children}

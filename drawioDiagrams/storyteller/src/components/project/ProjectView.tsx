@@ -1,18 +1,19 @@
 import { resolveReference } from '../../helpers';
-import { IEditorProps, EditorType } from './editors/EditorView';
 import * as React from 'react';
 import { LeftSidebarView } from './sidebars/LeftSidebarView';
 import { RightSidebarView } from './sidebars/RightSidebarView';
 import { IHash } from '../../api/IHash';
 import { EditorsContainerView } from './editors/EditorsContainerView';
 import { resolveReferenceFast, createReference } from '../../helpers/index';
+import { IReference } from '../../api/project/IReference';
 
 export interface IProjectViewState {
   selectedItemId: string;
-  opennedEditors: IHash<IEditorProps>;
+  opennedEditors: IHash<string>;
   activeEditorId?: string;
   isLeftSidebarCollapsed: boolean;
   isRightSidebarCollapsed: boolean;
+
   handleItemClick: (itemId: string) => void;
   openEditor: (itemId: string) => void;
   closeEditor: (itemId: string) => void;
@@ -93,44 +94,34 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
   }
 
   openEditor = (itemId: string) => {
-    const existedEditor = this.state.opennedEditors[itemId];
-    if (existedEditor) {
+    if (!this.state.opennedEditors[itemId] || this.state.activeEditorId !== itemId) {
       this.setState({
         ...this.state,
-        activeEditorId: existedEditor.id,
-      });
-
-      return;
+        opennedEditors: {
+          ...this.state.opennedEditors,
+          [itemId]: itemId,
+        },
+        activeEditorId: itemId,
+      })
     }
-    
-    const project = this.props.appState.project;
-    const symbol = resolveReferenceFast(itemId, project);
-    if (!symbol) {
-      return;
-    }
-
-    const editor: IEditorProps = {
-      id: itemId,
-      appState: this.props.appState,
-      editorType: EditorType.Graph,
-      symbol: createReference(symbol),
-    }
-    this.setState({
-      ...this.state,
-      opennedEditors: {
-        ...this.state.opennedEditors,
-        [editor.id]: editor,
-      },
-      activeEditorId: editor.id,
-    });
   }
 
   closeEditor = (editorId: string) => {
     const newEditors = {...this.state.opennedEditors}
     delete newEditors[editorId];
+    let activeEditorId = this.state.activeEditorId; 
+    if (activeEditorId === editorId) {
+      activeEditorId = undefined;
+      const editorIds = Object.keys(newEditors);
+      if (editorIds.length > 0) {
+        activeEditorId = editorIds[0];
+      }
+    }
+
     this.setState({
       ...this.state,
       opennedEditors: newEditors,
+      activeEditorId: activeEditorId,
     });
   }
 

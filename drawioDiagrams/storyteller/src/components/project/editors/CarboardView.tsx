@@ -6,84 +6,156 @@ import { IAppState } from '../../../api/IAppState';
 import { ICard } from '../../../api/project/ICard';
 import { IProjectViewState } from '../ProjectView';
 import { IReference } from '../../../api/project/IReference';
-import { parsePath, createReference } from '../../../helpers/index';
+import { parsePath, createReference, resolveReference, resolveReferenceFast, getSubitems, getSubitemsIds } from '../../../helpers/index';
 import { ReferencePathItem } from '../../../api/project/ReferencePath';
 import { ICardboard } from '../../../api/project/ICardboard';
 import { appConfig } from '../../../config/appConfig';
+import { IHash } from '../../../api/IHash';
 
 export interface ICardboardViewProps {
-  rootSymbol: ISymbol;
+  rootSymbolId: string;
   appState: IAppState;
   pvState: IProjectViewState;
 }
 
-interface ICardboardViewState {
-  cardboard: ICardboard|undefined;
-}
+export class CardboardView extends React.Component<ICardboardViewProps> {
 
-export class CardboardView extends React.Component<ICardboardViewProps, ICardboardViewState> {
-  
   componentWillMount() {
+    this.checkForCardboard();
+  }
+
+  componentDidUpdate() {
+    this.checkForCardboard();
+  }
+
+  createCard = (symbol: ISymbol): ICard => {
+    return {
+      id: symbol.fullId,
+      name: symbol.name,
+      position: {x: 100, y: 200},
+      size: {x: 180, y: 75},
+    }
+  }
+
+  createCards = (symbols: IHash<ISymbol>) => {
     const appState = this.props.appState;
-    const rootSymbol = this.props.rootSymbol;
-    const cardboardId = rootSymbol.fullId;
-    let cardboard = this.state ? this.state.cardboard : undefined;
-    if (cardboard && cardboard.id !== rootSymbol.fullId) {
-      cardboard = undefined;
+    const project = appState.project;
+    const rootSymbolId = this.props.rootSymbolId;
+    const result = {};
+    if (symbols) {
+      Object.keys(symbols).map((symbolId: string) => {
+        const symbol = symbols[symbolId];
+        const card = this.createCard(symbol);
+        result[card.id] = card;
+      })
     }
 
-    if (!cardboard) {
-      const project = appState.project;
-      const cardboards = project.cardboards;
-      cardboard = cardboards[cardboardId];
-    }
+    return result;
+  }
 
-    if (!cardboard) {
-      cardboard = {
-        id: cardboardId,
-        name: rootSymbol.name,
-        cards: {},
-        rootSymbolRef: createReference(rootSymbol),
-      };
+  checkForCardboard = () => {
+    const appState = this.props.appState;
+    const project = appState.project;
+    const rootSymbolId = this.props.rootSymbolId;
+    const subitems = getSubitems(rootSymbolId, project);
+    console.log('subitems', subitems);
+    const rootSymbol = resolveReferenceFast(rootSymbolId, project);
+    
+    if (rootSymbol) {
+      const cardboard = project.cardboards[rootSymbolId];
+    
+      if (!cardboard) {
+        let cards = {}
+    
+        if (subitems) {
+          cards = this.createCards(subitems);
+        }
 
-      this.setState({
-        ...this.state,
-        cardboard: cardboard
-      });
+        const newCardboard: ICardboard = {
+          id: rootSymbolId,
+          name: rootSymbol.name,
+          rootSymbolRef: createReference(rootSymbol),
+          cards: cards,
+        }
 
-      const action = appConfig.Actions.CardboardAdd(cardboard);
-      appState.resources.callback(action);
+        const action = appConfig.Actions.CardboardAdd(newCardboard);
+        appState.resources.callback(action);
+      }
+      
+      else {
+        //if cardboard is there. check for all the cards
+        const addedCards = {}
+        let isCardsAdded = false;
+
+        if (subitems) {
+          Object.keys(subitems).map((symbolId: string) => {
+            const symbol = subitems[symbolId];
+            
+            if (symbol) {
+              const card = cardboard.cards[symbolId];
+            
+              if (!card) {
+                const newCard = this.createCard(symbol);
+                
+                if (newCard) {
+                  addedCards[newCard.id] = newCard;
+                  isCardsAdded = true;
+                }
+              
+              }
+            
+            }
+
+          })
+          
+        }
+
+        if (isCardsAdded) {
+          const newCards = {
+            ...cardboard.cards,
+            ...addedCards,
+          }
+          const action = appConfig.Actions.CardboardUpdate(rootSymbolId, {cards: newCards});
+          appState.resources.callback(action);
+        }
+
+      }
+
     }
   }
 
   pathView = () => {
-    const rootSymbol = this.props.rootSymbol;
-    const path = parsePath(rootSymbol.fullId);
-
-    if (path) {
-      return path.map((pathItem: ReferencePathItem, index: number) => {
-        const prefix = index > 0 ? ' > ' : '';
-        return (
-          <div key={index} className={'cardboard-header-path-item'}>
-          {prefix}{pathItem.toString()}
-          </div>
-        )        
-      })
+    const rootSymbolId = this.props.rootSymbolId;
+    const appState = this.props.appState;
+    const project = appState.project;
+    const rootSymbol = resolveReferenceFast(rootSymbolId, project);
+    if (rootSymbol) {
+      const path = parsePath(rootSymbol.fullId);
+      if (path) {
+        return path.map((pathItem: ReferencePathItem, index: number) => {
+          const prefix = index > 0 ? ' > ' : '';
+          return (
+            <div key={index} className={'cardboard-header-path-item'}>
+            {prefix}{pathItem.toString()}
+            </div>
+          )        
+        })
+      }
     }
 
     return false;
   }
 
   cardsView = () => {
-    const cardboard = this.state.cardboard;
-    if (cardboard) {
-      const cardboardId = cardboard.id;
-      const symbols = this.props.appState.project.symbols;
-      return Object.keys(symbols).map((symbolId: string, index: number) => {
-        const symbol = symbols[symbolId];
-  
+    const appState = this.props.appState;
+    const project = appState.project;
+    const rootSymbolId = this.props.rootSymbolId;
+    const cardboardId = rootSymbolId;
+    const symbolsIds = getSubitemsIds(rootSymbolId, project);
+    if (symbolsIds) {
+      return Object.keys(symbolsIds).map((symbolId: string) => {
         return (
-          <CardView key={symbolId} symbol={symbol} cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <CardView key={symbolId} symbolId={symbolId} cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       })
     }
@@ -92,7 +164,6 @@ export class CardboardView extends React.Component<ICardboardViewProps, ICardboa
   }
 
   render () {
-
     return (
       <div className={'cardboard-container container-vertical'}>
         <div className="cardboard-header">

@@ -15,21 +15,21 @@ export const cardboardReducer = (state: ICardboard, action: IAction) => {
     case appConfig.Actions.Types.CARD_ADD: {
       const cardboardId: string = action.payload.cardboardId;
       if (cardboardId !== state.id) {
-        return;
+        return state;
       }
     } break;
 
     case appConfig.Actions.Types.CARD_DELETE: {
       const cardboardId: string = action.payload.cardboardId;
       if (cardboardId !== state.id) {
-        return;
+        return state;
       }
     } break;
 
     case appConfig.Actions.Types.CARD_UPDATE: {
       const cardboardId: string = action.payload.cardboardId;
       if (cardboardId !== state.id) {
-        return;
+        return state;
       }
     } break;
   
