@@ -9,7 +9,7 @@ import { appConfig } from './appConfig';
 import { IReference, ReferenceType } from '../api/project/IReference';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
-import { ISystemSourceCodeInterface, ItemType, SourceCodeType, IGraphSourceCodeInterface, IItem } from '../api/project/IItem';
+import { ISystemSourceCodeItem, ItemType, SourceCodeType, IGraphSourceCodeItem, IItem, IObjectItem, IFunctionCallItem } from '../api/project/IItem';
 
 // Interfaces
 
@@ -46,6 +46,9 @@ const booleanInterface: IPrimitiveInterface = {
 
 const concatStringName = 'Concat_String';
 const concatStringParamsName = 'Params';
+const prefixParamName = 'Prefix';
+const separatorParamName = 'Separator';
+const postfixParamName = 'Postfix';
 
 const concatStringParamsInterface: IStructureInterface = {
   id: concatStringParamsName,
@@ -55,15 +58,15 @@ const concatStringParamsInterface: IStructureInterface = {
   symbolType: SymbolType.Interface,
   interfaceType: InterfaceType.Structure,
   subitems: {
-    ['Prefix']: {
+    [prefixParamName]: {
       referenceType: ReferenceType.Interface,
       targetId: stringInterface.fullId,
     },
-    ['Separator']: {
+    [separatorParamName]: {
       referenceType: ReferenceType.Interface,
       targetId: stringInterface.fullId,
     },
-    ['Postfix']: {
+    [postfixParamName]: {
       referenceType: ReferenceType.Interface,
       targetId: stringInterface.fullId,
     },
@@ -197,7 +200,7 @@ const projectRootInterface: IFunctionInterface = {
 
 //concat string
 const concatStringSourceCodeName = 'SourceCode';
-const concatStringSourceCode: ISystemSourceCodeInterface = {
+const concatStringSourceCode: ISystemSourceCodeItem = {
   id: concatStringSourceCodeName,
   name: concatStringSourceCodeName,
   namespace: concatString.fullId,
@@ -214,7 +217,7 @@ const concatStringSourceCode: ISystemSourceCodeInterface = {
 
 //project root
 const projectRootSourceCodeName = 'SourceCode';
-const projectRootSourceCode: IGraphSourceCodeInterface = {
+const projectRootSourceCode: IGraphSourceCodeItem = {
   id: projectRootSourceCodeName,
   name: projectRootSourceCodeName,
   namespace: projectRootInterface.fullId,
@@ -229,6 +232,84 @@ const projectRootSourceCode: IGraphSourceCodeInterface = {
   locals: {
   },
   connections: {
+  },
+}
+
+const firstNameItemName = 'First Name';
+const firstNameItem: IObjectItem = {
+  id: firstNameItemName,
+  name: firstNameItemName,
+  namespace: projectRootInterface.fullId,
+  fullId: `${projectRootInterface.fullId}.${firstNameItemName}`,
+  symbolType: SymbolType.Item,
+  itemType: ItemType.Object,
+  typeReference: {
+    referenceType: ReferenceType.Interface,
+    targetId: stringInterface.fullId,
+  },
+  connections: {},
+  value: 'Jack',
+}
+
+const lastNameItemName = 'Last Name';
+const lastNameItem: IObjectItem = {
+  id: lastNameItemName,
+  name: lastNameItemName,
+  namespace: projectRootInterface.fullId,
+  fullId: `${projectRootInterface.fullId}.${lastNameItemName}`,
+  symbolType: SymbolType.Item,
+  itemType: ItemType.Object,
+  typeReference: {
+    referenceType: ReferenceType.Interface,
+    targetId: stringInterface.fullId,
+  },
+  connections: {},
+  value: 'Dreamer',
+}
+
+const separatorItemName = 'Separator';
+const separatorItem: IObjectItem = {
+  id: separatorItemName,
+  name: separatorItemName,
+  namespace: projectRootInterface.fullId,
+  fullId: `${projectRootInterface.fullId}.${separatorItemName}`,
+  symbolType: SymbolType.Item,
+  itemType: ItemType.Object,
+  typeReference: {
+    referenceType: ReferenceType.Interface,
+    targetId: stringInterface.fullId,
+  },
+  connections: {},
+  value: ' ',
+}
+
+//function calls
+const combineNameFunctionCallName = 'Full Name';
+const combineNameFunctionCall: IFunctionCallItem = {
+  id: combineNameFunctionCallName,
+  name: combineNameFunctionCallName,
+  namespace: projectRootInterface.fullId,
+  fullId: `${projectRootInterface.fullId}.${combineNameFunctionCallName}`,
+  symbolType: SymbolType.Item,
+  itemType: ItemType.FunctionCall,
+  typeReference: {
+    referenceType: ReferenceType.Item,
+    targetId: concatStringSourceCode.fullId,
+  },
+  locals: {},
+  connections: {
+    [`${prefixParamName}`]: {
+      referenceType: ReferenceType.Item,
+      targetId: firstNameItem.fullId,
+    },
+    [`${separatorParamName}`]: {
+      referenceType: ReferenceType.Item,
+      targetId: separatorItem.fullId,
+    },
+    [`${postfixParamName}`]: {
+      referenceType: ReferenceType.Item,
+      targetId: lastNameItem.fullId,
+    },
   },
 }
 
@@ -252,6 +333,12 @@ const interfaces: IHash<IInterface> = {
 const items: IHash<IItem> = {
   [concatStringSourceCode.fullId]: concatStringSourceCode,
   [projectRootSourceCode.fullId]: projectRootSourceCode,
+
+  [firstNameItem.fullId]: firstNameItem,
+  [lastNameItem.fullId]: lastNameItem,
+  [separatorItem.fullId]: separatorItem,
+  
+  [combineNameFunctionCall.fullId]: combineNameFunctionCall,
 }
 
 //final result

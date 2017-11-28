@@ -16,6 +16,7 @@ export interface IItem extends ISymbol {
 
 export interface IObjectItem extends IItem {
   connections: IHash<IReference>;
+  value?: any;
 }
 
 export interface IFunctionCallItem extends IObjectItem {
@@ -27,15 +28,15 @@ export enum SourceCodeType {
   Graph = 'Graph',
 }
 
-export interface ISourceCodeInterface extends IItem {
+export interface ISourceCodeItem extends IItem {
   sourceCodeType: SourceCodeType;
 }
 
-export interface ISystemSourceCodeInterface extends ISourceCodeInterface {
+export interface ISystemSourceCodeItem extends ISourceCodeItem {
   functionId: string;  
 }
   
-export interface IGraphSourceCodeInterface extends ISourceCodeInterface {
+export interface IGraphSourceCodeItem extends ISourceCodeItem {
   locals: IHash<IReference>;//name:type
   connections: IHash<IReference>;
 }
