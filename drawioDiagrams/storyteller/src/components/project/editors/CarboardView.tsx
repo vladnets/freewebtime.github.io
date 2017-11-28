@@ -6,8 +6,10 @@ import { IAppState } from '../../../api/IAppState';
 import { ICard } from '../../../api/project/ICard';
 import { IProjectViewState } from '../ProjectView';
 import { IReference } from '../../../api/project/IReference';
-import { parsePath } from '../../../helpers/index';
+import { parsePath, createReference } from '../../../helpers/index';
 import { ReferencePathItem } from '../../../api/project/ReferencePath';
+import { ICardboard } from '../../../api/project/ICardboard';
+import { appConfig } from '../../../config/appConfig';
 
 export interface ICardboardViewProps {
   rootSymbol: ISymbol;
@@ -15,8 +17,45 @@ export interface ICardboardViewProps {
   pvState: IProjectViewState;
 }
 
-export class CardboardView extends React.Component<ICardboardViewProps> {
+interface ICardboardViewState {
+  cardboard: ICardboard|undefined;
+}
+
+export class CardboardView extends React.Component<ICardboardViewProps, ICardboardViewState> {
   
+  componentWillMount() {
+    const appState = this.props.appState;
+    const rootSymbol = this.props.rootSymbol;
+    const cardboardId = rootSymbol.fullId;
+    let cardboard = this.state ? this.state.cardboard : undefined;
+    if (cardboard && cardboard.id !== rootSymbol.fullId) {
+      cardboard = undefined;
+    }
+
+    if (!cardboard) {
+      const project = appState.project;
+      const cardboards = project.cardboards;
+      cardboard = cardboards[cardboardId];
+    }
+
+    if (!cardboard) {
+      cardboard = {
+        id: cardboardId,
+        name: rootSymbol.name,
+        cards: {},
+        rootSymbolRef: createReference(rootSymbol),
+      };
+
+      this.setState({
+        ...this.state,
+        cardboard: cardboard
+      });
+
+      const action = appConfig.Actions.CardboardAdd(cardboard);
+      appState.resources.callback(action);
+    }
+  }
+
   pathView = () => {
     const rootSymbol = this.props.rootSymbol;
     const path = parsePath(rootSymbol.fullId);
@@ -35,8 +74,24 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
     return false;
   }
 
-  render () {
+  cardsView = () => {
+    const cardboard = this.state.cardboard;
+    if (cardboard) {
+      const cardboardId = cardboard.id;
+      const symbols = this.props.appState.project.symbols;
+      return Object.keys(symbols).map((symbolId: string, index: number) => {
+        const symbol = symbols[symbolId];
+  
+        return (
+          <CardView key={symbolId} symbol={symbol} cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+        )
+      })
+    }
 
+    return false;
+  }
+
+  render () {
 
     return (
       <div className={'cardboard-container container-vertical'}>
@@ -44,7 +99,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
         {this.pathView()}
         </div>
         <div className="cardboard-content">
-          Cardboard content
+        {this.cardsView()}
         </div>
       </div>
     )
