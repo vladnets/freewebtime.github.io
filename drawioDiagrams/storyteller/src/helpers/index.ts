@@ -1,3 +1,4 @@
+import { ReferencePath, ReferencePathItem } from '../api/project/ReferencePath';
 import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
@@ -60,4 +61,23 @@ export const resolveReference = (reference: IReference|undefined, project: IProj
 
 export const resolveReferenceFast = (targetId: string, project: IProject): ISymbol|undefined => {
   return project.symbols[targetId];
+}
+
+export const parsePath = (path: string): ReferencePath|undefined => {
+  if (!path) {
+    return undefined;
+  }
+
+  const parts = path.split('.');
+  const result = parts.map((sPathItem: string): ReferencePathItem => {
+    if (sPathItem.startsWith('[') && sPathItem.endsWith(']')) {
+      const sValue = sPathItem.substring(1, sPathItem.length-2);
+      const arrayIndex = Number(sValue);
+      return arrayIndex !== NaN ? arrayIndex : 0;
+    }
+
+    return sPathItem;
+  });
+
+  return result;
 }

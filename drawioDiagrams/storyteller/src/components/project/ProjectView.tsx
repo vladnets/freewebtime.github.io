@@ -83,8 +83,6 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
       ...this.state,
       isRightSidebarCollapsed: !this.state.isRightSidebarCollapsed,
     })
-
-    console.log('toggle right sidebar called!', this.state);
   }
 
   selectItem = (itemId: string) => {

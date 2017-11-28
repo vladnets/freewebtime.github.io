@@ -16,7 +16,7 @@ export class EditorsContainerView extends React.Component<{appState: IAppState, 
     const symbol = resolveReference(editorProps.symbol, this.props.appState.project);
     if (symbol) {
       return (
-        <SymbolEditorView appState={this.props.appState} symbol={symbol}/>
+        <SymbolEditorView appState={this.props.appState} symbol={symbol} pvState={this.props.pvState} />
       )
     }
 

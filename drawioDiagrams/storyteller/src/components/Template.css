@@ -474,6 +474,10 @@ svg {
   background: var(--color-main-1);
   /* background-image: linear-gradient(to bottom, transparent 0%,var(--color-main-3) 100%); */
 }
+.cardboard-header-path-item {
+  display: inline;
+}
+
 .cardboard-content {
   flex-grow: 1;
   margin: 3px;

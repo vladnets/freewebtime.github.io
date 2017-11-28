@@ -10,6 +10,8 @@ import { IReference, ReferenceType } from '../api/project/IReference';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
 import { ISystemSourceCodeItem, ItemType, SourceCodeType, IGraphSourceCodeItem, IItem, IObjectItem, IFunctionCallItem } from '../api/project/IItem';
+import { ICard } from '../api/project/ICard';
+import { ICardboard } from '../api/project/ICardboard';
 
 // Interfaces
 
@@ -362,3 +364,5 @@ Object.keys(items).map((itemId: string)=>{
   itemsKeys[itemId] = itemId;
 });
 export const initialItems = itemsKeys;
+
+export const initialCardboards: IHash<ICardboard> = {};
