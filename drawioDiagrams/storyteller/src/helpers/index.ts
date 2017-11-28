@@ -50,7 +50,11 @@ export const createReference = (symbol: ISymbol): IReference => {
   }
 }
 
-export const resolveReference = (reference: IReference, project: IProject): ISymbol|undefined => {
+export const resolveReference = (reference: IReference|undefined, project: IProject): ISymbol|undefined => {
+  if (!reference) {
+    return undefined;
+  }
+  
   return resolveReferenceFast(reference.targetId, project);
 }
 

@@ -132,19 +132,14 @@ export class ProjectExplorerItemsView extends React.Component<{appState: IAppSta
                   namespace.icon = 'microchip';
                 } break;
                 
-                case ItemType.Primitive:
+                case ItemType.Object:
                 {
-                  namespace.icon = '';
+                  namespace.icon = 'dot-circle-o';
                 } break;
                 
                 case ItemType.SourceCode:
                 {
                   namespace.icon = 'sitemap';
-                } break;
-              
-                case ItemType.Structure:
-                {
-                  namespace.icon = '';
                 } break;
               
                 default: break;

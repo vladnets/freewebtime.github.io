@@ -203,7 +203,7 @@ const concatStringSourceCode: ISystemSourceCodeInterface = {
   namespace: concatString.fullId,
   fullId: `${concatString.fullId}.${concatStringSourceCodeName}`,
   functionId: appConfig.SystemFunctionNames.Concat_String,
-  interface: {
+  typeReference: {
     referenceType: ReferenceType.Interface,
     targetId: concatString.fullId,
   },
@@ -222,7 +222,7 @@ const projectRootSourceCode: IGraphSourceCodeInterface = {
   sourceCodeType: SourceCodeType.Graph,
   itemType: ItemType.SourceCode,
   symbolType: SymbolType.Item,
-  interface: {
+  typeReference: {
     referenceType: ReferenceType.Interface,
     targetId: projectRootInterface.fullId,
   },

@@ -4,23 +4,22 @@ import { IReference } from './IReference';
 import { IHash } from '../IHash';
 
 export enum ItemType {
-  Primitive = 'Primitive',
-  Structure = 'Structure',
+  Object = 'Object',
   FunctionCall = 'FunctionCall',
   SourceCode = 'SourceCode',
 }
 
 export interface IItem extends ISymbol {
   itemType: ItemType;
-  interface: IReference;
+  typeReference: IReference;
 }
 
-export interface IPrimitiveItem extends IItem {
-  input: IReference;
+export interface IObjectItem extends IItem {
+  connections: IHash<IReference>;
 }
 
-export interface IStructureItem extends IItem {
-  input: IHash<IReference>;
+export interface IFunctionCallItem extends IObjectItem {
+  locals: IHash<IReference>;
 }
 
 export enum SourceCodeType {

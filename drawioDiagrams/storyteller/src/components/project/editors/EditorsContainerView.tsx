@@ -6,13 +6,21 @@ import { CardboardView } from './CarboardView';
 import { EditorsTabsView } from './EditorsTabsView';
 import { IAppState } from '../../../api/IAppState';
 import { EditorType, IEditorProps } from './EditorView';
+import { SymbolEditorView } from './SymbolEditorView';
+import { resolveReference } from '../../../helpers/index';
 
 export class EditorsContainerView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   
   graphEditorView = (editorProps: IEditorProps) => {
-    return (
-      <CardboardView appState={this.props.appState}/>
-    )
+
+    const symbol = resolveReference(editorProps.symbol, this.props.appState.project);
+    if (symbol) {
+      return (
+        <SymbolEditorView appState={this.props.appState} symbol={symbol}/>
+      )
+    }
+
+    return false;
   }
 
   activeEditorView = () => {
