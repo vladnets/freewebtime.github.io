@@ -29,12 +29,7 @@ export class ProjectExplorerItemsView extends React.Component<{appState: IAppSta
     return (
       <div className={className}>
       {
-        Object.keys(project.structure.items).map((itemId: string) => {
-          const item = project.structure.items[itemId];
-          if (item.level > 0) {
-            return false;
-          }
-
+        Object.keys(project.structure.rootItems).map((itemId: string) => {
           return (
             <ProjectExplorerTreeViewItem key={itemId} structureItemId={itemId} level={0} appState={appState} pvState={this.props.pvState} />
           )

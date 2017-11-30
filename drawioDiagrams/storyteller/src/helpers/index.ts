@@ -113,7 +113,7 @@ export const getSubitems = (namespace: string, project: IProject): IHash<ISymbol
   Object.keys(idList).map((symbolId: string) => {
     const symbol = project.symbols[symbolId];
     if (symbol) {
-      result[symbol.id] = symbol;
+      result[symbol.fullId] = symbol;
     }
   })
 

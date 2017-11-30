@@ -5,7 +5,7 @@ import { IProject } from '../api/project/IProject';
 import { IHash } from '../api/IHash';
 import { IProjectStructure } from '../api/project/IProjectStructure';
 
-export const getOrCreateNamespaceItem = (namespace: string, projectStructure: IHash<IProjectStructureItem>, symbols: IHash<ISymbol>): IProjectStructureItem => {
+const getOrCreateNamespaceItem = (namespace: string, projectStructure: IHash<IProjectStructureItem>, symbols: IHash<ISymbol>, rootItems: any): IProjectStructureItem => {
   let itemId = '';
   let itemName = '';
   let itemFullId = namespace;
@@ -44,6 +44,9 @@ export const getOrCreateNamespaceItem = (namespace: string, projectStructure: IH
     level: itemLevel,
   };
   projectStructure[itemFullId] = namespaceItem;
+  if (namespaceItem.level === 0) {
+    rootItems[namespaceItem.fullId] = namespaceItem.fullId;
+  }
 
   return namespaceItem;
 }
@@ -55,24 +58,30 @@ export const parseProjectStructure = (symbols: IHash<ISymbol>, projectId: string
   Object.keys(symbols).map((symbolId: string) => {
     const symbol = symbols[symbolId];
 
-    const structureItem: IProjectStructureItem = {
-      id: symbol.id,
-      name: symbol.name,
-      fullId: symbol.fullId,
-      namespace: symbol.namespace,
-      level: 0,
-      subitems: {},
+    let structureItem: IProjectStructureItem = structureItems[symbolId];
+    if (!structureItem) {
+      structureItem = 
+      {
+        id: symbol.id,
+        name: symbol.name,
+        fullId: symbol.fullId,
+        namespace: symbol.namespace,
+        level: 0,
+        subitems: {},
+      }
+      if (projectId === symbol.fullId) {
+        structureItem.isProjectRoot = true;
+      }
+      structureItems[symbolId] = structureItem;
     }
-    if (projectId === symbol.fullId) {
-      structureItem.isProjectRoot = true;
-    }
-    structureItems[symbolId] = structureItem;
+    
+    structureItem.name = symbol.name;
     
     const namespace = symbol.namespace;
     if (namespace) {
       const parentStructureItem = structureItems[namespace];
-      const namespaceItem = getOrCreateNamespaceItem(namespace, structureItems, symbols);
-      namespaceItem.subitems[symbol.id] = symbolId;
+      const namespaceItem = getOrCreateNamespaceItem(namespace, structureItems, symbols, rootItems);
+      namespaceItem.subitems[symbol.fullId] = symbolId;
       structureItem.level = namespaceItem.level + 1;
     }
 
