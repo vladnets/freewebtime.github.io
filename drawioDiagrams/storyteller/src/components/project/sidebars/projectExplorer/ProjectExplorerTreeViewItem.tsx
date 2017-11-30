@@ -80,8 +80,9 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
 
   buttonsView = () => {
     const isShowButtons = false;
+    const state = this.state || {};
 
-    if (isShowButtons || this.state.isMouseOver) {
+    if (isShowButtons || state.isMouseOver) {
       return (
         <span className={'project-explorer-tvi-header-buttons-container'}>
           <button className={'button'}>
@@ -115,12 +116,9 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
     const isSelected = pvState.selectedItemId === structItemId;
 
     const symbol = resolveReferenceFast(structItemId, project);
-    if (!symbol) {
-      return false;
-    }
-
     const icon = getIconForSymbol(symbol);
-    
+    const symbolName = symbol ? symbol.name : structureItem.name;
+
     const className = 'project-explorer-treeview-item' + (isSelected ? ' selected' : '');
 
     const contentClassName = 'project-explorer-treeview-item-content container-horizontal' + 
@@ -146,12 +144,14 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
         >
           <FontAwesome name={icon} className={'project-explorer-tvi-icon'} style={iconStyle}/>
           <span className={'project-explorer-tvi-text'}>
-          {symbol.name}
+          {symbolName}
           </span>
           {this.buttonsView()}
         </div>
         <div className={'project-explorer-treeview-item-subitems-container'}>
-        {this.subitemsView(structureItem)}
+        {
+          this.subitemsView(structureItem)
+        }
         </div>
       </div>
     )

@@ -1,29 +1,98 @@
+import { parsePath, pathToString } from './';
 import { ISymbol } from '../api/project/ISymbol';
 import { IProjectStructureItem } from '../api/project/IProjectStructureItem';
 import { IProject } from '../api/project/IProject';
 import { IHash } from '../api/IHash';
+import { IProjectStructure } from '../api/project/IProjectStructure';
 
-export const parseProjectStructure = (symbols: IHash<ISymbol>, projectId: string): IHash<IProjectStructureItem> => {
-  const result = {}
-  const rootSymbol = symbols[projectId];
-  
-  if (rootSymbol) {
-    const rootItem: IProjectStructureItem = {
-      id: rootSymbol.fullId,
-      name: rootSymbol.name,
-      subitems: {},
-    }
-
-    result[rootItem.id] = rootItem;
+export const getOrCreateNamespaceItem = (namespace: string, projectStructure: IHash<IProjectStructureItem>, symbols: IHash<ISymbol>): IProjectStructureItem => {
+  let itemId = '';
+  let itemName = '';
+  let itemFullId = namespace;
+  let itemNamespace: string|undefined = undefined;
+  let itemLevel = 0;
+  const symbol = symbols[namespace];
+  const path = parsePath(namespace);
+  if (path) {
+    itemLevel = path.length-1;
   }
   
-  return result;
+  if (symbol) {
+    itemId = symbol.id;
+    itemName = symbol.name;
+    itemNamespace = symbol.namespace;
+  }
+  else {
+    if (path && path.length > 0) {
+      itemId = path[path.length-1].toString();
+      itemName = itemId;
+      itemNamespace = pathToString(path);
+    }
+  }
+
+  let namespaceItem = projectStructure[namespace];
+  if (namespaceItem) {
+    return namespaceItem;
+  }
+
+  namespaceItem = {
+    id: itemId,
+    name: itemName,
+    fullId: itemFullId,
+    namespace: itemNamespace,
+    subitems: {},
+    level: itemLevel,
+  };
+  projectStructure[itemFullId] = namespaceItem;
+
+  return namespaceItem;
+}
+  
+export const parseProjectStructure = (symbols: IHash<ISymbol>, projectId: string): IProjectStructure => {
+  const structureItems: IHash<IProjectStructureItem> = {}
+  const rootItems: IHash<string> = {}
+  
+  Object.keys(symbols).map((symbolId: string) => {
+    const symbol = symbols[symbolId];
+
+    const structureItem: IProjectStructureItem = {
+      id: symbol.id,
+      name: symbol.name,
+      fullId: symbol.fullId,
+      namespace: symbol.namespace,
+      level: 0,
+      subitems: {},
+    }
+    if (projectId === symbol.fullId) {
+      structureItem.isProjectRoot = true;
+    }
+    structureItems[symbolId] = structureItem;
+    
+    const namespace = symbol.namespace;
+    if (namespace) {
+      const parentStructureItem = structureItems[namespace];
+      const namespaceItem = getOrCreateNamespaceItem(namespace, structureItems, symbols);
+      namespaceItem.subitems[symbol.id] = symbolId;
+      structureItem.level = namespaceItem.level + 1;
+    }
+
+    if (structureItem.level === 0) {
+      rootItems[structureItem.fullId] = structureItem.fullId;
+    }
+  });
+
+  const structure: IProjectStructure = {
+    items: structureItems,
+    rootItems: rootItems,
+  }
+
+  return structure;
 }
 
-export const getStructureRoot = (structure: IHash<IProjectStructureItem>, projectId: string) => {
-  return structure[projectId];
+export const getStructureRoot = (project: IProject) => {
+  return getStructureItem(project.id, project);
 }
 
 export const getStructureItem = (structureItemId: string, project: IProject) => {
-  return project.structure[structureItemId];
+  return project.structure.items[structureItemId];
 }

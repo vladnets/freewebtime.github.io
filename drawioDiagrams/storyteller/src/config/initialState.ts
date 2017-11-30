@@ -14,6 +14,8 @@ import { ICard } from '../api/project/ICard';
 import { ICardboard } from '../api/project/ICardboard';
 import { IProjectStructureItem } from '../api/project/IProjectStructureItem';
 import { parseProjectStructure } from '../helpers/projectStructureHelper';
+import { IProject } from '../api/project/IProject';
+import { IProjectStructure } from '../api/project/IProjectStructure';
 
 // Interfaces
 
@@ -369,5 +371,14 @@ export const initialItems = itemsKeys;
 
 export const initialCardboards: IHash<ICardboard> = {};
 
-export const initialStructure: IHash<IProjectStructureItem> = parseProjectStructure(initialSymbols, projectRootFullId);
+export const initialStructure: IProjectStructure = parseProjectStructure(initialSymbols, projectRootFullId);
 
+export const initialProject: IProject = {
+  id: appConfig.InitialStateConfig.ProjectId,
+  name: appConfig.InitialStateConfig.ProjectName,
+  interfaces: initialInterfaces,
+  symbols: initialSymbols,
+  items: initialItems,
+  cardboards: initialCardboards,
+  structure: initialStructure,
+}

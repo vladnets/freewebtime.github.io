@@ -86,8 +86,16 @@ export const parsePath = (path: string): ReferencePath|undefined => {
   return result;
 }
 
+export const pathToString = (path: ReferencePath): string|undefined => {
+  if (path.length <= 0) {
+    return undefined;
+  }
+
+  return path.join('.');
+}
+
 export const getSubitemsIds = (namespace: string, project: IProject): IHash<string>|undefined => {
-  const structureItem = project.structure[namespace];
+  const structureItem = project.structure.items[namespace];
   if (!structureItem) {
     return undefined;
   }
@@ -125,7 +133,11 @@ export const getCard = (cardboardId: string, cardId: string, project: IProject):
   return cardboard.cards[cardId];
 }
 
-export const getIconForSymbol = (symbol: ISymbol) => {
+export const getIconForSymbol = (symbol?: ISymbol) => {
+  if (!symbol) {
+    return 'wrench';
+  }
+
   switch (symbol.symbolType) {
     case SymbolType.Interface: {
       const intrf = symbol as IInterface;
