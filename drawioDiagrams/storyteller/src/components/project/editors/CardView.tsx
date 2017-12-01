@@ -1,3 +1,4 @@
+import { CardSocketView, CardSocketType } from './CardSocketView';
 import { getCard } from '../../../helpers';
 import { IVector2 } from '../../../api/IVector2';
 import { ICallback } from '../../../api';
@@ -119,52 +120,93 @@ export class CardView extends React.Component<ICardViewProps> {
     return false;
   }
 
+  headerInputSocketView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="input-container">
+        <CardSocketView socketType={CardSocketType.Input} symbolId={card.id} cardboardId={this.props.cardboardId} />
+      </div>
+    )
+  }
+
+  headerOutputSocketView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="output-container">
+        <CardSocketView socketType={CardSocketType.Output} symbolId={card.id} cardboardId={this.props.cardboardId} />
+      </div>
+    )
+  }
+
+  headerView = (card: ICard, symbol: ISymbol) => {
+    const headerStyle = {};
+    if (card.color) {
+      headerStyle['backgroundColor'] = card.color;
+    }
+    delete headerStyle['backgroundColor'];
+
+    return (
+      <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
+        {this.headerInputSocketView(card, symbol)}
+        <div className="content-container">
+          {card.name}
+        </div>
+        {this.headerOutputSocketView(card, symbol)}
+      </div>
+    )
+  }
+
+  contentInputView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="input-container">
+        Input
+      </div>
+    )
+  }
+  contentOutputView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="output-container">
+        Output
+      </div>
+    )
+  }
+  contentValueView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="content-container">
+        Card value
+      </div>
+    )
+  }
+
+  contentView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="card-content container-horizontal">
+      {this.contentInputView(card, symbol)}
+      {this.contentValueView(card, symbol)}
+      {this.contentOutputView(card, symbol)}
+      </div>
+    )
+  }
+
   render () {
     
     const cardboardId = this.props.cardboardId;
     const cardId = this.props.symbolId;
     const appState = this.props.appState;
     const project = appState.project;
+    const symbol = project.symbols[cardId];
     const card = getCard(cardboardId, cardId, project);
     
     if (card) {
-      console.log('rendering card ', this.props.symbolId, card);
 
-      const headerStyle = {};
-      if (card.color) {
-        headerStyle['backgroundColor'] = card.color;
-      }
-      delete headerStyle['backgroundColor'];
-  
-      const cardContainerClass = 'card-container card container-vertical fullwidth fullheight'
+      const cardContainerClass = 
+        'card-container card container-vertical fullwidth fullheight'
         + (card.isSelected ? ' selected' : '')
       ;
 
       return (
         this.movableContainer(
           <div className={cardContainerClass}>
-            <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
-              <div className="input-container">
-                Input
-              </div>
-              <div className="content-container">
-                {card.name}
-              </div>
-              <div className="output-container">
-                Output
-              </div>
-            </div>
-            <div className="card-content container-horizontal">
-              <div className="input-container">
-                Input
-              </div>
-              <div className="content-container">
-                Card content
-              </div>
-              <div className="output-container">
-                Output
-              </div>
-            </div>
+            {this.headerView(card, symbol)}
+            {this.contentView(card, symbol)}
           </div>
         )
       )
