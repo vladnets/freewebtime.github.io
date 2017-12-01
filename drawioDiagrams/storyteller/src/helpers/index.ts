@@ -2,12 +2,9 @@ import { ReferencePath, ReferencePathItem } from '../api/project/ReferencePath';
 import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
 import { ISymbol, SymbolType } from '../api/project/ISymbol';
-import { IReference, ReferenceType } from '../api/project/IReference';
 import { IProject } from '../api/project/IProject';
 import { ICardboard } from '../api/project/ICardboard';
 import { ICard } from '../api/project/ICard';
-import { IInterface, InterfaceType } from '../api/project/IInterface';
-import { IItem, ItemType } from '../api/project/IItem';
 
 export const areObjectsEqual = ( x, y ) => {
   if ( x === y ) return true;
@@ -44,26 +41,7 @@ export const areObjectsEqual = ( x, y ) => {
   return true;
 }
 
-export const createReference = (symbol: ISymbol): IReference => {
-  let referenceType = ReferenceType.Interface;
-  if (symbol.symbolType === SymbolType.Item) {
-    referenceType = ReferenceType.Item;
-  }
-  return {
-    referenceType: referenceType,
-    targetId: symbol.fullId,
-  }
-}
-
-export const resolveReference = (reference: IReference|undefined, project: IProject): ISymbol|undefined => {
-  if (!reference) {
-    return undefined;
-  }
-  
-  return resolveReferenceFast(reference.targetId, project);
-}
-
-export const resolveReferenceFast = (targetId: string, project: IProject): ISymbol|undefined => {
+export const resolveReference = (targetId: string, project: IProject): ISymbol|undefined => {
   return project.symbols[targetId];
 }
 
@@ -134,64 +112,6 @@ export const getCard = (cardboardId: string, cardId: string, project: IProject):
   return cardboard.cards[cardId];
 }
 
-export const getIconForSymbol = (symbol?: ISymbol) => {
-  if (!symbol) {
-    return 'wrench';
-  }
-
-  switch (symbol.symbolType) {
-    case SymbolType.Interface: {
-      const intrf = symbol as IInterface;
-
-      if (intrf) {
-      
-        switch (intrf.interfaceType) {
-          case InterfaceType.Function: {
-            
-          } break;
-        
-          case InterfaceType.Structure: {
-
-          } break;
-        
-          case InterfaceType.Primitive: {
-
-          } break;
-        
-          default: break;
-        }
-      
-      }
-
-    } break;
-  
-    case SymbolType.Item: {
-      const item = symbol as IItem;
-
-      if (item) {
-      
-        switch (item.itemType) {
-          case ItemType.FunctionCall: {
-
-          } break;
-        
-          case ItemType.Object: {
-
-          } break;
-        
-          case ItemType.SourceCode: {
-
-          } break;
-        
-          default: break;
-        }
-      
-      }
-
-    } break;
-  
-    default: break;
-  }
-
-  return 'wrench';
+export const getIconForSymbol = (symbolType: SymbolType) => {
+  return appConfig.SymbolIcons[symbolType] || appConfig.SymbolIcons.default;
 }

@@ -1,15 +1,6 @@
-import {
-  IFunctionInterface,
-  IInterface,
-  InterfaceType,
-  IPrimitiveInterface,
-  IStructureInterface,
-} from '../api/project/IInterface';
 import { appConfig } from './appConfig';
-import { IReference, ReferenceType } from '../api/project/IReference';
-import { ISymbol, SymbolType } from '../api/project/ISymbol';
+import { ISymbol, SymbolType, IPrimitive, IStructure, IFunctionInterface, ISystemSourceCode, SourceCodeType, IGraphSourceCode, IObject, IFunctionCall } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
-import { ISystemSourceCodeItem, ItemType, SourceCodeType, IGraphSourceCodeItem, IItem, IObjectItem, IFunctionCallItem } from '../api/project/IItem';
 import { ICard } from '../api/project/ICard';
 import { ICardboard } from '../api/project/ICardboard';
 import { IProjectStructureItem } from '../api/project/IProjectStructureItem';
@@ -21,33 +12,30 @@ import { createCardboards } from './createCardboards';
 // Interfaces
 
 //system
-const stringInterface: IPrimitiveInterface = {
+const stringInterface: IPrimitive = {
   id: appConfig.PrimitiveTypes.String,
   name: appConfig.PrimitiveTypes.String,
   namespace: appConfig.InitialStateConfig.SystemNamespace,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${appConfig.PrimitiveTypes.String}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Primitive,
+  symbolType: SymbolType.Primitive,
   primitiveType: appConfig.PrimitiveTypes.String,
 }
 
-const numberInterface: IPrimitiveInterface = {
+const numberInterface: IPrimitive = {
   id: appConfig.PrimitiveTypes.Number,
   name: appConfig.PrimitiveTypes.Number,
   namespace: appConfig.InitialStateConfig.SystemNamespace,
-  symbolType: SymbolType.Interface,
+  symbolType: SymbolType.Primitive,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${appConfig.PrimitiveTypes.Number}`,
-  interfaceType: InterfaceType.Primitive,
   primitiveType: appConfig.PrimitiveTypes.Number,
 }
 
-const booleanInterface: IPrimitiveInterface = {
+const booleanInterface: IPrimitive = {
   id: appConfig.PrimitiveTypes.Boolean,
   name: appConfig.PrimitiveTypes.Boolean,
   namespace: appConfig.InitialStateConfig.SystemNamespace,
-  symbolType: SymbolType.Interface,
+  symbolType: SymbolType.Primitive,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${appConfig.PrimitiveTypes.Boolean}`,
-  interfaceType: InterfaceType.Primitive,
   primitiveType: appConfig.PrimitiveTypes.Boolean,
 }
 
@@ -57,26 +45,16 @@ const prefixParamName = 'Prefix';
 const separatorParamName = 'Separator';
 const postfixParamName = 'Postfix';
 
-const concatStringParamsInterface: IStructureInterface = {
+const concatStringParamsInterface: IStructure = {
   id: concatStringParamsName,
   name: concatStringParamsName,
   namespace: `${appConfig.InitialStateConfig.SystemNamespace}.${concatStringName}`,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${concatStringName}.${concatStringParamsName}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Structure,
+  symbolType: SymbolType.Structure,
   subitems: {
-    [prefixParamName]: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
-    [separatorParamName]: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
-    [postfixParamName]: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
+    [prefixParamName]: stringInterface.fullId,
+    [separatorParamName]: stringInterface.fullId,
+    [postfixParamName]: stringInterface.fullId,
   }
 }
 
@@ -85,76 +63,40 @@ const concatString: IFunctionInterface = {
   name: 'Concatenate string',
   namespace: appConfig.InitialStateConfig.SystemNamespace,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${concatStringName}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Function,
-  params: {
-    referenceType: ReferenceType.Interface,
-    targetId: concatStringParamsInterface.fullId,
-  },
-  returns: {
-    referenceType: ReferenceType.Interface,
-    targetId: stringInterface.fullId,
-  },
+  symbolType: SymbolType.Function,
+  paramsTypeId: concatStringParamsInterface.fullId,
+  resultTypeId: stringInterface.fullId,
 }
 
 const characterInterfaceName = 'Character';
 
-const characterInterface: IStructureInterface = {
+const characterInterface: IStructure = {
   id: characterInterfaceName,
   name: characterInterfaceName,
   namespace: appConfig.InitialStateConfig.ProjectName,
   fullId: `${appConfig.InitialStateConfig.ProjectName}.${characterInterfaceName}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Structure,
+  symbolType: SymbolType.Structure,
   subitems: {
-    ['Name']: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
-    ['Age']: {
-      referenceType: ReferenceType.Interface,
-      targetId: numberInterface.fullId,
-    },
-    ['Sex']: {
-      referenceType: ReferenceType.Interface,
-      targetId: booleanInterface.fullId,
-    },
-    ['Backstory']: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
+    ['Name']: stringInterface.fullId,
+    ['Age']: numberInterface.fullId,
+    ['Sex']: booleanInterface.fullId,
+    ['Backstory']: stringInterface.fullId,
   }
 }
 
 const storyInterfaceName = 'Story';
-const storyInterface: IStructureInterface = {
+const storyInterface: IStructure = {
   id: storyInterfaceName,
   name: storyInterfaceName,
   namespace: appConfig.InitialStateConfig.ProjectName,
   fullId: `${appConfig.InitialStateConfig.ProjectName}.${storyInterfaceName}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Structure,
+  symbolType: SymbolType.Structure,
   subitems: {
-    ['Name']: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
-    ['Duration']: {
-      referenceType: ReferenceType.Interface,
-      targetId: numberInterface.fullId,
-    },
-    ['Protagonist']: {
-      referenceType: ReferenceType.Interface,
-      targetId: characterInterface.fullId,
-    },
-    ['Antagonist']: {
-      referenceType: ReferenceType.Interface,
-      targetId: characterInterface.fullId,
-    },
-    ['Storyline']: {
-      referenceType: ReferenceType.Interface,
-      targetId: stringInterface.fullId,
-    },
+    ['Name']: stringInterface.fullId,
+    ['Duration']: numberInterface.fullId,
+    ['Protagonist']: characterInterface.fullId,
+    ['Antagonist']: characterInterface.fullId,
+    ['Storyline']: stringInterface.fullId,
   }
 }
 
@@ -164,80 +106,57 @@ const projectRootId = appConfig.InitialStateConfig.ProjectRootName;
 const projectRootFullId = projectRootName;
 const projectRootParamsName = 'Params';
 const projectRootResultName = 'Result';
-const projectRootParamsInterface: IStructureInterface = {
+const projectRootParamsInterface: IStructure = {
   id: projectRootParamsName,
   name: projectRootParamsName,
   namespace: projectRootFullId,
   fullId: `${projectRootFullId}.${projectRootParamsName}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Structure,
+  symbolType: SymbolType.Structure,
   subitems: {},
 }
-const projectRootResultInterface: IStructureInterface = {
+const projectRootResultInterface: IStructure = {
   id: projectRootResultName,
   name: projectRootResultName,
   namespace: projectRootFullId,
   fullId: `${projectRootFullId}.${projectRootResultName}`,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Structure,
+  symbolType: SymbolType.Structure,
   subitems: {
-    [storyInterface.name]: {
-      referenceType: ReferenceType.Interface,
-      targetId: storyInterface.fullId,
-    }
+    [storyInterface.name]: storyInterface.fullId,
   },
 }
 const projectRootInterface: IFunctionInterface = {
   id: projectRootId,
   name: projectRootName,
   fullId: projectRootName,
-  symbolType: SymbolType.Interface,
-  interfaceType: InterfaceType.Function,
-  params: {
-    referenceType: ReferenceType.Interface,
-    targetId: projectRootParamsInterface.fullId,
-  },
-  returns: {
-    referenceType: ReferenceType.Interface,
-    targetId: projectRootResultInterface.fullId,
-  }
+  symbolType: SymbolType.Function,
+  paramsTypeId: projectRootParamsInterface.fullId,
+  resultTypeId: projectRootResultInterface.fullId,
 }
-
 //function bodies
 
 //concat string
 const concatStringSourceCodeId = 'SourceCode';
 const concatStringSourceCodeName = 'Source Code';
-const concatStringSourceCode: ISystemSourceCodeItem = {
+const concatStringSourceCode: ISystemSourceCode = {
   id: concatStringSourceCodeId,
   name: concatStringSourceCodeName,
   namespace: concatString.fullId,
   fullId: `${concatString.fullId}.${concatStringSourceCodeId}`,
   functionId: appConfig.SystemFunctionNames.Concat_String,
-  typeReference: {
-    referenceType: ReferenceType.Interface,
-    targetId: concatString.fullId,
-  },
   sourceCodeType: SourceCodeType.System,
-  itemType: ItemType.SourceCode,
-  symbolType: SymbolType.Item,
+  symbolType: SymbolType.SourceCode,
 }
 
 //project root
 const projectRootSourceCodeId = 'SourceCode';
 const projectRootSourceCodeName = 'Source Code';
-const projectRootSourceCode: IGraphSourceCodeItem = {
+const projectRootSourceCode: IGraphSourceCode = {
   id: projectRootSourceCodeId,
   name: projectRootSourceCodeName,
   namespace: projectRootInterface.fullId,
   fullId: `${projectRootInterface.fullId}.${projectRootSourceCodeId}`,
   sourceCodeType: SourceCodeType.Graph,
-  itemType: ItemType.SourceCode,
-  symbolType: SymbolType.Item,
-  typeReference: {
-    referenceType: ReferenceType.Interface,
-    targetId: projectRootInterface.fullId,
-  },
+  symbolType: SymbolType.SourceCode,
   locals: {
   },
   connections: {
@@ -245,86 +164,61 @@ const projectRootSourceCode: IGraphSourceCodeItem = {
 }
 
 const firstNameItemName = 'First Name';
-const firstNameItem: IObjectItem = {
+const firstNameItem: IObject = {
   id: firstNameItemName,
   name: firstNameItemName,
   namespace: projectRootInterface.fullId,
   fullId: `${projectRootInterface.fullId}.${firstNameItemName}`,
-  symbolType: SymbolType.Item,
-  itemType: ItemType.Object,
-  typeReference: {
-    referenceType: ReferenceType.Interface,
-    targetId: stringInterface.fullId,
-  },
+  symbolType: SymbolType.Object,
+  objectTypeId: stringInterface.fullId,
   connections: {},
   value: 'Jack',
 }
 
 const lastNameItemName = 'Last Name';
-const lastNameItem: IObjectItem = {
+const lastNameItem: IObject = {
   id: lastNameItemName,
   name: lastNameItemName,
   namespace: projectRootInterface.fullId,
   fullId: `${projectRootInterface.fullId}.${lastNameItemName}`,
-  symbolType: SymbolType.Item,
-  itemType: ItemType.Object,
-  typeReference: {
-    referenceType: ReferenceType.Interface,
-    targetId: stringInterface.fullId,
-  },
+  symbolType: SymbolType.Object,
+  objectTypeId: stringInterface.fullId,
   connections: {},
   value: 'Dreamer',
 }
 
 const separatorItemName = 'Separator';
-const separatorItem: IObjectItem = {
+const separatorItem: IObject = {
   id: separatorItemName,
   name: separatorItemName,
   namespace: projectRootInterface.fullId,
   fullId: `${projectRootInterface.fullId}.${separatorItemName}`,
-  symbolType: SymbolType.Item,
-  itemType: ItemType.Object,
-  typeReference: {
-    referenceType: ReferenceType.Interface,
-    targetId: stringInterface.fullId,
-  },
+  symbolType: SymbolType.Object,
+  objectTypeId: stringInterface.fullId,
   connections: {},
   value: ' ',
 }
 
 //function calls
 const combineNameFunctionCallName = 'Full Name';
-const combineNameFunctionCall: IFunctionCallItem = {
+const combineNameFunctionCall: IFunctionCall = {
   id: combineNameFunctionCallName,
   name: combineNameFunctionCallName,
   namespace: projectRootInterface.fullId,
   fullId: `${projectRootInterface.fullId}.${combineNameFunctionCallName}`,
-  symbolType: SymbolType.Item,
-  itemType: ItemType.FunctionCall,
-  typeReference: {
-    referenceType: ReferenceType.Item,
-    targetId: concatStringSourceCode.fullId,
-  },
-  locals: {},
+  symbolType: SymbolType.FunctionCall,
+  objectTypeId: concatStringSourceCode.fullId,
   connections: {
-    [`${prefixParamName}`]: {
-      referenceType: ReferenceType.Item,
-      targetId: firstNameItem.fullId,
-    },
-    [`${separatorParamName}`]: {
-      referenceType: ReferenceType.Item,
-      targetId: separatorItem.fullId,
-    },
-    [`${postfixParamName}`]: {
-      referenceType: ReferenceType.Item,
-      targetId: lastNameItem.fullId,
-    },
+    [`${prefixParamName}`]: firstNameItem.fullId,
+    [`${separatorParamName}`]: separatorItem.fullId,
+    [`${postfixParamName}`]: lastNameItem.fullId,
   },
 }
 
 
 //all interfaces together
-const interfaces: IHash<IInterface> = {
+//final result
+export const initialSymbols: IHash<ISymbol> = {
   [stringInterface.fullId]: stringInterface,
   [numberInterface.fullId]: numberInterface,
   [booleanInterface.fullId]: booleanInterface,
@@ -337,9 +231,7 @@ const interfaces: IHash<IInterface> = {
   [projectRootParamsInterface.fullId]: projectRootParamsInterface,
   [projectRootResultInterface.fullId]: projectRootResultInterface,
   [projectRootInterface.fullId]: projectRootInterface,
-}
 
-const items: IHash<IItem> = {
   [concatStringSourceCode.fullId]: concatStringSourceCode,
   [projectRootSourceCode.fullId]: projectRootSourceCode,
 
@@ -350,28 +242,6 @@ const items: IHash<IItem> = {
   [combineNameFunctionCall.fullId]: combineNameFunctionCall,
 }
 
-//final result
-export const initialSymbols: IHash<ISymbol> = {
-  // Interfaces
-  ...interfaces,
-  
-  //Items
-  ...items,
-}
-
-const interfacesKeys: IHash<string> = {}
-Object.keys(interfaces).map((interfaceId: string)=>{
-  interfacesKeys[interfaceId] = interfaceId;
-});
-export const initialInterfaces = interfacesKeys;
-
-const itemsKeys: IHash<string> = {
-}
-Object.keys(items).map((itemId: string)=>{
-  itemsKeys[itemId] = itemId;
-});
-export const initialItems = itemsKeys;
-
 export const initialCardboards: IHash<ICardboard> = {};
 
 export const initialStructure: IProjectStructure = parseProjectStructure(initialSymbols, projectRootFullId);
@@ -379,9 +249,7 @@ export const initialStructure: IProjectStructure = parseProjectStructure(initial
 const emptyProject: IProject = {
   id: appConfig.InitialStateConfig.ProjectId,
   name: appConfig.InitialStateConfig.ProjectName,
-  interfaces: initialInterfaces,
   symbols: initialSymbols,
-  items: initialItems,
   cardboards: initialCardboards,
   structure: initialStructure,
 }

@@ -1,4 +1,4 @@
-import { createReference, getSubitemsIds } from '../helpers';
+import { getSubitemsIds } from '../helpers';
 import { IHash } from '../api/IHash';
 import { IProject } from '../api/project/IProject';
 import { ICardboard } from '../api/project/ICardboard';

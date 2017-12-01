@@ -1,4 +1,4 @@
-import { resolveReference, resolveReferenceFast } from '../../../helpers';
+import { resolveReference } from '../../../helpers';
 import { IEditorTabViewProps, EditorTabView } from './EditorTabView';
 import { IProjectViewState } from '../ProjectView';
 import * as React from 'react';
@@ -12,7 +12,7 @@ export class EditorsTabsView extends React.Component<{appState: IAppState, pvSta
 
     const tabItems = Object.keys(pvState.opennedEditors).map((editorId: string) => {
       const editor = pvState.opennedEditors[editorId];
-      const symbol = resolveReferenceFast(editorId, appState.project);
+      const symbol = resolveReference(editorId, appState.project);
       let symbolName = editorId;
       if (symbol) {
         symbolName = symbol.name;

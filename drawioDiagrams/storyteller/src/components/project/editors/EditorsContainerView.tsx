@@ -5,7 +5,7 @@ import FontAwesome from 'react-fontawesome';
 import { CardboardView } from './CarboardView';
 import { EditorsTabsView } from './EditorsTabsView';
 import { IAppState } from '../../../api/IAppState';
-import { resolveReference, resolveReferenceFast } from '../../../helpers/index';
+import { resolveReference } from '../../../helpers/index';
 
 export class EditorsContainerView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   

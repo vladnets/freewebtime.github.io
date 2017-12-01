@@ -1,11 +1,9 @@
-import { resolveReference } from '../../helpers';
 import * as React from 'react';
 import { LeftSidebarView } from './sidebars/LeftSidebarView';
 import { RightSidebarView } from './sidebars/RightSidebarView';
 import { IHash } from '../../api/IHash';
 import { EditorsContainerView } from './editors/EditorsContainerView';
-import { resolveReferenceFast, createReference } from '../../helpers/index';
-import { IReference } from '../../api/project/IReference';
+import { resolveReference } from '../../helpers/index';
 
 export interface IProjectViewState {
   selectedItemId: string;

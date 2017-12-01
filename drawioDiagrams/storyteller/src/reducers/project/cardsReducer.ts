@@ -1,7 +1,6 @@
 import { ICard } from '../../api/project/ICard';
 import { IAction } from '../../api/IAction';
 import { IHash } from '../../api/IHash';
-import { IItem } from '../../api/project/IItem';
 import { appConfig } from '../../config/appConfig';
 
 export const cardsReducer = (state: IHash<ICard> = {}, action: IAction) => {

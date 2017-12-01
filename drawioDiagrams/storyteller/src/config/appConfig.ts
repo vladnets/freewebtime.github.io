@@ -2,6 +2,7 @@ import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
 import { ICardboard } from '../api/project/ICardboard';
 import { ICard } from '../api/project/ICard';
+import { SymbolType } from '../api/project/ISymbol';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
   IsLoadStateFromLocalStorage: false,
@@ -66,6 +67,16 @@ export const appConfig = {
       }
     },
 
+  },
+
+  SymbolIcons: {
+    [SymbolType.Function]: 'wrench',
+    [SymbolType.FunctionCall]: 'wrench',
+    [SymbolType.Object]: 'wrench',
+    [SymbolType.Primitive]: 'wrench',
+    [SymbolType.SourceCode]: 'wrench',
+    [SymbolType.Structure]: 'wrench',
+    ['default']: 'wrench',
   },
 
   PrimitiveTypes: {

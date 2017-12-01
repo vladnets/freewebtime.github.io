@@ -1,12 +1,10 @@
-import { resolveReferenceFast } from '../../../../helpers';
+import { resolveReference } from '../../../../helpers';
 import { getStructureRoot } from '../../../../helpers/projectStructureHelper';
 import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
 import { IAppState } from '../../../../api/IAppState';
 import * as React from 'react';
 import { IPetviProps, ProjectExplorerTreeViewItem } from './ProjectExplorerTreeViewItem';
 import { IProjectViewState } from '../../ProjectView';
-import { IInterface, InterfaceType } from '../../../../api/project/IInterface';
-import { IItem, ItemType } from '../../../../api/project/IItem';
 import { IProjectStructureItem } from '../../../../api/project/IProjectStructureItem';
 
 interface IPeivState {

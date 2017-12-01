@@ -7,9 +7,9 @@ import FontAwesome from 'react-fontawesome';
 import Rnd from 'react-rnd';
 import { ICard } from '../../../api/project/ICard';
 import { IAppState } from '../../../api/IAppState';
-import { ISymbol } from '../../../api/project/ISymbol';
+import { ISymbol, SymbolType } from '../../../api/project/ISymbol';
 import { IProjectViewState } from '../ProjectView';
-import { createReference, resolveReferenceFast } from '../../../helpers/index';
+import { resolveReference } from '../../../helpers/index';
 import { appConfig } from '../../../config/appConfig';
 
 export interface ICardViewProps {

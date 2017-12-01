@@ -1,4 +1,4 @@
-import { resolveReferenceFast } from '../../../../helpers';
+import { resolveReference } from '../../../../helpers';
 import { getStructureItem, getStructureRoot } from '../../../../helpers/projectStructureHelper';
 import { IAppState } from '../../../../api/IAppState';
 import * as React from 'react';
@@ -6,7 +6,6 @@ import FontAwesome from 'react-fontawesome';
 import { IProjectViewState } from '../../ProjectView';
 import { IHash } from '../../../../api/IHash';
 import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
-import { IInterface } from '../../../../api/project/IInterface';
 import { getIconForSymbol } from '../../../../helpers/index';
 import { IProjectStructureItem } from '../../../../api/project/IProjectStructureItem';
 
@@ -115,8 +114,9 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
     const pvState = this.props.pvState;
     const isSelected = pvState.selectedItemId === structItemId;
 
-    const symbol = resolveReferenceFast(structItemId, project);
-    const icon = getIconForSymbol(symbol);
+    const symbol = resolveReference(structItemId, project);
+    const symbolType = symbol ? symbol.symbolType : SymbolType.Unknown;
+    const icon = getIconForSymbol(symbolType);
     const symbolName = symbol ? symbol.name : structureItem.name;
 
     const className = 'project-explorer-treeview-item' + (isSelected ? ' selected' : '');
