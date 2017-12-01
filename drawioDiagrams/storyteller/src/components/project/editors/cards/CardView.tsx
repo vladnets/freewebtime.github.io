@@ -6,7 +6,7 @@ import { getCard } from '../../../../helpers';
 import { appConfig } from '../../../../config/appConfig';
 import { ICard } from '../../../../api/project/ICard';
 import { ISymbol } from '../../../../api/project/ISymbol';
-import { CardSocketType, CardSocketView } from '../CardSocketView';
+import { CardSocketView, CardSocketType } from './CardSocketView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import Rnd from 'react-rnd';

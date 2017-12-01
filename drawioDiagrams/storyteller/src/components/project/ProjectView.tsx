@@ -26,8 +26,11 @@ export interface IProjectViewState {
 export class ProjectView extends React.Component<{appState: any}, IProjectViewState> {
   state: IProjectViewState = {
     selectedItemId: 'System', 
-    opennedEditors: {'System':'System'},
-    activeEditorId: 'System',
+    opennedEditors: {
+      'System':'System',
+      'New Project':'New Project',
+    },
+    activeEditorId: 'New Project',
     isLeftSidebarCollapsed: false,
     isRightSidebarCollapsed: true,
     handleItemClick: (itemId: string) => {

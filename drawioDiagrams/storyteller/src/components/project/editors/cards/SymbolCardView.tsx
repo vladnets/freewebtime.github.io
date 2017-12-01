@@ -1,27 +1,26 @@
-import { SourceCodeCardView } from './SourceCodeCardView';
+import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
+import { IAppState } from '../../../../api/IAppState';
+import { FunctionCardView } from './FunctionCardView';
+import { FunctionCallCardView } from './FunctionCallCardView';
+import { ObjectCardView } from './ObjectCardView';
 import { PrimitiveCardView } from './PrimitiveCardView';
+import { SourceCodeCardView } from './SourceCodeCardView';
+import { StructureCardView } from './StructureCardView';
 import { getCard, resolveReference } from '../../../../helpers';
 import { CardView } from './CardView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
+import { ICardViewBaseProps } from './CardViewBase';
 import { IProjectViewState } from '../../ProjectView';
-import { IAppState } from '../../../../api/IAppState';
-import { CardSocketView, CardSocketType } from '../CardSocketView';
-import { ICard } from '../../../../api/project/ICard';
-import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
-import { FunctionCardView } from './FunctionCardView';
-import { FunctionCallCardView } from './FunctionCallCardView';
-import { ObjectCardView } from './ObjectCardView';
-import { StructureCardView } from './StructureCardView';
 
-export interface ISymbolCardViewProps {
+export interface ISymbolCardViewState {
   symbol: ISymbol;
   cardboardId: string;
   appState: IAppState;
   pvState: IProjectViewState;
 }
 
-export class SymbolCardView extends React.Component<ISymbolCardViewProps> {
+export class SymbolCardView extends React.Component<ISymbolCardViewState> {
 
   render () {
     const project = this.props.appState.project;
@@ -36,32 +35,37 @@ export class SymbolCardView extends React.Component<ISymbolCardViewProps> {
       
       case SymbolType.Function: {
         return (
-          <FunctionCardView symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <FunctionCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       } 
       case SymbolType.FunctionCall: {
         return (
-          <FunctionCallCardView symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <FunctionCallCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       } 
       case SymbolType.Object: {
         return (
-          <ObjectCardView symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <ObjectCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       } 
       case SymbolType.Primitive: {
         return (
-          <PrimitiveCardView symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <PrimitiveCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       } 
       case SymbolType.SourceCode: {
         return (
-          <SourceCodeCardView symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <SourceCodeCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       } 
       case SymbolType.Structure: {
         return (
-          <StructureCardView symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+          <StructureCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+        )
+      } 
+      case SymbolType.SourceCode: {
+        return (
+          <SourceCodeCardView card={card} symbol={symbol} cardboardId={this.props.cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
         )
       } 
 

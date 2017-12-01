@@ -439,9 +439,8 @@ body {
 
 
 
-
 svg {
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .svg-spline {
@@ -538,10 +537,10 @@ svg {
   padding: 2px;
   flex-grow: 1;
   text-align: center;
-  background: var(--color-main);
-  background-image: var(--grid-image);
+  background: var(--color-main-1);
+  /* background-image: var(--grid-image); */
   background-size: 10px 10px;
-  box-shadow: inset 0px 0px 3px 0px var(--color-main-5);
+  /* box-shadow: inset 0px 0px 3px 0px var(--color-main-5); */
 }
 .card-content .output-container {
   padding: 2px;

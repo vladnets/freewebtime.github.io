@@ -5,6 +5,7 @@ import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IProject } from '../api/project/IProject';
 import { ICardboard } from '../api/project/ICardboard';
 import { ICard } from '../api/project/ICard';
+import { NColor } from '../api/Color';
 
 export const areObjectsEqual = ( x, y ) => {
   if ( x === y ) return true;
@@ -104,7 +105,6 @@ export const getCardboard = (cardboardId: string, project: IProject): ICardboard
 
 export const getCard = (cardboardId: string, cardId: string, project: IProject): ICard|undefined => {
   const cardboard = getCardboard(cardboardId, project);
-  console.log('cardboard for ', cardboardId, cardboard, 'cardId', cardId);
   if (!cardboard) {
     return undefined;
   }
@@ -114,4 +114,32 @@ export const getCard = (cardboardId: string, cardId: string, project: IProject):
 
 export const getIconForSymbol = (symbolType: SymbolType) => {
   return appConfig.SymbolIcons[symbolType] || appConfig.SymbolIcons.default;
+}
+
+export const colorToRgbString = (color: NColor): string => {
+  
+  while (color.length < 3) {
+    color = [...color, 0];
+  }
+
+  while (color.length < 4) {
+    color = [...color, 255];
+  }
+
+  color = color.slice(0, 3);
+  
+  return `rgb(${color.join(',')})`;
+}
+export const colorToRgbaString = (color: NColor): string => {
+  
+  while (color.length < 3) {
+    color = [...color, 0];
+  }
+
+  while (color.length < 4) {
+    color = [...color, 255];
+  }
+
+  color = color.slice(0, 4);
+  return `rgba(${color.join(',')})`;
 }

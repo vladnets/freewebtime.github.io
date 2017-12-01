@@ -17,7 +17,7 @@ const createCards = (structureItem: IProjectStructureItem, project: IProject): I
       const symbol: ISymbol = subitems[symbolId];
       const card: ICard = {
         id: symbolId,
-        cardType: CardType[symbol.symbolType],
+        cardType: CardType.Card,
         name: symbol.name,
         position: {x: 100, y: 200},
         size: {x: 160, y: 70},

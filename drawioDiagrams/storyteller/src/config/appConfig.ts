@@ -3,9 +3,10 @@ import { IAction } from '../api/IAction';
 import { ICardboard } from '../api/project/ICardboard';
 import { ICard } from '../api/project/ICard';
 import { SymbolType } from '../api/project/ISymbol';
+import { NColor } from '../api/Color';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: false,
+  IsLoadStateFromLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
 
   Actions: {
@@ -67,6 +68,16 @@ export const appConfig = {
       }
     },
 
+  },
+
+  Colors: {
+    Black: <NColor> [0, 0, 0, 255],
+    White: <NColor> [255, 255, 255, 255],
+    Transparent: <NColor> [0, 0, 0, 0],
+    Red: <NColor> [255, 0, 0, 255],
+    Green: <NColor> [0, 255, 0, 255],
+    Blue: <NColor> [0, 0, 255, 255],
+    Yellow: <NColor> [255, 230, 0, 255],
   },
 
   SymbolIcons: {

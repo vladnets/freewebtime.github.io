@@ -1,6 +1,6 @@
 import * as React from 'react';
 import onClickOutside from 'react-onclickoutside';
-import { IVector2 } from '../api/IVector2';
+import { IVector2 } from '../../api/IVector2';
 import TrashIcon from './TrashIcon';
 
 export interface ISplineProps {
