@@ -59,29 +59,31 @@ export class CardViewBase extends React.Component<ICardViewBaseProps> {
     return false;
   }
 
-  render () {
-    const project = this.props.appState.project;
-    const symbol = this.props.symbol;
-    const card = this.props.card;
+  // render () {
+  //   const project = this.props.appState.project;
+  //   const symbol = this.props.symbol;
+  //   const card = this.props.card;
     
-    if (!symbol) {
-      return false;
-    }
+  //   if (!symbol) {
+  //     return false;
+  //   }
 
-    return (
-      <CardView 
-        appState={this.props.appState}
-        pvState={this.props.pvState}
-        symbolId={symbol.fullId}
-        cardboardId={this.props.cardboardId}
-        cardType={this.props.cardType}
-        inputView={this.contentInputView()}
-        outputView={this.contentOutputView()}
-        valueView={this.contentValueView()}
-        headerInputView={this.headerInputView()}
-        headerOutputView={this.headerOutputView()}
-        headerValueView={this.headerValueView()}
-      />
-    )
-  }
+  //   return false;
+
+  //   return (
+  //     <CardView 
+  //       appState={this.props.appState}
+  //       pvState={this.props.pvState}
+  //       symbolId={symbol.fullId}
+  //       cardboardId={this.props.cardboardId}
+  //       cardType={this.props.cardType}
+  //       inputView={this.contentInputView()}
+  //       outputView={this.contentOutputView()}
+  //       valueView={this.contentValueView()}
+  //       headerInputView={this.headerInputView()}
+  //       headerOutputView={this.headerOutputView()}
+  //       headerValueView={this.headerValueView()}
+  //     />
+  //   )
+  // }
 }

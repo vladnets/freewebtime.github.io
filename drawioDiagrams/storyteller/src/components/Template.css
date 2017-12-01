@@ -492,8 +492,8 @@ svg {
 
 /* Card */
 .card-container {
-  border-radius: 3px;
-  border: 2px solid var(--color-main-2);
+  border-radius: 5px;
+  border: 0px solid var(--color-main-2);
   background: var(--color-main-2);
 }
 .card-container.selected {
@@ -501,20 +501,22 @@ svg {
 }
 .card-container.card {
   overflow: hidden;
-  box-shadow: 1px 1px 2px 0px var(--color-main-5);
+  box-shadow: 0px 0px 5px 0px var(--color-main-5);
 }
 .card-drag-handler {
   cursor: move;
 }
 .card-header {
-  /* background: rgb(131, 12, 121); */
   background-image: linear-gradient(to bottom, 
-  rgba(0, 0, 0, 0), 
-  rgba(0, 0, 0, 0.0)
+  rgba(255, 255, 255, 0.2),
+  rgba(0, 0, 0, 0) 
   );
   padding: 2px;
 }
 .card-content {
+  flex-grow: 1;
+}
+.symbol-view {
   background: var(--color-main-1);
   flex-grow: 1;
 }
@@ -530,10 +532,10 @@ svg {
   padding: 2px;
 }
 
-.card-content .input-container {
+.symbol-view .input-container {
   padding: 2px;
 }
-.card-content .content-container {
+.symbol-view .content-container {
   padding: 2px;
   flex-grow: 1;
   text-align: center;
@@ -542,6 +544,7 @@ svg {
   background-size: 10px 10px;
   /* box-shadow: inset 0px 0px 3px 0px var(--color-main-5); */
 }
-.card-content .output-container {
+.symbol-view .output-container {
   padding: 2px;
 }
+

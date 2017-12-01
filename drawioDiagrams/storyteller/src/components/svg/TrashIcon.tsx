@@ -1,5 +1,5 @@
+import { IVector2 } from '../../api/IVector2';
 import * as React from 'react';
-import { IVector2 } from '../api/IVector2';
 
 export default class TrashIcon extends React.Component<{position: IVector2, onClick: (e: any)=>void}> {
     handleClick(e: any) {

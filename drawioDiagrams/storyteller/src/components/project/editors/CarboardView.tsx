@@ -1,4 +1,3 @@
-import { SymbolCardView } from './cards/SymbolCardView';
 import { ISymbol, SymbolType } from '../../../api/project/ISymbol';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
@@ -12,19 +11,18 @@ import { appConfig } from '../../../config/appConfig';
 import { IHash } from '../../../api/IHash';
 import { CardView, CardType } from './cards/CardView';
 import { IProject } from '../../../api/project/IProject';
+import { SymbolView } from './cards/SymbolView';
 
 export interface ICardboardViewProps {
-  namespace: string;
+  cardboardId: string;
   appState: IAppState;
   pvState: IProjectViewState;
 }
 
 export class CardboardView extends React.Component<ICardboardViewProps> {
 
-  pathView = () => {
-    const namespace = this.props.namespace;
-    const appState = this.props.appState;
-    const project = appState.project;
+  pathView = (cardboard: ICardboard) => {
+    const namespace = cardboard.id;
     const path = parsePath(namespace);
     if (path) {
       return path.map((pathItem: ReferencePathItem, index: number) => {
@@ -40,45 +38,50 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
     return false;
   }
 
-  cardsView = () => {
+  cardsView = (cardboard: ICardboard) => {
     const appState = this.props.appState;
     const project = appState.project;
-    const namespace = this.props.namespace;
-    const cardboardId = namespace;
-    const symbolsIds = getSubitemsIds(namespace, project);
     
-    if (!symbolsIds) {
-      return false;
-    }
-
-    return Object.keys(symbolsIds).map((symbolId: string) => {
-
-      const symbol = resolveReference(symbolId, project);
-      if (!symbol) {
-        return false;
-      }
-
+    return Object.keys(cardboard.cards).map((cardId: string) => {
+      const card = cardboard.cards[cardId];
+      const symbol = resolveReference(card.id, project);
+      const cardContent = symbol
+        ? (
+          <SymbolView symbol={symbol} appState={appState} pvState={this.props.pvState} />
+        )
+        : false
+      ;
+      
       return (
-        <SymbolCardView 
-          key={symbolId} 
-          cardType={CardType.Card} 
-          symbol={symbol} 
-          cardboardId={cardboardId} 
-          appState={this.props.appState} 
-          pvState={this.props.pvState} 
-        />
+        <CardView 
+          key={cardId}
+          appState={this.props.appState}
+          pvState={this.props.pvState}
+          cardboardId={cardboard.id}
+          card={card}
+        >
+        {cardContent}
+        </CardView>
       )
     })
   }
 
   render () {
+    const project = this.props.appState.project;
+    const cardboardId = this.props.cardboardId;
+    const cardboard = project.cardboards[cardboardId];
+    
+    if (!cardboard) {
+      return false;
+    }
+
     return (
       <div className={'cardboard-container container-vertical'}>
         <div className="cardboard-header">
-        {this.pathView()}
+        {this.pathView(cardboard)}
         </div>
         <div className={'cardboard-content container-vertical'}>
-        {this.cardsView()}
+        {this.cardsView(cardboard)}
         </div>
       </div>
     )
