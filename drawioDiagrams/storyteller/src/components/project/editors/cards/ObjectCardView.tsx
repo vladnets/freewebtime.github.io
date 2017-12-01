@@ -4,12 +4,4 @@ import { CardViewBase } from './CardViewBase';
 import { SymbolType } from '../../../../api/project/ISymbol';
 
 export class ObjectCardView extends CardViewBase {
-  contentInputView = () => {
-
-    return (
-      <div>
-        Hello
-      </div>
-    )
-  }
 }
