@@ -20,6 +20,9 @@ export interface ICardViewProps {
   inputView: any;
   outputView: any;
   valueView: any;
+  headerInputView: any;
+  headerOutputView: any;
+  headerValueView: any;
 }
 
 export class CardView extends React.Component<ICardViewProps> {
@@ -123,58 +126,13 @@ export class CardView extends React.Component<ICardViewProps> {
     return false;
   }
 
-  headerInputSocketView = (card: ICard, symbol: ISymbol) => {
-    return (
-      <div className="input-container">
-        <CardSocketView socketType={CardSocketType.Input} symbolId={card.id} cardboardId={this.props.cardboardId} />
-      </div>
-    )
-  }
-
-  headerOutputSocketView = (card: ICard, symbol: ISymbol) => {
-    return (
-      <div className="output-container">
-        <CardSocketView socketType={CardSocketType.Output} symbolId={card.id} cardboardId={this.props.cardboardId} />
-      </div>
-    )
-  }
-
   headerView = (card: ICard, symbol: ISymbol) => {
-    const headerStyle = {};
-    if (card.color) {
-      headerStyle['backgroundColor'] = card.color;
-    }
-    delete headerStyle['backgroundColor'];
 
     return (
-      <div className="card-header container-horizontal card-drag-handler" style={headerStyle}>
-        {this.headerInputSocketView(card, symbol)}
-        <div className="content-container">
-          {card.name}
-        </div>
-        {this.headerOutputSocketView(card, symbol)}
-      </div>
-    )
-  }
-
-  contentInputView = (card: ICard, symbol: ISymbol) => {
-    return (
-      <div className="input-container">
-        Input
-      </div>
-    )
-  }
-  contentOutputView = (card: ICard, symbol: ISymbol) => {
-    return (
-      <div className="output-container">
-        Output
-      </div>
-    )
-  }
-  contentValueView = (card: ICard, symbol: ISymbol) => {
-    return (
-      <div className="content-container">
-        Card value
+      <div className="card-header container-horizontal card-drag-handler">
+        {this.props.headerInputView}
+        {this.props.headerValueView}
+        {this.props.headerOutputView}
       </div>
     )
   }

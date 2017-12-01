@@ -16,7 +16,29 @@ export interface IPrimitiveCardViewProps {
 }
 
 export class PrimitiveCardView extends React.Component<IPrimitiveCardViewProps> {
+  headerInputView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="input-container">
+        <CardSocketView socketType={CardSocketType.Input} symbolId={card.id} cardboardId={this.props.cardboardId} />
+      </div>
+    )
+  }
 
+  headerOutputView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="output-container">
+        <CardSocketView socketType={CardSocketType.Output} symbolId={card.id} cardboardId={this.props.cardboardId} />
+      </div>
+    )
+  }
+
+  headerValueView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="content-container">
+        {card.name}
+      </div>
+    )
+  }
   contentInputView = (card: ICard, symbol: ISymbol) => {
     return (
       <div className="input-container">
@@ -57,6 +79,9 @@ export class PrimitiveCardView extends React.Component<IPrimitiveCardViewProps> 
         inputView={this.contentInputView(card, symbol)}
         outputView={this.contentOutputView(card, symbol)}
         valueView={this.contentValueView(card, symbol)}
+        headerInputView={this.headerInputView(card, symbol)}
+        headerOutputView={this.headerOutputView(card, symbol)}
+        headerValueView={this.headerValueView(card, symbol)}
       />
     )
   }
