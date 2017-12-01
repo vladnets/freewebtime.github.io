@@ -5,10 +5,12 @@ import { ICardboard } from '../api/project/ICardboard';
 import { ISymbol } from '../api/project/ISymbol';
 import { ICard } from '../api/project/ICard';
 import { getSubitems } from '../helpers/index';
+import { IProjectStructure } from '../api/project/IProjectStructure';
+import { IProjectStructureItem } from '../api/project/IProjectStructureItem';
 
-const createCards = (symbol: ISymbol, project: IProject): IHash<ICard> => {
+const createCards = (structureItem: IProjectStructureItem, project: IProject): IHash<ICard> => {
   const cards: IHash<ICard> = {}
-  const subitems = getSubitems(symbol.fullId, project);
+  const subitems = getSubitems(structureItem.fullId, project);
 
   if (subitems) {
     Object.keys(subitems).map((symbolId: string) => {
@@ -27,14 +29,14 @@ const createCards = (symbol: ISymbol, project: IProject): IHash<ICard> => {
   return cards;
 }
 
-const createCardboard = (symbol:ISymbol, project: IProject): ICardboard => {
-  const cards: IHash<ICard> = createCards(symbol, project);
+const createCardboard = (structureItem:IProjectStructureItem, project: IProject): ICardboard => {
+  const cards: IHash<ICard> = createCards(structureItem, project);
   
   const cardboard: ICardboard = {
-    id: symbol.fullId,
-    name: symbol.name,
+    id: structureItem.fullId,
+    name: structureItem.name,
     cards: cards,
-    rootSymbolRef: createReference(symbol),
+    namespace: structureItem.fullId,
   }
 
   return cardboard;
@@ -42,12 +44,12 @@ const createCardboard = (symbol:ISymbol, project: IProject): ICardboard => {
 
 export const createCardboards = (project: IProject): IHash<ICardboard> => {
   
-  const symbols = project.symbols;
+  const structureItems = project.structure.items;
   const cardboards: IHash<ICardboard> = {};
 
-  Object.keys(symbols).map((symbolId: string) => {
-    const symbol = symbols[symbolId];
-    const cardboard = createCardboard(symbol, project);
+  Object.keys(structureItems).map((symbolId: string) => {
+    const structureItem = structureItems[symbolId];
+    const cardboard = createCardboard(structureItem, project);
     cardboards[symbolId] = cardboard;
   })
 

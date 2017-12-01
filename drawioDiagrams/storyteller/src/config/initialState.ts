@@ -206,12 +206,13 @@ const projectRootInterface: IFunctionInterface = {
 //function bodies
 
 //concat string
-const concatStringSourceCodeName = 'SourceCode';
+const concatStringSourceCodeId = 'SourceCode';
+const concatStringSourceCodeName = 'Source Code';
 const concatStringSourceCode: ISystemSourceCodeItem = {
-  id: concatStringSourceCodeName,
+  id: concatStringSourceCodeId,
   name: concatStringSourceCodeName,
   namespace: concatString.fullId,
-  fullId: `${concatString.fullId}.${concatStringSourceCodeName}`,
+  fullId: `${concatString.fullId}.${concatStringSourceCodeId}`,
   functionId: appConfig.SystemFunctionNames.Concat_String,
   typeReference: {
     referenceType: ReferenceType.Interface,
@@ -223,12 +224,13 @@ const concatStringSourceCode: ISystemSourceCodeItem = {
 }
 
 //project root
-const projectRootSourceCodeName = 'SourceCode';
+const projectRootSourceCodeId = 'SourceCode';
+const projectRootSourceCodeName = 'Source Code';
 const projectRootSourceCode: IGraphSourceCodeItem = {
-  id: projectRootSourceCodeName,
+  id: projectRootSourceCodeId,
   name: projectRootSourceCodeName,
   namespace: projectRootInterface.fullId,
-  fullId: `${projectRootInterface.fullId}.${projectRootSourceCodeName}`,
+  fullId: `${projectRootInterface.fullId}.${projectRootSourceCodeId}`,
   sourceCodeType: SourceCodeType.Graph,
   itemType: ItemType.SourceCode,
   symbolType: SymbolType.Item,

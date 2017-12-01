@@ -126,6 +126,7 @@ export const getCardboard = (cardboardId: string, project: IProject): ICardboard
 
 export const getCard = (cardboardId: string, cardId: string, project: IProject): ICard|undefined => {
   const cardboard = getCardboard(cardboardId, project);
+  console.log('cardboard for ', cardboardId, cardboard, 'cardId', cardId);
   if (!cardboard) {
     return undefined;
   }

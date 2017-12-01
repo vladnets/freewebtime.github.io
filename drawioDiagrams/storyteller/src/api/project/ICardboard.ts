@@ -4,6 +4,6 @@ import { ICard } from './ICard';
 import { IReference } from './IReference';
 
 export interface ICardboard extends IUniqueObject {
-  rootSymbolRef: IReference;
+  namespace: string;
   cards: IHash<ICard>;
 }

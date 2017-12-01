@@ -13,7 +13,7 @@ import { appConfig } from '../../../config/appConfig';
 import { IHash } from '../../../api/IHash';
 
 export interface ICardboardViewProps {
-  rootSymbolId: string;
+  namespace: string;
   appState: IAppState;
   pvState: IProjectViewState;
 }
@@ -21,22 +21,19 @@ export interface ICardboardViewProps {
 export class CardboardView extends React.Component<ICardboardViewProps> {
 
   pathView = () => {
-    const rootSymbolId = this.props.rootSymbolId;
+    const namespace = this.props.namespace;
     const appState = this.props.appState;
     const project = appState.project;
-    const rootSymbol = resolveReferenceFast(rootSymbolId, project);
-    if (rootSymbol) {
-      const path = parsePath(rootSymbol.fullId);
-      if (path) {
-        return path.map((pathItem: ReferencePathItem, index: number) => {
-          const prefix = index > 0 ? ' > ' : '';
-          return (
-            <div key={index} className={'cardboard-header-path-item'}>
-            {prefix}{pathItem.toString()}
-            </div>
-          )        
-        })
-      }
+    const path = parsePath(namespace);
+    if (path) {
+      return path.map((pathItem: ReferencePathItem, index: number) => {
+        const prefix = index > 0 ? ' > ' : '';
+        return (
+          <div key={index} className={'cardboard-header-path-item'}>
+          {prefix}{pathItem.toString()}
+          </div>
+        )        
+      })
     }
 
     return false;
@@ -45,9 +42,9 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
   cardsView = () => {
     const appState = this.props.appState;
     const project = appState.project;
-    const rootSymbolId = this.props.rootSymbolId;
-    const cardboardId = rootSymbolId;
-    const symbolsIds = getSubitemsIds(rootSymbolId, project);
+    const namespace = this.props.namespace;
+    const cardboardId = namespace;
+    const symbolsIds = getSubitemsIds(namespace, project);
     if (symbolsIds) {
       return Object.keys(symbolsIds).map((symbolId: string) => {
         return (

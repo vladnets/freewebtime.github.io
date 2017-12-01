@@ -13,7 +13,7 @@ export class EditorsTabsView extends React.Component<{appState: IAppState, pvSta
     const tabItems = Object.keys(pvState.opennedEditors).map((editorId: string) => {
       const editor = pvState.opennedEditors[editorId];
       const symbol = resolveReferenceFast(editorId, appState.project);
-      let symbolName = 'N/A';
+      let symbolName = editorId;
       if (symbol) {
         symbolName = symbol.name;
       }
