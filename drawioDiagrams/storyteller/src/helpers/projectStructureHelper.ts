@@ -24,9 +24,10 @@ const getOrCreateNamespaceItem = (namespace: string, projectStructure: IHash<IPr
   }
   else {
     if (path && path.length > 0) {
+      const ownNamespacePath = path.slice(0, path.length-2);
       itemId = path[path.length-1].toString();
       itemName = itemId;
-      itemNamespace = pathToString(path);
+      itemNamespace = ownNamespacePath.length > 0 ? pathToString(path) : undefined;
     }
   }
 

@@ -59,7 +59,14 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
       }
 
       return (
-        <SymbolCardView key={symbolId} cardType={CardType.Card} symbol={symbol} cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+        <SymbolCardView 
+          key={symbolId} 
+          cardType={CardType.Card} 
+          symbol={symbol} 
+          cardboardId={cardboardId} 
+          appState={this.props.appState} 
+          pvState={this.props.pvState} 
+        />
       )
     })
   }
@@ -70,7 +77,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
         <div className="cardboard-header">
         {this.pathView()}
         </div>
-        <div className="cardboard-content">
+        <div className={'cardboard-content container-vertical'}>
         {this.cardsView()}
         </div>
       </div>
