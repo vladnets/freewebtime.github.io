@@ -11,6 +11,7 @@ export interface IProjectViewState {
   activeEditorId?: string;
   isLeftSidebarCollapsed: boolean;
   isRightSidebarCollapsed: boolean;
+  isShowTypeReferences: boolean;
 
   handleItemClick: (itemId: string) => void;
   openEditor: (itemId: string) => void;
@@ -30,9 +31,10 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
       'System':'System',
       'New Project':'New Project',
     },
-    activeEditorId: 'New Project',
+    activeEditorId: 'System',
     isLeftSidebarCollapsed: false,
     isRightSidebarCollapsed: true,
+    isShowTypeReferences: true,
     handleItemClick: (itemId: string) => {
       this.selectItem(itemId);
     },

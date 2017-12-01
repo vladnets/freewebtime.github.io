@@ -3,7 +3,7 @@ import { IHash } from '../api/IHash';
 import { IProject } from '../api/project/IProject';
 import { ICardboard } from '../api/project/ICardboard';
 import { ISymbol } from '../api/project/ISymbol';
-import { ICard, CardType } from '../api/project/ICard';
+import { ICard } from '../api/project/ICard';
 import { getSubitems } from '../helpers/index';
 import { IProjectStructure } from '../api/project/IProjectStructure';
 import { IProjectStructureItem } from '../api/project/IProjectStructureItem';
@@ -17,10 +17,9 @@ const createCards = (structureItem: IProjectStructureItem, project: IProject): I
       const symbol: ISymbol = subitems[symbolId];
       const card: ICard = {
         id: symbolId,
-        cardType: CardType.Card,
         name: symbol.name,
-        position: {x: 100, y: 200},
-        size: {x: 160, y: 70},
+        position: {x: Math.random() * 800, y: Math.random() * 600},
+        size: {x: 260, y: 70},
       }
 
       cards[symbolId] = card;

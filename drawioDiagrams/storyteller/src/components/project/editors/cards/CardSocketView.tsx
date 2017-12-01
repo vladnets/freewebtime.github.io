@@ -13,6 +13,7 @@ export interface ICardSocketViewProps {
   symbol: ISymbol;
   cardboardId: string;
   socketType: CardSocketType;
+  socketText?: string;
 }
 
 export class CardSocketView extends React.Component<ICardSocketViewProps> {
@@ -31,6 +32,15 @@ export class CardSocketView extends React.Component<ICardSocketViewProps> {
       : appConfig.Colors.Yellow
     ;
     const fillColor = appConfig.Colors.Transparent;
+
+    const socketText = this.props.socketText 
+      ? (
+        <div className={'card-socket-text'}>
+        {this.props.socketText}
+        </div>
+      ) 
+      : false
+    ;
 
     return (
       <div className={className}>

@@ -6,7 +6,7 @@ import { SymbolType } from '../api/project/ISymbol';
 import { NColor } from '../api/Color';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: true,
+  IsLoadStateFromLocalStorage: false,
   SaveStateToLocalStorageInterval: 1000,
 
   Actions: {

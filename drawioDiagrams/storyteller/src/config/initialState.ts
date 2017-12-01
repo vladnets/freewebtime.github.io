@@ -1,5 +1,5 @@
 import { appConfig } from './appConfig';
-import { ISymbol, SymbolType, IPrimitive, IStructure, IFunctionInterface, ISystemSourceCode, SourceCodeType, IGraphSourceCode, IObject, IFunctionCall } from '../api/project/ISymbol';
+import { ISymbol, SymbolType, IPrimitive, IStructure, IFunction, ISystemSourceCode, SourceCodeType, IGraphSourceCode, IObject, IFunctionCall } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
 import { ICard } from '../api/project/ICard';
 import { ICardboard } from '../api/project/ICardboard';
@@ -19,6 +19,7 @@ const stringInterface: IPrimitive = {
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${appConfig.PrimitiveTypes.String}`,
   symbolType: SymbolType.Primitive,
   primitiveType: appConfig.PrimitiveTypes.String,
+  defaultValue: 'Text...',
 }
 
 const numberInterface: IPrimitive = {
@@ -28,6 +29,7 @@ const numberInterface: IPrimitive = {
   symbolType: SymbolType.Primitive,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${appConfig.PrimitiveTypes.Number}`,
   primitiveType: appConfig.PrimitiveTypes.Number,
+  defaultValue: 0,
 }
 
 const booleanInterface: IPrimitive = {
@@ -37,6 +39,7 @@ const booleanInterface: IPrimitive = {
   symbolType: SymbolType.Primitive,
   fullId: `${appConfig.InitialStateConfig.SystemNamespace}.${appConfig.PrimitiveTypes.Boolean}`,
   primitiveType: appConfig.PrimitiveTypes.Boolean,
+  defaultValue: false,
 }
 
 const concatStringName = 'Concat_String';
@@ -58,7 +61,7 @@ const concatStringParamsInterface: IStructure = {
   }
 }
 
-const concatString: IFunctionInterface = {
+const concatString: IFunction = {
   id: concatStringName,
   name: 'Concatenate string',
   namespace: appConfig.InitialStateConfig.SystemNamespace,
@@ -124,7 +127,7 @@ const projectRootResultInterface: IStructure = {
     [storyInterface.name]: storyInterface.fullId,
   },
 }
-const projectRootInterface: IFunctionInterface = {
+const projectRootInterface: IFunction = {
   id: projectRootId,
   name: projectRootName,
   fullId: projectRootName,

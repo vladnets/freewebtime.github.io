@@ -1,22 +1,28 @@
+import { appConfig } from '../../../../config/appConfig';
 import { ICard } from '../../../../api/project/ICard';
 import { CardSocketType, CardSocketView } from './CardSocketView';
 import { ISymbol } from '../../../../api/project/ISymbol';
 import { IProjectViewState } from '../../ProjectView';
 import { IAppState } from '../../../../api/IAppState';
 import * as React from 'react';
-import { CardView } from './CardView';
+import { CardView, CardType } from './CardView';
 import { getCard } from '../../../../helpers/index';
 
 export interface ICardViewBaseProps {
   symbol: ISymbol;
-  card: ICard;
+  card?: ICard;
   cardboardId: string;
   appState: IAppState;
   pvState: IProjectViewState;
+  cardType: CardType;
 }
 
 export class CardViewBase extends React.Component<ICardViewBaseProps> {
   headerInputView = (): any => {
+    if (!this.props.pvState.isShowTypeReferences) {
+      return false;
+    }
+
     return (
       <div className="input-container">
         <CardSocketView socketType={CardSocketType.Input} symbol={this.props.symbol} cardboardId={this.props.cardboardId} />
@@ -25,6 +31,10 @@ export class CardViewBase extends React.Component<ICardViewBaseProps> {
   }
 
   headerOutputView = (): any => {
+    if (!this.props.pvState.isShowTypeReferences) {
+      return false;
+    }
+    
     return (
       <div className="output-container">
         <CardSocketView socketType={CardSocketType.Output} symbol={this.props.symbol} cardboardId={this.props.cardboardId} />
@@ -35,7 +45,7 @@ export class CardViewBase extends React.Component<ICardViewBaseProps> {
   headerValueView = (): any => {
     return (
       <div className="content-container">
-        {this.props.card.name}
+        {this.props.symbol.name}
       </div>
     )
   }
@@ -46,19 +56,15 @@ export class CardViewBase extends React.Component<ICardViewBaseProps> {
     return false;
   }
   contentValueView = (): any => {
-    return (
-      <div className="content-container">
-        Card value
-      </div>
-    )
+    return false;
   }
 
   render () {
     const project = this.props.appState.project;
     const symbol = this.props.symbol;
-    const card = getCard(this.props.cardboardId, symbol.fullId, project);
+    const card = this.props.card;
     
-    if (!card || !symbol) {
+    if (!symbol) {
       return false;
     }
 
@@ -68,6 +74,7 @@ export class CardViewBase extends React.Component<ICardViewBaseProps> {
         pvState={this.props.pvState}
         symbolId={symbol.fullId}
         cardboardId={this.props.cardboardId}
+        cardType={this.props.cardType}
         inputView={this.contentInputView()}
         outputView={this.contentOutputView()}
         valueView={this.contentValueView()}

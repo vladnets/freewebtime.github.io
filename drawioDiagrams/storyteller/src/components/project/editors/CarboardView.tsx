@@ -10,7 +10,7 @@ import { ReferencePathItem } from '../../../api/project/ReferencePath';
 import { ICardboard } from '../../../api/project/ICardboard';
 import { appConfig } from '../../../config/appConfig';
 import { IHash } from '../../../api/IHash';
-import { CardView } from './cards/CardView';
+import { CardView, CardType } from './cards/CardView';
 import { IProject } from '../../../api/project/IProject';
 
 export interface ICardboardViewProps {
@@ -59,7 +59,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
       }
 
       return (
-        <SymbolCardView key={symbolId} symbol={symbol} cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
+        <SymbolCardView key={symbolId} cardType={CardType.Card} symbol={symbol} cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState} />
       )
     })
   }

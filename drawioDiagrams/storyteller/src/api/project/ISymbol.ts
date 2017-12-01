@@ -47,13 +47,14 @@ export interface IGraphSourceCode extends ISourceCode {
 
 export interface IPrimitive extends ISymbol {
   primitiveType: string;
+  defaultValue: any;
 }
 
 export interface IStructure extends ISymbol {
   subitems: IHash<string>; //name:typeId
 }
 
-export interface IFunctionInterface extends ISymbol {
+export interface IFunction extends ISymbol {
   paramsTypeId: string;
   resultTypeId: string;
 }

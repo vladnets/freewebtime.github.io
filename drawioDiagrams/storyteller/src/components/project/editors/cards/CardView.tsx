@@ -11,12 +11,19 @@ import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import Rnd from 'react-rnd';
 
+export enum CardType {
+  Unknown = 'Unknown',
+  Card = 'Card',
+  Subcard = 'Subcard',
+}
+
 export interface ICardViewProps {
   symbolId: string;
   cardboardId: string;
   appState: IAppState;
   pvState: IProjectViewState;
-  
+  cardType: CardType;
+
   inputView: any;
   outputView: any;
   valueView: any;
@@ -126,7 +133,7 @@ export class CardView extends React.Component<ICardViewProps> {
     return false;
   }
 
-  headerView = (card: ICard, symbol: ISymbol) => {
+  headerView = (card: ICard|undefined, symbol: ISymbol) => {
 
     return (
       <div className="card-header container-horizontal card-drag-handler">
@@ -137,7 +144,7 @@ export class CardView extends React.Component<ICardViewProps> {
     )
   }
 
-  contentView = (card: ICard, symbol: ISymbol) => {
+  contentView = (card: ICard|undefined, symbol: ISymbol) => {
     return (
       <div className="card-content container-horizontal">
       {this.props.inputView}
@@ -155,21 +162,31 @@ export class CardView extends React.Component<ICardViewProps> {
     const project = appState.project;
     const symbol = project.symbols[cardId];
     const card = getCard(cardboardId, cardId, project);
-    
+    let cardContainerClass = this.props.cardType === CardType.Card
+      ? 'card-container card container-vertical fullwidth fullheight'
+      : 'card-container container-vertical fullwidth fullheight'
+    ;  
+
     if (card) {
+      if (this.props.cardType === CardType.Card) {
+        cardContainerClass += (card.isSelected ? ' selected' : '');
 
-      const cardContainerClass = 
-        'card-container card container-vertical fullwidth fullheight'
-        + (card.isSelected ? ' selected' : '')
-      ;
-
-      return (
-        this.movableContainer(
-          <div className={cardContainerClass}>
-            {this.headerView(card, symbol)}
-            {this.contentView(card, symbol)}
-          </div>
+        return (
+          this.movableContainer(
+            <div className={cardContainerClass}>
+              {this.headerView(card, symbol)}
+              {this.contentView(card, symbol)}
+            </div>
+          )
         )
+      }
+    }
+    else {
+      return (
+        <div className={cardContainerClass}>
+          {this.headerView(card, symbol)}
+          {this.contentView(card, symbol)}
+        </div>
       )
     }
 
