@@ -9,7 +9,6 @@ import { getSubitems } from '../helpers/index';
 const createCards = (symbol: ISymbol, project: IProject): IHash<ICard> => {
   const cards: IHash<ICard> = {}
   const subitems = getSubitems(symbol.fullId, project);
-  console.log(`subitems of ${symbol.fullId} are `, subitems);
 
   if (subitems) {
     Object.keys(subitems).map((symbolId: string) => {

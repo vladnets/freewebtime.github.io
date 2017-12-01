@@ -126,7 +126,6 @@ export class CardView extends React.Component<ICardViewProps> {
     const appState = this.props.appState;
     const project = appState.project;
     const card = getCard(cardboardId, cardId, project);
-    console.log('render card', cardId, card);
 
     if (card) {
       const headerStyle = {};
