@@ -1,22 +1,25 @@
-import { CardSocketView, CardSocketType } from './CardSocketView';
-import { getCard } from '../../../helpers';
-import { IVector2 } from '../../../api/IVector2';
-import { ICallback } from '../../../api';
+import { IAppState } from '../../../../api/IAppState';
+import { IProjectViewState } from '../../ProjectView';
+import { IVector2 } from '../../../../api/IVector2';
+import { ICallback } from '../../../../api';
+import { getCard } from '../../../../helpers';
+import { appConfig } from '../../../../config/appConfig';
+import { ICard } from '../../../../api/project/ICard';
+import { ISymbol } from '../../../../api/project/ISymbol';
+import { CardSocketType, CardSocketView } from '../CardSocketView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import Rnd from 'react-rnd';
-import { ICard } from '../../../api/project/ICard';
-import { IAppState } from '../../../api/IAppState';
-import { ISymbol, SymbolType } from '../../../api/project/ISymbol';
-import { IProjectViewState } from '../ProjectView';
-import { resolveReference } from '../../../helpers/index';
-import { appConfig } from '../../../config/appConfig';
 
 export interface ICardViewProps {
   symbolId: string;
   cardboardId: string;
   appState: IAppState;
   pvState: IProjectViewState;
+  
+  inputView: any;
+  outputView: any;
+  valueView: any;
 }
 
 export class CardView extends React.Component<ICardViewProps> {
@@ -179,9 +182,9 @@ export class CardView extends React.Component<ICardViewProps> {
   contentView = (card: ICard, symbol: ISymbol) => {
     return (
       <div className="card-content container-horizontal">
-      {this.contentInputView(card, symbol)}
-      {this.contentValueView(card, symbol)}
-      {this.contentOutputView(card, symbol)}
+      {this.props.inputView}
+      {this.props.valueView}
+      {this.props.outputView}
       </div>
     )
   }

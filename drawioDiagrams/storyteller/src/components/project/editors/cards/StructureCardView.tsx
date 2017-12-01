@@ -1,0 +1,63 @@
+import { getCard, resolveReference } from '../../../../helpers';
+import { CardView } from './CardView';
+import * as React from 'react';
+import FontAwesome from 'react-fontawesome';
+import { IProjectViewState } from '../../ProjectView';
+import { IAppState } from '../../../../api/IAppState';
+import { CardSocketView, CardSocketType } from '../CardSocketView';
+import { ICard } from '../../../../api/project/ICard';
+import { ISymbol } from '../../../../api/project/ISymbol';
+
+export interface IStructureCardViewProps {
+  symbol: ISymbol;
+  cardboardId: string;
+  appState: IAppState;
+  pvState: IProjectViewState;
+}
+
+export class StructureCardView extends React.Component<IStructureCardViewProps> {
+
+  contentInputView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="input-container">
+        Input
+      </div>
+    )
+  }
+  contentOutputView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="output-container">
+        Output
+      </div>
+    )
+  }
+  contentValueView = (card: ICard, symbol: ISymbol) => {
+    return (
+      <div className="content-container">
+        Card value
+      </div>
+    )
+  }
+
+  render () {
+    const project = this.props.appState.project;
+    const symbol = this.props.symbol;
+    const card = getCard(this.props.cardboardId, symbol.fullId, project);
+    
+    if (!card || !symbol) {
+      return false;
+    }
+
+    return (
+      <CardView 
+        appState={this.props.appState}
+        pvState={this.props.pvState}
+        symbolId={symbol.fullId}
+        cardboardId={this.props.cardboardId}
+        inputView={this.contentInputView(card, symbol)}
+        outputView={this.contentOutputView(card, symbol)}
+        valueView={this.contentValueView(card, symbol)}
+      />
+    )
+  }
+}

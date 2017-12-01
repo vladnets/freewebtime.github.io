@@ -2,13 +2,10 @@ import { appConfig } from '../config/appConfig';
 import { ITheme } from '../api/index';
 import { IAction } from '../api/IAction';
 import { IAppResources } from '../api/IAppResources';
+import { initialTheme } from '../config/initialTheme';
 
-const theme: ITheme = {
-  
-}
-  
 const initialState: IAppResources = {
-  theme: theme,
+  theme: initialTheme,
   callback: ()=>{}
 }
 
