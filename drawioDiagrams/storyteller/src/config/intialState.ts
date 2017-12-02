@@ -75,6 +75,12 @@ const prNamePostfix: IPrimitive = createPrimitive({
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: prLastName.fullId,
 });
+const prNameResult: IPrimitive = createPrimitive({
+  id: 'Result',
+  name: 'Result',
+  namespace: protagonistName.fullId,
+  primitiveType: appConfig.PrimitiveTypes.String,
+});
 
 const charName: IPrimitive = createPrimitive({
   id: 'Name',
@@ -89,10 +95,12 @@ protagonistName.paramsIdList = {
   [prNameSeparator.fullId]: prNameSeparator.fullId,
   [prNamePostfix.fullId]: prNamePostfix.fullId,
 };
+protagonistName.resultId = prNameResult.fullId;
 protagonistName.subitemsIdList = {
   [prNamePrefix.fullId]: prNamePrefix.fullId,
   [prNameSeparator.fullId]: prNameSeparator.fullId,
   [prNamePostfix.fullId]: prNamePostfix.fullId,
+  [prNameResult.fullId]: prNameResult.fullId,
 }
 
 character.subitemsIdList = {
@@ -116,6 +124,7 @@ addCard(prLastName, cards);
 addCard(prNamePrefix, cards);
 addCard(prNameSeparator, cards);
 addCard(prNamePostfix, cards);
+addCard(prNameResult, cards);
 addCard(protagonistName, cards);
 
 addCard(charName, cards);

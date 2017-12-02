@@ -74,8 +74,25 @@ export const pathToString = (path: ReferencePath): string|undefined => {
   return path.join('.');
 }
 
-export const resolveReference = (targetId: string, project: IProject): ICard|undefined => {
+export const resolveReference = (targetId: string|undefined, project: IProject): ICard|undefined => {
+  if (!targetId) {
+    return undefined;
+  }
+
   return project.cards[targetId];
+}
+export const resolveReferences = (refs: IHash<string>, project: IProject): IHash<ICard>|undefined => {
+  const result = {}
+
+  Object.keys(refs).map((refName: string) => {
+    const targetId = refs[refName];
+    const card = resolveReference(targetId, project);
+    if (card) {
+      result[targetId] = card;
+    }
+  })
+
+  return result;
 }
 
 export const getSubitems = (rootCard: ICard, project: IProject): IHash<ICard>|undefined => {
