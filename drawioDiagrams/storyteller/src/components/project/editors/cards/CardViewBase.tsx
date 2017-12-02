@@ -111,9 +111,9 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     const className = 'card-header container-horizontal';
     return (
       <div className={className}>
-      {this.headerInputView()}
-      {this.headerValueView()}
       {this.headerOutputView()}
+      {this.headerValueView()}
+      {this.headerInputView()}
       </div>
     )
   }
@@ -125,9 +125,9 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     const className = 'card-content container-horizontal';
     return (
       <div className={className}>
-      {this.contentInputView()}
-      {this.contentValueView()}
       {this.contentOutputView()}
+      {this.contentValueView()}
+      {this.contentInputView()}
       </div>
     )
   }
