@@ -37,6 +37,7 @@
   color: var(--card-text-color);
   display: inline-flex;
   border: none;
+  border-radius: 5px;
 }
 .card.Card {
   margin: 15px;
@@ -46,17 +47,15 @@
 
 .card-Primitive {
   background: #E1D5E7;
-  border-top: 1px solid #565158;
+  /* border-top: 1px solid #565158; */
 }
 .card-Structure {
   background: #e7e5d5;
-  border-top: 1px solid #5e5d56;
-  border-radius: 5px;
+  /* border-top: 1px solid #5e5d56; */
 }
 .card-Function {
   background: #d5e4e7;
-  border-top: 1px solid #565c5e;
-  border-radius: 5px;
+  /* border-top: 1px solid #565c5e; */
   overflow: hidden;
 }
 .card-header {
