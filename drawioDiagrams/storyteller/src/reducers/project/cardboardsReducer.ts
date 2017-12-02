@@ -2,7 +2,7 @@ import { areObjectsEqual } from '../../helpers';
 import { initialCardboards } from '../../config/initialState';
 import { IAction } from '../../api/IAction';
 import { IHash } from '../../api/IHash';
-import { ICardboard } from '../../api/project/ICardboard';
+import { ICardboard, ICardboardAction } from '../../api/project/ICardboard';
 import { appConfig } from '../../config/appConfig';
 import { cardboardReducer } from './cardboardReducer';
 
@@ -43,16 +43,32 @@ export const cardboardsReducer = (state: IHash<ICardboard> = initialCardboards, 
     default: {
       let isChanged = false;
       const changedCardboards = {};
-      Object.keys(state).map((cardboardId: string, index: number) => {
+
+      const cardboardAction: ICardboardAction|undefined = action as ICardboardAction;
+      if (cardboardAction && cardboardAction.payload) {
+        const cardboardId = cardboardAction.payload.cardboardId;
         const oldCardboard = state[cardboardId];
         if (oldCardboard) {
           const newCardboard = cardboardReducer(oldCardboard, action);
+          newCardboard.id = cardboardAction.payload.cardboardId;
           if (!areObjectsEqual(oldCardboard, newCardboard)) {
             isChanged = true;
             changedCardboards[cardboardId] = newCardboard;
           }
         }
-      })
+      }
+      else {
+        Object.keys(state).map((cardboardId: string, index: number) => {
+          const oldCardboard = state[cardboardId];
+          if (oldCardboard) {
+            const newCardboard = cardboardReducer(oldCardboard, action);
+            if (!areObjectsEqual(oldCardboard, newCardboard)) {
+              isChanged = true;
+              changedCardboards[cardboardId] = newCardboard;
+            }
+          }
+        })
+      }
 
       if (isChanged) {
         state = {

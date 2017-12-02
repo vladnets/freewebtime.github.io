@@ -1,3 +1,4 @@
+import { PrimitiveSymbolView } from './cards/PrimitiveSymbolView';
 import { ISymbol, SymbolType } from '../../../api/project/ISymbol';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
@@ -38,6 +39,12 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
     return false;
   }
 
+  symbolView = (symbol: ISymbol, cardboard: ICardboard, appState: IAppState) => {
+    return (
+      <SymbolView symbol={symbol} cardboardId={cardboard.id} appState={appState} pvState={this.props.pvState} />
+    )      
+  }
+
   cardsView = (cardboard: ICardboard) => {
     const appState = this.props.appState;
     const project = appState.project;
@@ -46,9 +53,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
       const card = cardboard.cards[cardId];
       const symbol = resolveReference(card.id, project);
       const cardContent = symbol
-        ? (
-          <SymbolView symbol={symbol} appState={appState} pvState={this.props.pvState} />
-        )
+        ? this.symbolView(symbol, cardboard, appState)
         : false
       ;
       

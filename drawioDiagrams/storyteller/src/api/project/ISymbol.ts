@@ -21,7 +21,7 @@ export interface IObject extends ISymbol {
   objectTypeId: string;
   subitems?: IHash<string>;
   value?: any;
-  connections: IHash<string>;
+  sourceId?: string;
 }
 
 export interface IFunctionCall extends IObject {

@@ -174,7 +174,6 @@ const firstNameItem: IObject = {
   fullId: `${projectRootInterface.fullId}.${firstNameItemName}`,
   symbolType: SymbolType.Object,
   objectTypeId: stringInterface.fullId,
-  connections: {},
   value: 'Jack',
 }
 
@@ -186,7 +185,6 @@ const lastNameItem: IObject = {
   fullId: `${projectRootInterface.fullId}.${lastNameItemName}`,
   symbolType: SymbolType.Object,
   objectTypeId: stringInterface.fullId,
-  connections: {},
   value: 'Dreamer',
 }
 
@@ -198,7 +196,6 @@ const separatorItem: IObject = {
   fullId: `${projectRootInterface.fullId}.${separatorItemName}`,
   symbolType: SymbolType.Object,
   objectTypeId: stringInterface.fullId,
-  connections: {},
   value: ' ',
 }
 
@@ -211,11 +208,6 @@ const combineNameFunctionCall: IFunctionCall = {
   fullId: `${projectRootInterface.fullId}.${combineNameFunctionCallName}`,
   symbolType: SymbolType.FunctionCall,
   objectTypeId: concatStringSourceCode.fullId,
-  connections: {
-    [`${prefixParamName}`]: firstNameItem.fullId,
-    [`${separatorParamName}`]: separatorItem.fullId,
-    [`${postfixParamName}`]: lastNameItem.fullId,
-  },
 }
 
 

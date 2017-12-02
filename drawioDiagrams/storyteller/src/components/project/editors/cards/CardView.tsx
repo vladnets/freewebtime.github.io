@@ -125,30 +125,6 @@ export class CardView extends React.Component<ICardViewProps> {
     return false;
   }
 
-  headerView = (card: ICard|undefined, symbol: ISymbol) => {
-    return false;
-
-    // return (
-    //   <div className="card-header container-horizontal card-drag-handler">
-    //     {this.props.headerInputView}
-    //     {this.props.headerValueView}
-    //     {this.props.headerOutputView}
-    //   </div>
-    // )
-  }
-
-  contentView = (card: ICard|undefined, symbol: ISymbol) => {
-    return false;
-
-    // return (
-    //   <div className="card-content container-horizontal">
-    //   {this.props.inputView}
-    //   {this.props.valueView}
-    //   {this.props.outputView}
-    //   </div>
-    // )
-  }
-
   render () {
     const cardboardId = this.props.cardboardId;
     const card = this.props.card;
