@@ -89,6 +89,11 @@ protagonistName.paramsIdList = {
   [prNameSeparator.fullId]: prNameSeparator.fullId,
   [prNamePostfix.fullId]: prNamePostfix.fullId,
 };
+protagonistName.subitemsIdList = {
+  [prNamePrefix.fullId]: prNamePrefix.fullId,
+  [prNameSeparator.fullId]: prNameSeparator.fullId,
+  [prNamePostfix.fullId]: prNamePostfix.fullId,
+}
 
 character.subitemsIdList = {
   [charName.fullId]: charName.fullId,
@@ -97,9 +102,11 @@ character.subitemsIdList = {
 projectRoot.subitemsIdList = {
   [character.fullId]: character.fullId,
   [protagonistName.fullId]: protagonistName.fullId,
+
+  [prFirstName.fullId]: prFirstName.fullId,
+  [prNameSeparator.fullId]: prNameSeparator.fullId,
+  [prLastName.fullId]: prLastName.fullId,
 } 
-
-
 
 const cards: IHash<ICard> = {};
 addCard(prFirstName, cards);

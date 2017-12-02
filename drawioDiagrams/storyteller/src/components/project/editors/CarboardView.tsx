@@ -3,7 +3,7 @@ import FontAwesome from 'react-fontawesome';
 import { IAppState } from '../../../api/IAppState';
 import { IProjectViewState } from '../ProjectView';
 import { ReferencePathItem } from '../../../api/project/ReferencePath';
-import { CardView } from './cards/CardView';
+import { CardView, CardDrawType } from './cards/CardView';
 import { IProject } from '../../../api/project/IProject';
 import { parsePath, getSubitems, resolveReference } from '../../../helpers/projectHeler';
 import { ICard } from '../../../api/project/ICard';
@@ -45,6 +45,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
       return (
         <CardView 
           key={subitemId}
+          drawType={CardDrawType.Card}
           appState={this.props.appState}
           pvState={this.props.pvState}
           card={card}
@@ -66,7 +67,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
         <div className="cardboard-header">
         {this.pathView(rootCard.fullId)}
         </div>
-        <div className={'cardboard-content container-vertical'}>
+        <div className={'cardboard-content'}>
         {this.cardsView(project, rootCard)}
         </div>
       </div>

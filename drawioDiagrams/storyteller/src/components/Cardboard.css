@@ -1,0 +1,85 @@
+:root {
+  --card-bg-color: rgb(235, 235, 235);
+  --card-border-color: rgb(61, 54, 19);
+  --card-text-color: rgb(0, 0, 0);
+}
+
+/* Cardobard */
+.cardboard-container {
+  flex-grow: 1;
+}
+.cardboard-header {
+  padding: 5px;
+  background: var(--color-main-1);
+  /* background-image: linear-gradient(to bottom, transparent 0%,var(--color-main-3) 100%); */
+}
+.cardboard-header-path-item {
+  display: inline;
+}
+
+.cardboard-content {
+  flex-grow: 1;
+  margin: 3px;
+  border-top: none;
+  /* background: var(--color-main);
+  background-image: var(--grid-image);
+  background-size: 15px 15px; */
+
+  flex-wrap: wrap;
+
+  box-shadow: inset 0px 0px 5px 0px var(--color-main-5);
+}
+
+/* Card */
+.card {
+  background: var(--card-bg-color);
+  border: 1px solid var(--card-border-color);
+  color: var(--card-text-color);
+  display: inline-flex;
+  border: none;
+}
+.card.Card {
+  margin: 15px;
+}
+.card.Subcard {
+}
+
+.card-Primitive {
+  background: #E1D5E7;
+}
+.card-Structure {
+  background: rgb(231, 229, 213);
+  border-radius: 5px;
+}
+.card-Function {
+  background: rgb(213, 228, 231);
+  border-radius: 5px;
+}
+.card-header {
+}
+.subheader {
+  font-size: 80%;
+  font-style: italic;
+}
+.card-header-input {
+}
+.card-header-value {
+  flex-grow: 1;
+}
+.card-header-output {
+}
+
+.card-socket {
+}
+
+.card-content {
+  flex-grow: 1;
+}
+.card-content-input {
+}
+.card-content-value {
+  flex-grow: 1;
+}
+.card-content-output {
+}
+

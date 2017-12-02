@@ -11,7 +11,7 @@ export enum CardSocketType {
 
 export interface ICardSocketViewProps {
   card: ICard;
-  cardboardId: string;
+  socketId: string;
   socketType: CardSocketType;
   socketText?: string;
 }
@@ -28,8 +28,8 @@ export class CardSocketView extends React.Component<ICardSocketViewProps> {
     }
     const socketType = this.props.socketType;
     const strokeColor = socketType === CardSocketType.Input
-      ? appConfig.Colors.Green
-      : appConfig.Colors.Yellow
+      ? appConfig.Colors.Red
+      : appConfig.Colors.Blue
     ;
     const fillColor = appConfig.Colors.Transparent;
 
