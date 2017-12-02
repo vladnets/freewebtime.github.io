@@ -36,7 +36,7 @@ export interface IStructure extends ICard {
 }
 export interface IFunction extends IStructure {
   functionType: FunctionType;
-  paramsIdList: IHash<string>; //name: id
+  paramsId: string; //name: id
   resultId?: string; //result object id
   systemFunctionId?: string;
 }

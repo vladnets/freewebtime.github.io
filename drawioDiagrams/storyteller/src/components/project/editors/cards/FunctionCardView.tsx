@@ -7,6 +7,11 @@ import { CardView, CardDrawType } from './CardView';
 export class FunctionCardView extends CardViewBase {
 
   contentValueView = () => {
+    const isTest = true;
+    if (isTest) {
+      return false;
+    }
+    
     const className = 'card-content-value container-vertical';
     const func = this.props.card as IFunction;
     
@@ -35,20 +40,14 @@ export class FunctionCardView extends CardViewBase {
     const appState = this.props.appState;
     const project = appState.project;
     
-    const subitems = resolveReferences(func.paramsIdList, project);
-    
-    if (!subitems) {
+    const paramsCard = resolveReference(func.paramsId, project);
+    if (!paramsCard) {
       return false;
     }
 
-    const subitemsViews = Object.keys(subitems).map((subitemId: string) => {
-      const subitem = subitems[subitemId];
-      return (<CardView key={subitemId} drawType={CardDrawType.Subcard} appState={appState} pvState={this.props.pvState} card={subitem} />)
-    })
-
     return (
       <div className={className}>
-      {subitemsViews}
+        <CardView key={paramsCard.fullId} drawType={CardDrawType.Subcard} appState={appState} pvState={this.props.pvState} card={paramsCard} />
       </div>
     )
   }

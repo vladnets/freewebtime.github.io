@@ -62,6 +62,10 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
   }
 
   contentInputView = (): JSX.Element|boolean => {
+    if (!this.props.pvState.isShowValueReferences) {
+      return false;
+    }
+    
     const className = 'card-content-input';
     const socketId = `input-value-socket-${this.props.card.fullId}`;
 
@@ -82,6 +86,10 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     )
   }
   contentOutputView = (): JSX.Element|boolean => {
+    if (!this.props.pvState.isShowValueReferences) {
+      return false;
+    }
+
     const className = 'card-content-output';
     const socketId = `output-value-socket-${this.props.card.fullId}`;
     
@@ -98,6 +106,27 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
         <div>
         {this.props.card.name}
         </div>
+        <div className={'subheader'}>
+        {this.props.card.fullId}
+        </div>
+      </div>
+    )
+  }
+
+  footerInputView = (): JSX.Element|boolean => {
+    return false;
+  }
+  footerOutputView = (): JSX.Element|boolean => {
+    return false;
+  }
+  footerValueView = (): JSX.Element|boolean => {
+    if (this.props.pvState.isShowFooters !== true) {
+      return false;
+    }
+    
+    const className = 'card-footer-value container-vertical';
+    return (
+      <div className={className} onClick={this.toggleShowContent}>
         <div className={'subheader'}>
         {this.props.card.fullId}
         </div>
@@ -131,6 +160,16 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       </div>
     )
   }
+  footerView = (): JSX.Element|boolean => {
+    const className = 'card-footer container-horizontal';
+    return (
+      <div className={className}>
+      {this.footerOutputView()}
+      {this.footerValueView()}
+      {this.footerInputView()}
+      </div>
+    )
+  }
 
   render() {
     
@@ -140,6 +179,7 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       <div className={className}>
       {this.headerView()}
       {this.contentView()}
+      {this.footerView()}
       </div>
     )
   }

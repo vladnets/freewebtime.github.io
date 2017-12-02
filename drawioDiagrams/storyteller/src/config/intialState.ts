@@ -54,27 +54,33 @@ const prLastName: IPrimitive = createPrimitive({
   value: 'Dreamer',
 });
 
+const prNameParams: IStructure = createStructure({
+  id: 'Params',
+  name: 'Params',
+  namespace: protagonistName.fullId,
+});
 const prNamePrefix: IPrimitive = createPrimitive({
   id: 'Prefix',
   name: 'Prefix',
-  namespace: protagonistName.fullId,
+  namespace: prNameParams.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: prFirstName.fullId,
 });
 const prNameSeparator: IPrimitive = createPrimitive({
   id: 'Separator',
   name: 'Separator',
-  namespace: protagonistName.fullId,
+  namespace: prNameParams.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: nameSeparator.fullId,
 });
 const prNamePostfix: IPrimitive = createPrimitive({
   id: 'Postfix',
   name: 'Postfix',
-  namespace: protagonistName.fullId,
+  namespace: prNameParams.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: prLastName.fullId,
 });
+
 const prNameResult: IPrimitive = createPrimitive({
   id: 'Result',
   name: 'Result',
@@ -90,11 +96,13 @@ const charName: IPrimitive = createPrimitive({
   valueId: protagonistName.fullId,
 });
 
-protagonistName.paramsIdList = {
+prNameParams.subitemsIdList = {
   [prNamePrefix.fullId]: prNamePrefix.fullId,
   [prNameSeparator.fullId]: prNameSeparator.fullId,
   [prNamePostfix.fullId]: prNamePostfix.fullId,
-};
+}
+
+protagonistName.paramsId = prNameParams.fullId;
 protagonistName.resultId = prNameResult.fullId;
 protagonistName.subitemsIdList = {
   [prNamePrefix.fullId]: prNamePrefix.fullId,
@@ -121,6 +129,7 @@ addCard(prFirstName, cards);
 addCard(nameSeparator, cards);
 addCard(prLastName, cards);
 
+addCard(prNameParams, cards);
 addCard(prNamePrefix, cards);
 addCard(prNameSeparator, cards);
 addCard(prNamePostfix, cards);
