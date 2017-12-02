@@ -1,9 +1,9 @@
-import { resolveReference } from '../../../helpers';
 import { IEditorTabViewProps, EditorTabView } from './EditorTabView';
 import { IProjectViewState } from '../ProjectView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { IAppState } from '../../../api/IAppState';
+import { resolveReference } from '../../../helpers/projectHeler';
 
 export class EditorsTabsView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   render () {

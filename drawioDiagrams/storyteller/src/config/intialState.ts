@@ -1,10 +1,11 @@
+import { createFunction, createPrimitive, createStructure } from '../helpers/projectHeler';
 import { appConfig } from './appConfig';
-import { FunctionType, IFunction, IObject, IPrimitive, IStructure } from '../api/project/IObject';
+import { FunctionType, IFunction, ICard, IPrimitive, IStructure } from '../api/project/ICard';
 import { IHash } from '../api/IHash';
-import { createFunction, createStructure, createPrimitive } from '../helpers/objectsHeler';
+import { IProject } from '../api/project/IProject';
 
-const addObject = (object: IObject, objects: IHash<IObject>) => {
-  objects[object.fullId] = object;
+const addCard = (card: ICard, cards: IHash<ICard>) => {
+  cards[card.fullId] = card;
 }
 
 const projectId = appConfig.InitialStateConfig.ProjectId;
@@ -100,26 +101,28 @@ projectRoot.subitemsIdList = {
 
 
 
+const cards: IHash<ICard> = {};
+addCard(prFirstName, cards);
+addCard(nameSeparator, cards);
+addCard(prLastName, cards);
 
+addCard(prNamePrefix, cards);
+addCard(prNameSeparator, cards);
+addCard(prNamePostfix, cards);
+addCard(protagonistName, cards);
 
+addCard(charName, cards);
+addCard(character, cards);
 
+addCard(projectRoot, cards);
 
+export const initialCards = cards;
 
+const proj: IProject = {
+  id: projectId,
+  name: projectName,
+  cards: cards,
+}
 
+export const initialProject = proj;
 
-const objects: IHash<IObject> = {};
-addObject(prFirstName, objects);
-addObject(nameSeparator, objects);
-addObject(prLastName, objects);
-
-addObject(prNamePrefix, objects);
-addObject(prNameSeparator, objects);
-addObject(prNamePostfix, objects);
-addObject(protagonistName, objects);
-
-addObject(charName, objects);
-addObject(character, objects);
-
-addObject(projectRoot, objects);
-
-export const initialObjects = objects;

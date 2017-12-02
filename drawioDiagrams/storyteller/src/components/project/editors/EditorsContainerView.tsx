@@ -1,20 +1,17 @@
-import { ISymbol } from '../../../api/project/ISymbol';
 import { IProjectViewState } from '../ProjectView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { CardboardView } from './CarboardView';
 import { EditorsTabsView } from './EditorsTabsView';
 import { IAppState } from '../../../api/IAppState';
-import { resolveReference } from '../../../helpers/index';
 
 export class EditorsContainerView extends React.Component<{appState: IAppState, pvState: IProjectViewState}> {
   
-  graphEditorView = (editorId: string) => {
+  graphEditorView = (namespace: string) => {
 
-    const cardboardId = editorId;
     const appState = this.props.appState;
     return (
-      <CardboardView cardboardId={cardboardId} appState={this.props.appState} pvState={this.props.pvState}/>
+      <CardboardView namespace={namespace} appState={this.props.appState} pvState={this.props.pvState}/>
     )
   }
 

@@ -1,16 +1,14 @@
-import { resolveReference } from '../../../../helpers';
-import { getStructureItem, getStructureRoot } from '../../../../helpers/projectStructureHelper';
+import { IProject } from '../../../../api/project/IProject';
+import { ICard } from '../../../../api/project/ICard';
 import { IAppState } from '../../../../api/IAppState';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { IProjectViewState } from '../../ProjectView';
 import { IHash } from '../../../../api/IHash';
-import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
-import { getIconForSymbol } from '../../../../helpers/index';
-import { IProjectStructureItem } from '../../../../api/project/IProjectStructureItem';
+import { getSubitems, getSubitemsIds, resolveReference, getIconForCard } from '../../../../helpers/projectHeler';
 
 export interface IPetviProps {
-  structureItemId: string;
+  cardId: string;
   level: number;
   pvState: IProjectViewState;
   appState: IAppState;
@@ -53,28 +51,26 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
     }
   }
 
-  subitemsView = (structureItem: IProjectStructureItem) => {
-    const subitems = Object.keys(structureItem.subitems).map((key: string)=>{
-      return structureItem.subitems[key];
-    });
-
-    if (subitems && subitems.length > 0) {
-      return (
-        subitems.map((subitemId: string) => {
-          return (
-            <ProjectExplorerTreeViewItem 
-              key={subitemId} 
-              level={this.props.level+1} 
-              pvState={this.props.pvState} 
-              appState={this.props.appState}
-              structureItemId={subitemId}
-            />
-          )
-        })
-      )
+  subitemsView = (rootCard: ICard, project: IProject) => {
+    
+    const subitems = getSubitemsIds(rootCard, project);
+    if (!subitems) {
+      return false;
     }
 
-    return false;
+    return Object.keys(subitems).map((subitemId: string) => {
+      return (
+        <ProjectExplorerTreeViewItem 
+          key={subitemId} 
+          level={this.props.level+1} 
+          pvState={this.props.pvState} 
+          appState={this.props.appState}
+          cardId={subitemId}
+        />
+      )
+  
+    });
+
   }
 
   buttonsView = () => {
@@ -105,19 +101,17 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
   render () {
     const appState = this.props.appState;
     const project = appState.project;
-    const structItemId = this.props.structureItemId;
-    const structureItem = getStructureItem(structItemId, project);
-    if (!structureItem) {
+    const cardId = this.props.cardId;
+    const card = resolveReference(cardId, project);
+    
+    if (!card) {
       return false;
     }
-    
-    const pvState = this.props.pvState;
-    const isSelected = pvState.selectedItemId === structItemId;
 
-    const symbol = resolveReference(structItemId, project);
-    const symbolType = symbol ? symbol.symbolType : SymbolType.Unknown;
-    const icon = getIconForSymbol(symbolType);
-    const symbolName = symbol ? symbol.name : structureItem.name;
+    const pvState = this.props.pvState;
+    const isSelected = pvState.selectedItemId === cardId;
+
+    const icon = getIconForCard(card.cardType);
 
     const className = 'project-explorer-treeview-item' + (isSelected ? ' selected' : '');
 
@@ -126,7 +120,7 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
         ? ' project-explorer-subheader'
         : ''
       ) + 
-      (this.props.pvState.selectedItemId === this.props.structureItemId
+      (isSelected
         ? ' selected'
         : ''
       )
@@ -140,17 +134,17 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
           style={{paddingLeft: (0.5 + this.props.level) + 'em'}}
           onMouseEnter={() => this.mouseEnter(this)}
           onMouseLeave={() => this.mouseLeave(this)}
-          onClick={(e: any) => this.handleClick(this.props.pvState, structItemId, e)}
+          onClick={(e: any) => this.handleClick(this.props.pvState, cardId, e)}
         >
           <FontAwesome name={icon} className={'project-explorer-tvi-icon'} style={iconStyle}/>
           <span className={'project-explorer-tvi-text'}>
-          {symbolName}
+          {card.name}
           </span>
           {this.buttonsView()}
         </div>
         <div className={'project-explorer-treeview-item-subitems-container'}>
         {
-          this.subitemsView(structureItem)
+          this.subitemsView(card, project)
         }
         </div>
       </div>

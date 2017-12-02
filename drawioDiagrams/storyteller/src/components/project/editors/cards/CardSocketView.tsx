@@ -2,7 +2,7 @@ import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { CircleView } from '../../../svg/CircleView';
 import { appConfig } from '../../../../config/appConfig';
-import { ISymbol } from '../../../../api/project/ISymbol';
+import { ICard } from '../../../../api/project/ICard';
 
 export enum CardSocketType {
   Input = 'Input',
@@ -10,7 +10,7 @@ export enum CardSocketType {
 }
 
 export interface ICardSocketViewProps {
-  symbol: ISymbol;
+  card: ICard;
   cardboardId: string;
   socketType: CardSocketType;
   socketText?: string;

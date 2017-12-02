@@ -1,42 +1,18 @@
 import { IProject } from '../../api/project/IProject';
 import { IAction } from '../../api/IAction';
 import { combineReducers } from 'redux';
-import { symbolsReducer } from './symbolsReducer';
-import { cardboardsReducer } from './cardboardsReducer';
-import { projectStructureReducer } from './projectStructureReducer';
-import { initialProject } from '../../config/initialState';
-import { objectsReducer } from './objectsReducer';
+import { cardsReducer } from './cardsReducer';
+import { initialProject } from '../../config/intialState';
 
 export const projectReducer = (state: IProject = initialProject, action: IAction) => {
   
   const newValues: any = {}
   let isChanged = false;
 
-  const oldSymbols = state.symbols;
-  const newSymbols = symbolsReducer(oldSymbols, action);
-  if (oldSymbols !== newSymbols) {
-    newValues.symbols = newSymbols;
-    isChanged = true;
-  }
-
-  const oldCardboards = state.cardboards;
-  const newCardboards = cardboardsReducer(oldCardboards, action);
-  if (oldCardboards !== newCardboards) {
-    newValues.cardboards = newCardboards;
-    isChanged = true;
-  }
-
-  const oldStructure = state.structure;
-  const newStructure = projectStructureReducer(oldStructure, action);
-  if (oldStructure !== newStructure) {
-    newValues.symbols = newStructure;
-    isChanged = true;
-  }
-
-  const oldObjects = state.objects;
-  const newObjects = objectsReducer(oldObjects, action);
-  if (oldObjects !== newObjects) {
-    newValues.objects = newObjects;
+  const oldCards = state.cards;
+  const newCards = cardsReducer(oldCards, action);
+  if (oldCards !== newCards) {
+    newValues.cards = newCards;
     isChanged = true;
   }
 

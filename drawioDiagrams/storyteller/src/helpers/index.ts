@@ -1,11 +1,9 @@
 import { ReferencePath, ReferencePathItem } from '../api/project/ReferencePath';
 import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
-import { ISymbol, SymbolType } from '../api/project/ISymbol';
 import { IProject } from '../api/project/IProject';
-import { ICardboard } from '../api/project/ICardboard';
-import { ICard } from '../api/project/ICard';
 import { NColor } from '../api/Color';
+import { ICard, CardType, IStructure } from '../api/project/ICard';
 
 export const areObjectsEqual = ( x, y ) => {
   if ( x === y ) return true;
@@ -40,80 +38,6 @@ export const areObjectsEqual = ( x, y ) => {
       // allows x[ p ] to be set to undefined
   }
   return true;
-}
-
-export const resolveReference = (targetId: string, project: IProject): ISymbol|undefined => {
-  return project.symbols[targetId];
-}
-
-export const parsePath = (path: string): ReferencePath|undefined => {
-  if (!path) {
-    return undefined;
-  }
-
-  const parts = path.split('.');
-  const result = parts.map((sPathItem: string): ReferencePathItem => {
-    if (sPathItem.startsWith('[') && sPathItem.endsWith(']')) {
-      const sValue = sPathItem.substring(1, sPathItem.length-2);
-      const arrayIndex = Number(sValue);
-      return arrayIndex !== NaN ? arrayIndex : 0;
-    }
-
-    return sPathItem;
-  });
-
-  return result;
-}
-
-export const pathToString = (path: ReferencePath): string|undefined => {
-  if (path.length <= 0) {
-    return undefined;
-  }
-
-  return path.join('.');
-}
-
-export const getSubitemsIds = (namespace: string, project: IProject): IHash<string>|undefined => {
-  const structureItem = project.structure.items[namespace];
-  if (!structureItem) {
-    return undefined;
-  }
-
-  return structureItem.subitems;
-}
-
-export const getSubitems = (namespace: string, project: IProject): IHash<ISymbol>|undefined => {
-  const idList = getSubitemsIds(namespace, project);
-  if (!idList) {
-    return undefined;
-  }
-
-  const result: IHash<ISymbol> = {};
-  Object.keys(idList).map((symbolId: string) => {
-    const symbol = project.symbols[symbolId];
-    if (symbol) {
-      result[symbol.fullId] = symbol;
-    }
-  })
-
-  return result;
-}
-
-export const getCardboard = (cardboardId: string, project: IProject): ICardboard|undefined => {
-  return project.cardboards[cardboardId];
-}
-
-export const getCard = (cardboardId: string, cardId: string, project: IProject): ICard|undefined => {
-  const cardboard = getCardboard(cardboardId, project);
-  if (!cardboard) {
-    return undefined;
-  }
-
-  return cardboard.cards[cardId];
-}
-
-export const getIconForSymbol = (symbolType: SymbolType) => {
-  return appConfig.SymbolIcons[symbolType] || appConfig.SymbolIcons.default;
 }
 
 export const colorToRgbString = (color: NColor): string => {

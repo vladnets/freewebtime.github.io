@@ -1,9 +1,7 @@
 import { ICallback } from '../api/index';
 import { IAction } from '../api/IAction';
-import { ICardboard } from '../api/project/ICardboard';
-import { ICard } from '../api/project/ICard';
-import { SymbolType } from '../api/project/ISymbol';
 import { NColor } from '../api/Color';
+import { ICard, CardType } from '../api/project/ICard';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
   IsLoadStateFromLocalStorage: false,
@@ -29,25 +27,6 @@ export const appConfig = {
       }
     },
 
-
-    CardboardAdd: (newCardboard: ICardboard): IAction => {
-      return {
-        type: appConfig.Actions.Types.CARDBOARD_ADD,
-        payload: newCardboard,
-      }
-    },
-    CardboardDelete: (cardboardId: string): IAction => {
-      return {
-        type: appConfig.Actions.Types.CARDBOARD_DELETE,
-        payload: cardboardId,
-      }
-    },
-    CardboardUpdate: (cardboardId: string, values: {}): IAction => {
-      return {
-        type: appConfig.Actions.Types.CARDBOARD_UPDATE,
-        payload: {cardboardId, values},
-      }
-    },
 
     CardAdd: (cardboardId: string, newCard: ICard): IAction => {
       return {
@@ -80,13 +59,10 @@ export const appConfig = {
     Yellow: <NColor> [255, 230, 0, 255],
   },
 
-  SymbolIcons: {
-    [SymbolType.Function]: 'wrench',
-    [SymbolType.FunctionCall]: 'wrench',
-    [SymbolType.Object]: 'wrench',
-    [SymbolType.Primitive]: 'wrench',
-    [SymbolType.SourceCode]: 'wrench',
-    [SymbolType.Structure]: 'wrench',
+  CardIcons: {
+    [CardType.Function]: 'wrench',
+    [CardType.Primitive]: 'wrench',
+    [CardType.Structure]: 'wrench',
     ['default']: 'wrench',
   },
 

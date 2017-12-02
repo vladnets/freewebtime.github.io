@@ -1,29 +1,22 @@
-import { PrimitiveSymbolView } from './cards/PrimitiveSymbolView';
-import { ISymbol, SymbolType } from '../../../api/project/ISymbol';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { IAppState } from '../../../api/IAppState';
-import { ICard } from '../../../api/project/ICard';
 import { IProjectViewState } from '../ProjectView';
-import { parsePath, getSubitems, getSubitemsIds, resolveReference } from '../../../helpers/index';
 import { ReferencePathItem } from '../../../api/project/ReferencePath';
-import { ICardboard } from '../../../api/project/ICardboard';
-import { appConfig } from '../../../config/appConfig';
-import { IHash } from '../../../api/IHash';
-import { CardView, CardType } from './cards/CardView';
+import { CardView } from './cards/CardView';
 import { IProject } from '../../../api/project/IProject';
-import { SymbolView } from './cards/SymbolView';
+import { parsePath, getSubitems, resolveReference } from '../../../helpers/projectHeler';
+import { ICard } from '../../../api/project/ICard';
 
 export interface ICardboardViewProps {
-  cardboardId: string;
+  namespace: string;
   appState: IAppState;
   pvState: IProjectViewState;
 }
 
 export class CardboardView extends React.Component<ICardboardViewProps> {
 
-  pathView = (cardboard: ICardboard) => {
-    const namespace = cardboard.id;
+  pathView = (namespace: string) => {
     const path = parsePath(namespace);
     if (path) {
       return path.map((pathItem: ReferencePathItem, index: number) => {
@@ -39,54 +32,42 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
     return false;
   }
 
-  symbolView = (symbol: ISymbol, cardboard: ICardboard, appState: IAppState) => {
-    return (
-      <SymbolView symbol={symbol} cardboardId={cardboard.id} appState={appState} pvState={this.props.pvState} />
-    )      
-  }
-
-  cardsView = (cardboard: ICardboard) => {
-    const appState = this.props.appState;
-    const project = appState.project;
+  cardsView = (project: IProject, rootCard: ICard) => {
     
-    return Object.keys(cardboard.cards).map((cardId: string) => {
-      const card = cardboard.cards[cardId];
-      const symbol = resolveReference(card.id, project);
-      const cardContent = symbol
-        ? this.symbolView(symbol, cardboard, appState)
-        : false
-      ;
+    const subitems = getSubitems(rootCard, project);
+    if (!subitems) {
+      return false;
+    }
+
+    return Object.keys(subitems).map((subitemId: string) => {
+      const card = subitems[subitemId];
       
       return (
         <CardView 
-          key={cardId}
+          key={subitemId}
           appState={this.props.appState}
           pvState={this.props.pvState}
-          cardboardId={cardboard.id}
           card={card}
-        >
-        {cardContent}
-        </CardView>
+        />
       )
     })
   }
 
   render () {
     const project = this.props.appState.project;
-    const cardboardId = this.props.cardboardId;
-    const cardboard = project.cardboards[cardboardId];
+    const rootCard = resolveReference(this.props.namespace, project);
     
-    if (!cardboard) {
+    if (!rootCard) {
       return false;
     }
 
     return (
       <div className={'cardboard-container container-vertical'}>
         <div className="cardboard-header">
-        {this.pathView(cardboard)}
+        {this.pathView(rootCard.fullId)}
         </div>
         <div className={'cardboard-content container-vertical'}>
-        {this.cardsView(cardboard)}
+        {this.cardsView(project, rootCard)}
         </div>
       </div>
     )

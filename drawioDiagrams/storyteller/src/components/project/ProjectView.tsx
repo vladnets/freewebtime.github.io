@@ -3,7 +3,6 @@ import { LeftSidebarView } from './sidebars/LeftSidebarView';
 import { RightSidebarView } from './sidebars/RightSidebarView';
 import { IHash } from '../../api/IHash';
 import { EditorsContainerView } from './editors/EditorsContainerView';
-import { resolveReference } from '../../helpers/index';
 
 export interface IProjectViewState {
   selectedItemId: string;
@@ -26,12 +25,12 @@ export interface IProjectViewState {
 
 export class ProjectView extends React.Component<{appState: any}, IProjectViewState> {
   state: IProjectViewState = {
-    selectedItemId: 'System', 
+    selectedItemId: 'New Project', 
     opennedEditors: {
-      'System':'System',
+      'New Project.Character':'New Project.Character',
       'New Project':'New Project',
     },
-    activeEditorId: 'System',
+    activeEditorId: 'New Project',
     isLeftSidebarCollapsed: false,
     isRightSidebarCollapsed: true,
     isShowTypeReferences: true,

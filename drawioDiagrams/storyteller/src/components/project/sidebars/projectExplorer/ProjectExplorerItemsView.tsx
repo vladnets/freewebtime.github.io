@@ -1,11 +1,8 @@
-import { resolveReference } from '../../../../helpers';
-import { getStructureRoot } from '../../../../helpers/projectStructureHelper';
-import { ISymbol, SymbolType } from '../../../../api/project/ISymbol';
 import { IAppState } from '../../../../api/IAppState';
 import * as React from 'react';
 import { IPetviProps, ProjectExplorerTreeViewItem } from './ProjectExplorerTreeViewItem';
 import { IProjectViewState } from '../../ProjectView';
-import { IProjectStructureItem } from '../../../../api/project/IProjectStructureItem';
+import { resolveReference } from '../../../../helpers/projectHeler';
 
 interface IPeivState {
   rootItem: IPetviProps;
@@ -26,13 +23,7 @@ export class ProjectExplorerItemsView extends React.Component<{appState: IAppSta
 
     return (
       <div className={className}>
-      {
-        Object.keys(project.structure.rootItems).map((itemId: string) => {
-          return (
-            <ProjectExplorerTreeViewItem key={itemId} structureItemId={itemId} level={0} appState={appState} pvState={this.props.pvState} />
-          )
-        })
-      }
+        <ProjectExplorerTreeViewItem key={project.id} cardId={project.id} level={0} appState={appState} pvState={this.props.pvState} />
       </div>
     );
   }
