@@ -17,14 +17,14 @@ export interface ISymbol extends IUniqueObject {
   symbolType: SymbolType;
 }
 
-export interface IObject extends ISymbol {
+export interface IObjectOld extends ISymbol {
   objectTypeId: string;
   subitems?: IHash<string>;
   value?: any;
   sourceId?: string;
 }
 
-export interface IFunctionCall extends IObject {
+export interface IFunctionCall extends IObjectOld {
 }
 
 export enum SourceCodeType {
@@ -45,16 +45,16 @@ export interface IGraphSourceCode extends ISourceCode {
   connections: IHash<string>;
 }
 
-export interface IPrimitive extends ISymbol {
+export interface IPrimitiveOld extends ISymbol {
   primitiveType: string;
   defaultValue: any;
 }
 
-export interface IStructure extends ISymbol {
+export interface IStructureOld extends ISymbol {
   subitems: IHash<string>; //name:typeId
 }
 
-export interface IFunction extends ISymbol {
+export interface IFunctionOld extends ISymbol {
   paramsTypeId: string;
   resultTypeId: string;
 }

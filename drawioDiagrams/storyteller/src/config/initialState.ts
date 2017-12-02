@@ -1,5 +1,5 @@
 import { appConfig } from './appConfig';
-import { ISymbol, SymbolType, IPrimitive, IStructure, IFunction, ISystemSourceCode, SourceCodeType, IGraphSourceCode, IObject, IFunctionCall } from '../api/project/ISymbol';
+import { ISymbol, SymbolType, IPrimitiveOld, IStructureOld, IFunctionOld, ISystemSourceCode, SourceCodeType, IGraphSourceCode, IObjectOld, IFunctionCall } from '../api/project/ISymbol';
 import { IHash } from '../api/IHash';
 import { ICard } from '../api/project/ICard';
 import { ICardboard } from '../api/project/ICardboard';
@@ -8,11 +8,12 @@ import { parseProjectStructure } from '../helpers/projectStructureHelper';
 import { IProject } from '../api/project/IProject';
 import { IProjectStructure } from '../api/project/IProjectStructure';
 import { createCardboards } from './createCardboards';
+import { initialObjects } from './intialObjects';
 
 // Interfaces
 
 //system
-const stringInterface: IPrimitive = {
+const stringInterface: IPrimitiveOld = {
   id: appConfig.PrimitiveTypes.String,
   name: appConfig.PrimitiveTypes.String,
   namespace: appConfig.InitialStateConfig.SystemNamespace,
@@ -22,7 +23,7 @@ const stringInterface: IPrimitive = {
   defaultValue: 'Text...',
 }
 
-const numberInterface: IPrimitive = {
+const numberInterface: IPrimitiveOld = {
   id: appConfig.PrimitiveTypes.Number,
   name: appConfig.PrimitiveTypes.Number,
   namespace: appConfig.InitialStateConfig.SystemNamespace,
@@ -32,7 +33,7 @@ const numberInterface: IPrimitive = {
   defaultValue: 0,
 }
 
-const booleanInterface: IPrimitive = {
+const booleanInterface: IPrimitiveOld = {
   id: appConfig.PrimitiveTypes.Boolean,
   name: appConfig.PrimitiveTypes.Boolean,
   namespace: appConfig.InitialStateConfig.SystemNamespace,
@@ -48,7 +49,7 @@ const prefixParamName = 'Prefix';
 const separatorParamName = 'Separator';
 const postfixParamName = 'Postfix';
 
-const concatStringParamsInterface: IStructure = {
+const concatStringParamsInterface: IStructureOld = {
   id: concatStringParamsName,
   name: concatStringParamsName,
   namespace: `${appConfig.InitialStateConfig.SystemNamespace}.${concatStringName}`,
@@ -61,7 +62,7 @@ const concatStringParamsInterface: IStructure = {
   }
 }
 
-const concatString: IFunction = {
+const concatString: IFunctionOld = {
   id: concatStringName,
   name: 'Concatenate string',
   namespace: appConfig.InitialStateConfig.SystemNamespace,
@@ -73,7 +74,7 @@ const concatString: IFunction = {
 
 const characterInterfaceName = 'Character';
 
-const characterInterface: IStructure = {
+const characterInterface: IStructureOld = {
   id: characterInterfaceName,
   name: characterInterfaceName,
   namespace: appConfig.InitialStateConfig.ProjectName,
@@ -88,7 +89,7 @@ const characterInterface: IStructure = {
 }
 
 const storyInterfaceName = 'Story';
-const storyInterface: IStructure = {
+const storyInterface: IStructureOld = {
   id: storyInterfaceName,
   name: storyInterfaceName,
   namespace: appConfig.InitialStateConfig.ProjectName,
@@ -109,7 +110,7 @@ const projectRootId = appConfig.InitialStateConfig.ProjectRootName;
 const projectRootFullId = projectRootName;
 const projectRootParamsName = 'Params';
 const projectRootResultName = 'Result';
-const projectRootParamsInterface: IStructure = {
+const projectRootParamsInterface: IStructureOld = {
   id: projectRootParamsName,
   name: projectRootParamsName,
   namespace: projectRootFullId,
@@ -117,7 +118,7 @@ const projectRootParamsInterface: IStructure = {
   symbolType: SymbolType.Structure,
   subitems: {},
 }
-const projectRootResultInterface: IStructure = {
+const projectRootResultInterface: IStructureOld = {
   id: projectRootResultName,
   name: projectRootResultName,
   namespace: projectRootFullId,
@@ -127,7 +128,7 @@ const projectRootResultInterface: IStructure = {
     [storyInterface.name]: storyInterface.fullId,
   },
 }
-const projectRootInterface: IFunction = {
+const projectRootInterface: IFunctionOld = {
   id: projectRootId,
   name: projectRootName,
   fullId: projectRootName,
@@ -167,7 +168,7 @@ const projectRootSourceCode: IGraphSourceCode = {
 }
 
 const firstNameItemName = 'First Name';
-const firstNameItem: IObject = {
+const firstNameItem: IObjectOld = {
   id: firstNameItemName,
   name: firstNameItemName,
   namespace: projectRootInterface.fullId,
@@ -178,7 +179,7 @@ const firstNameItem: IObject = {
 }
 
 const lastNameItemName = 'Last Name';
-const lastNameItem: IObject = {
+const lastNameItem: IObjectOld = {
   id: lastNameItemName,
   name: lastNameItemName,
   namespace: projectRootInterface.fullId,
@@ -189,7 +190,7 @@ const lastNameItem: IObject = {
 }
 
 const separatorItemName = 'Separator';
-const separatorItem: IObject = {
+const separatorItem: IObjectOld = {
   id: separatorItemName,
   name: separatorItemName,
   namespace: projectRootInterface.fullId,
@@ -247,6 +248,7 @@ const emptyProject: IProject = {
   symbols: initialSymbols,
   cardboards: initialCardboards,
   structure: initialStructure,
+  objects: initialObjects,
 }
 emptyProject.cardboards = createCardboards(emptyProject);
 

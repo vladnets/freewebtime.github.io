@@ -5,6 +5,7 @@ import { symbolsReducer } from './symbolsReducer';
 import { cardboardsReducer } from './cardboardsReducer';
 import { projectStructureReducer } from './projectStructureReducer';
 import { initialProject } from '../../config/initialState';
+import { objectsReducer } from './objectsReducer';
 
 export const projectReducer = (state: IProject = initialProject, action: IAction) => {
   
@@ -32,7 +33,13 @@ export const projectReducer = (state: IProject = initialProject, action: IAction
     isChanged = true;
   }
 
-  
+  const oldObjects = state.objects;
+  const newObjects = objectsReducer(oldObjects, action);
+  if (oldObjects !== newObjects) {
+    newValues.objects = newObjects;
+    isChanged = true;
+  }
+
   if (isChanged) {
     state = {
       ...state,

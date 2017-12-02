@@ -1,12 +1,12 @@
 import { SymbolViewBase } from './SymbolViewBase';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { IPrimitive } from '../../../../api/project/ISymbol';
+import { IPrimitiveOld } from '../../../../api/project/ISymbol';
 import { CardSocketView, CardSocketType } from './CardSocketView';
 
 export class PrimitiveSymbolView extends SymbolViewBase {
   contentValueView = () => {
-    const primitive = this.props.symbol as IPrimitive;
+    const primitive = this.props.symbol as IPrimitiveOld;
     if (primitive) {
       return (
         <div className="content-container">

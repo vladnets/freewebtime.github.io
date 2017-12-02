@@ -1,7 +1,7 @@
 import { SymbolView } from './SymbolView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { IStructure } from '../../../../api/project/ISymbol';
+import { IStructureOld } from '../../../../api/project/ISymbol';
 import { CardSocketView, CardSocketType } from './CardSocketView';
 import { resolveReference } from '../../../../helpers/index';
 import { SymbolViewBase } from './SymbolViewBase';
@@ -10,7 +10,7 @@ export class StructureSymbolView extends SymbolViewBase {
   contentValueView = () => {
     const appState = this.props.appState;
     const project = appState.project;
-    const structure = this.props.symbol as IStructure;
+    const structure = this.props.symbol as IStructureOld;
     const cardboardId = this.props.cardboardId;
     
     if (structure) {
