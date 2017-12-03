@@ -22,6 +22,8 @@ const projectRoot: IStructure = createStructure({
 const character: IStructure = createStructure({
   id: characterId,
   namespace: projectId,
+  size: {x: 300, y: 150},
+  position: {x: -5, y: 200},
 });
 
 const protagonistName: IFunction = createFunction({
@@ -30,6 +32,8 @@ const protagonistName: IFunction = createFunction({
   namespace: projectId,
   functionType: FunctionType.System,
   systemFunctionId: appConfig.SystemFunctionNames.Concat_String,
+  size: {x: 450, y: 220},
+  position: {x: 450, y: 200},
 });
 
 const prFirstName: IPrimitive = createPrimitive({
@@ -38,13 +42,17 @@ const prFirstName: IPrimitive = createPrimitive({
   namespace: projectId,
   primitiveType: appConfig.PrimitiveTypes.String,
   value: 'Jack',
+  size: {x: 300, y: 50},
+  position: {x: 1100, y: 200},
 });
 const nameSeparator: IPrimitive = createPrimitive({
   id: 'Name separator',
   name: 'Name separator',
   namespace: projectId,
   primitiveType: appConfig.PrimitiveTypes.String,
-  value: ' ',
+  value: '" "',
+  size: {x: 300, y: 50},
+  position: {x: 1100, y: 300},
 });
 const prLastName: IPrimitive = createPrimitive({
   id: 'Protagonist Last Name',
@@ -52,6 +60,8 @@ const prLastName: IPrimitive = createPrimitive({
   namespace: projectId,
   primitiveType: appConfig.PrimitiveTypes.String,
   value: 'Dreamer',
+  size: {x: 300, y: 50},
+  position: {x: 1100, y: 400},
 });
 
 const prNameParams: IStructure = createStructure({
@@ -65,6 +75,7 @@ const prNamePrefix: IPrimitive = createPrimitive({
   namespace: prNameParams.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: prFirstName.fullId,
+  value: 'Jack',
 });
 const prNameSeparator: IPrimitive = createPrimitive({
   id: 'Separator',
@@ -72,6 +83,7 @@ const prNameSeparator: IPrimitive = createPrimitive({
   namespace: prNameParams.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: nameSeparator.fullId,
+  value: '" "',
 });
 const prNamePostfix: IPrimitive = createPrimitive({
   id: 'Postfix',
@@ -79,6 +91,7 @@ const prNamePostfix: IPrimitive = createPrimitive({
   namespace: prNameParams.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: prLastName.fullId,
+  value: 'Dreamer',
 });
 
 const prNameResult: IPrimitive = createPrimitive({
@@ -86,6 +99,7 @@ const prNameResult: IPrimitive = createPrimitive({
   name: 'Result',
   namespace: protagonistName.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
+  value: 'Jack Dreamer',
 });
 
 const charName: IPrimitive = createPrimitive({
@@ -94,6 +108,7 @@ const charName: IPrimitive = createPrimitive({
   namespace: character.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
   valueId: protagonistName.fullId,
+  value: 'Jack Dreamer',
 });
 
 prNameParams.subitemsIdList = {
