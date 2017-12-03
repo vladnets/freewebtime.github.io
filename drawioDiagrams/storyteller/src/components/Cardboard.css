@@ -71,7 +71,7 @@
   border-color: #2e97c0;
   background: #f34d3a7a;
   border-color: #ff2600;
-  color: white;
+  /* color: white; */
 }
 .card-Primitive {
   background: #dab02479;
@@ -118,6 +118,8 @@
 
 .card-footer {
   background: rgba(0, 0, 0, 0.2);
+  color: darkgray;
+  padding: 2px;
 }
 
 .card-footer-value {

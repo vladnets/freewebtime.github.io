@@ -37,7 +37,7 @@ export class ProjectView extends React.Component<{appState: any}, IProjectViewSt
     isRightSidebarCollapsed: true,
     isShowTypeReferences: true,
     isShowValueReferences: false,
-    isShowFooters: false,
+    isShowFooters: true,
     handleItemClick: (itemId: string) => {
       this.selectItem(itemId);
     },

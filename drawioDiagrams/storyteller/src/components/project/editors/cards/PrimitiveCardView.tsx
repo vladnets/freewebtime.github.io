@@ -41,4 +41,8 @@ export class PrimitiveCardView extends CardViewBase {
       </div>
     )
   }
+
+  footerView = () => {
+    return false;
+  }
 }
