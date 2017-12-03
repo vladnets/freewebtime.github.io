@@ -66,25 +66,18 @@
   margin-bottom: 2px;
 }
 
-.card-Structure {
-  background: rgb(247, 109, 109);
-  background: rgb(155, 154, 179);
-  border-color: rgb(102, 69, 69);
-  border-color: rgb(247, 109, 109);
-  border-color: rgb(120, 143, 212);
-  /* border-top: 1px solid #565158; */
+.card-Function {
+  background: #2e72c0;
+  border-color: #2e72c0;
+  color: #ffffff;
 }
 .card-Primitive {
-  background: rgb(218, 178, 36);
-  border-color: rgb(117, 95, 20);
-  border-color: rgb(218, 178, 36);
-  /* border-top: 1px solid #5e5d56; */
+  background: #dab224;
+  border-color: #dab224;
 }
-.card-Function {
-  background: rgb(118, 177, 127);
-  border-color: rgb(62, 92, 66);
-  border-color: rgb(118, 177, 127);
-  /* border-top: 1px solid #565c5e; */
+.card-Structure {
+  background: #59af66;
+  border-color: #59af66;
   overflow: hidden;
 }
 .card-header {
