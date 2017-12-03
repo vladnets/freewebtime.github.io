@@ -7,7 +7,7 @@ import { CardView, CardDrawType } from './CardView';
 export class FunctionCardView extends CardViewBase {
 
   contentValueView = () => {
-    const isTest = true;
+    const isTest = false;
     if (isTest) {
       return false;
     }

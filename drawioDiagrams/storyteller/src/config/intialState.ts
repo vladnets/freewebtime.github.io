@@ -120,7 +120,7 @@ projectRoot.subitemsIdList = {
   [protagonistName.fullId]: protagonistName.fullId,
 
   [prFirstName.fullId]: prFirstName.fullId,
-  [prNameSeparator.fullId]: prNameSeparator.fullId,
+  [nameSeparator.fullId]: nameSeparator.fullId,
   [prLastName.fullId]: prLastName.fullId,
 } 
 

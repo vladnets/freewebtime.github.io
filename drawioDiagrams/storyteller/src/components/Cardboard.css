@@ -49,7 +49,7 @@
   /* box-shadow: 1px 1px 0px 0px var(--color-main-5); */
 }
 .card.Card {
-  margin: 15px;
+  /* margin: 15px; */
 }
 .card.Card:selected {
   border-color: salmon;
@@ -120,3 +120,8 @@
 .card-footer-value {
   flex-grow: 1;
 }
+
+.nomargin {
+  margin: 0px;
+}
+

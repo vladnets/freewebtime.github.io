@@ -28,22 +28,22 @@ export const appConfig = {
     },
 
 
-    CardAdd: (cardboardId: string, newCard: ICard): IAction => {
+    CardAdd: (newCard: ICard): IAction => {
       return {
         type: appConfig.Actions.Types.CARD_ADD,
-        payload: {cardboardId, newCard},
+        payload: newCard,
       }
     },
-    CardDelete: (cardboardId: string, cardId: string): IAction => {
+    CardDelete: (cardId: string): IAction => {
       return {
         type: appConfig.Actions.Types.CARD_DELETE,
-        payload: {cardboardId, cardId},
+        payload: cardId,
       }
     },
-    CardUpdate: (cardboardId: string, cardId: string, values: {}): IAction => {
+    CardUpdate: (cardId: string, values: {}): IAction => {
       return {
         type: appConfig.Actions.Types.CARD_UPDATE,
-        payload: {cardboardId, cardId, values},
+        payload: {cardId, values},
       }
     },
 
