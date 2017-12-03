@@ -4,6 +4,13 @@ import { IPrimitive } from '../../../../api/project/ICard';
 
 export class PrimitiveCardView extends CardViewBase {
   
+  headerInputView = (): JSX.Element|boolean => {
+   return false;
+  }
+  headerOutputView = (): JSX.Element|boolean => {
+    return false;
+  }
+
   headerValueView = (): JSX.Element|boolean => {
     const className = 'card-header-value container-vertical';
     const primitive = this.props.card as IPrimitive;

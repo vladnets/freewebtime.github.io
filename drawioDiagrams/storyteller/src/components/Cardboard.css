@@ -42,11 +42,11 @@
   display: inline-flex;
   border: none;
 
-  border: 1px solid #444;
+  border: 2px solid #444;
   border-radius: 5px;
   overflow: hidden;
 
-  box-shadow: 1px 1px 0px 0px var(--color-main-5);
+  /* box-shadow: 1px 1px 0px 0px var(--color-main-5); */
 }
 .card.Card {
   margin: 15px;
@@ -61,18 +61,21 @@
 
 .card-Primitive {
   background: rgb(161, 180, 238);
-  background: rgb(238, 161, 161);
+  background: rgb(247, 109, 109);
   border-color: rgb(102, 69, 69);
+  border-color: rgb(247, 109, 109);
   /* border-top: 1px solid #565158; */
 }
 .card-Structure {
   background: rgb(218, 178, 36);
   border-color: rgb(117, 95, 20);
+  border-color: rgb(218, 178, 36);
   /* border-top: 1px solid #5e5d56; */
 }
 .card-Function {
   background: rgb(118, 177, 127);
   border-color: rgb(62, 92, 66);
+  border-color: rgb(118, 177, 127);
   /* border-top: 1px solid #565c5e; */
   overflow: hidden;
 }

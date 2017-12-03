@@ -28,10 +28,10 @@ export class CardSocketView extends React.Component<ICardSocketViewProps> {
     }
     const socketType = this.props.socketType;
     const strokeColor = socketType === CardSocketType.Input
-      ? appConfig.Colors.Black
-      : appConfig.Colors.Black
+      ? appConfig.Colors.DarkGray
+      : appConfig.Colors.DarkGray
     ;
-    const fillColor = appConfig.Colors.Transparent;
+    const fillColor = appConfig.Colors.LightGray;
 
     const socketText = this.props.socketText 
       ? (

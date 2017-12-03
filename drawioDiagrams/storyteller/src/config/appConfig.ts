@@ -51,6 +51,9 @@ export const appConfig = {
 
   Colors: {
     Black: <NColor> [0, 0, 0, 255],
+    DarkGray: <NColor> [64, 64, 64, 255],
+    Gray: <NColor> [128, 128, 128, 255],
+    LightGray: <NColor> [196, 196, 196, 255],
     White: <NColor> [255, 255, 255, 255],
     Transparent: <NColor> [0, 0, 0, 0],
     Red: <NColor> [255, 0, 0, 255],
