@@ -1,3 +1,4 @@
+import { getCardSocketId } from '../../../../helpers/projectHeler';
 import { ICallback } from '../../../../api';
 import { IVector2 } from '../../../../api/IVector2';
 import * as React from 'react';
@@ -124,11 +125,16 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     }
 
     const className = 'card-header-input';
-    const socketId = `input-type-socket-${this.props.card.fullId}`;
+    const socketId = getCardSocketId(CardSocketType.Input, this.props.card.fullId);
 
     return (
       <div className={className}>
-        <CardSocketView socketId={socketId} socketType={CardSocketType.Input} card={this.props.card} />
+        <CardSocketView 
+          cardboardRenderData={this.props.cardboardRenderData}
+          socketId={socketId} 
+          socketType={CardSocketType.Input} 
+          card={this.props.card} 
+        />
       </div>
     )
   }
@@ -138,11 +144,16 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     }
 
     const className = 'card-header-output';
-    const socketId = `output-type-socket-${this.props.card.fullId}`;
+    const socketId = getCardSocketId(CardSocketType.Input, this.props.card.fullId);
     
     return (
       <div className={className}>
-        <CardSocketView socketId={socketId} socketType={CardSocketType.Output} card={this.props.card} />
+        <CardSocketView 
+          cardboardRenderData={this.props.cardboardRenderData}
+          socketId={socketId} 
+          socketType={CardSocketType.Output} 
+          card={this.props.card} 
+        />
       </div>
     )
   }
@@ -177,7 +188,12 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
 
     return (
       <div className={className}>
-        <CardSocketView socketId={socketId} socketType={CardSocketType.Input} card={this.props.card} />
+        <CardSocketView 
+          cardboardRenderData={this.props.cardboardRenderData}
+          socketId={socketId} 
+          socketType={CardSocketType.Input} 
+          card={this.props.card} 
+        />
       </div>
     )
   }
@@ -191,7 +207,12 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     
     return (
       <div className={className}>
-        <CardSocketView socketId={socketId} socketType={CardSocketType.Output} card={this.props.card} />
+        <CardSocketView 
+          cardboardRenderData={this.props.cardboardRenderData}
+          socketId={socketId} 
+          socketType={CardSocketType.Output} 
+          card={this.props.card} 
+        />
       </div>
     )
   }

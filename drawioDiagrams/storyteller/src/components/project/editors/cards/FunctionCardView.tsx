@@ -47,7 +47,14 @@ export class FunctionCardView extends CardViewBase {
 
     return (
       <div className={className}>
-        <CardView key={paramsCard.fullId} drawType={CardDrawType.Subcard} appState={appState} pvState={this.props.pvState} card={paramsCard} />
+        <CardView 
+          key={paramsCard.fullId} 
+          cardboardRenderData={this.props.cardboardRenderData} 
+          drawType={CardDrawType.Subcard} 
+          appState={appState} 
+          pvState={this.props.pvState} 
+          card={paramsCard} 
+        />
       </div>
     )
   }
@@ -72,7 +79,14 @@ export class FunctionCardView extends CardViewBase {
 
     return (
       <div className={className}>
-        <CardView key={resultCard.fullId} drawType={CardDrawType.Subcard} appState={appState} pvState={this.props.pvState} card={resultCard} />
+        <CardView 
+          key={resultCard.fullId} 
+          cardboardRenderData={this.props.cardboardRenderData}
+          drawType={CardDrawType.Subcard} 
+          appState={appState} 
+          pvState={this.props.pvState} 
+          card={resultCard} 
+        />
       </div>
     )
   }

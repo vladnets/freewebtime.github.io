@@ -25,7 +25,16 @@ export class StructureCardView extends CardViewBase {
     const subitemsViews = Object.keys(subitems).map((subitemId: string, index: number) => {
       const subitem = subitems[subitemId];
 
-      return (<CardView key={subitemId} drawType={CardDrawType.Subcard} appState={appState} pvState={this.props.pvState} card={subitem} />)
+      return (
+        <CardView 
+          key={subitemId} 
+          cardboardRenderData={this.props.cardboardRenderData}
+          drawType={CardDrawType.Subcard} 
+          appState={appState} 
+          pvState={this.props.pvState} 
+          card={subitem} 
+        />
+      )
     })
 
     return (

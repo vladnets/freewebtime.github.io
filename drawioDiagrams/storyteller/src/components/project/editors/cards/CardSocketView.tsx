@@ -1,3 +1,4 @@
+import { ICardboardRenderData } from '../CarboardView';
 import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { CircleView } from '../../../svg/CircleView';
@@ -14,6 +15,7 @@ export interface ICardSocketViewProps {
   socketId: string;
   socketType: CardSocketType;
   socketText?: string;
+  cardboardRenderData: ICardboardRenderData;
 }
 
 export class CardSocketView extends React.Component<ICardSocketViewProps> {
@@ -41,6 +43,15 @@ export class CardSocketView extends React.Component<ICardSocketViewProps> {
       ) 
       : false
     ;
+
+    const renderData = this.props.cardboardRenderData;
+    const visibleSockets = renderData.visibleSockets;
+    const socketId = this.props.socketId;
+    visibleSockets[socketId] = {
+      socketType: socketType,
+      socketId: socketId,
+      position: {x: 0, y: 0},
+    }
 
     return (
       <div className={className}>

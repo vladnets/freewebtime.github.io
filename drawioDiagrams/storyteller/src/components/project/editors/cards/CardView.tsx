@@ -8,6 +8,7 @@ import { CardViewBase } from './CardViewBase';
 import { PrimitiveCardView } from './PrimitiveCardView';
 import { StructureCardView } from './StructureCardView';
 import { FunctionCardView } from './FunctionCardView';
+import { ICardboardRenderData } from '../CarboardView';
 
 export enum CardDrawType {
   Card = 'Card',
@@ -17,6 +18,7 @@ export enum CardDrawType {
 export interface ICardViewProps {
   drawType: CardDrawType;
   card: ICard;
+  cardboardRenderData: ICardboardRenderData;
   appState: IAppState;
   pvState: IProjectViewState;
 }
@@ -26,24 +28,25 @@ export class CardView extends React.Component<ICardViewProps> {
   render() {
     const appState = this.props.appState;
     const card = this.props.card;
+    const cardboardRenderData = this.props.cardboardRenderData;
 
     switch (card.cardType) {
       
       case CardType.Primitive: {
-        return (<PrimitiveCardView drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
+        return (<PrimitiveCardView cardboardRenderData={cardboardRenderData} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
       }
 
       case CardType.Structure: {
-        return (<StructureCardView drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
+        return (<StructureCardView cardboardRenderData={cardboardRenderData} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
       }
       
       case CardType.Function: {
-        return (<FunctionCardView drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
+        return (<FunctionCardView cardboardRenderData={cardboardRenderData} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
       }
       
       default: {
         return (
-          <CardViewBase appState={appState} drawType={this.props.drawType} card={card} pvState={this.props.pvState} />
+          <CardViewBase cardboardRenderData={cardboardRenderData} appState={appState} drawType={this.props.drawType} card={card} pvState={this.props.pvState} />
         )
       }
     }

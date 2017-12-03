@@ -3,6 +3,7 @@ import { IProject } from '../api/project/IProject';
 import { IHash } from '../api/IHash';
 import { appConfig } from '../config/appConfig';
 import { CardType, ICard, IFunction, IPrimitive, IStructure } from '../api/project/ICard';
+import { CardSocketType } from '../components/project/editors/cards/CardSocketView';
 
 export const validateObject = (obj: ICard) => {
   if (!obj.name || obj.name === '') {
@@ -135,3 +136,13 @@ export const getSubitemsIds = (rootCard: ICard, project: IProject): IHash<string
 export const getIconForCard = (cardType: CardType) => {
   return appConfig.CardIcons[cardType] || appConfig.CardIcons.default;
 }
+
+export const getCardSocketId = (socketType: CardSocketType, cardId: string) => {
+  const socketId = socketType === CardSocketType.Input
+    ? `input-socket-${cardId}`
+    : `output-socket-${cardId}`
+  ;
+  
+  return socketId;
+}
+
