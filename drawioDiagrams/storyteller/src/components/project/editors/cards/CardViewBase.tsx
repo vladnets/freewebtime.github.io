@@ -339,8 +339,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       }
 
       if (!cardboardItem.isCollapsed) {
-        defaultValues.width = size.x;
-        defaultValues.height = size.y;
+        // defaultValues.width = size.x;
+        // defaultValues.height = size.y;
         
         return (
           <Rnd 
@@ -349,7 +349,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
             onDragStop={this.dragStop}
             onResizeStop={this.resizeStop}
             dragHandleClassName={'.card-drag-handler'}
-          >
+            enableResizing={{}}
+            >
             {children}
           </Rnd>
         )
@@ -358,12 +359,12 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       const enableResizing = {}
       return (
         <Rnd 
-          default={defaultValues}
+          default={{...defaultValues}}
           onDragStart={this.dragStart}
           onDragStop={this.dragStop}
           onResizeStop={this.resizeStop}
           dragHandleClassName={'.card-drag-handler'}
-          enableResizing={enableResizing}
+          enableResizing={{}}
         >
           {children}
         </Rnd>
