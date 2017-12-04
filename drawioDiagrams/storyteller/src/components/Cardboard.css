@@ -62,19 +62,17 @@
   border-color: salmon;
 }
 .card.Subcard {
-  margin-top: 2px;
-  margin-bottom: 2px;
+  /* margin-top: 1px; */
+  /* margin-bottom: 2px; */
 }
 
 .card-Function {
-  background: #2e97c0;
-  border-color: #2e97c0;
   background: #f34d3a7a;
   border-color: #f34d3a7a;
   /* color: white; */
 }
 .card-Primitive {
-  background: #dab02479;
+  background: #dab0247a;
   border-color: #dab2247a;
 }
 .card-Structure {
@@ -83,8 +81,16 @@
   overflow: hidden;
 }
 .card-header {
-  background: rgba(255, 255, 255, 0.2);
+  background: #ffffff15;
+  padding: 2px;
 }
+.card-header-toolbox {
+}
+.card-header-toolbox .button {
+  background: #ffffff15;
+  border: 1px solid #00000015;
+}
+
 .subheader {
   font-size: 80%;
   font-style: italic;
@@ -99,25 +105,25 @@
 }
 
 .card-socket {
-  margin: 3px;
+  margin: 1px;
 }
 
 .card-content {
   flex-grow: 1;
 }
 .card-content-input {
-  padding: 2px;
+  padding: 0px;
 }
 .card-content-value {
   flex-grow: 1;
-  padding: 2px;
+  padding: 0px;
 }
 .card-content-output {
-  padding: 2px;
+  padding: 0px;
 }
 
 .card-footer {
-  background: rgba(0, 0, 0, 0.2);
+  background: #00000015;
   color: #0000007a;
   padding: 2px;
 }
