@@ -24,7 +24,7 @@ export const CardboardActions = {
   },
   UpdateCardboard: (cardboardId: string, values: {}): IAction => {
     return {
-      type: CardboardActions.Types.CARDBOARD_DELETE,
+      type: CardboardActions.Types.CARDBOARD_UPDATE,
       payload: {cardboardId, values},
     }
   },
@@ -61,6 +61,7 @@ export const cardboardsReducer = (state: IHash<ICardboard> = {}, action: IAction
 
     } break;
     case CardboardActions.Types.CARDBOARD_UPDATE: {
+      
       if (action.payload) {
         const cardboardId = action.payload.cardboardId;
         const values = action.payload.values;
@@ -68,15 +69,18 @@ export const cardboardsReducer = (state: IHash<ICardboard> = {}, action: IAction
         if (cardboardId && values) {
           const cardboard = state[cardboardId];
           if (cardboard) {
-            newValues[cardboardId] = cardboard;
+            newValues[cardboardId] = {
+              ...cardboard,
+              ...values,
+            };
           }
 
+          isChanged = true;
         }
 
       }
 
     } break;
-
 
     default: {
       Object.keys(state).map((cardboardId: string) => {

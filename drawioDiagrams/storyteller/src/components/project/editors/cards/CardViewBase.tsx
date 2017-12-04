@@ -153,14 +153,19 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
 
     const className = 'card-header-input';
     const socketId = getCardSocketId(CardSocketType.Input, this.props.card.fullId);
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
 
     return (
       <div className={className}>
         <CardSocketView 
           cardboardRenderData={this.props.cardboardRenderData}
           socketId={socketId} 
-          socketType={CardSocketType.Input} 
-          card={this.props.card} 
+          socketType={CardSocketType.Input}
+          appState={this.props.appState}
+          card={this.props.card}
+          cardboard={cardboard}
+          cardboardItem={cardboardItem}
         />
       </div>
     )
@@ -172,14 +177,19 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
 
     const className = 'card-header-output';
     const socketId = getCardSocketId(CardSocketType.Input, this.props.card.fullId);
-    
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
+
     return (
       <div className={className}>
         <CardSocketView 
           cardboardRenderData={this.props.cardboardRenderData}
+          appState={this.props.appState}
           socketId={socketId} 
           socketType={CardSocketType.Output} 
           card={this.props.card} 
+          cardboard={cardboard}
+          cardboardItem={cardboardItem}
         />
       </div>
     )
@@ -202,6 +212,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     
     const className = 'card-content-input';
     const socketId = `input-value-socket-${this.props.card.fullId}`;
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
 
     const card = this.props.card;
     switch (card.cardType) {
@@ -217,9 +229,12 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       <div className={className}>
         <CardSocketView 
           cardboardRenderData={this.props.cardboardRenderData}
+          appState={this.props.appState}
           socketId={socketId} 
           socketType={CardSocketType.Input} 
           card={this.props.card} 
+          cardboard={cardboard}
+          cardboardItem={cardboardItem}
         />
       </div>
     )
@@ -231,14 +246,19 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
 
     const className = 'card-content-output';
     const socketId = `output-value-socket-${this.props.card.fullId}`;
-    
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
+
     return (
       <div className={className}>
         <CardSocketView 
           cardboardRenderData={this.props.cardboardRenderData}
+          appState={this.props.appState}
           socketId={socketId} 
           socketType={CardSocketType.Output} 
           card={this.props.card} 
+          cardboard={cardboard}
+          cardboardItem={cardboardItem}
         />
       </div>
     )

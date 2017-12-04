@@ -1,5 +1,5 @@
 import { IUniqueObject } from '../IUniqueObject';
-import { IVector2 } from '../IVector2';
+import { IVector2, IVector4 } from '../IVector2';
 import { IHash } from '../IHash';
 import { IGenericAction } from '../IAction';
 
@@ -8,12 +8,15 @@ export interface ICardboardItem extends IUniqueObject {
   isCollapsed: false;
   position?: IVector2;
   size?: IVector2;
+  inputSocketRect?: IVector4;
+  outputSocketRect?: IVector4;
 }
 
 export interface ICardboard {
   id: string;
   rootId: string;
   items: IHash<ICardboardItem>;
+  clientRect?: IVector4;
 }
 
 export interface ICardboardAction extends IGenericAction<{cardboardId: string}> {

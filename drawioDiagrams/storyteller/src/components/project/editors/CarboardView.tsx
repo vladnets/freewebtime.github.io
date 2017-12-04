@@ -1,5 +1,6 @@
 import { CardSocketType } from './cards/CardSocketView';
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import FontAwesome from 'react-fontawesome';
 import { IAppState } from '../../../api/IAppState';
 import { IProjectViewState } from '../ProjectView';
@@ -11,6 +12,8 @@ import { ICard } from '../../../api/project/ICard';
 import { IVector2 } from '../../../api/IVector2';
 import { IHash } from '../../../api/IHash';
 import { ICardboard } from '../../../api/project/ICardboard';
+import { areObjectsEqual } from '../../../helpers/index';
+import { CardboardActions } from '../../../reducers/project/carboardsReducer';
 
 export interface ICardboardViewProps {
   cardboard: ICardboard;
@@ -28,6 +31,48 @@ export interface ICardboardRenderData {
 }
 
 export class CardboardView extends React.Component<ICardboardViewProps> {
+
+  updateClientRect = () => {
+    const cardboard = this.props.cardboard;
+    const appState = this.props.appState;
+    const currentRect = cardboard.clientRect; 
+    
+    const domNode = ReactDOM.findDOMNode(this);
+    if (domNode) {
+      const clientRect = domNode.getBoundingClientRect();
+      if (clientRect) {
+
+        const newRect = {
+          x: clientRect.left,
+          y: clientRect.top,
+          z: clientRect.width,
+          w: clientRect.height,
+        }
+        
+        const areEqual = areObjectsEqual(currentRect, newRect);
+
+        if (!areEqual) {
+          const values = {clientRect: newRect};
+          const action = CardboardActions.UpdateCardboard(cardboard.id, values);
+          if (!cardboard.clientRect) {
+            appState.resources.callback(action);
+          }
+        }
+        
+      }
+    }
+
+  }
+
+  componentDidMount() {
+    console.log('mount');
+    this.updateClientRect();
+  }
+  componentDidUpdate() {
+    console.log('update');
+    this.updateClientRect();
+  }
+
 
   pathView = (namespace: string) => {
     const path = parsePath(namespace);
