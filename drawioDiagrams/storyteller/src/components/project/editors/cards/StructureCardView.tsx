@@ -14,9 +14,10 @@ export class StructureCardView extends CardViewBase {
     }
 
     const card = this.props.card;
+    const cardboard = this.props.cardboard;
     const appState = this.props.appState;
     const project = appState.project;
-    const subitems = getSubitems(card, project);
+    const subitems = getSubitems(card, project.cards);
     
     if (!subitems) {
       return false;
@@ -24,10 +25,17 @@ export class StructureCardView extends CardViewBase {
 
     const subitemsViews = Object.keys(subitems).map((subitemId: string, index: number) => {
       const subitem = subitems[subitemId];
+      const cardboardItem = cardboard.items[subitem.fullId];
+
+      if (!cardboardItem) {
+        return false;
+      }
 
       return (
         <CardView 
           key={subitemId} 
+          cardboard={cardboard} 
+          cardboardItem={cardboardItem}
           cardboardRenderData={this.props.cardboardRenderData}
           drawType={CardDrawType.Subcard} 
           appState={appState} 

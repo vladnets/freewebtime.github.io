@@ -10,9 +10,10 @@ import { parsePath, getSubitems, resolveReference } from '../../../helpers/proje
 import { ICard } from '../../../api/project/ICard';
 import { IVector2 } from '../../../api/IVector2';
 import { IHash } from '../../../api/IHash';
+import { ICardboard } from '../../../api/project/ICardboard';
 
 export interface ICardboardViewProps {
-  namespace: string;
+  cardboard: ICardboard;
   appState: IAppState;
   pvState: IProjectViewState;
 }
@@ -46,7 +47,8 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
 
   cardsView = (project: IProject, rootCard: ICard) => {
     
-    const subitems = getSubitems(rootCard, project);
+    const cardboard = this.props.cardboard;
+    const subitems = getSubitems(rootCard, project.cards);
     if (!subitems) {
       return false;
     }
@@ -56,16 +58,23 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
     }
 
     return Object.keys(subitems).map((subitemId: string) => {
-      const card = subitems[subitemId];
-      
+      const subitemCard = subitems[subitemId];
+      const cardboardItem = cardboard.items[subitemId];
+
+      if (!cardboardItem) {
+        return false;
+      }
+
       return (
         <CardView 
           key={subitemId}
+          cardboard={cardboard}
+          cardboardItem={cardboardItem}
           cardboardRenderData={renderData}
           drawType={CardDrawType.Card}
           appState={this.props.appState}
           pvState={this.props.pvState}
-          card={card}
+          card={subitemCard}
         />
       )
     })
@@ -73,7 +82,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
 
   render () {
     const project = this.props.appState.project;
-    const rootCard = resolveReference(this.props.namespace, project);
+    const rootCard = resolveReference(this.props.cardboard.rootId, project.cards);
     
     if (!rootCard) {
       return false;

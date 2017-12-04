@@ -10,8 +10,15 @@ export class EditorsContainerView extends React.Component<{appState: IAppState, 
   graphEditorView = (namespace: string) => {
 
     const appState = this.props.appState;
+    const project = appState.project;
+    const cardboard = project.cardboards[namespace];
+    
+    if (!cardboard) {
+      return false;
+    }
+
     return (
-      <CardboardView namespace={namespace} appState={this.props.appState} pvState={this.props.pvState}/>
+      <CardboardView cardboard={cardboard} appState={this.props.appState} pvState={this.props.pvState}/>
     )
   }
 

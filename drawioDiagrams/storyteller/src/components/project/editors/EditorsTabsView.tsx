@@ -9,10 +9,11 @@ export class EditorsTabsView extends React.Component<{appState: IAppState, pvSta
   render () {
     const pvState = this.props.pvState;
     const appState = this.props.appState;
+    const project = appState.project;
 
     const tabItems = Object.keys(pvState.opennedEditors).map((editorId: string) => {
       const editor = pvState.opennedEditors[editorId];
-      const symbol = resolveReference(editorId, appState.project);
+      const symbol = resolveReference(editorId, project.cards);
       let symbolName = editorId;
       if (symbol) {
         symbolName = symbol.name;

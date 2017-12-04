@@ -53,7 +53,7 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
 
   subitemsView = (rootCard: ICard, project: IProject) => {
     
-    const subitems = getSubitemsIds(rootCard, project);
+    const subitems = getSubitemsIds(rootCard);
     if (!subitems) {
       return false;
     }
@@ -102,7 +102,7 @@ export class ProjectExplorerTreeViewItem extends React.Component<IPetviProps, IP
     const appState = this.props.appState;
     const project = appState.project;
     const cardId = this.props.cardId;
-    const card = resolveReference(cardId, project);
+    const card = resolveReference(cardId, project.cards);
     
     if (!card) {
       return false;

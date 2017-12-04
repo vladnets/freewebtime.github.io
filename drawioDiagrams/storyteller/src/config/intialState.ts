@@ -3,6 +3,8 @@ import { appConfig } from './appConfig';
 import { FunctionType, IFunction, ICard, IPrimitive, IStructure } from '../api/project/ICard';
 import { IHash } from '../api/IHash';
 import { IProject } from '../api/project/IProject';
+import { ICardboard } from '../api/project/ICardboard';
+import { createCardboards } from './createCardboards';
 
 const addCard = (card: ICard, cards: IHash<ICard>) => {
   cards[card.fullId] = card;
@@ -120,9 +122,7 @@ prNameParams.subitemsIdList = {
 protagonistName.paramsId = prNameParams.fullId;
 protagonistName.resultId = prNameResult.fullId;
 protagonistName.subitemsIdList = {
-  [prNamePrefix.fullId]: prNamePrefix.fullId,
-  [prNameSeparator.fullId]: prNameSeparator.fullId,
-  [prNamePostfix.fullId]: prNamePostfix.fullId,
+  [prNameParams.fullId]: prNameParams.fullId,
   [prNameResult.fullId]: prNameResult.fullId,
 }
 
@@ -156,13 +156,13 @@ addCard(character, cards);
 
 addCard(projectRoot, cards);
 
-export const initialCards = cards;
-
 const proj: IProject = {
   id: projectId,
   name: projectName,
   cards: cards,
+  cardboards: createCardboards(cards),
 }
 
+export const initialCards = cards;
 export const initialProject = proj;
 

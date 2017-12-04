@@ -75,19 +75,19 @@ export const pathToString = (path: ReferencePath): string|undefined => {
   return path.join('.');
 }
 
-export const resolveReference = (targetId: string|undefined, project: IProject): ICard|undefined => {
+export const resolveReference = (targetId: string|undefined, cards: IHash<ICard>): ICard|undefined => {
   if (!targetId) {
     return undefined;
   }
 
-  return project.cards[targetId];
+  return cards[targetId];
 }
-export const resolveReferences = (refs: IHash<string>, project: IProject): IHash<ICard>|undefined => {
+export const resolveReferences = (refs: IHash<string>, cards: IHash<ICard>): IHash<ICard>|undefined => {
   const result = {}
 
   Object.keys(refs).map((refName: string) => {
     const targetId = refs[refName];
-    const card = resolveReference(targetId, project);
+    const card = resolveReference(targetId, cards);
     if (card) {
       result[targetId] = card;
     }
@@ -96,14 +96,14 @@ export const resolveReferences = (refs: IHash<string>, project: IProject): IHash
   return result;
 }
 
-export const getSubitems = (rootCard: ICard, project: IProject): IHash<ICard>|undefined => {
-  const idList = getSubitemsIds(rootCard, project);
+export const getSubitems = (rootCard: ICard, cards: IHash<ICard>): IHash<ICard>|undefined => {
+  const idList = getSubitemsIds(rootCard);
 
   if (idList) {
     const result = {}
 
     Object.keys(idList).map((cardId: string) => {
-      const card = resolveReference(cardId, project);
+      const card = resolveReference(cardId, cards);
 
       if (card) {
         result[card.fullId] = card;
@@ -117,7 +117,7 @@ export const getSubitems = (rootCard: ICard, project: IProject): IHash<ICard>|un
   return undefined;
 }
 
-export const getSubitemsIds = (rootCard: ICard, project: IProject): IHash<string>|undefined => {
+export const getSubitemsIds = (rootCard: ICard): IHash<string>|undefined => {
   switch (rootCard.cardType) {
     case CardType.Structure: 
     case CardType.Function: {

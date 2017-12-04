@@ -1,3 +1,4 @@
+import { CardboardItemActions } from '../../../../reducers/project/cardboardItemsReducer';
 import { getCardSocketId } from '../../../../helpers/projectHeler';
 import { ICallback } from '../../../../api';
 import { IVector2 } from '../../../../api/IVector2';
@@ -9,7 +10,6 @@ import { CardType, ICard } from '../../../../api/project/ICard';
 import { CardSocketView, CardSocketType } from './CardSocketView';
 import { CardDrawType, ICardViewProps } from './CardView';
 import Rnd from 'react-rnd';
-import { appConfig } from '../../../../config/appConfig';
 
 interface ICardViewState {
   isShowContent: boolean;
@@ -48,7 +48,6 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       ...this.state,
       isDragging: false,
     })
-    console.log('dragStop');
   }
   resizeStop = (e, direction, ref, delta, position) => {
     const callback = this.props.appState.resources.callback;
@@ -62,13 +61,11 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
 
   moveCard = (deltaPos: IVector2, callback: ICallback) => {
     const card = this.props.card;
-    
-    if (!card) {
-      return;
-    }
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
 
     const appState = this.props.appState;
-    const currentPos = card.position || {x: 0, y: 0};
+    const currentPos = cardboardItem.position || {x: 0, y: 0};
     const newValues = {
       position: {
         x: currentPos.x + deltaPos.x, 
@@ -76,34 +73,30 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       }
     }
 
-    const action = appConfig.Actions.CardUpdate(card.fullId, newValues);
+    const action = CardboardItemActions.UpdateItem(cardboard.id, cardboardItem.id, newValues);
     appState.resources.callback(action);      
   }
   placeCard = (newPos: IVector2, callback: ICallback) => {
     const card = this.props.card;
-    
-    if (!card) {
-      return;
-    }
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
 
     const appState = this.props.appState;
     const newValues = {
       position: newPos
     }
 
-    const action = appConfig.Actions.CardUpdate(card.fullId, newValues);
+    const action = CardboardItemActions.UpdateItem(cardboard.id, cardboardItem.id, newValues);
     appState.resources.callback(action); 
   }
   resizeCard = (deltaSize: IVector2, newPos: IVector2, callback: ICallback) => {
     const card = this.props.card;
-    
-    if (!card) {
-      return;
-    }
+    const cardboard = this.props.cardboard;
+    const cardboardItem = this.props.cardboardItem;
 
     const appState = this.props.appState;
-    const currentPos = card.position;
-    const currentSize = card.size;
+    const currentPos = cardboardItem.position;
+    const currentSize = cardboardItem.size;
     const newSize = {
       x: Math.max(deltaSize.x, 10), 
       y: Math.max(deltaSize.y, 10)
@@ -114,7 +107,7 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       size: newSize,
     }
 
-    const action = appConfig.Actions.CardUpdate(card.fullId, newValues);
+    const action = CardboardItemActions.UpdateItem(cardboard.id, cardboardItem.id, newValues);
     appState.resources.callback(action); 
 
   }
@@ -291,14 +284,14 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
   movableContainer = (card: ICard, children: any) => {
     const appState = this.props.appState;
     const callback = appState.resources.callback;
+    const cardboardItem = this.props.cardboardItem;
 
     const defaultPos = {x: 0, y: 0}
     const defaultSize = {x: 200, y: 50}
 
-
     if (card) {
-      const pos = card.position || defaultPos;
-      const size = card.size || defaultSize;
+      const pos = cardboardItem && cardboardItem.position || defaultPos;
+      const size = cardboardItem && cardboardItem.size || defaultSize;
   
       return (
         <Rnd 

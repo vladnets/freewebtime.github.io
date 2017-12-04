@@ -36,12 +36,18 @@ export class FunctionCardView extends CardViewBase {
       return false;
     }
 
-    const card = this.props.card;
     const appState = this.props.appState;
     const project = appState.project;
+    const cardboard = this.props.cardboard;
+    const paramsCard = resolveReference(func.paramsId, project.cards);
     
-    const paramsCard = resolveReference(func.paramsId, project);
     if (!paramsCard) {
+      return false;
+    }
+
+    const cardboardItem = cardboard.items[paramsCard.fullId];
+    
+    if (!cardboardItem) {
       return false;
     }
 
@@ -49,6 +55,8 @@ export class FunctionCardView extends CardViewBase {
       <div className={className}>
         <CardView 
           key={paramsCard.fullId} 
+          cardboard={cardboard} 
+          cardboardItem={cardboardItem} 
           cardboardRenderData={this.props.cardboardRenderData} 
           drawType={CardDrawType.Subcard} 
           appState={appState} 
@@ -70,10 +78,17 @@ export class FunctionCardView extends CardViewBase {
     const card = this.props.card;
     const appState = this.props.appState;
     const project = appState.project;
-    
-    const resultCard = resolveReference(func.resultId, project);
+    const cardboard = this.props.cardboard;
+
+    const resultCard = resolveReference(func.resultId, project.cards);
     
     if (!resultCard) {
+      return false;
+    }
+
+    const cardboardItem = cardboard.items[resultCard.fullId];
+    
+    if (!cardboardItem) {
       return false;
     }
 
@@ -81,6 +96,8 @@ export class FunctionCardView extends CardViewBase {
       <div className={className}>
         <CardView 
           key={resultCard.fullId} 
+          cardboardItem={cardboardItem}
+          cardboard={cardboard}
           cardboardRenderData={this.props.cardboardRenderData}
           drawType={CardDrawType.Subcard} 
           appState={appState} 

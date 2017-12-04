@@ -22,9 +22,6 @@ export interface ICard extends IUniqueObject {
 
   typeId?: string;
   valueId?: string;
-
-  position?: IVector2;
-  size?: IVector2;
 }
 
 export interface IPrimitive extends ICard {

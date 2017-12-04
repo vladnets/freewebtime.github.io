@@ -4,7 +4,7 @@ import { NColor } from '../api/Color';
 import { ICard, CardType } from '../api/project/ICard';
 export const appConfig = {
   IsSaveStateToLocalStorage: true,
-  IsLoadStateFromLocalStorage: false,
+  IsLoadStateFromLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
 
   Actions: {
