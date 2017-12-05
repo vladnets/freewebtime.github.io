@@ -4,7 +4,7 @@ import { FunctionType, IFunction, ICard, IPrimitive, IStructure } from '../api/p
 import { IHash } from '../api/IHash';
 import { IProject } from '../api/project/IProject';
 import { ICardboard } from '../api/project/ICardboard';
-import { createCardboards } from './createCardboards';
+import { createCardboards, getRootItems, getRootItemsIds } from './createCardboards';
 
 const addCard = (card: ICard, cards: IHash<ICard>) => {
   cards[card.fullId] = card;
@@ -109,7 +109,7 @@ const charName: IPrimitive = createPrimitive({
   name: 'Name',
   namespace: character.fullId,
   primitiveType: appConfig.PrimitiveTypes.String,
-  valueId: protagonistName.fullId,
+  valueId: prNameResult.fullId,
   value: 'Jack Dreamer',
 });
 
@@ -161,6 +161,7 @@ const proj: IProject = {
   name: projectName,
   cards: cards,
   cardboards: createCardboards(cards),
+  rootItems: getRootItemsIds(cards),
 }
 
 export const initialCards = cards;

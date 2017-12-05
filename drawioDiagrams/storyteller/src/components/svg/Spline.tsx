@@ -2,6 +2,7 @@ import * as React from 'react';
 import onClickOutside from 'react-onclickoutside';
 import { IVector2 } from '../../api/IVector2';
 import TrashIcon from './TrashIcon';
+import { appConfig } from '../../config/appConfig';
 
 export interface ISplineProps {
   mousePos: IVector2,
@@ -58,11 +59,12 @@ class Spline extends React.Component<ISplineProps> {
                                           end.y);                   // end y
 
         let className = 'connector' + (selected ? ' selected' : '');
+        const radius = appConfig.ConnectionPointRadius;
 
         return (
                 <g className={'svg-spline'}>
-                  <circle cx={start.x} cy={start.y} r="3"  fill="#337ab7" className={className}/>
-                  <circle cx={end.x} cy={end.y} r="3"  fill="#9191A8" className={className}/>
+                  <circle cx={start.x} cy={start.y} r={radius} fill="#337ab7" className={className}/>
+                  <circle cx={end.x} cy={end.y} r={radius}  fill="#9191A8" className={className}/>
                   <path className="connector-click-area" d={pathString} onClick={(e) => {this.handleClick(e)}} />
                   <path className={className} d={pathString} onClick={(e) => {this.handleClick(e)}} />
                   { selected 

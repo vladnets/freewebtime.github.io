@@ -1,13 +1,13 @@
 :root {
-  --card-bg-color: rgb(235, 235, 235);
+  --card-bg-color: #444;
   --card-border-color: rgb(61, 54, 19);
   --card-text-color: rgb(0, 0, 0);
 
-  --card-function-color: #d18a75;
+  --card-function-color: #a87457;
   --card-function-text-color: black;
-  --card-primitive-color: #ccbe92;
+  --card-primitive-color: #aaa25a;
   --card-primitive-text-color: black;
-  --card-structure-color: #7e9b6e;
+  --card-structure-color: #70915d;
   --card-structure-text-color: black;
 }
 
@@ -26,7 +26,7 @@
 
 .cardboard-content {
   flex-grow: 1;
-  margin: 3px;
+  /* margin: 3px; */
   border-top: none;
   /* background: #696969; */
   /* background-image: var(--grid-image); */
@@ -36,8 +36,7 @@
   background-size: 15px 15px; 
   */
   overflow: hidden;
-
-  flex-wrap: wrap;
+  position: relative;
 }
 .cardboard-content .inner-shadow {
   position: absolute;
@@ -48,9 +47,24 @@
   box-shadow: inset 0px 0px 5px 0px var(--color-main-5);
 }
 
+.cardboard-content-conainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardboard-connections {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Card */
 .card {
-  /* background: var(--card-bg-color); */
   border: 1px solid var(--card-border-color);
   color: var(--card-text-color);
   display: inline-flex;
@@ -59,7 +73,7 @@
   border: 1px solid #444;
   overflow: hidden;
 
-  background: #aaa;
+  background: var(--card-bg-color);
 }
 .card.Card {
 
@@ -115,7 +129,8 @@
 }
 
 .card-socket {
-  margin: 1px;
+  /* margin: 1px; */
+  display: flex;
 }
 
 .card-content {
@@ -144,5 +159,36 @@
 
 .nomargin {
   margin: 0px;
+}
+
+.test-spline {
+  position: absolute;  
+}
+
+.cardboard-connections {
+  pointer-events: none;
+}
+.cardboard-connections rect {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.test-area {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  pointer-events: none;
+}
+
+.test-item {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 281px;
+  top: 27px;
+  background: maroon;
 }
 

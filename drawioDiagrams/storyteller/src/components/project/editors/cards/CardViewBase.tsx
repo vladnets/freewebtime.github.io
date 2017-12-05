@@ -159,7 +159,6 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     return (
       <div className={className}>
         <CardSocketView 
-          cardboardRenderData={this.props.cardboardRenderData}
           socketId={socketId} 
           socketType={CardSocketType.Input}
           appState={this.props.appState}
@@ -183,7 +182,6 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     return (
       <div className={className}>
         <CardSocketView 
-          cardboardRenderData={this.props.cardboardRenderData}
           appState={this.props.appState}
           socketId={socketId} 
           socketType={CardSocketType.Output} 
@@ -228,7 +226,6 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     return (
       <div className={className}>
         <CardSocketView 
-          cardboardRenderData={this.props.cardboardRenderData}
           appState={this.props.appState}
           socketId={socketId} 
           socketType={CardSocketType.Input} 
@@ -252,7 +249,6 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     return (
       <div className={className}>
         <CardSocketView 
-          cardboardRenderData={this.props.cardboardRenderData}
           appState={this.props.appState}
           socketId={socketId} 
           socketType={CardSocketType.Output} 

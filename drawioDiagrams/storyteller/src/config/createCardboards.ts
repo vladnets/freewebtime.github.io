@@ -32,6 +32,31 @@ const createCardboardSubcards = (cards: IHash<ICard>, rootCard: ICard, cardboard
 
 }
 
+export const getRootItems = (cards: IHash<ICard>): IHash<ICard> => {
+  
+    const result: IHash<ICard> = {}
+  
+    Object.keys(cards).map((cardId: string) => {
+      const card = cards[cardId];
+      if (!card.namespace || card.namespace === '') {
+        result[cardId] = card;
+      }
+    })
+  
+    return result;
+  }
+  export const getRootItemsIds = (cards: IHash<ICard>): IHash<string> => {
+    
+    const rootItems = getRootItems(cards);
+    const result: IHash<string> = {}
+  
+    Object.keys(rootItems).map((cardId: string) => {
+      result[cardId] = cardId;
+    })
+  
+    return result;
+  }
+      
 export const createCardboards = (cards: IHash<ICard>): IHash<ICardboard> => {
   const cardboards: IHash<ICardboard> = {}
 

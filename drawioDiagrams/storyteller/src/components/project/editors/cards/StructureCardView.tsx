@@ -36,7 +36,6 @@ export class StructureCardView extends CardViewBase {
           key={subitemId} 
           cardboard={cardboard} 
           cardboardItem={cardboardItem}
-          cardboardRenderData={this.props.cardboardRenderData}
           drawType={CardDrawType.Subcard} 
           appState={appState} 
           pvState={this.props.pvState} 

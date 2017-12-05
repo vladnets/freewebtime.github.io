@@ -4,10 +4,35 @@ import { cardsReducer } from './cardsReducer';
 import { initialProject } from '../../config/intialState';
 import { cardboardsReducer } from './carboardsReducer';
 
+export const ProjectActions = {
+  Types: {
+    PROJECT_UPDATE: 'PROJECT_UPDATE',
+  },
+
+  UpdateProject: (newValues: {}): IAction => {
+    return {
+      type: ProjectActions.Types.PROJECT_UPDATE,
+      payload: newValues,
+    }
+  }
+}
+
 export const projectReducer = (state: IProject = initialProject, action: IAction) => {
   
-  const newValues: any = {}
+  let newValues: any = {}
   let isChanged = false;
+
+  switch (action.type) {
+
+    case ProjectActions.Types.PROJECT_UPDATE: {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    } 
+  
+    default: break;
+  }
 
   const oldCards = state.cards;
   const newCards = cardsReducer(oldCards, action);

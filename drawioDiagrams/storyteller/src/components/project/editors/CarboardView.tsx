@@ -1,3 +1,4 @@
+import { ConnectionsView } from './ConnectionsView';
 import { CardSocketType } from './cards/CardSocketView';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -14,20 +15,12 @@ import { IHash } from '../../../api/IHash';
 import { ICardboard } from '../../../api/project/ICardboard';
 import { areObjectsEqual } from '../../../helpers/index';
 import { CardboardActions } from '../../../reducers/project/carboardsReducer';
+import { CardboardContentView } from './CardboardContentView';
 
 export interface ICardboardViewProps {
   cardboard: ICardboard;
   appState: IAppState;
   pvState: IProjectViewState;
-}
-
-export interface ISocketRenderData {
-  socketId: string;
-  socketType: CardSocketType;
-  position: IVector2;
-}
-export interface ICardboardRenderData {
-  visibleSockets: IHash<ISocketRenderData>;
 }
 
 export class CardboardView extends React.Component<ICardboardViewProps> {
@@ -65,17 +58,16 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
   }
 
   componentDidMount() {
-    console.log('mount');
     this.updateClientRect();
   }
   componentDidUpdate() {
-    console.log('update');
     this.updateClientRect();
   }
 
 
   pathView = (namespace: string) => {
     const path = parsePath(namespace);
+
     if (path) {
       return path.map((pathItem: ReferencePathItem, index: number) => {
         const prefix = index > 0 ? ' > ' : '';
@@ -98,10 +90,6 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
       return false;
     }
 
-    const renderData: ICardboardRenderData = {
-      visibleSockets: {},
-    }
-
     return Object.keys(subitems).map((subitemId: string) => {
       const subitemCard = subitems[subitemId];
       const cardboardItem = cardboard.items[subitemId];
@@ -115,7 +103,6 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
           key={subitemId}
           cardboard={cardboard}
           cardboardItem={cardboardItem}
-          cardboardRenderData={renderData}
           drawType={CardDrawType.Card}
           appState={this.props.appState}
           pvState={this.props.pvState}
@@ -126,9 +113,12 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
   }
 
   render () {
-    const project = this.props.appState.project;
-    const rootCard = resolveReference(this.props.cardboard.rootId, project.cards);
-    
+    const appState = this.props.appState;
+    const project = appState.project;
+    const cardboard = this.props.cardboard;
+    const rootCard = resolveReference(cardboard.rootId, project.cards);
+    const pvState = this.props.pvState;
+
     if (!rootCard) {
       return false;
     }
@@ -136,11 +126,17 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
     return (
       <div className={'cardboard-container container-vertical'}>
         <div className="cardboard-header">
-        {this.pathView(rootCard.fullId)}
+          {this.pathView(rootCard.fullId)}
         </div>
-        <div className={'cardboard-content'}>
-        {this.cardsView(project, rootCard)}
-        <div className={'inner-shadow'} />
+        <div className={'cardboard-content-conainer'}>
+          <CardboardContentView 
+            appState={appState}
+            cardboard={cardboard}
+            pvState={pvState}
+          >
+            <ConnectionsView appState={appState} cardboard={cardboard} pvState={pvState} rootCard={rootCard} />
+            {this.cardsView(project, rootCard)}
+          </CardboardContentView>
         </div>
       </div>
     )

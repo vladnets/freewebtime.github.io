@@ -57,7 +57,6 @@ export class FunctionCardView extends CardViewBase {
           key={paramsCard.fullId} 
           cardboard={cardboard} 
           cardboardItem={cardboardItem} 
-          cardboardRenderData={this.props.cardboardRenderData} 
           drawType={CardDrawType.Subcard} 
           appState={appState} 
           pvState={this.props.pvState} 
@@ -98,7 +97,6 @@ export class FunctionCardView extends CardViewBase {
           key={resultCard.fullId} 
           cardboardItem={cardboardItem}
           cardboard={cardboard}
-          cardboardRenderData={this.props.cardboardRenderData}
           drawType={CardDrawType.Subcard} 
           appState={appState} 
           pvState={this.props.pvState} 

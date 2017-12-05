@@ -1,6 +1,5 @@
 import { CardboardActions } from '../../../../reducers/project/carboardsReducer';
 import { areObjectsEqual } from '../../../../helpers';
-import { ICardboardRenderData } from '../CarboardView';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import FontAwesome from 'react-fontawesome';
@@ -22,7 +21,6 @@ export interface ICardSocketViewProps {
   socketId: string;
   socketType: CardSocketType;
   socketText?: string;
-  cardboardRenderData: ICardboardRenderData;
   appState: IAppState;
   cardboard: ICardboard;
   cardboardItem: ICardboardItem;
@@ -97,15 +95,6 @@ export class CardSocketView extends React.Component<ICardSocketViewProps> {
       ) 
       : false
     ;
-
-    const renderData = this.props.cardboardRenderData;
-    const visibleSockets = renderData.visibleSockets;
-    const socketId = this.props.socketId;
-    visibleSockets[socketId] = {
-      socketType: socketType,
-      socketId: socketId,
-      position: {x: 0, y: 0},
-    }
 
     return (
       <div className={className}>

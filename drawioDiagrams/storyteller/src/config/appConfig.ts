@@ -6,6 +6,7 @@ export const appConfig = {
   IsSaveStateToLocalStorage: true,
   IsLoadStateFromLocalStorage: true,
   SaveStateToLocalStorageInterval: 1000,
+  ConnectionPointRadius: 2,
 
   Actions: {
     Types: {
@@ -27,7 +28,7 @@ export const appConfig = {
       }
     },
 
-
+    
     CardAdd: (newCard: ICard): IAction => {
       return {
         type: appConfig.Actions.Types.CARD_ADD,
