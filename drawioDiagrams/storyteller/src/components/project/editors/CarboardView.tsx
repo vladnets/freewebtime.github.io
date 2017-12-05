@@ -101,6 +101,7 @@ export class CardboardView extends React.Component<ICardboardViewProps> {
       return (
         <CardView 
           key={subitemId}
+          isSilentMode={false}
           cardboard={cardboard}
           cardboardItem={cardboardItem}
           drawType={CardDrawType.Card}

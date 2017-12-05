@@ -35,6 +35,7 @@ export class StructureCardView extends CardViewBase {
         <CardView 
           key={subitemId} 
           cardboard={cardboard} 
+          isSilentMode={this.props.isSilentMode}
           cardboardItem={cardboardItem}
           drawType={CardDrawType.Subcard} 
           appState={appState} 

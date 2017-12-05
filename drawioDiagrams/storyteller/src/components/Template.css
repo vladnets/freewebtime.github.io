@@ -446,7 +446,7 @@ svg {
   pointer-events: painted;
   fill: none;
   stroke: darkkhaki;
-  color: aquamarine;
+  color: darkkhaki;
   stroke-width: 3px;
   cursor: pointer;
 }

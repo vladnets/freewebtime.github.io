@@ -24,11 +24,17 @@ export interface ICardSocketViewProps {
   appState: IAppState;
   cardboard: ICardboard;
   cardboardItem: ICardboardItem;
+  isSilentMode: boolean;
 }
 
 export class CardSocketView extends React.Component<ICardSocketViewProps> {
   
   updateClientRect = () => {
+    if (this.props.isSilentMode) {
+      console.log('isSilent mode!!!');
+      return;
+    }
+    
     const cardboardItem = this.props.cardboardItem;
     const socketType = this.props.socketType;
     const cardboard = this.props.cardboard;

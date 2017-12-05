@@ -54,7 +54,8 @@ export class FunctionCardView extends CardViewBase {
     return (
       <div className={className}>
         <CardView 
-          key={paramsCard.fullId} 
+          key={paramsCard.fullId}
+          isSilentMode={this.props.isSilentMode}
           cardboard={cardboard} 
           cardboardItem={cardboardItem} 
           drawType={CardDrawType.Subcard} 
@@ -95,6 +96,7 @@ export class FunctionCardView extends CardViewBase {
       <div className={className}>
         <CardView 
           key={resultCard.fullId} 
+          isSilentMode={this.props.isSilentMode}
           cardboardItem={cardboardItem}
           cardboard={cardboard}
           drawType={CardDrawType.Subcard} 

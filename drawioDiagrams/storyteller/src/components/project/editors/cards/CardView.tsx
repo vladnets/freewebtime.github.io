@@ -22,6 +22,7 @@ export interface ICardViewProps {
   cardboardItem: ICardboardItem;
   appState: IAppState;
   pvState: IProjectViewState;
+  isSilentMode: boolean;
 }
 
 export class CardView extends React.Component<ICardViewProps> {
@@ -35,20 +36,20 @@ export class CardView extends React.Component<ICardViewProps> {
     switch (card.cardType) {
       
       case CardType.Primitive: {
-        return (<PrimitiveCardView cardboard={cardboard} cardboardItem={cardboardItem} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
+        return (<PrimitiveCardView isSilentMode={this.props.isSilentMode} cardboard={cardboard} cardboardItem={cardboardItem} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
       }
 
       case CardType.Structure: {
-        return (<StructureCardView cardboard={cardboard} cardboardItem={cardboardItem} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
+        return (<StructureCardView isSilentMode={this.props.isSilentMode} cardboard={cardboard} cardboardItem={cardboardItem} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
       }
       
       case CardType.Function: {
-        return (<FunctionCardView cardboard={cardboard} cardboardItem={cardboardItem} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
+        return (<FunctionCardView isSilentMode={this.props.isSilentMode} cardboard={cardboard} cardboardItem={cardboardItem} drawType={this.props.drawType} appState={appState} card={card} pvState={this.props.pvState} />)
       }
       
       default: {
         return (
-          <CardViewBase cardboard={cardboard} cardboardItem={cardboardItem} appState={appState} drawType={this.props.drawType} card={card} pvState={this.props.pvState} />
+          <CardViewBase isSilentMode={this.props.isSilentMode} cardboard={cardboard} cardboardItem={cardboardItem} appState={appState} drawType={this.props.drawType} card={card} pvState={this.props.pvState} />
         )
       }
     }

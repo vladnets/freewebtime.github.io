@@ -10,49 +10,98 @@ import { CardType, ICard } from '../../../../api/project/ICard';
 import { CardSocketView, CardSocketType } from './CardSocketView';
 import { CardDrawType, ICardViewProps } from './CardView';
 import Rnd from 'react-rnd';
+import { areObjectsEqual } from '../../../../helpers/index';
 
 interface ICardViewState {
   isDragging: boolean;
+  isResizing: boolean;
+  isCollapsed: boolean;
   size?: IVector2;
   position?: IVector2;
 }
 
 export class CardViewBase extends React.Component<ICardViewProps, ICardViewState> {
 
-  componentWillMount() {
-
-    const item = this.props.cardboardItem;
+  updState = (props: ICardViewProps) => {
+    const item = props.cardboardItem;
     const itemSize = item.isCollapsed ? item.collapsedSize : item.expandedSize;
 
     const newState: ICardViewState = {
       isDragging: false,
+      isResizing: false,
       size: itemSize,
-      position: item.position,
+      position: item.position || {x: 0, y: 0},
+      isCollapsed: item.isCollapsed,
     }
-    this.setState(newState);
+
+    if (!areObjectsEqual(this.state, newState)) {
+      this.setState(newState);
+    }
+
   }
 
-  dragStart = (e, d)=>{
+  componentWillMount() {
+    this.updState(this.props);
+  }
+
+  onDragStart = (e, d)=>{
+    console.log('on drag start');
+
     this.setState({
       ...this.state,
       isDragging: true,
+      isResizing: false,
     })
   }
-  dragStop = (e, d)=>{
-    this.placeCard({x: d.x, y: d.y});
+  onDragStop = (e, d)=>{
+    console.log('on drag stop');
+    const newPos = {x: d.x, y: d.y}
+
+    //this.placeCard(newPos);
+    this.setState({
+      ...this.state,
+      position: newPos,
+      isDragging: false,
+      isResizing: false,
+    })
+  }
+  onResizeStop = (e, direction, ref, delta, position) => {
+    console.log('on resize stop');
+    //this.resizeCard({x: ref.offsetWidth, y: ref.offsetHeight}, position)
     this.setState({
       ...this.state,
       isDragging: false,
+      isResizing: false,
     })
   }
-  resizeStop = (e, direction, ref, delta, position) => {
-    const callback = this.props.appState.resources.callback;
-    this.resizeCard({x: ref.offsetWidth, y: ref.offsetHeight}, position)
+
+  onResize = (e, direction, ref, delta, position) => {
+    console.log('on resize');
+
     this.setState({
       ...this.state,
       isDragging: false,
+      isResizing: true,
+      size: {
+        x: ref.offsetWidth,
+        y: ref.offsetHeight,
+      },
+      position: {...position},
     })
-    console.log('dragStop');
+  }
+
+  onResizeStart = (e, direction, ref) => {
+    console.log('on resize start');
+
+    this.setState({
+      ...this.state,
+      isDragging: false,
+      isResizing: true,
+      size: {
+        x: ref.offsetWidth,
+        y: ref.offsetHeight,
+      },
+    })
   }
 
   moveCard = (deltaPos: IVector2) => {
@@ -87,37 +136,38 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     const newValues = cardboardItem.isCollapsed 
       ? {
         position: newPos,
-        size: newSize,
         collapsedSize: newSize,
       }
       : {
         position: newPos,
-        size: newSize,
         expandedSize: newSize,
       }
     ;
 
     const action = CardboardItemActions.UpdateItem(this.props.cardboard.id, this.props.cardboardItem.id, newValues);
     this.props.appState.resources.callback(action); 
-
   }
+
   toggleIsCollapsed = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const card = this.props.card;
-    const cardboard = this.props.cardboard;
     const cardboardItem = this.props.cardboardItem;
-    const callback = this.props.appState.resources.callback;
-    
-    const appState = this.props.appState;
     
     const newValues = {
       isCollapsed: !cardboardItem.isCollapsed,
     }
 
-    const action = CardboardItemActions.UpdateItem(cardboard.id, cardboardItem.id, newValues);
-    appState.resources.callback(action); 
+    const action = CardboardItemActions.UpdateItem(this.props.cardboard.id, this.props.cardboardItem.id, newValues);
+    this.props.appState.resources.callback(action); 
+
+    const newSize = newValues.isCollapsed ? cardboardItem.collapsedSize : cardboardItem.expandedSize;
+
+    this.setState({
+      ...this.state,
+      isCollapsed: newValues.isCollapsed,
+      size: newSize,
+    })
   }
 
   headerToolboxView = (): JSX.Element|boolean => {
@@ -152,6 +202,7 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
           card={this.props.card}
           cardboard={cardboard}
           cardboardItem={cardboardItem}
+          isSilentMode={this.props.isSilentMode}
         />
       </div>
     )
@@ -175,7 +226,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
           card={this.props.card} 
           cardboard={cardboard}
           cardboardItem={cardboardItem}
-        />
+          isSilentMode={this.props.isSilentMode}
+          />
       </div>
     )
   }
@@ -219,7 +271,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
           card={this.props.card} 
           cardboard={cardboard}
           cardboardItem={cardboardItem}
-        />
+          isSilentMode={this.props.isSilentMode}
+          />
       </div>
     )
   }
@@ -232,6 +285,12 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     const socketId = `output-value-socket-${this.props.card.fullId}`;
     const cardboard = this.props.cardboard;
     const cardboardItem = this.props.cardboardItem;
+    const isSilentMode = this.props.isSilentMode || this.state.isResizing || this.state.isDragging;
+
+    console.log('content output view');
+    if (isSilentMode) {
+      console.log('silent mode');
+    }
 
     return (
       <div className={className}>
@@ -242,7 +301,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
           card={this.props.card} 
           cardboard={cardboard}
           cardboardItem={cardboardItem}
-        />
+          isSilentMode={isSilentMode}
+          />
       </div>
     )
   }
@@ -329,15 +389,8 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
     const defaultSize = {x: 200, y: 50}
 
     if (cardboardItem) {
-      const pos = cardboardItem.position || defaultPos;
-      const size = 
-        (
-          cardboardItem.isCollapsed
-            ? cardboardItem.collapsedSize
-            : cardboardItem.expandedSize
-        ) 
-        || defaultSize
-      ;
+      const pos = this.state.position || defaultPos;
+      const size = this.state.size || defaultSize;
       
       const defaultValues: any = {
         x: pos.x,
@@ -351,10 +404,14 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
       
       return (
         <Rnd 
-          default={defaultValues}
-          onDragStart={this.dragStart}
-          onDragStop={this.dragStop}
-          onResizeStop={this.resizeStop}
+          // default={defaultValues}
+          position={{x: pos.x, y: pos.y}}
+          size={{width: size.x, height: size.y}}
+          onDragStart={this.onDragStart}
+          onDragStop={this.onDragStop}
+          onResizeStop={this.onResizeStop}
+          onResize={this.onResize}
+          onResizeStart={this.onResizeStart}
           dragHandleClassName={'.card-drag-handler'}
           >
           {children}
@@ -366,7 +423,6 @@ export class CardViewBase extends React.Component<ICardViewProps, ICardViewState
   }
 
   render() {
-    
     let className = `card container-vertical card-${this.props.card.cardType} ${this.props.drawType}`;
     if (this.props.drawType === CardDrawType.Card) {
       className += ' fullheight fullwidth';

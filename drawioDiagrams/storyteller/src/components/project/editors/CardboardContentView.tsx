@@ -32,8 +32,6 @@ export class CardboardContentView extends React.Component<ICardboardViewProps, I
         const areEqual = areObjectsEqual(currentRect, newRect);
       
         if (!areEqual) {
-          console.log('updateClientRect', newRect);
-
           const values = {clientRect: newRect};
           const action = CardboardActions.UpdateCardboard(cardboard.id, values);
 
