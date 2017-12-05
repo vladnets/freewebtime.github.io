@@ -13,7 +13,7 @@ export class PrimitiveCardView extends CardViewBase {
     }
     
     return (
-      <div className={className} onClick={this.onClick}>
+      <div className={className}>
         <div>
         {this.props.card.name} ({primitive.primitiveType})
         </div>

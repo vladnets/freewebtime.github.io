@@ -84,9 +84,13 @@ export const createCardboards = (cards: IHash<ICard>): IHash<ICardboard> => {
       x: placementKoeff * index, 
       y: placementKoeff2 * index
     };
-    const itemSize = {
+    const expandedSize = {
       x: 350,
       y: 180,
+    }
+    const collapsedSize = {
+      x: 350,
+      y: 70,
     }
 
     const cardboardItem: ICardboardItem = {
@@ -96,7 +100,8 @@ export const createCardboards = (cards: IHash<ICard>): IHash<ICardboard> => {
       objectId: cardId,
       isCollapsed: false,
       position: itemPosition,
-      size: itemSize,
+      expandedSize: expandedSize,
+      collapsedSize: expandedSize,
     }
 
     cardboard.items[cardId] = cardboardItem;

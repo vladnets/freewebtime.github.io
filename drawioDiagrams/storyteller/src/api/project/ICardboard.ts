@@ -7,7 +7,8 @@ export interface ICardboardItem extends IUniqueObject {
   objectId: string;
   isCollapsed: false;
   position?: IVector2;
-  size?: IVector2;
+  expandedSize?: IVector2;
+  collapsedSize?: IVector2;
   inputSocketRect?: IVector4;
   outputSocketRect?: IVector4;
 }
