@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Test Game</title>
+  
+    <style type="text/css">
+      
+      body{
+        background-color: cadetblue;
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+        text-align: center;
+        vertical-align: middle;
+        align-content: center;
+
+        font-size: 200%;
+      }
+
+      #headerArea{
+        background-color: rgb(67, 109, 187);
+        width: 100%;
+        height: 10%;
+      }
+
+      #contentArea{
+        background-color: rgb(100, 221, 237);
+        width: 100%;
+        height: 80%;
+        top: 10%;
+        bottom: 10%;
+      }
+
+      #footerArea{
+        background-color: rgb(196, 237, 100);
+        width: 100%;
+        height: 10%;
+        margin-bottom: 0px;
+        bottom: 0px;
+      }
+
+      #reelArea{
+        background-color: rgb(237, 100, 237);
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+        height: 80%;
+      }
+
+      #buttonsArea{
+        background-color: rgb(237, 100, 123);
+        width: 100%;
+        height: 20%;
+      }
+
+      .reelButton{
+        width: 80%;
+        height: 50%;
+        margin: 30px 30px 30px 30px;
+        background-color: darkcyan;
+        font-size: 100%;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    
+    <div id="headerArea">
+      Coins: 1000
+    </div>
+    <div id="contentArea">
+      <div id="reelArea">
+        Reels
+      </div>
+      <div id="buttonsArea">
+        <button class="reelButton">Spin</button>
+      </div>
+    </div>
+    <div id="footerArea">
+      Footer content
+    </div>
+
+    <script lang="javascript" type="text/css">
+    
+      document.getElementById("demo").innerHTML = "Hello JavaScript!";
+    
+    </script>
+  </body>
+</html>
