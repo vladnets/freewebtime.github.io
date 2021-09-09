@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <canvas id="unity-canvas" width=1280 height=800></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -29,9 +29,9 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/ChessKnight.loader.js";
       var config = {
-        dataUrl: buildUrl + "/ChessKnight.data",
-        frameworkUrl: buildUrl + "/ChessKnight.framework.js",
-        codeUrl: buildUrl + "/ChessKnight.wasm",
+        dataUrl: buildUrl + "/ChessKnight.data.unityweb",
+        frameworkUrl: buildUrl + "/ChessKnight.framework.js.unityweb",
+        codeUrl: buildUrl + "/ChessKnight.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Freewebtime",
         productName: "ChessKnight",
@@ -62,8 +62,8 @@
           mobileWarning.style.display = "none";
         }, 5000);
       } else {
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "1280px";
+        canvas.style.height = "800px";
       }
       loadingBar.style.display = "block";
 
