@@ -26,12 +26,13 @@
       </div>
     </div>
     <script>
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL/0.1/ChessKnight.loader.js";
+      var pathPrefix = "WebGL/0.1/";
+      var buildUrl = pathPrefix + "Build/";
+      var loaderUrl = buildUrl + "ChessKnight.loader.js";
       var config = {
-        dataUrl: buildUrl + "WebGL/0.1/ChessKnight.data.unityweb",
-        frameworkUrl: buildUrl + "WebGL/0.1/ChessKnight.framework.js.unityweb",
-        codeUrl: buildUrl + "WebGL/0.1/ChessKnight.wasm.unityweb",
+        dataUrl: buildUrl + "ChessKnight.data.unityweb",
+        frameworkUrl: buildUrl + "ChessKnight.framework.js.unityweb",
+        codeUrl: buildUrl + "ChessKnight.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Freewebtime",
         productName: "ChessKnight",
