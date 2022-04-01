@@ -1,0 +1,119 @@
+:root {
+  --icon-size: 3em;
+  --padding--title: 1em;
+  --padding--attention: 0.4em;
+
+  --font-family--main: Verdana, Geneva, Tahoma, sans-serif;
+
+  --font-size--main: 1em;
+  --font-size--title: 1.2em;
+  --font-size--company: 1em;
+
+  --color--main: #fff;
+  --color--attention: #bb0000;
+  --color--ua-top: #FFD500;
+  --color--ua-bottom: #005BBB;
+  --color--ua-flag: linear-gradient(to bottom, var(--color--ua-bottom) 50%, var(--color--ua-top) 50%);
+
+  --height--ua-ribbon: 1.2em;
+}
+
+.root {
+  display: flex;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+
+  font-family: var(--font-family--main);
+}
+
+.game-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--color--ua-bottom);
+}
+
+.game-header-title {
+  display: flex;
+  align-items: center;
+}
+.game-header-title-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+
+  background-image: url("../images/icon@64x64.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.game-header-title-text {
+  font-size: var(--font-size--title);
+  color: var(--color--ua-top);
+}
+.game-header-company-text {
+  color: var(--color--main);
+  padding: var(--padding--title);
+}
+
+.war-container {
+  color: var(--color--main);
+  background-color: var(--color--attention);
+}
+
+.war-content {
+  font-family: var(--font-family--main);
+  /* padding: var(--padding--attention); */
+}
+
+.war-ua-ribbon {
+  height: var(--height--ua-ribbon);
+
+  background: var(--color--ua-flag);
+}
+.war-content-attention {
+  text-align: center;
+  padding: var(--padding--attention);
+}
+.war-content-description {
+  padding: var(--padding--attention);
+}
+
+@media (orientation: portrait) {
+  .root {
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100%;
+  }
+
+  .war-ua-ribbon {
+    border-top: 2px solid var(--color--attention);
+  }
+}
+
+@media (orientation: landscape) {
+  .root {
+    flex-direction: row;
+    justify-content: space-between;
+
+    height: 100%;
+  }
+
+  .game-container {
+    flex-grow: 1;
+  }
+
+  .war-container {
+    display: flex;
+    max-width: 16em;
+    flex-direction: column;
+  }
+
+  .war-ua-ribbon {
+    border: 2px solid var(--color--attention);
+  }
+}

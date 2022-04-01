@@ -1,0 +1,98 @@
+:root {
+  --chessknight-font-size: 1em;
+  --chessknight-font-family: Verdana, Geneva, Tahoma, sans-serif;
+  --chessknight-font-color__main: #fff;
+
+  --chessknight-title-padding: 0.4em;
+  --chessknight-title-font-size: 1.2em;
+  --chessknight-title-icon-size: 3em;
+  --chessknight-title-color: #FFD500;
+
+  --chessknight-company-color: var(--chessknight-font-color__main);
+
+  --chessknight-ua-ribbon-height: 1.4em;
+
+  --chessknight-war-padding: 1em;
+  --chessknight-war-color: var(--chessknight-font-color__main);
+  --chessknight-war-bg: #bb0000;
+}
+
+
+/* --- COMMON --- */
+.chessknight__uaRibbon {
+  height: var(--chessknight-ua-ribbon-height);
+
+  background: linear-gradient(to bottom, #005BBB 50%, #FFD500 50%);
+}
+
+/* --- ROOT --- */
+.chessknight__root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-family: var(--chessknight-font-family);
+  font-size: var(--chessknight-font-size);
+}
+
+/* --- HEADER --- */
+.chessknight__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+
+  background-color: #005BBB;
+}
+
+.chessknight__title {
+  display: flex;
+  align-items: center;
+
+  padding: var(--chessknight-title-padding);
+}
+
+.chessknight__titleIcon {
+  width: var(--chessknight-title-icon-size);
+  height: var(--chessknight-title-icon-size);
+  background-image: url("../images/icon@64x64.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.chessknight__titleText {
+  color: var(--chessknight-title-color);
+  font-size: var(--chessknight-title-font-size);
+}
+
+.chessknight__company {
+  display: flex;
+  align-items: center;
+  padding: var(--chessknight-title-padding);
+}
+.chessknight__companyTitle {
+  color: var(--chessknight-company-color);
+}
+
+/* --- BODY --- */
+.chessknight__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+/* --- FOOTER --- */
+.chessknight__footer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.chessknight__war {
+  padding: var(--chessknight-war-padding);
+
+  color: var(--chessknight-war-color);
+  background-color: var(--chessknight-war-bg);
+}

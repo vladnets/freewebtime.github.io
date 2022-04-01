@@ -1,0 +1,29 @@
+/* Variables */
+:root {
+  --headerHeightMobile: auto;
+  --footerHeightMobile: auto;
+}
+
+/* Header */
+.mobile .panel__header {
+  justify-content: space-between;
+  height: var(--headerHeightMobile);
+}
+
+.mobile .panel__footer {
+  height: var(--footerHeightMobile);
+}
+
+.mobile .GameTitle {
+  transform: translateX(-0em);
+  font-size: 1.4em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffcd24;
+}
+
+.mobile .CompanyTitle {
+  padding: 0 1em;
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+}

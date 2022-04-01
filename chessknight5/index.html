@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>ChessKnight | by Freewebtime</title>
+    <link rel="shortcut icon" href="./resources/images/icon@64x64.ico">
+    <link rel="stylesheet" href="./resources/css/styles.css">
+  </head>
+  <body>
+    <div class="root">
+      <div class="container">
+        <div class="header">
+          <div class="chessknight-title">
+            <div class="icon"></div>
+            <h1 class="text">ChessKnight</h1>
+          </div>
+          <div class="freewebtime-title">
+            <h2 class="text">by Freewebtime</h2>
+          </div>
+        </div>
+        <div class="body">
+          <div id="unity-container" class="unity-desktop">
+            <canvas id="unity-canvas"></canvas>
+            <div id="unity-loading-bar">
+              <div id="unity-logo"></div>
+              <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+              </div>
+            </div>
+            <div id="unity-mobile-warning">
+              WebGL builds may not be supported on some mobile devices.
+            </div>
+            <div id="unity-footer">
+              <div id="unity-fullscreen-button"></div>
+              <div id="unity-build-title"><a href="../ChessKnight.apk">Android build (.apk file)</a> | <a href="../ChessKnight.zip">Desktop build (Win)</a></div>
+              <!-- <div id="unity-webgl-logo"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="war">
+        <div class="ua-flag"></div>
+        <div class="title">
+          <div class="gg-bell"></div>
+          <h2 class="text">УВАГА!</h2>
+        </div>
+        <p class="text">Росія веде війну проти нашої України!</p>
+        <p class="text">Кожен, хто здатен допомогти нашій перемозі, має робити для цього все, що в його силах.</p>
+        <p class="text">Ви можете зробити внесок через фонд "Повернись Живим" на користь нашої Армії або самого фонду.</p>
+        <p class="details"><a id="donation-link" href="#"><span class="gg-enter"></span> <span class="text">Реквізити</span></a></p>
+      </div>
+      <div id="donation-container" class="war-donation" style="display: none;">
+        <a id="donation-close-link" href="#" class="close">Назад<i class="gg-chevron-down-o"></i></a>
+        <div class="ua-flag"></div>
+
+        <div class="section">
+          <p>
+            Не лишайтесь байдужими! Україна вкрай потребує вашої допомоги! Ми переможемо! Все буде Україна!
+          </p>
+        </div>
+        <div class="section">
+          <h3>
+            Підтримати армію з картки будь-якого банку:
+          </h3>
+          <div class="props">
+            <p>
+              <span class="highlighted">IBAN:</span> UA223226690000026007300905964
+            </p>
+            <p>
+              <span class="highlighted">ЄДРПОУ:</span> 39696398
+            </p>
+            <p>
+              <span class="highlighted">Отримувач:</span> Благодійна Організація «Міжнародний благодійний фонд «Повернись живим»
+            </p>
+            <p>
+              <span class="highlighted">Призначення платежу:</span> Благодійна допомога військовослужбовцям.
+            </p>
+          </div>
+          <p>
+            Або за прямим <a href="https://next.privat24.ua/payments/form/%7B%22token%22:%225e99fe0a-7962-444c-8ee4-dc236efb2aa3%22%7D?lang" target="_blank">посиланням</a>
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>
+            Підтримати команду «Повернись живим»
+          </h3>
+          <p>
+            Переходьте за <a href="https://next.privat24.ua/payments/form/%7B%22token%22:%22cb98260e-ea4d-43c2-bc78-a2c5a8cb5c6a%22%7D?lang" target="_blank">посиланням</a> та підтримайте команду «Повернись живим» з картки будь-якого банку.
+          </p>
+          <p>
+            Оформіть регулярний платіж на <a href="http://patreon.com/savelife_in_ua" target="_blank">Patreon</a>.
+          </p>
+          <p>
+            Докладніше про наші досягнення у 2020 році ви можете прочитати <a href="http://drive.google.com/file/d/1IAJNqWLPkiq5hexVvTXlSTuz68JFOQE3/view?usp=sharing">ви можете прочитати тут</a>.
+          </p>
+          <div class="props">
+            <p><span class="highlighted">Рахунок Bitcoin:</span> 15NpjeA6W9h1jvrM3piZZFDoxuSeGeamKK</p>
+            <p><span class="highlighted">Рахунок Ethereum:</span> 0x32b8B6fc046314dfF1F3b1ee6dAF1e46b762094d</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>
+            Перекази з-за кордону
+          </h3>
+          <p>
+            <a href="https://pay.fondy.eu/api/checkout?button=59da139c540533216e39fef311708bed" target="_blank">Fondy.eu</a> – це найвищий рівень безпеки PCI DSS Level 1.
+          </p>
+          <p>
+            Валюта переказу – гривня. Якщо ваша карта в іншій валюті, кошти знімаються по курсу.
+          </p>
+          <p>
+            Комісію 2,45% сплачує отримувач.
+          </p>
+          <div class="props">
+            <p><span class="highlighted">SWIFT</span></p>
+            <p><span class="highlighted">Назва підприємства/company Name:</span> МБФ ПОВЕРНИСЬ ЖИВИМ БО<br />CO "INTERNATIONAL CHARITABLE FOUNDATION "COME BACK ALIVE"</p>
+            <p><span class="highlighted">IBAN Code (Євро):</span>UA093052990000026004025029786</p>
+            <p><span class="highlighted">IBAN Code (Долар США):</span>UA173052990000026009035028620</p>
+            <p><span class="highlighted">Назва банку/Name of the bank:</span>JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE</p>
+            <p><span class="highlighted">SWIFT code банку/Bank SWIFT Code:</span>PBANUA2X</p>
+            <p><span class="highlighted">Адреса підприємства/Company address:</span>UA 01054, м.Київ, вул Богдана Хмельницького, 32 кв.41</p>
+            <p><span class="highlighted">Призначення платежу / Purpose of payment:</span>Charitable donation to Ukrainian military</p>
+            <p><span class="highlighted">Наш офіс:</span>Київ, вул. Богдана Хмельницкого, 32 оф. 41</p>
+            <p><span class="highlighted">Тел:</span><a href="tel:0685008800">(068)500-88-00 (Пн-Пт 10:00-19:00)</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var donationLink = document.querySelector("#donation-link");
+      var donationCloseLink = document.querySelector("#donation-close-link");
+      var donationContainer = document.querySelector("#donation-container");
+
+      if (donationLink !== null && donationContainer !== null) {
+        donationLink.addEventListener("click", () => {
+          donationContainer.style.display = "block";
+        });
+      }
+
+      if (donationCloseLink !== null && donationContainer !== null) {
+        donationCloseLink.addEventListener("click", () => {
+          donationContainer.style.display = "none";
+        });
+      }
+    </script>
+
+    <script>
+      var pathPrefix = "../WebGL/1.1.1.0/";
+      var buildUrl = pathPrefix + "Build";
+      var loaderUrl = buildUrl + "/ChessKnight.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/ChessKnight.data.unityweb",
+        frameworkUrl: buildUrl + "/ChessKnight.framework.js.unityweb",
+        codeUrl: buildUrl + "/ChessKnight.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Freewebtime",
+        productName: "ChessKnight",
+        productVersion: "1.1.1.0",
+      };
+
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var mobileWarning = document.querySelector("#unity-mobile-warning");
+
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        // Avoid draining fillrate performance on mobile devices,
+        // and default/override low DPI mode on mobile browsers.
+        config.devicePixelRatio = 1;
+        mobileWarning.style.display = "block";
+        setTimeout(() => {
+          mobileWarning.style.display = "none";
+        }, 5000);
+      } else {
+        // canvas.style.width = "1280px";
+        // canvas.style.height = "800px";
+      }
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+
+  </body>
+</html>
