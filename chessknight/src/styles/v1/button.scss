@@ -1,0 +1,199 @@
+@import "./utils/functions.scss";
+
+:root {
+  --button--padding-vertical: 0.2em;
+  --button--padding-horizontal: 0.8em;
+  --button--font-size: 1em;
+  --button--font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  --button--icon--size: 2em;
+
+  --button--text--padding-vertical: 0.2em;
+  --button--text--padding-horizontal: 0.2em;
+}
+
+.button-list {
+  display: flex;
+
+  &.growable {
+    // justify-content: space-around;
+    flex-grow: 1;
+    border-bottom: 1px solid;
+  }
+
+  @include oritentat-landscape {
+    flex-direction: column;
+  }
+
+}
+
+.separator {
+  height: 100%;
+  width: 1px;
+  background: #ddc;
+
+  @include oritentat-landscape {
+    width: 100%;
+    height: 1px;
+  }
+
+  @include oritentat-portrait {
+    display: none;
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+
+  padding: var(--button--padding-vertical) var(--button--padding-horizontal);
+
+  &.reversable {
+    @include oritentat-landscape {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &.button-toggle {
+    @include oritentat-landscape {
+      transform: rotate(180deg);
+    }
+
+    @include oritentat-portrait {
+      display: none;
+    }
+  }
+  &.button-toggle-reverse {
+    display: none;
+
+    @include oritentat-landscape {
+      display: flex;
+    }
+
+    > .icon {
+      // @include small-screen {
+        @include oritentat-landscape {
+          transform: rotate(180deg);
+        }
+      // }
+    }
+  }
+
+  &.button-download {
+    @include oritentat-landscape {
+      flex-direction: row!important;
+    }
+  }
+
+  &.button-language {
+    > .text {
+      @include oritentat-portrait {
+        display: none;
+      }
+    }
+  }
+
+  &.active {
+    border: 1px solid #555;
+    border-bottom: none;
+    // border-top: none;
+    flex-grow: 1;
+  }
+
+  &.notactive {
+    border-bottom: 1px solid #555;
+    // border-bottom: none;
+    // border-top: none;
+    flex-grow: 1;
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
+  &:hover {
+    cursor: pointer;
+    // box-shadow: 0 0 10px #000;
+    background-color: #ccc;
+  }
+
+  > .icon {
+    @include size(var(--button--icon--size));
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.icon-fullscreen {
+      @include icon-image("icon-fullscreen.png");
+    }
+
+    &.icon-more {
+      @include icon-image("icon-more.png");
+    }
+
+    &.icon-download {
+      @include icon-image("icon-download.png");
+    }
+
+    &.icon-play {
+      @include icon-image("icon-play.png");
+    }
+
+    &.icon-chessknight {
+      @include icon-image("icon-chessknight.ico");
+    }
+
+    &.icon-ua {
+      @include icon-image("icon-ua.png");
+    }
+
+    &.icon-usa {
+      @include icon-image("icon-usa.png");
+    }
+
+    &.icon-about {
+      @include icon-image("icon-about.png");
+    }
+
+    &.icon-warning {
+      @include icon-image("icon-warning.png");
+    }
+
+    &.icon-home {
+      @include icon-image("icon-home.png");
+    }
+
+    &.icon-toggle {
+      @include icon-image("icon-toggle.png");
+      filter: saturate(10%)
+    }
+  }
+
+  > .text {
+    padding: var(--button--text--padding-vertical) var(--button--text--padding-horizontal);
+
+    font-size: var(--button--text--font-size);
+    font-family: var(--button--text--font-family);
+
+    &.hiddable {
+      // @include small-screen {
+        @include oritentat-landscape {
+          // display: none;
+        }
+      // }
+    }
+
+    &.hiddable-if-small {
+      @include small-screen {
+        @include oritentat-landscape {
+          // display: none;
+        }
+      }
+    }
+  }
+
+}
+

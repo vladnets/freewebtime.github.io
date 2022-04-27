@@ -1,0 +1,73 @@
+@import "./utils/functions.scss";
+
+@import "./panel.scss";
+@import "./button.scss";
+@import "./navbar.scss";
+
+html, body {
+  @include size(100%);
+  margin: 0;
+  padding: 0;
+  background: #ccc;
+}
+
+.layout {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  justify-items: center;
+
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  // position: absolute;
+  // left: 50%;
+  // transform: translateX(-50%);
+  width: 100%;
+  max-width: 1920px;
+  height: 100%;
+  // box-shadow: 0 0 10px #444;
+  background: #eee;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  @include oritentat-landscape {
+    // flex-direction: row;
+  }
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  // padding: 2px;
+
+  @include oritentat-landscape {
+    flex-direction: row-reverse;
+  }
+
+  .view {
+    flex-grow: 1;
+    // border: 1px solid #333;
+    // border-top: none;
+
+    @include oritentat-landscape {
+      // border-right: 1px solid;
+    }
+  }
+
+  .toolbar {
+    box-shadow: 0 0 10px #ccc;
+    flex-direction: row-reverse;
+
+    @include oritentat-landscape {
+      flex-direction: column-reverse;
+      box-shadow: 4px 0 10px #ccc;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+@import "../system/utils.scss";
+
+@mixin setIconBackground($name) {
+  background-image: url("resources/ui/icons/" + $name);
+}
+
+.icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.icon-fullscreen {
+    @include setIconBackground("icon-fullscreen.png");
+  }
+
+  &.icon-more {
+    @include setIconBackground("icon-more.png");
+  }
+
+  &.icon-download {
+    @include setIconBackground("icon-download.png");
+  }
+
+  &.icon-play {
+    @include setIconBackground("icon-play.png");
+  }
+
+  &.icon-chessknight {
+    @include setIconBackground("icon-chessknight.ico");
+  }
+
+  &.icon-ua {
+    @include setIconBackground("icon-ua.png");
+  }
+
+  &.icon-usa {
+    @include setIconBackground("icon-usa.png");
+  }
+
+  &.icon-about {
+    @include setIconBackground("icon-about.png");
+  }
+
+  &.icon-warning {
+    @include setIconBackground("icon-warning.png");
+  }
+
+  &.icon-home {
+    @include setIconBackground("icon-home.png");
+  }
+
+  &.icon-toggle {
+    @include setIconBackground("icon-toggle.png");
+  }
+
+  &.icon-ZSU {
+    @include setIconBackground("icon-ZSU.png");
+  }
+
+  &.icon-enter {
+    @include setIconBackground("icon-enter.png");
+  }
+}

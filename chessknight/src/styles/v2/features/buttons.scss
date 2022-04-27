@@ -1,0 +1,22 @@
+@import "../system/utils.scss";
+
+.button {
+  --layout-button--padding-vertical: 0.4em;
+  --layout-button--padding-horizontal: 0.4em;
+  --layout-button--icon--size: 2em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: var(--layout-button--padding-vertical) var(--layout-button--padding-horizontal);
+
+
+  > .icon {
+    @include setSize(var(--layout-button--icon--size));
+  }
+
+  > .text {
+    padding: var(--layout-button--padding-vertical) var(--layout-button--padding-horizontal);
+  }
+}

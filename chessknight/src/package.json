@@ -1,0 +1,17 @@
+{
+  "name": "chessknight-landing",
+  "version": "1.0.0-alpha.1",
+  "description": "Source files for Chessknight Game landing",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "sass --watch styles/v2/index.scss ../style.css",
+    "build": "tsc && sass styles/index.scss ../style.css",
+    "build:tsc": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.51.0"
+  }
+}

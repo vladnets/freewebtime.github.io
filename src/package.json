@@ -1,0 +1,12 @@
+{
+  "name": "freewebtime-github-io",
+  "version": "1.0.0-alpha.1",
+  "description": "Source files for `freewebtime.github.io` github pages",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC"
+}

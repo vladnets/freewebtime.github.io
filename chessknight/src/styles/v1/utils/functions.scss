@@ -1,0 +1,30 @@
+$resourcesDir: "resources/";
+$iconResourcesDir: $resourcesDir + "ui/icons/";
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin icon-image($name) {
+  background-image: url($iconResourcesDir + $name);
+}
+
+@mixin oritentat-portrait {
+  @media screen and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin oritentat-landscape {
+  @media screen and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin small-screen {
+  @media screen and (max-width: 800px) {
+    @content;
+  }
+}
+

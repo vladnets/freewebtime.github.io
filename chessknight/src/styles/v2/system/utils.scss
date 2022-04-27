@@ -1,0 +1,27 @@
+@mixin setSize($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin setMaxSize($width, $height: $width) {
+  max-width: $width;
+  max-height: $height;
+}
+
+@mixin onPortrait {
+  @media screen and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin onLandscape {
+  @media screen and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin onSmallScreen {
+  @media screen and (max-width: 800px) {
+    @content;
+  }
+}

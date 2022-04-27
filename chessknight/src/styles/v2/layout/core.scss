@@ -1,0 +1,71 @@
+@import "../system/utils.scss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  @include setSize(100%);
+  @include setMaxSize(100%);
+}
+
+.scene {
+  display: flex;
+
+  @include setSize(100%);
+}
+
+.root {
+  display: flex;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.layout {
+  &._growable {
+    flex-grow: 1;
+  }
+
+  &._center {
+    justify-content: center;
+  }
+
+  &._cover {
+    @include setSize(100%);
+  }
+
+  &-flex {
+    display: flex;
+
+    &._growable {
+      flex-grow: 1;
+    }
+
+    &._cover {
+      @include setSize(100%);
+    }
+
+    &._center {
+      justify-content: center;
+    }
+
+    &._horizontal {
+      flex-direction: row;
+    }
+    &._horizontal_reverse {
+      flex-direction: row-reverse;
+    }
+
+    &._vertical {
+      flex-direction: column;
+    }
+    &._vertical_reverse {
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+.__hide-on-small-screen {
+  @include onSmallScreen {
+    display: none;
+  }
+}

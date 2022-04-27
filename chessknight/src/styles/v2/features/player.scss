@@ -1,0 +1,28 @@
+@import "../system/utils.scss";
+
+.player-toolbar {
+  color: var(--color--panel-text--default);
+  background: var(--color--panel-default);
+
+  > .unity-webgl-logo {
+    padding: 0.3em;
+
+    > .image {
+      background: url(resources/ui/logo-unity-webgl.png) center no-repeat;
+      background-size: contain;
+      // filter: drop-shadow(0 0 10px #eee);
+    }
+  }
+}
+
+#player-canvas {
+  margin: 0;
+  padding: 0;
+  // min-width: 0px;
+  height: 100%;
+  // aspect-ratio: unset;
+}
+
+.player-canvas-container {
+  background: #888;
+}
