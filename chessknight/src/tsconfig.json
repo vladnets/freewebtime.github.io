@@ -99,6 +99,6 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "./scripts/index.ts"
+    "v3/scripts/index.ts"
   ]
 }

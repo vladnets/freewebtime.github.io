@@ -5,13 +5,15 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "sass --watch styles/v2/index.scss ../style.css",
-    "build": "tsc && sass styles/index.scss ../style.css",
-    "build:tsc": "tsc"
+    "start": "concurrently \"npm:build:tsc -- --watch\" \"npm:build:sass -- --watch\" \"cd ../ && static-server\"",
+    "build": "npm run build:tsc && npm run build:sass",
+    "build:tsc": "tsc",
+    "build:sass": "sass v3/styles/index.scss ../style.css"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^7.1.0",
     "sass": "^1.51.0"
   }
 }

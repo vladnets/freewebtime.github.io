@@ -17,50 +17,47 @@
   </head>
   <body>
 
-    <div class="scene layout-flex _cover">
+    <div class="scene">
 
-      <div class="root layout-flex _vertical _growable">
-        <div class="navbar layout-flex">
-          <div class="button chessknight-logo">
-            <div class="icon icon-chessknight"></div>
-            <div class="text __hide-on-small-screen">ChessKnight</div>
-            <!-- <div class="text">ChessKnight</div> -->
+      <div class="root">
+
+        <div class="navbar">
+          <div class="button chessknight">
+            <div class="icon"></div>
+            <div class="text">ChessKnight</div>
           </div>
 
-          <div class="help-Ukraine layout-flex _growable _center">
-            <div class="button">
-              <!-- <div class="icon icon-ZSU"></div> -->
-              <div class="icon icon-warning"></div>
-              <div style="width:10px"></div>
-              <div class="text">HELP UKRAINE!</div>
-              <div class="icon icon-warning"></div>
-              <!-- <div class="icon icon-ZSU"></div> -->
-            </div>
+          <div class="button help-ukraine">
+            <div class="icon"></div>
+            <div class="text">HELP UKRAINE</div>
           </div>
 
-          <div class="button">
-            <div class="text __hide-on-small-screen">Freewebtime</div>
-            <div class="icon icon-home"></div>
+          <div class="button freewebtime">
+            <div class="text">Freewebtime</div>
+            <div class="icon"></div>
           </div>
-      </div>
+        </div>
 
-        <div class="player layout-flex _vertical _growable">
-          <div id="player-canvas-container" class="player-canvas-container layout-flex _growable">
-            <canvas id="player-canvas" class="layout" style="display: none;"></canvas>
+        <div class="player">
+          <div class="view">
+            <canvas id="player-canvas" width="10" height="1"></canvas>
           </div>
+          <div class="toolbar">
 
-          <div class="player-toolbar layout-flex">
-            <div id="unity-fullscreen-button" class="button">
-              <div class="icon icon-fullscreen"></div>
-              <div class="text __hide-on-small-screen">Fullscreen</div>
+            <div class="button fullscreen">
+              <div class="icon"></div>
+              <div class="text">Fullscreen</div>
             </div>
-            <div class="unity-webgl-logo layout-flex _growable">
-              <div class="image layout _growable"></div>
+
+            <div class="area unity-web-gl">
+              <div class="icon"></div>
             </div>
-            <div class="button">
-              <div class="text __hide-on-small-screen">Download</div>
-              <div class="icon icon-download"></div>
+
+            <div class="button download">
+              <div class="text">Download</div>
+              <div class="icon"></div>
             </div>
+
           </div>
         </div>
 

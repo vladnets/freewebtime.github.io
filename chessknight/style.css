@@ -1,179 +1,211 @@
-:root {
-  --color--panel-default: #0d1216;
-  --color--panel-text--default: #a0c0da;
-  --color--panel-text--contrast: #dfb97e;
-}
-
 html, body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --max-root-width: 800px;
+  --max-root-height: 800px;
 }
 
 .scene {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  background: #222;
+  background-image: repeating-conic-gradient(#3c3c4a 0% 25%, #191d2e 0% 50%);
+  background-position: 0 0, 32px 32px;
+  background-size: 64px 64px;
+  background-color: #191d2e;
 }
 
 .root {
   display: flex;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.layout._growable {
-  flex-grow: 1;
-}
-.layout._center {
-  justify-content: center;
-}
-.layout._cover {
-  width: 100%;
-  height: 100%;
-}
-.layout-flex {
-  display: flex;
-}
-.layout-flex._growable {
-  flex-grow: 1;
-}
-.layout-flex._cover {
-  width: 100%;
-  height: 100%;
-}
-.layout-flex._center {
-  justify-content: center;
-}
-.layout-flex._horizontal {
-  flex-direction: row;
-}
-.layout-flex._horizontal_reverse {
-  flex-direction: row-reverse;
-}
-.layout-flex._vertical {
   flex-direction: column;
-}
-.layout-flex._vertical_reverse {
-  flex-direction: column-reverse;
-}
-
-@media screen and (max-width: 800px) {
-  .__hide-on-small-screen {
-    display: none;
-  }
-}
-
-.icon {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.icon.icon-fullscreen {
-  background-image: url("resources/ui/icons/icon-fullscreen.png");
-}
-.icon.icon-more {
-  background-image: url("resources/ui/icons/icon-more.png");
-}
-.icon.icon-download {
-  background-image: url("resources/ui/icons/icon-download.png");
-}
-.icon.icon-play {
-  background-image: url("resources/ui/icons/icon-play.png");
-}
-.icon.icon-chessknight {
-  background-image: url("resources/ui/icons/icon-chessknight.ico");
-}
-.icon.icon-ua {
-  background-image: url("resources/ui/icons/icon-ua.png");
-}
-.icon.icon-usa {
-  background-image: url("resources/ui/icons/icon-usa.png");
-}
-.icon.icon-about {
-  background-image: url("resources/ui/icons/icon-about.png");
-}
-.icon.icon-warning {
-  background-image: url("resources/ui/icons/icon-warning.png");
-}
-.icon.icon-home {
-  background-image: url("resources/ui/icons/icon-home.png");
-}
-.icon.icon-toggle {
-  background-image: url("resources/ui/icons/icon-toggle.png");
-}
-.icon.icon-ZSU {
-  background-image: url("resources/ui/icons/icon-ZSU.png");
-}
-.icon.icon-enter {
-  background-image: url("resources/ui/icons/icon-enter.png");
-}
-
-.button {
-  --layout-button--padding-vertical: 0.4em;
-  --layout-button--padding-horizontal: 0.4em;
-  --layout-button--icon--size: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--layout-button--padding-vertical) var(--layout-button--padding-horizontal);
-}
-.button > .icon {
-  width: var(--layout-button--icon--size);
-  height: var(--layout-button--icon--size);
-}
-.button > .text {
-  padding: var(--layout-button--padding-vertical) var(--layout-button--padding-horizontal);
-}
-
-.player-toolbar {
-  color: var(--color--panel-text--default);
-  background: var(--color--panel-default);
-}
-.player-toolbar > .unity-webgl-logo {
-  padding: 0.3em;
-}
-.player-toolbar > .unity-webgl-logo > .image {
-  background: url(resources/ui/logo-unity-webgl.png) center no-repeat;
-  background-size: contain;
-}
-
-#player-canvas {
-  margin: 0;
-  padding: 0;
+  flex-grow: 1;
+  width: 100%;
   height: 100%;
-width: 100%;}
-
-.player-canvas-container {
-  background: #888;
+  background: #ccc;
 }
 
 .navbar {
-  font-size: 1em;
-  color: var(--color--panel-text--default);
-  background: var(--color--panel-default);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid;
 }
-.navbar > .chessknight-logo {
-  font-weight: bold;
-  color: var(--color--panel-text--contrast);
-}
-.navbar .help-Ukraine {
-  padding: 0.4em;
-}
-.navbar .help-Ukraine > .button {
+
+.player {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  padding: 0;
-  color: #fff;
-  text-shadow: 0 0 8px #000;
-  font-weight: bold;
-  font-size: 1.2em;
-  box-shadow: inset 0 0 20px #0d1216;
-  background: rgb(45, 83, 207);
-  background: linear-gradient(180deg, rgb(45, 83, 207) 0%, rgb(26, 75, 238) 50%, rgb(226, 207, 10) 50%, rgb(184, 173, 59) 100%);
-  background: rgb(0, 1, 3);
-  background: linear-gradient(180deg, rgba(0, 1, 3, 0) 0%, rgba(44, 83, 209, 0.9192051821) 13%, rgb(26, 75, 238) 50%, rgb(226, 207, 10) 50%, rgba(184, 173, 59, 0.7819502801) 92%, rgba(186, 174, 57, 0) 100%);
+}
+.player > .view {
+  flex-grow: 1;
+}
+.player > .view > canvas {
+  width: 100%;
+  height: 100%;
+  background-color: #222;
+}
+.player > .toolbar {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #222;
+}
+.player > .toolbar > .unity-web-gl {
+  display: flex;
+  justify-content: center;
+  padding: 0.2em;
+}
+.player > .toolbar > .unity-web-gl.area {
+  flex-grow: 1;
+}
+.player > .toolbar > .unity-web-gl.area > .icon {
+  width: 100%;
+  height: 100%;
+  background: url("resources/ui/logo-unity-webgl.png") center no-repeat;
+  background-size: contain;
+}
+
+.chessknight.button {
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+.chessknight.button > .icon {
+  width: 2em;
+  height: 2em;
+  background: url("resources/ui/icons/icon-chessknight.ico") center no-repeat;
+  background-size: contain;
+}
+.chessknight.button:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+
+.orientation-portrait.width-tiny .chessknight.button > .text, .orientation-portrait.width-small .chessknight.button > .text {
+  display: none;
+}
+.orientation-portrait.width-tiny .freewebtime.button > .text, .orientation-portrait.width-small .freewebtime.button > .text {
+  display: none;
+}
+
+.orientation-landscape.height-tiny .root, .orientation-landscape.height-small .root, .orientation-landscape.height-none .root {
+  flex-direction: row;
+}
+.orientation-landscape.height-tiny .navbar, .orientation-landscape.height-small .navbar, .orientation-landscape.height-none .navbar {
+  flex-direction: column;
+}
+.orientation-landscape.height-tiny .navbar .text, .orientation-landscape.height-small .navbar .text, .orientation-landscape.height-none .navbar .text {
+  display: none;
+}
+.orientation-landscape.height-tiny .player, .orientation-landscape.height-small .player, .orientation-landscape.height-none .player {
+  flex-direction: row;
+}
+.orientation-landscape.height-tiny .player > .toolbar, .orientation-landscape.height-small .player > .toolbar, .orientation-landscape.height-none .player > .toolbar {
+  flex-direction: column-reverse;
+}
+.orientation-landscape.height-tiny .player > .toolbar .text, .orientation-landscape.height-small .player > .toolbar .text, .orientation-landscape.height-none .player > .toolbar .text {
+  display: none;
+}
+.orientation-landscape.height-tiny .player > .toolbar .unity-web-gl .icon, .orientation-landscape.height-small .player > .toolbar .unity-web-gl .icon, .orientation-landscape.height-none .player > .toolbar .unity-web-gl .icon {
+  transform: rotate(90deg) scale(3);
+}
+
+.freewebtime.button {
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+.freewebtime.button > .icon {
+  width: 2em;
+  height: 2em;
+  background: url("resources/ui/icons/icon-home.png") center no-repeat;
+  background-size: contain;
+}
+.freewebtime.button:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+.width-tiny > .text {
+  display: none;
+}
+
+.width-small > .text {
+  display: none;
+}
+
+.help-ukraine.button {
+  flex-grow: 1;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+.help-ukraine.button > .icon {
+  width: 2em;
+  height: 2em;
+  background: url("resources/ui/icons/icon-ua.png") center no-repeat;
+  background-size: contain;
+}
+.help-ukraine.button:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+
+.fullscreen.button {
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+.fullscreen.button > .icon {
+  width: 2em;
+  height: 2em;
+  background: url("resources/ui/icons/icon-fullscreen.png") center no-repeat;
+  background-size: contain;
+}
+.fullscreen.button:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+.width-tiny > .text {
+  display: none;
+}
+
+.width-small > .text {
+  display: none;
+}
+
+.download.button {
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+.download.button > .icon {
+  width: 2em;
+  height: 2em;
+  background: url("resources/ui/icons/icon-download.png") center no-repeat;
+  background-size: contain;
+}
+.download.button:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+.width-tiny > .text {
+  display: none;
+}
+
+.width-small > .text {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
