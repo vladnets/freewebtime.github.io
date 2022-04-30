@@ -1,0 +1,236 @@
+html, body { width: 100%; height: 100%; margin: 0; padding: 0;}
+h1, h2, h3, h4, h5 { margin: 0; padding: 0; }
+
+:root {
+  --icon--size: 2em;
+  --layout--size--small: 500px;
+
+  --button--padding-vertical--default: 0.2em;
+  --button--padding-horizontal--default: 0.4em;
+  --button--color--default: #7dafd3;
+  --button--font-size--small: 0.8em;
+  --button--font-size--large: 1em;
+  --button--font-family--default: Verdana, Geneva, Tahoma, sans-serif;
+
+  --chessknight--color--name: #ebce7d;
+
+  --help-Ukraine--color--border: #000;
+  --help-Ukraine--font-size: 1em;
+  --help-Ukraine--padding-vertical: 0.2em;
+  --help-Ukraine--padding-horizontal: 0em;
+
+  --navbar--bg-color: #1a1a1a;
+  --navbar--border-color: #313131;
+
+  --player-toolbar--bg-color: var(--navbar--bg-color);
+
+  --color--debug--scene: #111;
+  --color--debug--root: #222;
+  --color--debug--navbar: #333;
+  /* --color--debug--navbar--space: #444; */
+  --color--debug--content: #131618;
+  --color--debug--player: rgb(39, 87, 63);
+  --color--debug--player-toolbar: rgb(73, 31, 78);
+}
+
+.scene {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  /* DEBUG */
+  background-color: var(--color--debug--scene);
+}
+
+/* ROOT */
+.root {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;;
+  max-width: 1000px;
+
+  /* DEBUG */
+  background-color: var(--color--debug--root);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  flex-direction: column;
+
+  border-bottom: 1px solid var(--navbar--border-color);
+  background-color: var(--navbar--bg-color);
+
+  /* DEBUG */
+  /* height: 2em; */
+  /* background-color: var(--color--gebug--navbar); */
+}
+
+.navbar > .area {
+  display: flex;
+  flex-grow: 1;
+}
+
+.area > .space {
+  flex-grow: 1;
+
+  width: 100%;
+}
+
+/* HELP UKRAINE */
+.help-ukraine {
+  color: #fff;
+  background: rgb(0,1,3);
+  background: linear-gradient(180deg, rgba(0,1,3,0) 0%, rgba(44,83,209,1) 0%, rgba(26,75,238,1) 50%, rgba(184,182,34,1) 50%, rgba(184,173,59,1) 100%, rgba(166,186,57,0) 100%);
+  box-shadow: inset 0 0 18px var(--help-Ukraine--color--border);
+}
+.help-ukraine > .bound {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.help-ukraine > .bound > .text {
+  padding: var(--help-Ukraine--padding-vertical) var(--help-Ukraine--padding-horizontal);
+
+  text-align: center;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: var(--help-Ukraine--font-size);
+  font-family: var(--button--font-family--default);
+}
+
+/* BUTTONS */
+.button-list {
+  flex-grow: 1;
+  display: flex;
+
+  border: 1px solid var(--navbar--border-color);
+  border-top: none;
+  border-bottom: none;
+
+  /* DEBUG */
+}
+.button-list.reverse {
+  justify-content: flex-end;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+
+  padding: var(--button--padding-vertical--default) var(--button--padding-horizontal--default);
+}
+.button > .text {
+  white-space: nowrap;
+  text-align: center;
+  font-family: var(--button--font-family--default);
+  color: var(--button--color--default);
+}
+
+/* ICONS */
+.icon {
+  width: var(--icon--size);
+  height: var(--icon--size);
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* DEBUG */
+}
+
+.icon-chessknight {
+  background-image: url("./Resources/Icons/Icon_Chessknight.png");
+}
+
+.icon-fullscreen {
+  background-image: url("./Resources/Icons/Icon_Fullscreen.png");
+}
+
+.icon-download {
+  background-image: url("./Resources/Icons/Icon_Download.png");
+}
+
+.icon-play {
+  background-image: url("./Resources/Icons/Icon_Play.png");
+}
+
+/* CHESSKNIGHT */
+.text.text-chessknight {
+  color: var(--chessknight--color--name);
+}
+
+/* PLAYER */
+.content {
+  overflow: hidden;display: flex;
+  flex-grow: 1;
+
+  /* debug */
+  background-color: var(--color--debug--content);
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.player > .canvas-container {
+  display: none;
+
+  overflow: hidden;
+  flex-grow: 1;
+
+  /* debug */
+  /* display: flex; */
+}
+.canvas-container > canvas {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  /* debug */
+  background-color: var(--color--debug--player);
+}
+
+.player > .toolbar {
+  display: flex;
+  background-color: var(--player-toolbar--bg-color);
+}
+.toolbar > .area {
+  display: flex;
+  flex-grow: 1;
+}
+.toolbar > .area > .space {
+  flex-grow: 1;
+}
+.button-play {
+  flex-grow: 1;
+}
+.button-play > .icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* LAYOUT SIZES */
+@media (max-width: 500px) {
+  .small {
+    display: none!important;
+  }
+
+  .button-list {
+    border: none;
+  }
+}
+
+@media (min-width: 501px) {
+  .large {
+    display: none!important;
+  }
+}
