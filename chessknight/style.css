@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5 { margin: 0; padding: 0; }
   --navbar--border-color: #313131;
 
   --player-toolbar--bg-color: var(--navbar--bg-color);
+  --player-toolbar--border-color: var(--navbar--border-color);
 
   --color--debug--scene: #111;
   --color--debug--root: #222;
@@ -201,6 +202,7 @@ h1, h2, h3, h4, h5 { margin: 0; padding: 0; }
 
 .player > .toolbar {
   display: flex;
+  border-top: 1px solid var(--player-toolbar--border-color);
   background-color: var(--player-toolbar--bg-color);
 }
 .toolbar > .area {
