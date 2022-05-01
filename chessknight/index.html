@@ -17,72 +17,182 @@
   </head>
   <body class="page-player">
 
-    <div class="panel cover layout-columns">
-      <div class="panel">
-        <div class="button button-help-Ukraine wide">
-          <div class="icon icon-chessknight"></div>
-          <div class="text">
-            <div class="top">HELP UKRAINE</div>
-            <div class="bottom">ДОПОМОЖИ УКРАЇНІ!</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Navbar -->
-      <div class="panel navbar">
-        <div class="button button-default">
-          <div class="icon icon-chessknight"></div>
-          <div class="text">Chessknight</div>
-        </div>
-
-        <div class="panel growable">
-          <div class="button button-help-Ukraine small">
-            <div class="icon icon-chessknight"></div>
+    <div class="panel cover scene">
+      <div class="panel cover layout-columns root">
+        <div class="panel layout-columns">
+          <div class="button button-help-Ukraine button-help-Ukraine-clickable wide">
             <div class="text">
-              <div class="top">HELP UKRAINE</div>
-              <div class="bottom">ДОПОМОЖИ УКРАЇНІ!</div>
+              <div class="top">SUPPORT UKRAINE!</div>
+              <div class="bottom">ПІДТРИМАЙ УКРАЇНУ!</div>
             </div>
           </div>
         </div>
 
-        <div class="button button-default reversed">
-          <!-- <div class="icon icon-chessknight"></div> -->
-          <div class="text">Freewebtime</div>
+        <!-- Navbar -->
+        <div class="panel navbar">
+          <div class="button button-default button-not-clickable">
+            <div class="icon icon-chessknight"></div>
+            <div class="text">Chessknight</div>
+          </div>
+
+          <div class="panel growable">
+            <div class="button button-help-Ukraine button-help-Ukraine-clickable small">
+              <div class="icon icon-chessknight"></div>
+              <div class="text">
+                <div class="top">SUPPORT UKRAINE!</div>
+                <div class="bottom">ПІДТРИМАЙ УКРАЇНУ!</div>
+                </div>
+            </div>
+          </div>
+
+          <div class="button button-default reversed button-not-clickable">
+            <!-- <div class="icon icon-chessknight"></div> -->
+            <div class="text">Freewebtime</div>
+          </div>
         </div>
+        <!-- // Navbar -->
+
+        <!-- Content -->
+        <div class="panel growable layout-columns overflow-hide">
+          <div class="panel growable player">
+            <div id="unity-mobile-warning">
+              WebGL builds may not be supported on some mobile devices.
+            </div>
+
+            <div class="panel growable play-button-container">
+              <div class="button button-play">
+                <div class="icon icon-play"></div>
+                <div class="text">Play</div>
+              </div>
+            </div>
+            <div id="unity-loading-bar">
+              <div id="unity-logo"></div>
+              <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+              </div>
+            </div>
+            <canvas id="unity-player-canvas" style="display: none;"></canvas>
+          </div>
+          <div class="panel growable layout-columns content-help-Ukraine">
+            <div class="panel">
+              <!-- <div class="growable"></div> -->
+              <div class="button button-default button-help-Ukraine-clickable">
+                <div class="icon icon-back"></div>
+                <div class="text">Back</div>
+              </div>
+            </div>
+            <div class="section">
+              <h1 class="text">Росія веде війну проти нашої України!</h1>
+              <p class="text">Кожен, хто здатен допомогти нашій перемозі, має робити для цього все, що в його силах.</p>
+              <p class="text">Ви можете зробити внесок через фонд "Повернись Живим" на користь нашої Армії або самого фонду.</p>
+            </div>
+            <div class="section">
+              <p>
+                Не лишайтесь байдужими! Україна вкрай потребує вашої допомоги! Ми переможемо! Все буде Україна!
+              </p>
+            </div>
+            <div class="section">
+              <h3>
+                Підтримати армію з картки будь-якого банку:
+              </h3>
+              <div class="props">
+                <p>
+                  <span class="highlighted">IBAN:</span> UA223226690000026007300905964
+                </p>
+                <p>
+                  <span class="highlighted">ЄДРПОУ:</span> 39696398
+                </p>
+                <p>
+                  <span class="highlighted">Отримувач:</span> Благодійна Організація «Міжнародний благодійний фонд «Повернись живим»
+                </p>
+                <p>
+                  <span class="highlighted">Призначення платежу:</span> Благодійна допомога військовослужбовцям.
+                </p>
+              </div>
+              <p>
+                Або за прямим <a href="https://next.privat24.ua/payments/form/%7B%22token%22:%225e99fe0a-7962-444c-8ee4-dc236efb2aa3%22%7D?lang" target="_blank">посиланням</a>
+              </p>
+            </div>
+            <div class="section">
+              <h3>
+                Підтримати команду «Повернись живим»
+              </h3>
+              <p>
+                Переходьте за <a href="https://next.privat24.ua/payments/form/%7B%22token%22:%22cb98260e-ea4d-43c2-bc78-a2c5a8cb5c6a%22%7D?lang" target="_blank">посиланням</a> та підтримайте команду «Повернись живим» з картки будь-якого банку.
+              </p>
+              <p>
+                Оформіть регулярний платіж на <a href="http://patreon.com/savelife_in_ua" target="_blank">Patreon</a>.
+              </p>
+              <p>
+                Докладніше про наші досягнення у 2020 році ви можете прочитати <a href="http://drive.google.com/file/d/1IAJNqWLPkiq5hexVvTXlSTuz68JFOQE3/view?usp=sharing">ви можете прочитати тут</a>.
+              </p>
+              <div class="props">
+                <p><span class="highlighted">Рахунок Bitcoin:</span> 15NpjeA6W9h1jvrM3piZZFDoxuSeGeamKK</p>
+                <p><span class="highlighted">Рахунок Ethereum:</span> 0x32b8B6fc046314dfF1F3b1ee6dAF1e46b762094d</p>
+              </div>
+            </div>
+            <div class="section">
+              <h3>
+                Перекази з-за кордону
+              </h3>
+              <p>
+                <a href="https://pay.fondy.eu/api/checkout?button=59da139c540533216e39fef311708bed" target="_blank">Fondy.eu</a> – це найвищий рівень безпеки PCI DSS Level 1.
+              </p>
+              <p>
+                Валюта переказу – гривня. Якщо ваша карта в іншій валюті, кошти знімаються по курсу.
+              </p>
+              <p>
+                Комісію 2,45% сплачує отримувач.
+              </p>
+              <div class="props">
+                <p><span class="highlighted">SWIFT</span></p>
+                <p><span class="highlighted">Назва підприємства/company Name:</span> МБФ ПОВЕРНИСЬ ЖИВИМ БО<br />CO "INTERNATIONAL CHARITABLE FOUNDATION "COME BACK ALIVE"</p>
+                <p><span class="highlighted">IBAN Code (Євро):</span>UA093052990000026004025029786</p>
+                <p><span class="highlighted">IBAN Code (Долар США):</span>UA173052990000026009035028620</p>
+                <p><span class="highlighted">Назва банку/Name of the bank:</span>JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE</p>
+                <p><span class="highlighted">SWIFT code банку/Bank SWIFT Code:</span>PBANUA2X</p>
+                <p><span class="highlighted">Адреса підприємства/Company address:</span>UA 01054, м.Київ, вул Богдана Хмельницького, 32 кв.41</p>
+                <p><span class="highlighted">Призначення платежу / Purpose of payment:</span>Charitable donation to Ukrainian military</p>
+                <p><span class="highlighted">Наш офіс:</span>Київ, вул. Богдана Хмельницкого, 32 оф. 41</p>
+                <p><span class="highlighted">Тел:</span><a href="tel:0685008800">(068)500-88-00 (Пн-Пт 10:00-19:00)</a></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player Toolbar -->
+          <div class="panel toolbar mode-downloads-closed">
+            <div class="panel growable align-end downloads">
+              <div class="button button-default reversed button-download">
+                <div class="icon icon-back"></div>
+                <!-- <div class="text">Download</div> -->
+              </div>
+              <div class="button button-default">
+                <div class="text"><a class="dark" href="./Downloads/ChessKnight.zip">Windows (.exe)</a></div>
+              </div>
+              <div class="button button-default">
+                <div class="text"><a class="dark" href="./Downloads/ChessKnight.apk">Android (.apk)</a></div>
+              </div>
+            </div>
+
+            <div class="panel growable player-buttons">
+              <div id="unity-fullscreen-button" class="button button-default">
+                <div class="icon icon-fullscreen"></div>
+                <div class="text">Fullscreen</div>
+              </div>
+              <div class="panel growable logo-webgl-container">
+                <div class="logo-webgl"></div>
+              </div>
+            </div>
+
+            <div class="button button-default reversed button-download">
+              <div class="icon icon-download"></div>
+              <div class="text">Download</div>
+            </div>
+          </div>
+          <!-- // Player Toolbar -->
+        </div>
+        <!-- // Content -->
       </div>
-      <!-- // Navbar -->
-
-      <!-- Content -->
-      <div class="panel growable layout-columns">
-        <div class="panel growable player"></div>
-        <div class="panel growable content-help-Ukraine"></div>
-
-        <!-- Player Toolbar -->
-        <div class="panel toolbar mode-downloads-closed">
-          <div class="panel growable align-end downloads">
-            <div class="button button-default">
-              <div class="text">Windows (.exe)</div>
-            </div>
-            <div class="button button-default">
-              <div class="text">Android (.apk)</div>
-            </div>
-          </div>
-
-          <div class="panel growable player-buttons">
-            <div class="button button-default">
-              <div class="icon icon-fullscreen"></div>
-              <div class="text">Fullscreen</div>
-            </div>
-          </div>
-
-          <div class="button button-default reversed">
-            <div class="icon icon-download"></div>
-            <div class="text">Download</div>
-          </div>
-        </div>
-        <!-- // Player Toolbar -->
-      </div>
-      <!-- // Content -->
     </div>
 
   </body>
