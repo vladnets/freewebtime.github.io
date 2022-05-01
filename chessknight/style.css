@@ -1,0 +1,173 @@
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
+body {
+  font-size: 0.9em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  background: #4c4c4c;
+}
+
+/* BUTTONS */
+.button {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+/* BUTTONS: Modifiers */
+.button-default {
+  /* justify-content: center; */
+  /* min-width: 9em; */
+  padding: 0.3em;
+  color: #fff;
+  background-color: #444444;
+}
+.button-default > .icon {
+  width: 2em;
+  height: 2em;
+  padding: 0 0.2em;
+}
+.button-default > .text {
+  padding: 0 0.4em;
+}
+.reversed {
+  flex-direction: row-reverse;
+}
+
+/* BUTTONS: Modifiers: Help Ukraine */
+.button-help-Ukraine {
+  flex-grow: 1;
+  justify-content: center;
+  padding: 0.2em;
+  background: rgb(0,1,3);
+  background: linear-gradient(180deg, rgba(0,1,3,0) 0%, rgba(44,83,209,1) 0%, rgba(26,75,238,1) 50%, rgba(184,182,34,1) 50%, rgba(184,173,59,1) 100%, rgba(166,186,57,0) 100%);
+  box-shadow: inset 0 0 18px #000;
+}
+.button-help-Ukraine > .text {
+  font-weight: bold;
+  text-align: center;
+}
+.button-help-Ukraine > .text > .top {
+  color: #fff;
+}
+.button-help-Ukraine > .text > .bottom {
+  color: #000;
+}
+
+@media (max-width: 460px) {
+  .button-help-Ukraine.small {
+    display: none;
+  }
+}
+@media (min-width: 461px) {
+  .button-help-Ukraine.wide {
+    display: none;
+  }
+}
+
+/* ICONS */
+.icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ICONS: Modifiers */
+.icon-debug {
+  background-color: #5a4130;
+}
+.icon-download {
+  background-image: url(./Resources/Icons/Icon_Download.png);
+}
+.icon-fullscreen {
+  background-image: url(./Resources/Icons/Icon_Fullscreen.png);
+}
+.icon-chessknight {
+  background-image: url(./Resources/Icons/Icon_Chessknight.png);
+}
+
+/* LAYOUT */
+.align-end {
+  justify-content: flex-end;
+}
+.layout-row {
+  flex-direction: row;
+}
+.layout-columns {
+  flex-direction: column;
+}
+.cover {
+  width: 100%;
+  height: 100%;
+}
+
+/* PANELS */
+.panel {
+  display: flex;
+}
+.growable {
+  flex-grow: 1;
+}
+.panel-debug {
+  background: #5a6e5b;
+}
+
+/* PAGES */
+.page-help-Ukraine .player {
+  display: none;
+}
+.page-help-Ukraine .toolbar {
+  display: none;
+}
+
+.page-player .content-help-Ukraine {
+  display: none;
+}
+
+/* TOOLBAR modes */
+.mode-downloads-open .downloads {
+  display: flex;
+}
+.mode-downloads-open .player-buttons {
+  display: none;
+}
+.mode-downloads-closed .downloads {
+  display: none;
+}
+.mode-downloads-closed .player-buttons {
+  display: flex;
+}
+
+/* PLAYER */
+.player {
+  background: #161616;
+}
+
+/* HELP UKRAINE CONTENT */
+.content-help-Ukraine {
+  background: #5a4130;
+}
+
+/* NAVBAR */
+.navbar {
+
+}
+
+@media (max-width: 460px) {
+  .navbar > .panel.growable {
+    display: none;
+  }
+  .navbar > .button {
+    flex-grow: 1;
+    /* border-right: 1px solid; */
+  }
+  .navbar > .button.reversed {
+    /* border-right: none; */
+    /* border-left: 1px solid #666020; */
+  }
+}
+@media (min-width: 461px) {
+  .navbar {
+    /* display: none; */
+  }
+}
