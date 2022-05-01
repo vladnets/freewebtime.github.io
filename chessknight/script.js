@@ -1,7 +1,7 @@
 "use strict";
 var ChessKnight;
 (function (ChessKnight) {
-    var pathPrefix = "WebGL/0.10/";
+    var pathPrefix = "WebGL/1.1.1.1/";
     var buildUrl = pathPrefix + "Build/";
     var loaderUrl = buildUrl + "ChessKnight.loader.js";
     var config = {
